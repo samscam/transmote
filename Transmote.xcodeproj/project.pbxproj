@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
+		22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */; };
+		22B9DCA118A5D58B003F5056 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCA018A5D58B003F5056 /* main.m */; };
+		22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCA318A5D58B003F5056 /* Credits.rtf */; };
+		22B9DCA818A5D58B003F5056 /* TRNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */; };
+		22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCA918A5D58C003F5056 /* MainMenu.xib */; };
+		22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCAC18A5D58C003F5056 /* Images.xcassets */; };
+		22B9DCB418A5D58C003F5056 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DCB318A5D58C003F5056 /* XCTest.framework */; };
+		22B9DCB518A5D58C003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
+		22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */; };
+		22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22B9DCB618A5D58C003F5056 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22B9DC8918A5D58B003F5056 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22B9DC9018A5D58B003F5056;
+			remoteInfo = Transmote;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22B9DC9118A5D58B003F5056 /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B9DC9418A5D58B003F5056 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		22B9DC9718A5D58B003F5056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		22B9DC9818A5D58B003F5056 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		22B9DC9918A5D58B003F5056 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Transmote-Info.plist"; sourceTree = "<group>"; };
+		22B9DC9E18A5D58B003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22B9DCA018A5D58B003F5056 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		22B9DCA218A5D58B003F5056 /* Transmote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Transmote-Prefix.pch"; sourceTree = "<group>"; };
+		22B9DCA418A5D58B003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		22B9DCA618A5D58B003F5056 /* TRNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRNAppDelegate.h; sourceTree = "<group>"; };
+		22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRNAppDelegate.m; sourceTree = "<group>"; };
+		22B9DCAA18A5D58C003F5056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		22B9DCAC18A5D58C003F5056 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransmoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B9DCB318A5D58C003F5056 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		22B9DCBA18A5D58C003F5056 /* TransmoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TransmoteTests-Info.plist"; sourceTree = "<group>"; };
+		22B9DCBC18A5D58C003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22B9DC8E18A5D58B003F5056 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B9DCAF18A5D58C003F5056 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B9DCB518A5D58C003F5056 /* Cocoa.framework in Frameworks */,
+				22B9DCB418A5D58C003F5056 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22B9DC8818A5D58B003F5056 = {
+			isa = PBXGroup;
+			children = (
+				22B9DC9A18A5D58B003F5056 /* Transmote */,
+				22B9DCB818A5D58C003F5056 /* TransmoteTests */,
+				22B9DC9318A5D58B003F5056 /* Frameworks */,
+				22B9DC9218A5D58B003F5056 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22B9DC9218A5D58B003F5056 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DC9118A5D58B003F5056 /* Transmote.app */,
+				22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22B9DC9318A5D58B003F5056 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DC9418A5D58B003F5056 /* Cocoa.framework */,
+				22B9DCB318A5D58C003F5056 /* XCTest.framework */,
+				22B9DC9618A5D58B003F5056 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22B9DC9618A5D58B003F5056 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DC9718A5D58B003F5056 /* AppKit.framework */,
+				22B9DC9818A5D58B003F5056 /* CoreData.framework */,
+				22B9DC9918A5D58B003F5056 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		22B9DC9A18A5D58B003F5056 /* Transmote */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DCA618A5D58B003F5056 /* TRNAppDelegate.h */,
+				22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */,
+				22B9DCA918A5D58C003F5056 /* MainMenu.xib */,
+				22B9DCAC18A5D58C003F5056 /* Images.xcassets */,
+				22B9DC9B18A5D58B003F5056 /* Supporting Files */,
+			);
+			path = Transmote;
+			sourceTree = "<group>";
+		};
+		22B9DC9B18A5D58B003F5056 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */,
+				22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */,
+				22B9DCA018A5D58B003F5056 /* main.m */,
+				22B9DCA218A5D58B003F5056 /* Transmote-Prefix.pch */,
+				22B9DCA318A5D58B003F5056 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22B9DCB818A5D58C003F5056 /* TransmoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */,
+				22B9DCB918A5D58C003F5056 /* Supporting Files */,
+			);
+			path = TransmoteTests;
+			sourceTree = "<group>";
+		};
+		22B9DCB918A5D58C003F5056 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DCBA18A5D58C003F5056 /* TransmoteTests-Info.plist */,
+				22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22B9DC9018A5D58B003F5056 /* Transmote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22B9DCC218A5D58C003F5056 /* Build configuration list for PBXNativeTarget "Transmote" */;
+			buildPhases = (
+				22B9DC8D18A5D58B003F5056 /* Sources */,
+				22B9DC8E18A5D58B003F5056 /* Frameworks */,
+				22B9DC8F18A5D58B003F5056 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Transmote;
+			productName = Transmote;
+			productReference = 22B9DC9118A5D58B003F5056 /* Transmote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22B9DCB118A5D58C003F5056 /* TransmoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22B9DCC518A5D58C003F5056 /* Build configuration list for PBXNativeTarget "TransmoteTests" */;
+			buildPhases = (
+				22B9DCAE18A5D58C003F5056 /* Sources */,
+				22B9DCAF18A5D58C003F5056 /* Frameworks */,
+				22B9DCB018A5D58C003F5056 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22B9DCB718A5D58C003F5056 /* PBXTargetDependency */,
+			);
+			name = TransmoteTests;
+			productName = TransmoteTests;
+			productReference = 22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22B9DC8918A5D58B003F5056 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TRN;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Spotlight Kid";
+				TargetAttributes = {
+					22B9DCB118A5D58C003F5056 = {
+						TestTargetID = 22B9DC9018A5D58B003F5056;
+					};
+				};
+			};
+			buildConfigurationList = 22B9DC8C18A5D58B003F5056 /* Build configuration list for PBXProject "Transmote" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22B9DC8818A5D58B003F5056;
+			productRefGroup = 22B9DC9218A5D58B003F5056 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22B9DC9018A5D58B003F5056 /* Transmote */,
+				22B9DCB118A5D58C003F5056 /* TransmoteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22B9DC8F18A5D58B003F5056 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */,
+				22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */,
+				22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */,
+				22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B9DCB018A5D58C003F5056 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22B9DC8D18A5D58B003F5056 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B9DCA118A5D58B003F5056 /* main.m in Sources */,
+				22B9DCA818A5D58B003F5056 /* TRNAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B9DCAE18A5D58C003F5056 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22B9DCB718A5D58C003F5056 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22B9DC9018A5D58B003F5056 /* Transmote */;
+			targetProxy = 22B9DCB618A5D58C003F5056 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B9DC9E18A5D58B003F5056 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		22B9DCA318A5D58B003F5056 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B9DCA418A5D58B003F5056 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		22B9DCA918A5D58C003F5056 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B9DCAA18A5D58C003F5056 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B9DCBC18A5D58C003F5056 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22B9DCC018A5D58C003F5056 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		22B9DCC118A5D58C003F5056 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		22B9DCC318A5D58C003F5056 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
+				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		22B9DCC418A5D58C003F5056 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
+				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		22B9DCC618A5D58C003F5056 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TransmoteTests/TransmoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		22B9DCC718A5D58C003F5056 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
+				INFOPLIST_FILE = "TransmoteTests/TransmoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22B9DC8C18A5D58B003F5056 /* Build configuration list for PBXProject "Transmote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22B9DCC018A5D58C003F5056 /* Debug */,
+				22B9DCC118A5D58C003F5056 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22B9DCC218A5D58C003F5056 /* Build configuration list for PBXNativeTarget "Transmote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22B9DCC318A5D58C003F5056 /* Debug */,
+				22B9DCC418A5D58C003F5056 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		22B9DCC518A5D58C003F5056 /* Build configuration list for PBXNativeTarget "TransmoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22B9DCC618A5D58C003F5056 /* Debug */,
+				22B9DCC718A5D58C003F5056 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22B9DC8918A5D58B003F5056 /* Project object */;
+}
