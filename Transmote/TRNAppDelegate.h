@@ -7,8 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TRNWindowController.h"
 
 @interface TRNAppDelegate : NSObject <NSApplicationDelegate>
+
+@property (nonatomic,strong) TRNWindowController *mainWindowController;
 
 @property (assign) IBOutlet NSWindow *window;
 

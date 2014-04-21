@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11E82D4211F647D7B6A7D3BA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 870FA36FEBEC4475A1B68205 /* libPods.a */; };
+		220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709618A5DDC6008C22F5 /* TRNServer.m */; };
+		220A709A18A5DEE2008C22F5 /* TRNTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709918A5DEE2008C22F5 /* TRNTorrent.m */; };
+		220A709D18A5E039008C22F5 /* TRNWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709C18A5E039008C22F5 /* TRNWindowController.m */; };
+		220A709F18A5E103008C22F5 /* TRNWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220A709E18A5E103008C22F5 /* TRNWindowController.xib */; };
+		220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */; };
 		22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
 		22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */; };
 		22B9DCA118A5D58B003F5056 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCA018A5D58B003F5056 /* main.m */; };
@@ -31,6 +37,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220A709518A5DDC6008C22F5 /* TRNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNServer.h; sourceTree = "<group>"; };
+		220A709618A5DDC6008C22F5 /* TRNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNServer.m; sourceTree = "<group>"; };
+		220A709818A5DEE2008C22F5 /* TRNTorrent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNTorrent.h; sourceTree = "<group>"; };
+		220A709918A5DEE2008C22F5 /* TRNTorrent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNTorrent.m; sourceTree = "<group>"; };
+		220A709B18A5E039008C22F5 /* TRNWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNWindowController.h; sourceTree = "<group>"; };
+		220A709C18A5E039008C22F5 /* TRNWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNWindowController.m; sourceTree = "<group>"; };
+		220A709E18A5E103008C22F5 /* TRNWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRNWindowController.xib; sourceTree = "<group>"; };
+		220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNJSONRPCClient.h; sourceTree = "<group>"; };
+		220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNJSONRPCClient.m; sourceTree = "<group>"; };
 		22B9DC9118A5D58B003F5056 /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B9DC9418A5D58B003F5056 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22B9DC9718A5D58B003F5056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -50,6 +65,8 @@
 		22B9DCBA18A5D58C003F5056 /* TransmoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TransmoteTests-Info.plist"; sourceTree = "<group>"; };
 		22B9DCBC18A5D58C003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
+		5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		870FA36FEBEC4475A1B68205 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */,
+				11E82D4211F647D7B6A7D3BA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +98,7 @@
 				22B9DCB818A5D58C003F5056 /* TransmoteTests */,
 				22B9DC9318A5D58B003F5056 /* Frameworks */,
 				22B9DC9218A5D58B003F5056 /* Products */,
+				5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +117,7 @@
 				22B9DC9418A5D58B003F5056 /* Cocoa.framework */,
 				22B9DCB318A5D58C003F5056 /* XCTest.framework */,
 				22B9DC9618A5D58B003F5056 /* Other Frameworks */,
+				870FA36FEBEC4475A1B68205 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -118,6 +138,15 @@
 				22B9DCA618A5D58B003F5056 /* TRNAppDelegate.h */,
 				22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */,
 				22B9DCA918A5D58C003F5056 /* MainMenu.xib */,
+				220A709B18A5E039008C22F5 /* TRNWindowController.h */,
+				220A709C18A5E039008C22F5 /* TRNWindowController.m */,
+				220A709E18A5E103008C22F5 /* TRNWindowController.xib */,
+				220A709518A5DDC6008C22F5 /* TRNServer.h */,
+				220A709618A5DDC6008C22F5 /* TRNServer.m */,
+				220A709818A5DEE2008C22F5 /* TRNTorrent.h */,
+				220A709918A5DEE2008C22F5 /* TRNTorrent.m */,
+				220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */,
+				220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */,
 				22B9DCAC18A5D58C003F5056 /* Images.xcassets */,
 				22B9DC9B18A5D58B003F5056 /* Supporting Files */,
 			);
@@ -161,9 +190,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22B9DCC218A5D58C003F5056 /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
+				559953F3FD1247C3AF7279CE /* Check Pods Manifest.lock */,
 				22B9DC8D18A5D58B003F5056 /* Sources */,
 				22B9DC8E18A5D58B003F5056 /* Frameworks */,
 				22B9DC8F18A5D58B003F5056 /* Resources */,
+				5D98EB75502347C1AFE7D8C7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,6 +233,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Spotlight Kid";
 				TargetAttributes = {
+					22B9DC9018A5D58B003F5056 = {
+						DevelopmentTeam = 9M28MQ9SZC;
+					};
 					22B9DCB118A5D58C003F5056 = {
 						TestTargetID = 22B9DC9018A5D58B003F5056;
 					};
@@ -232,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */,
+				220A709F18A5E103008C22F5 /* TRNWindowController.xib in Resources */,
 				22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */,
 				22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */,
 				22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */,
@@ -248,11 +283,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		559953F3FD1247C3AF7279CE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5D98EB75502347C1AFE7D8C7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22B9DC8D18A5D58B003F5056 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */,
+				220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */,
+				220A709D18A5E039008C22F5 /* TRNWindowController.m in Sources */,
+				220A709A18A5DEE2008C22F5 /* TRNTorrent.m in Sources */,
 				22B9DCA118A5D58B003F5056 /* main.m in Sources */,
 				22B9DCA818A5D58B003F5056 /* TRNAppDelegate.m in Sources */,
 			);
@@ -382,8 +454,10 @@
 		};
 		22B9DCC318A5D58C003F5056 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
@@ -395,8 +469,10 @@
 		};
 		22B9DCC418A5D58C003F5056 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
@@ -465,6 +541,7 @@
 				22B9DCC418A5D58C003F5056 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22B9DCC518A5D58C003F5056 /* Build configuration list for PBXNativeTarget "TransmoteTests" */ = {
 			isa = XCConfigurationList;
@@ -473,6 +550,7 @@
 				22B9DCC718A5D58C003F5056 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
