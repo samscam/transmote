@@ -17,7 +17,7 @@
 @property (nonatomic,readonly) BOOL connected;
 @property (nonatomic,readonly) NSMutableArray *torrents;
 
--(void) connect;
+-(void) tryToConnect;
 -(void) disconnect;
 -(void) addMagnetLink:(NSURL*)magnetLink;
 

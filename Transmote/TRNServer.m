@@ -31,15 +31,24 @@ static void *obvContext=&obvContext;
         self.torrents=[[NSMutableArray alloc] init];
         self.torrentDict=[[NSMutableDictionary alloc] init];
         
-        self.address=@"drobo5n.local";
-        self.port=@"9091";
-        self.rpcPath=@"transmission/rpc";
+        
+        NSUserDefaultsController *userDefaultsController=[NSUserDefaultsController sharedUserDefaultsController];
+        
+        [self bind:@"address" toObject:userDefaultsController withKeyPath:@"values.server.address" options:@{@"NSContinuouslyUpdatesValue":@YES}];
+        
+        [self bind:@"port" toObject:userDefaultsController withKeyPath:@"values.server.port" options:@{@"NSContinuouslyUpdatesValue":@YES}];
+        
+        [self bind:@"rpcPath" toObject:userDefaultsController withKeyPath:@"values.server.rpcPath" options:@{@"NSContinuouslyUpdatesValue":@YES}];
         
         [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:obvContext];
         [self addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionNew context:obvContext];
         [self addObserver:self forKeyPath:@"port" options:NSKeyValueObservingOptionNew context:obvContext];
     }
     return self;
+}
+
+-(void) tryToConnect{
+    [self connect];
 }
 
 -(void) connect{

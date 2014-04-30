@@ -12,14 +12,15 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    
+    [self setupDefaults];
+    
     self.mainWindowController=[[TRNWindowController alloc] initWithWindowNibName:@"TRNWindowController"];
     self.window=self.mainWindowController.window;
     
-    
 }
 
--(void)applicationWillFinishLaunching:(NSNotification *)aNotification
+- (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
     NSAppleEventManager *appleEventManager = [NSAppleEventManager sharedAppleEventManager];
     [appleEventManager setEventHandler:self
@@ -31,6 +32,12 @@
 {
     NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
     [self.mainWindowController.server addMagnetLink:url];
+}
+
+- (void)setupDefaults{
+    
+    // Load default defaults
+    [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"]]];
 }
 
 @end

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>492B95AA-6616-4CDB-9257-EE5913C7E1CC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Transmote</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E1B6255A-74D7-4821-BA8F-3DB6A3A7A4A0</key>
+		<string>ssh://samscam.co.uk/transmote.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Transmote.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E1B6255A-74D7-4821-BA8F-3DB6A3A7A4A0</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://samscam.co.uk/transmote.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E1B6255A-74D7-4821-BA8F-3DB6A3A7A4A0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E1B6255A-74D7-4821-BA8F-3DB6A3A7A4A0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Transmote</string>
+		</dict>
+	</array>
+</dict>
+</plist>

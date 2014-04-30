@@ -26,6 +26,5 @@
 
 
 -(IBAction)serverSettingsPopover:(id)sender;
--(IBAction)boing:(id)sender;
 
 @end

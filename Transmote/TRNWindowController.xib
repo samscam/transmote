@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TRNWindowController">
@@ -26,7 +26,7 @@
         <window title="Transmote" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="tJN-gT-RSQ">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
             <rect key="contentRect" x="335" y="390" width="395" height="265"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <value key="minSize" type="size" width="254" height="155"/>
             <view key="contentView" id="IUp-PR-V1o">
                 <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
@@ -85,7 +85,7 @@
                             <rect key="frame" x="1" y="244" width="395" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" horizontal="NO" id="NXX-DJ-LWo">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="NXX-DJ-LWo">
                             <rect key="frame" x="-15" y="17" width="16" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -107,11 +107,11 @@
                     <toolbarItem implicitItemIdentifier="97F4519C-126E-4F61-B474-4E21F24E3C1C" label="Server" paletteLabel="Server" image="NSActionTemplate" id="2ms-CA-ga6">
                         <nil key="toolTip"/>
                         <size key="minSize" width="24" height="24"/>
-                        <size key="maxSize" width="24" height="24"/>
+                        <size key="maxSize" width="48" height="51"/>
                         <button key="view" id="Cn0-Sh-wqM">
                             <rect key="frame" x="8" y="14" width="24" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="EAo-wn-aPH">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="EAo-wn-aPH">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -142,7 +142,6 @@
                 <outlet property="delegate" destination="-2" id="E9a-Ex-MLa"/>
             </connections>
         </window>
-        <userDefaultsController representsSharedInstance="YES" id="VXn-UU-Aju"/>
         <viewController title="Server" id="E1g-if-tMX" userLabel="Popover View Controller">
             <connections>
                 <outlet property="view" destination="AkQ-6m-vP3" id="Ltb-vn-ohI"/>
@@ -153,7 +152,7 @@
                 <outlet property="contentViewController" destination="E1g-if-tMX" id="SZV-tj-ZfR"/>
             </connections>
         </popover>
-        <customView identifier="ServerSettings" id="AkQ-6m-vP3">
+        <customView identifier="ServerSettings" id="AkQ-6m-vP3" userLabel="Preferences">
             <rect key="frame" x="0.0" y="0.0" width="303" height="143"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>

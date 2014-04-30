@@ -17,14 +17,20 @@ static void *obvContext=&obvContext;
     self = [super initWithWindow:window];
     if (self) {
         self.server=[[TRNServer alloc] init];
-        [self.server addObserver:self forKeyPath:@"connected" options:NSKeyValueObservingOptionNew context:obvContext];
-        [self.server connect];
     }
     return self;
 }
 
--(IBAction)boing:(id)sender{
-    NSLog(@"BOING!");
+-(void)awakeFromNib{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"percentDone" ascending:YES];
+    [_arrayController setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
+}
+-(void) windowDidLoad{
+    [super windowDidLoad];
+    [self.server addObserver:self forKeyPath:@"connected" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:obvContext];
+    [self.server addObserver:self forKeyPath:@"torrents" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:obvContext];
+    [self.server tryToConnect];
 }
 
 -(IBAction)serverSettingsPopover:(id)sender{
@@ -39,6 +45,7 @@ static void *obvContext=&obvContext;
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
     if (context==&obvContext){
+        if ([keyPath isEqualToString:@"connected"]){
         if (self.server.connected){
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusAvailable"];
             [self.tableView reloadData];
@@ -46,11 +53,16 @@ static void *obvContext=&obvContext;
         } else {
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusUnavailable"];
             [self.tableScrollView setHidden:YES];
+        }} else if ([keyPath isEqualToString:@"torrents"]){
+            [self.tableView reloadData];
         }
+        
         return;
     }
     
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+
+
 
 @end
