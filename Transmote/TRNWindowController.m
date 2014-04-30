@@ -63,6 +63,12 @@ static void *obvContext=&obvContext;
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
+-(IBAction)logDefaults:(id)sender{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    NSLog(@"Defaults: %@ %@ %@",[defaults valueForKey:@"address"],[defaults valueForKey:@"port"],[defaults valueForKey:@"rpcPath"]);
+    
+}
+
 
 
 @end

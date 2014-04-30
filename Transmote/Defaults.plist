@@ -2,11 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>server.address</key>
-	<string></string>
-	<key>server.port</key>
+	<key>port</key>
 	<string>9091</string>
-	<key>server.rpcPath</key>
+	<key>rpcPath</key>
 	<string>transmission/rpc</string>
 </dict>
 </plist>

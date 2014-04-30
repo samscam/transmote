@@ -26,5 +26,6 @@
 
 
 -(IBAction)serverSettingsPopover:(id)sender;
+-(IBAction)logDefaults:(id)sender;
 
 @end

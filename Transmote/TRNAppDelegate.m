@@ -8,6 +8,12 @@
 
 #import "TRNAppDelegate.h"
 
+@interface TRNAppDelegate(){
+
+}
+
+@end
+
 @implementation TRNAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -31,7 +37,11 @@
 - (void)handleGetURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
-    [self.mainWindowController.server addMagnetLink:url];
+    if (self.mainWindowController.server){
+        [self.mainWindowController.server addMagnetLink:url];
+    } else {
+        self.deferredMagnetURL=url;
+    }
 }
 
 - (void)setupDefaults{

@@ -10,6 +10,7 @@
 #import "TRNTorrent.h"
 
 #import "TRNJSONRPCClient.h"
+#import "TRNAppDelegate.h"
 
 @interface TRNServer()
 
@@ -34,11 +35,22 @@ static void *obvContext=&obvContext;
         
         NSUserDefaultsController *userDefaultsController=[NSUserDefaultsController sharedUserDefaultsController];
         
-        [self bind:@"address" toObject:userDefaultsController withKeyPath:@"values.server.address" options:@{@"NSContinuouslyUpdatesValue":@YES}];
+        [self bind:@"address"
+          toObject:userDefaultsController
+       withKeyPath:@"values.address"
+           options:@{NSContinuouslyUpdatesValueBindingOption : @YES }];
         
-        [self bind:@"port" toObject:userDefaultsController withKeyPath:@"values.server.port" options:@{@"NSContinuouslyUpdatesValue":@YES}];
         
-        [self bind:@"rpcPath" toObject:userDefaultsController withKeyPath:@"values.server.rpcPath" options:@{@"NSContinuouslyUpdatesValue":@YES}];
+        [self bind:@"port"
+          toObject:userDefaultsController
+       withKeyPath:@"values.port"
+           options:@{NSContinuouslyUpdatesValueBindingOption : @YES }];
+        
+        [self bind:@"rpcPath"
+          toObject:userDefaultsController
+       withKeyPath:@"values.rpcPath"
+           options:@{NSContinuouslyUpdatesValueBindingOption : @YES }];
+        
         
         [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:obvContext];
         [self addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionNew context:obvContext];
@@ -65,6 +77,12 @@ static void *obvContext=&obvContext;
         NSLog(@"Session alive\n%@",responseObject);
         self.connected=YES;
         self.timer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(updateTorrents:) userInfo:nil repeats:YES];
+        
+        // Check for a deferred URL
+        TRNAppDelegate *appDelegate=[NSApp delegate];
+        [self addMagnetLink:appDelegate.deferredMagnetURL];
+        appDelegate.deferredMagnetURL=nil;
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //BOO
@@ -127,11 +145,20 @@ static void *obvContext=&obvContext;
     
     if (context==&obvContext){
         [self connect];
+        
+        [self updateDefaults];
         return;
     }
     
     return [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
+}
+
+-(void) updateDefaults{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults setValue:self.address forKey:@"address"];
+    [defaults setValue:self.rpcPath forKey:@"rpcPath"];
+    [defaults setValue:self.port forKey:@"port"];
 }
 
 

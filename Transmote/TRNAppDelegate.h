@@ -12,6 +12,7 @@
 @interface TRNAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic,strong) TRNWindowController *mainWindowController;
+@property (nonatomic,strong) NSURL *deferredMagnetURL;
 
 @property (assign) IBOutlet NSWindow *window;
 
