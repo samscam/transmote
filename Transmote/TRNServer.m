@@ -29,9 +29,9 @@ static void *obvContext=&obvContext;
 -(id) init{
     
     if ((self=[super init])){
+
         self.torrents=[[NSMutableArray alloc] init];
         self.torrentDict=[[NSMutableDictionary alloc] init];
-        
         
         NSUserDefaultsController *userDefaultsController=[NSUserDefaultsController sharedUserDefaultsController];
         
@@ -64,6 +64,7 @@ static void *obvContext=&obvContext;
 }
 
 -(void) connect{
+
     [self.torrentDict removeAllObjects];
     [self.torrents removeAllObjects];
 
@@ -80,9 +81,10 @@ static void *obvContext=&obvContext;
         
         // Check for a deferred URL
         TRNAppDelegate *appDelegate=[NSApp delegate];
-        [self addMagnetLink:appDelegate.deferredMagnetURL];
-        appDelegate.deferredMagnetURL=nil;
-        
+        if (appDelegate.deferredMagnetURL){
+            [self addMagnetLink:appDelegate.deferredMagnetURL];
+            appDelegate.deferredMagnetURL=nil;
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //BOO
@@ -119,17 +121,29 @@ static void *obvContext=&obvContext;
         
         if ([responseDict valueForKeyPath:@"arguments.torrents"]){
             NSArray *incomingTorrents=[responseDict valueForKeyPath:@"arguments.torrents"];
-            
+            NSMutableArray *foundTorrentKeys=[[NSMutableArray alloc] init];
             for (NSDictionary *thisTData in incomingTorrents){
                 NSString *torrentID=[thisTData valueForKey:@"id"];
                 TRNTorrent *importTo=[self.torrentDict objectForKey:torrentID];
                 if (!importTo){
-                    importTo=[[TRNTorrent alloc] init];
+                    importTo=[[TRNTorrent alloc] initWithServer:self];
+                    [self willChangeValueForKey:@"torrents"]; // This feels a bit nasty - forces the array controller to do initial update
                     [self.torrents addObject:importTo];
                     [self.torrentDict setObject:importTo forKey:torrentID];
+                    [self didChangeValueForKey:@"torrents"];
                 }
+                [foundTorrentKeys addObject:torrentID];
                 [importTo importJSONData:thisTData];
-                
+            }
+            
+            NSMutableArray *deleteKeys=[[self.torrentDict allKeys] mutableCopy];
+            [deleteKeys removeObjectsInArray:foundTorrentKeys];
+            NSArray *torrentsToDelete=[self.torrentDict objectsForKeys:deleteKeys notFoundMarker:[NSNull null]];
+            if (torrentsToDelete.count>0){
+                [self willChangeValueForKey:@"torrents"];
+                [self.torrentDict removeObjectsForKeys:deleteKeys];
+                [self.torrents removeObjectsInArray:torrentsToDelete];
+                [self didChangeValueForKey:@"torrents"];
             }
             
         }
@@ -160,6 +174,8 @@ static void *obvContext=&obvContext;
     [defaults setValue:self.rpcPath forKey:@"rpcPath"];
     [defaults setValue:self.port forKey:@"port"];
 }
+
+
 
 
 @end

@@ -28,9 +28,17 @@ static void *obvContext=&obvContext;
 }
 -(void) windowDidLoad{
     [super windowDidLoad];
+    
+    self.tableView.rowHeight=100.0f;
+    
     [self.server addObserver:self forKeyPath:@"connected" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:obvContext];
     [self.server addObserver:self forKeyPath:@"torrents" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:obvContext];
-    [self.server tryToConnect];
+    
+    if (self.server.address){
+        [self.server tryToConnect];
+    } else {
+        [self serverSettingsPopover:nil];
+    }
 }
 
 -(IBAction)serverSettingsPopover:(id)sender{
@@ -48,13 +56,12 @@ static void *obvContext=&obvContext;
         if ([keyPath isEqualToString:@"connected"]){
         if (self.server.connected){
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusAvailable"];
-            [self.tableView reloadData];
             [self.tableScrollView setHidden:NO];
         } else {
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusUnavailable"];
             [self.tableScrollView setHidden:YES];
         }} else if ([keyPath isEqualToString:@"torrents"]){
-            [self.tableView reloadData];
+
         }
         
         return;
@@ -68,6 +75,8 @@ static void *obvContext=&obvContext;
     NSLog(@"Defaults: %@ %@ %@",[defaults valueForKey:@"address"],[defaults valueForKey:@"port"],[defaults valueForKey:@"rpcPath"]);
     
 }
+
+
 
 
 

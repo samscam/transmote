@@ -14,6 +14,7 @@
 		220A709F18A5E103008C22F5 /* TRNWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220A709E18A5E103008C22F5 /* TRNWindowController.xib */; };
 		220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */; };
 		229CEB2A19110F11004DC29C /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 229CEB2919110F11004DC29C /* Defaults.plist */; };
+		229CEB2D1911FB52004DC29C /* TRNTheMovieDBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */; };
 		22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
 		22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */; };
 		22B9DCA118A5D58B003F5056 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCA018A5D58B003F5056 /* main.m */; };
@@ -48,6 +49,8 @@
 		220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNJSONRPCClient.h; sourceTree = "<group>"; };
 		220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNJSONRPCClient.m; sourceTree = "<group>"; };
 		229CEB2919110F11004DC29C /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		229CEB2B1911FB52004DC29C /* TRNTheMovieDBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNTheMovieDBClient.h; sourceTree = "<group>"; };
+		229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNTheMovieDBClient.m; sourceTree = "<group>"; };
 		22B9DC9118A5D58B003F5056 /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B9DC9418A5D58B003F5056 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22B9DC9718A5D58B003F5056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -148,6 +151,8 @@
 				220A709618A5DDC6008C22F5 /* TRNServer.m */,
 				220A709818A5DEE2008C22F5 /* TRNTorrent.h */,
 				220A709918A5DEE2008C22F5 /* TRNTorrent.m */,
+				229CEB2B1911FB52004DC29C /* TRNTheMovieDBClient.h */,
+				229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */,
 				220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */,
 				220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */,
 				22B9DCAC18A5D58C003F5056 /* Images.xcassets */,
@@ -327,6 +332,7 @@
 			files = (
 				220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */,
 				220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */,
+				229CEB2D1911FB52004DC29C /* TRNTheMovieDBClient.m in Sources */,
 				220A709D18A5E039008C22F5 /* TRNWindowController.m in Sources */,
 				220A709A18A5DEE2008C22F5 /* TRNTorrent.m in Sources */,
 				22B9DCA118A5D58B003F5056 /* main.m in Sources */,

@@ -46,7 +46,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="295.05859375" minWidth="40" maxWidth="1000" id="5vG-Xp-itg">
+                                        <tableColumn width="211.54296875" minWidth="40" maxWidth="1000" id="5vG-Xp-itg">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -59,7 +59,7 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <connections>
-                                                <binding destination="xfd-hp-RO0" name="value" keyPath="arrangedObjects.name" id="hzz-cw-Gfk"/>
+                                                <binding destination="xfd-hp-RO0" name="value" keyPath="arrangedObjects.bestName" id="IYB-q4-hQf"/>
                                             </connections>
                                         </tableColumn>
                                         <tableColumn width="88" minWidth="40" maxWidth="1000" id="iQY-xh-VZ8">
@@ -74,6 +74,18 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <connections>
                                                 <binding destination="xfd-hp-RO0" name="value" keyPath="arrangedObjects.percentDone" id="49e-0X-Tpi"/>
+                                            </connections>
+                                        </tableColumn>
+                                        <tableColumn width="77" minWidth="10" maxWidth="3.4028234663852886e+38" id="lFa-P7-Y4a">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="QXm-8l-oXv"/>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="xfd-hp-RO0" name="value" keyPath="arrangedObjects.poster" id="bdA-Ny-VCV"/>
                                             </connections>
                                         </tableColumn>
                                     </tableColumns>
@@ -128,11 +140,6 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="126C293B-5BCF-4E4A-93EE-5D4EB715A986" label="Start/Stop" paletteLabel="Start/Stop" tag="-1" image="NSGoRightTemplate" id="TFh-Rz-HnJ"/>
                     <toolbarItem implicitItemIdentifier="014270D2-19EC-48F8-8A69-C7B79D23B511" label="Add Torrent" paletteLabel="Add Torrent" tag="-1" image="NSAddTemplate" id="5Z1-MD-QQq"/>
-                    <toolbarItem implicitItemIdentifier="929B74AB-CDE6-4DAA-86DD-4E42E2FCED22" label="Log Defaults" paletteLabel="Log Defaults" tag="-1" image="NSEveryone" id="jdM-1Y-P7j">
-                        <connections>
-                            <action selector="logDefaults:" target="-2" id="LDa-yV-pLu"/>
-                        </connections>
-                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="2ms-CA-ga6"/>
@@ -141,7 +148,6 @@
                     <toolbarItem reference="TFh-Rz-HnJ"/>
                     <toolbarItem reference="H6b-9O-3Ye"/>
                     <toolbarItem reference="5Z1-MD-QQq"/>
-                    <toolbarItem reference="jdM-1Y-P7j"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
@@ -286,11 +292,20 @@
                 <constraint firstItem="vwb-do-HMA" firstAttribute="leading" secondItem="LgH-QU-CDe" secondAttribute="leading" id="u8J-Cy-9mQ"/>
             </constraints>
         </customView>
+        <box autoresizesSubviews="NO" title="Box" borderType="line" id="Dbl-73-daD">
+            <rect key="frame" x="0.0" y="0.0" width="177" height="114"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView">
+                <rect key="frame" x="1" y="1" width="175" height="98"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            </view>
+            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+        </box>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="8" height="8"/>
-        <image name="NSEveryone" width="32" height="32"/>
         <image name="NSGoRightTemplate" width="9" height="9"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
