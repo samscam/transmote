@@ -99,6 +99,7 @@
     
     if (!result){
         self.cleanedName=semiCleaned;
+        return;
     }
     
     NSString *title=[semiCleaned substringWithRange:[result rangeAtIndex:1]];

@@ -31,14 +31,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAO-2A-G1F">
+                    <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAO-2A-G1F">
                         <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="OEU-8d-y0W">
                             <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <collectionView selectable="YES" allowsMultipleSelection="YES" id="Srk-o5-ZS5">
+                                <collectionView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" selectable="YES" allowsMultipleSelection="YES" id="Srk-o5-ZS5">
                                     <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -72,13 +72,13 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="97F4519C-126E-4F61-B474-4E21F24E3C1C" label="Server" paletteLabel="Server" image="NSActionTemplate" id="2ms-CA-ga6">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="24" height="24"/>
-                        <size key="maxSize" width="48" height="51"/>
+                        <size key="minSize" width="24" height="16"/>
+                        <size key="maxSize" width="72" height="51"/>
                         <button key="view" id="Cn0-Sh-wqM">
-                            <rect key="frame" x="8" y="14" width="24" height="24"/>
+                            <rect key="frame" x="4" y="14" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="EAo-wn-aPH">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSActionTemplate" imagePosition="only" alignment="center" inset="2" id="EAo-wn-aPH">
+                                <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
@@ -86,22 +86,12 @@
                             </connections>
                         </button>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Pqr-gL-H2h"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="s6J-vu-nnj"/>
-                    <toolbarItem implicitItemIdentifier="0988EBA3-F531-4EEB-BFEF-12637E6D4D26" label="Remove" paletteLabel="Remove" tag="-1" image="NSStopProgressTemplate" id="H6b-9O-3Ye">
-                        <size key="minSize" width="24" height="24"/>
-                        <size key="maxSize" width="24" height="24"/>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="126C293B-5BCF-4E4A-93EE-5D4EB715A986" label="Start/Stop" paletteLabel="Start/Stop" tag="-1" image="NSGoRightTemplate" id="TFh-Rz-HnJ"/>
-                    <toolbarItem implicitItemIdentifier="014270D2-19EC-48F8-8A69-C7B79D23B511" label="Add Torrent" paletteLabel="Add Torrent" tag="-1" image="NSAddTemplate" id="5Z1-MD-QQq"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="wmn-GF-NhT"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
+                    <toolbarItem reference="wmn-GF-NhT"/>
                     <toolbarItem reference="2ms-CA-ga6"/>
-                    <toolbarItem reference="s6J-vu-nnj"/>
-                    <toolbarItem reference="Pqr-gL-H2h"/>
-                    <toolbarItem reference="TFh-Rz-HnJ"/>
-                    <toolbarItem reference="H6b-9O-3Ye"/>
-                    <toolbarItem reference="5Z1-MD-QQq"/>
+                    <toolbarItem reference="wmn-GF-NhT"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
@@ -315,7 +305,7 @@
                     <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hpz-ew-zbJ">
                         <rect key="frame" x="10" y="10" width="115" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="1" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="9LB-Hn-8hk"/>
+                        <levelIndicatorCell key="cell" alignment="left" maxValue="1" levelIndicatorStyle="continuousCapacity" id="9LB-Hn-8hk"/>
                         <connections>
                             <binding destination="7fE-CF-icn" name="value" keyPath="representedObject.percentDone" id="hh5-4n-ct9"/>
                         </connections>
@@ -357,9 +347,6 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="NSAddTemplate" width="8" height="8"/>
-        <image name="NSGoRightTemplate" width="9" height="9"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
-        <image name="NSStopProgressTemplate" width="11" height="11"/>
     </resources>
 </document>
