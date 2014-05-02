@@ -8,10 +8,15 @@
             <connections>
                 <outlet property="arrayController" destination="xfd-hp-RO0" id="aT9-3C-2Ml"/>
                 <outlet property="collectionView" destination="Srk-o5-ZS5" id="qWk-j9-00x"/>
-                <outlet property="popover" destination="vob-UZ-SdB" id="eVE-ZQ-a2B"/>
+                <outlet property="deleteConfirmPopover" destination="eMy-fO-dMo" id="CCv-vz-Gkh"/>
+                <outlet property="deleteConfirmPopoverViewController" destination="9dl-37-7hb" id="6q8-YV-ofF"/>
+                <outlet property="deleteMessageField" destination="QQN-4B-Dj6" id="OKK-R9-MKd"/>
                 <outlet property="popoverViewController" destination="E1g-if-tMX" id="GC6-WR-2pT"/>
+                <outlet property="removeTorrentButton" destination="RAu-DG-KLU" id="XW7-2I-gkx"/>
                 <outlet property="serverToolbarButton" destination="Cn0-Sh-wqM" id="429-xA-Wka"/>
+                <outlet property="settingsPopover" destination="vob-UZ-SdB" id="y4h-0K-6Et"/>
                 <outlet property="statusBlip" destination="RyM-as-zmF" id="sad-NR-sLe"/>
+                <outlet property="versionButton" destination="DYd-Bc-hj1" id="8Ou-fR-Fs7"/>
                 <outlet property="window" destination="tJN-gT-RSQ" id="uwy-WD-yAX"/>
             </connections>
         </customObject>
@@ -24,22 +29,22 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Transmote" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="tJN-gT-RSQ">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="335" y="390" width="395" height="265"/>
+            <rect key="contentRect" x="335" y="390" width="376" height="276"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <value key="minSize" type="size" width="254" height="155"/>
             <view key="contentView" id="IUp-PR-V1o">
-                <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
+                <rect key="frame" x="0.0" y="0.0" width="376" height="276"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAO-2A-G1F">
-                        <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
+                        <rect key="frame" x="0.0" y="25" width="376" height="251"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="OEU-8d-y0W">
-                            <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
+                            <rect key="frame" x="0.0" y="0.0" width="376" height="251"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <collectionView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" selectable="YES" allowsMultipleSelection="YES" id="Srk-o5-ZS5">
-                                    <rect key="frame" x="0.0" y="0.0" width="395" height="265"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="251"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
@@ -60,20 +65,66 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lpp-6H-0bX">
+                        <rect key="frame" x="190" y="6" width="178" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="Images and metadata from TheMovieDB" usesSingleLineMode="YES" id="M2r-Hm-DYk">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="U14-E7-WY7">
+                        <rect key="frame" x="0.0" y="22" width="376" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="jZp-JT-hkn">
+                        <rect key="frame" x="0.0" y="273" width="376" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                    <button verticalHuggingPriority="1000" placeholderIntrinsicWidth="86" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="DYd-Bc-hj1">
+                        <rect key="frame" x="10" y="3" width="86" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="inline" title="Version" bezelStyle="inline" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="kXQ-IA-I9R">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="miniSystemBold"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkForUpdatesButtonPressed:" target="-2" id="qFw-bF-4Sr"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="U14-E7-WY7" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" id="18v-Im-UiS"/>
+                    <constraint firstAttribute="trailing" secondItem="lpp-6H-0bX" secondAttribute="trailing" constant="10" id="1vt-pH-6mn"/>
+                    <constraint firstItem="jZp-JT-hkn" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" id="2Xe-PE-fBs"/>
+                    <constraint firstItem="DYd-Bc-hj1" firstAttribute="centerY" secondItem="lpp-6H-0bX" secondAttribute="centerY" id="4Cf-yR-e0H"/>
+                    <constraint firstItem="U14-E7-WY7" firstAttribute="top" secondItem="UAO-2A-G1F" secondAttribute="bottom" id="CzU-na-RC5"/>
                     <constraint firstItem="UAO-2A-G1F" firstAttribute="top" secondItem="IUp-PR-V1o" secondAttribute="top" id="IWw-2j-sj7"/>
-                    <constraint firstAttribute="bottom" secondItem="UAO-2A-G1F" secondAttribute="bottom" id="JZf-WV-HIn"/>
+                    <constraint firstAttribute="bottom" secondItem="UAO-2A-G1F" secondAttribute="bottom" constant="25" id="JZf-WV-HIn"/>
+                    <constraint firstItem="DYd-Bc-hj1" firstAttribute="top" secondItem="U14-E7-WY7" secondAttribute="bottom" constant="4" id="NXG-UA-YaI"/>
                     <constraint firstAttribute="trailing" secondItem="UAO-2A-G1F" secondAttribute="trailing" id="O0A-vv-XOL"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DYd-Bc-hj1" secondAttribute="bottom" constant="3" id="Qry-EZ-XJY"/>
+                    <constraint firstAttribute="trailing" secondItem="jZp-JT-hkn" secondAttribute="trailing" id="SgD-ko-VIu"/>
                     <constraint firstItem="UAO-2A-G1F" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" id="T0d-Bv-zMi"/>
+                    <constraint firstItem="DYd-Bc-hj1" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" constant="10" id="ZZs-6d-Ftr"/>
+                    <constraint firstAttribute="trailing" secondItem="U14-E7-WY7" secondAttribute="trailing" id="ceZ-ad-HR4"/>
+                    <constraint firstItem="lpp-6H-0bX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DYd-Bc-hj1" secondAttribute="trailing" constant="10" id="ftE-CA-SC6"/>
+                    <constraint firstItem="jZp-JT-hkn" firstAttribute="top" secondItem="IUp-PR-V1o" secondAttribute="top" id="wbJ-Hh-KO9"/>
                 </constraints>
             </view>
             <toolbar key="toolbar" implicitIdentifier="3BC005ED-8AFF-4967-805D-448A4BF63D85" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="small" id="BEd-0e-poy">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="97F4519C-126E-4F61-B474-4E21F24E3C1C" label="Server" paletteLabel="Server" image="NSActionTemplate" id="2ms-CA-ga6">
+                    <toolbarItem implicitItemIdentifier="97F4519C-126E-4F61-B474-4E21F24E3C1C" label="Server" paletteLabel="Server" image="NSActionTemplate" id="2ms-CA-ga6" userLabel="Server">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="24" height="16"/>
-                        <size key="maxSize" width="72" height="51"/>
+                        <size key="minSize" width="24" height="32"/>
+                        <size key="maxSize" width="32" height="51"/>
                         <button key="view" id="Cn0-Sh-wqM">
                             <rect key="frame" x="4" y="14" width="32" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -87,23 +138,56 @@
                         </button>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="wmn-GF-NhT"/>
+                    <toolbarItem implicitItemIdentifier="1FB5569E-8D01-43BA-8A1B-B8FA2649A760" label="Remove" paletteLabel="Remove Torrent" id="kPl-AA-46Y" userLabel="Remove">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="32" height="32"/>
+                        <size key="maxSize" width="32" height="32"/>
+                        <button key="view" id="RAu-DG-KLU">
+                            <rect key="frame" x="30" y="14" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Iwi-mx-te8">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="confirmRemoveSelectedTorrents:" target="-2" id="inC-ly-qjA"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="CBE2191F-D7EC-442F-8130-B8EDD2D2DE6C" label="Delete" paletteLabel="Delete Torrent" image="NSTrashEmpty" id="Wgh-VO-IRY" userLabel="Delete">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="32" height="32"/>
+                        <size key="maxSize" width="32" height="32"/>
+                        <button key="view" id="S2U-qr-cog">
+                            <rect key="frame" x="26" y="14" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTrashEmpty" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="cT2-Dz-4jP">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="confirmDeleteSelectedTorrents:" target="-2" id="mrT-zv-Qvd"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="wmn-GF-NhT"/>
                     <toolbarItem reference="2ms-CA-ga6"/>
                     <toolbarItem reference="wmn-GF-NhT"/>
+                    <toolbarItem reference="kPl-AA-46Y"/>
+                    <toolbarItem reference="Wgh-VO-IRY"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="E9a-Ex-MLa"/>
             </connections>
         </window>
-        <viewController title="Server" id="E1g-if-tMX" userLabel="Popover View Controller">
+        <viewController title="Server" id="E1g-if-tMX" userLabel="Settings Popover View Controller">
             <connections>
                 <outlet property="view" destination="AkQ-6m-vP3" id="Ltb-vn-ohI"/>
             </connections>
         </viewController>
-        <popover behavior="semitransient" id="vob-UZ-SdB">
+        <popover behavior="semitransient" id="vob-UZ-SdB" userLabel="Settings Popover">
             <connections>
                 <outlet property="contentViewController" destination="E1g-if-tMX" id="SZV-tj-ZfR"/>
             </connections>
@@ -236,12 +320,22 @@
                 <constraint firstItem="vwb-do-HMA" firstAttribute="leading" secondItem="LgH-QU-CDe" secondAttribute="leading" id="u8J-Cy-9mQ"/>
             </constraints>
         </customView>
+        <viewController id="9dl-37-7hb" userLabel="Delete Confirm Popover View Controller">
+            <connections>
+                <outlet property="view" destination="UhH-h9-gWy" id="6E2-FW-0nh"/>
+            </connections>
+        </viewController>
+        <popover behavior="semitransient" id="eMy-fO-dMo" userLabel="Delete Confirm Popover">
+            <connections>
+                <outlet property="contentViewController" destination="9dl-37-7hb" id="jb1-NS-bIi"/>
+            </connections>
+        </popover>
         <collectionViewItem id="7fE-CF-icn">
             <connections>
                 <outlet property="view" destination="XQJ-uL-wTe" id="2S2-cT-SbX"/>
             </connections>
         </collectionViewItem>
-        <box autoresizesSubviews="NO" transparent="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="XQJ-uL-wTe">
+        <box autoresizesSubviews="NO" transparent="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="XQJ-uL-wTe" userLabel="Torrent cell template">
             <rect key="frame" x="0.0" y="0.0" width="135" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView">
@@ -344,9 +438,62 @@
                 </binding>
             </connections>
         </box>
+        <customView id="UhH-h9-gWy" userLabel="Delete confirmation">
+            <rect key="frame" x="0.0" y="0.0" width="221" height="146"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQN-4B-Dj6">
+                    <rect key="frame" x="18" y="58" width="185" height="68"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Are you sure you want to permanently delete the selected torrents from the server?" id="u3t-46-ueH">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2qp-fQ-aw8">
+                    <rect key="frame" x="20" y="19" width="86" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="vvh-XO-Lsc"/>
+                    </constraints>
+                    <buttonCell key="cell" type="roundRect" title="Cancel" bezelStyle="roundedRect" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IXH-Kc-IDi">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="performClose:" target="eMy-fO-dMo" id="f6I-pi-eLm"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K8T-Vb-8CS">
+                    <rect key="frame" x="116" y="19" width="85" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="roundRect" title="Delete" bezelStyle="roundedRect" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="z3l-Hn-lku">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="confirmedRemoveOrDelete:" target="-2" id="d1n-4n-8Kq"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="2qp-fQ-aw8" secondAttribute="bottom" constant="20" id="E7q-S9-3Rx"/>
+                <constraint firstAttribute="trailing" secondItem="QQN-4B-Dj6" secondAttribute="trailing" constant="20" id="JqO-c7-p2M"/>
+                <constraint firstAttribute="trailing" secondItem="K8T-Vb-8CS" secondAttribute="trailing" constant="20" id="K9G-rQ-oCv"/>
+                <constraint firstItem="K8T-Vb-8CS" firstAttribute="leading" secondItem="2qp-fQ-aw8" secondAttribute="trailing" constant="10" id="LtA-AA-pxc"/>
+                <constraint firstItem="QQN-4B-Dj6" firstAttribute="leading" secondItem="UhH-h9-gWy" secondAttribute="leading" constant="20" id="RlV-bf-fLr"/>
+                <constraint firstItem="2qp-fQ-aw8" firstAttribute="width" secondItem="K8T-Vb-8CS" secondAttribute="width" id="XKj-59-wQe"/>
+                <constraint firstItem="2qp-fQ-aw8" firstAttribute="centerY" secondItem="K8T-Vb-8CS" secondAttribute="centerY" id="YlO-Jc-dzP"/>
+                <constraint firstItem="2qp-fQ-aw8" firstAttribute="leading" secondItem="UhH-h9-gWy" secondAttribute="leading" constant="20" id="mUS-cs-Sgs"/>
+                <constraint firstItem="QQN-4B-Dj6" firstAttribute="top" secondItem="UhH-h9-gWy" secondAttribute="top" constant="20" id="of1-So-miu"/>
+                <constraint firstItem="K8T-Vb-8CS" firstAttribute="top" secondItem="QQN-4B-Dj6" secondAttribute="bottom" constant="20" id="ofq-yw-7xx"/>
+            </constraints>
+        </customView>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
+        <image name="NSTrashEmpty" width="32" height="32"/>
     </resources>
 </document>

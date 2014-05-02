@@ -19,12 +19,25 @@
 @property (weak) IBOutlet NSButton *serverToolbarButton;
 @property (weak) IBOutlet NSImageView *statusBlip;
 
-@property (weak) IBOutlet NSPopover *popover;
+@property (weak) IBOutlet NSPopover *settingsPopover;
 @property (weak) IBOutlet NSViewController *popoverViewController;
+
+@property (weak) IBOutlet NSPopover *deleteConfirmPopover;
+@property (weak) IBOutlet NSViewController *deleteConfirmPopoverViewController;
+
 @property (weak) IBOutlet NSCollectionView *collectionView;
 
+@property (weak) IBOutlet NSButton *removeTorrentButton;
+@property (weak) IBOutlet NSTextField *deleteMessageField;
 
--(IBAction)serverSettingsPopover:(id)sender;
--(IBAction)logDefaults:(id)sender;
+@property (weak) IBOutlet NSButton *versionButton;
+
+
+-(IBAction) serverSettingsPopover:(id)sender;
+-(IBAction) confirmDeleteSelectedTorrents:(id)sender;
+-(IBAction) confirmRemoveSelectedTorrents:(id)sender;
+-(IBAction) confirmedRemoveOrDelete:(id)sender;
+
+-(IBAction) checkForUpdatesButtonPressed:(id)sender;
 
 @end
