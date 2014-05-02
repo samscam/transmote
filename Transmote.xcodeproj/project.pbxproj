@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		22D10D5C1913DA4300209A79 /* Autoversioning */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 22D10D5D1913DA4300209A79 /* Build configuration list for PBXAggregateTarget "Autoversioning" */;
+			buildPhases = (
+				22D10D621913DA6000209A79 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Autoversioning;
+			productName = Autoversioning;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		11E82D4211F647D7B6A7D3BA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 870FA36FEBEC4475A1B68205 /* libPods.a */; };
 		220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709618A5DDC6008C22F5 /* TRNServer.m */; };
@@ -26,6 +40,7 @@
 		22B9DCB518A5D58C003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
 		22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */; };
 		22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */; };
+		22D10D551913D93C00209A79 /* autoversioning.sh in Resources */ = {isa = PBXBuildFile; fileRef = 22D10D541913D93C00209A79 /* autoversioning.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +50,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 22B9DC9018A5D58B003F5056;
 			remoteInfo = Transmote;
+		};
+		22D10D601913DA5800209A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22B9DC8918A5D58B003F5056 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22D10D5C1913DA4300209A79;
+			remoteInfo = Autoversioning;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -71,6 +93,7 @@
 		22B9DCBC18A5D58C003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
 		22D10D521913D00000209A79 /* TRNDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNDefinitions.h; sourceTree = "<group>"; };
+		22D10D541913D93C00209A79 /* autoversioning.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
 		5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		870FA36FEBEC4475A1B68205 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -166,6 +189,7 @@
 		22B9DC9B18A5D58B003F5056 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				22D10D541913D93C00209A79 /* autoversioning.sh */,
 				22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */,
 				22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */,
 				22B9DCA018A5D58B003F5056 /* main.m */,
@@ -209,6 +233,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				22D10D611913DA5800209A79 /* PBXTargetDependency */,
 			);
 			name = Transmote;
 			productName = Transmote;
@@ -266,6 +291,7 @@
 			targets = (
 				22B9DC9018A5D58B003F5056 /* Transmote */,
 				22B9DCB118A5D58C003F5056 /* TransmoteTests */,
+				22D10D5C1913DA4300209A79 /* Autoversioning */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +307,7 @@
 				22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */,
 				22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */,
 				22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */,
+				22D10D551913D93C00209A79 /* autoversioning.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +322,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		22D10D621913DA6000209A79 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./Transmote/autoversioning.sh;
+		};
 		559953F3FD1247C3AF7279CE /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,6 +397,11 @@
 			isa = PBXTargetDependency;
 			target = 22B9DC9018A5D58B003F5056 /* Transmote */;
 			targetProxy = 22B9DCB618A5D58C003F5056 /* PBXContainerItemProxy */;
+		};
+		22D10D611913DA5800209A79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22D10D5C1913DA4300209A79 /* Autoversioning */;
+			targetProxy = 22D10D601913DA5800209A79 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -474,6 +519,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
 				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -489,6 +536,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
 				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -534,6 +583,20 @@
 			};
 			name = Release;
 		};
+		22D10D5E1913DA4300209A79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		22D10D5F1913DA4300209A79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -563,6 +626,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		22D10D5D1913DA4300209A79 /* Build configuration list for PBXAggregateTarget "Autoversioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D10D5E1913DA4300209A79 /* Debug */,
+				22D10D5F1913DA4300209A79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
