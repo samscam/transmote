@@ -89,8 +89,6 @@ static void *obvContext=&obvContext;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //BOO
         self.connected=NO;
-        [self.timer invalidate];
-        self.timer=nil;
     }];
     
 }
@@ -114,7 +112,15 @@ static void *obvContext=&obvContext;
     return theURL;
 }
 
--(void) updateTorrents:(id)timer{
+-(void) timerDidFire:(id)timer{
+    if (self.connected){
+        [self updateDefaults];
+    } else {
+        [self tryToConnect];
+    }
+}
+
+-(void) updateTorrents{
     [self.client invokeMethod:@"torrent-get" withParameters:@{@"fields":@[@"id",@"name",@"totalSize",@"rateDownload",@"rateUpload",@"percentDone"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *responseDict=(NSDictionary*)responseObject;
@@ -150,7 +156,8 @@ static void *obvContext=&obvContext;
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        // Some error occured... assume we have been disconnected...
+        self.connected=NO;
         
     }];
 }
@@ -176,6 +183,19 @@ static void *obvContext=&obvContext;
 }
 
 
+-(void) removeTorrent:(TRNTorrent*)torrent deleteData:(BOOL)delete {
+    [self.client invokeMethod:@"torrent-remove" withParameters:@{@"ids":@[torrent.id],@"delete-local-data":[NSNumber numberWithBool:delete]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // Looks like it has gone.
+        // Remove it locally too
+        
+        [self.torrentDict removeObjectForKey:torrent.id];
+        [self.torrents removeObject:torrent];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
 
+}
 
 @end
