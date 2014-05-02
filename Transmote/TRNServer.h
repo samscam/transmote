@@ -23,6 +23,7 @@
 -(void) disconnect;
 -(void) addMagnetLink:(NSURL*)magnetLink;
 
+-(void) removeTorrents:(NSArray*)torrentsToDelete deleteData:(BOOL)delete;
 
 
 @end

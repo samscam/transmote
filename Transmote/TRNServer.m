@@ -12,7 +12,10 @@
 #import "TRNJSONRPCClient.h"
 #import "TRNAppDelegate.h"
 
-@interface TRNServer()
+@interface TRNServer(){
+    BOOL connecting;
+    BOOL updating;
+}
 
 @property (nonatomic,readwrite) BOOL connected;
 @property (nonatomic,readwrite) NSMutableArray *torrents;
@@ -24,7 +27,7 @@
 
 @implementation TRNServer
 
-static void *obvContext=&obvContext;
+static void *connectionContext=&connectionContext;
 
 -(id) init{
     
@@ -52,24 +55,40 @@ static void *obvContext=&obvContext;
            options:@{NSContinuouslyUpdatesValueBindingOption : @YES }];
         
         
-        [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:obvContext];
-        [self addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionNew context:obvContext];
-        [self addObserver:self forKeyPath:@"port" options:NSKeyValueObservingOptionNew context:obvContext];
+        [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:connectionContext];
+        [self addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionNew context:connectionContext];
+        [self addObserver:self forKeyPath:@"port" options:NSKeyValueObservingOptionNew context:connectionContext];
     }
     return self;
 }
 
 -(void) tryToConnect{
+    self.timer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
     [self connect];
 }
 
--(void) connect{
+-(void) timerDidFire:(id)timer{
+    // the timer will fire every three seconds...
+    // we should probably make this configurable...
 
+    if (self.connected){
+        // if we are connected update the torrents
+        [self updateTorrents];
+    } else {
+        // otherwise, have another bash at connecting
+        // should probably throttle this down if it fails a few times
+        [self connect];
+    }
+}
+
+-(void) connect{
+    if (connecting){
+        return;
+    }
+    
+    connecting=YES;
     [self.torrentDict removeAllObjects];
     [self.torrents removeAllObjects];
-
-    [self.timer invalidate];
-    self.timer=nil;
     
     self.client=[TRNJSONRPCClient clientWithEndpointURL:[self serverURL]];
     
@@ -77,7 +96,10 @@ static void *obvContext=&obvContext;
         //WOO
         NSLog(@"Session alive\n%@",responseObject);
         self.connected=YES;
-        self.timer=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(updateTorrents:) userInfo:nil repeats:YES];
+        connecting=NO;
+        
+        // force an immediate update of torrents
+        [self updateTorrents];
         
         // Check for a deferred URL
         TRNAppDelegate *appDelegate=[NSApp delegate];
@@ -85,10 +107,11 @@ static void *obvContext=&obvContext;
             [self addMagnetLink:appDelegate.deferredMagnetURL];
             appDelegate.deferredMagnetURL=nil;
         }
+        connecting=NO;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //BOO
-        self.connected=NO;
+        // This will get called on session negotiation.. so don't trust it
+        
     }];
     
 }
@@ -101,9 +124,9 @@ static void *obvContext=&obvContext;
 -(void) addMagnetLink:(NSURL*)magnetLink{
     
     [self.client invokeMethod:@"torrent-add" withParameters:@{@"filename":[magnetLink absoluteString]}  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Looks like we win...");
+        NSLog(@"Torrent added: %@",responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Torrent Fails");
+        NSLog(@"Torrent failed to add: %@",error.localizedDescription);
     }];
 }
 
@@ -112,15 +135,14 @@ static void *obvContext=&obvContext;
     return theURL;
 }
 
--(void) timerDidFire:(id)timer{
-    if (self.connected){
-        [self updateDefaults];
-    } else {
-        [self tryToConnect];
-    }
-}
+
 
 -(void) updateTorrents{
+    if (updating){
+        return;
+    }
+    
+    updating=YES;
     [self.client invokeMethod:@"torrent-get" withParameters:@{@"fields":@[@"id",@"name",@"totalSize",@"rateDownload",@"rateUpload",@"percentDone"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *responseDict=(NSDictionary*)responseObject;
@@ -153,20 +175,20 @@ static void *obvContext=&obvContext;
             }
             
         }
-        
+        updating=NO;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Some error occured... assume we have been disconnected...
         self.connected=NO;
-        
+        updating=NO;
     }];
 }
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
-    if (context==&obvContext){
+    if (context==&connectionContext){
+        // The user edited the connection details - force a reconnect
         [self connect];
-        
         [self updateDefaults];
         return;
     }
@@ -183,17 +205,22 @@ static void *obvContext=&obvContext;
 }
 
 
--(void) removeTorrent:(TRNTorrent*)torrent deleteData:(BOOL)delete {
-    [self.client invokeMethod:@"torrent-remove" withParameters:@{@"ids":@[torrent.id],@"delete-local-data":[NSNumber numberWithBool:delete]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+-(void) removeTorrents:(NSArray*)torrentsToDelete deleteData:(BOOL)delete {
+    NSMutableArray *torrentIDs=[[NSMutableArray alloc] init];
+    for (TRNTorrent *thisTorrent in torrentsToDelete){
+        [torrentIDs addObject:thisTorrent.id];
+    }
+    
+    [self.client invokeMethod:@"torrent-remove" withParameters:@{@"ids":torrentIDs,@"delete-local-data":[NSNumber numberWithBool:delete]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // Looks like it has gone.
         // Remove it locally too
         
-        [self.torrentDict removeObjectForKey:torrent.id];
-        [self.torrents removeObject:torrent];
+        [self.torrentDict removeObjectsForKeys:torrentIDs];
+        [self.torrents removeObjectsInArray:torrentsToDelete];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
+        // Some error occured... assume we have been disconnected...
+        self.connected=NO;
     }];
 
 }
