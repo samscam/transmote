@@ -47,19 +47,19 @@ static void *collectionViewContext=&collectionViewContext;
     [self.server addObserver:self forKeyPath:@"connected" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:serverContext];
     [self.server addObserver:self forKeyPath:@"torrents" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:serverContext];
     
-    if (self.server.address){
-        [self.server tryToConnect];
-    } else {
+    if (!self.server.address){
         [self serverSettingsPopover:nil];
     }
 }
+
 
 -(void) sortOutVersionMessage{
     NSString *versionString=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     self.versionButton.title=[NSString stringWithFormat:@"Tranmote v%@ - click to check for updates",versionString];
 }
 -(IBAction)serverSettingsPopover:(id)sender{
-    NSView *toolbarItemView=((NSButton*)sender);
+    
+    NSView *toolbarItemView=self.serverToolbarButton;
     
     [self.settingsPopover showRelativeToRect:[toolbarItemView bounds]
                               ofView:toolbarItemView
@@ -73,8 +73,10 @@ static void *collectionViewContext=&collectionViewContext;
         if ([keyPath isEqualToString:@"connected"]){
         if (self.server.connected){
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusAvailable"];
+            self.collectionView.hidden=NO;
         } else {
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusUnavailable"];
+            self.collectionView.hidden=YES;
         }} else if ([keyPath isEqualToString:@"torrents"]){
 
         }

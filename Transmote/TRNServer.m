@@ -58,6 +58,8 @@ static void *connectionContext=&connectionContext;
         [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:connectionContext];
         [self addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionNew context:connectionContext];
         [self addObserver:self forKeyPath:@"port" options:NSKeyValueObservingOptionNew context:connectionContext];
+        
+        [self tryToConnect];
     }
     return self;
 }
@@ -111,7 +113,8 @@ static void *connectionContext=&connectionContext;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // This will get called on session negotiation.. so don't trust it
-        
+        self.connected=NO;
+        connecting=NO;
     }];
     
 }
@@ -188,6 +191,7 @@ static void *connectionContext=&connectionContext;
     
     if (context==&connectionContext){
         // The user edited the connection details - force a reconnect
+        connecting=NO;
         [self connect];
         [self updateDefaults];
         return;
@@ -215,8 +219,10 @@ static void *connectionContext=&connectionContext;
         // Looks like it has gone.
         // Remove it locally too
         
+        [self willChangeValueForKey:@"torrents"];// force the array controller to spot the change
         [self.torrentDict removeObjectsForKeys:torrentIDs];
         [self.torrents removeObjectsInArray:torrentsToDelete];
+        [self didChangeValueForKey:@"torrents"];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Some error occured... assume we have been disconnected...

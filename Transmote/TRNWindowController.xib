@@ -99,12 +99,57 @@
                             <action selector="checkForUpdatesButtonPressed:" target="-2" id="qFw-bF-4Sr"/>
                         </connections>
                     </button>
+                    <box autoresizesSubviews="NO" title="Oh dear" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bxs-W8-RXy">
+                        <rect key="frame" x="100" y="85" width="177" height="105"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView">
+                            <rect key="frame" x="1" y="1" width="175" height="103"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cEk-SZ-ZZx">
+                                    <rect key="frame" x="66" y="49" width="42" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="42" id="rqo-sh-3Ox"/>
+                                        <constraint firstAttribute="height" constant="42" id="tbj-Lt-eeM"/>
+                                    </constraints>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="ZsH-AB-gGC"/>
+                                </imageView>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jvM-mf-aUR">
+                                    <rect key="frame" x="10" y="24" width="155" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Disconnected" id="bIN-WE-6yj">
+                                        <font key="font" metaFont="systemBold"/>
+                                        <color key="textColor" white="0.0" alpha="0.54000000000000004" colorSpace="deviceWhite"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="171" id="3GQ-Sf-900"/>
+                            <constraint firstItem="cEk-SZ-ZZx" firstAttribute="top" secondItem="bxs-W8-RXy" secondAttribute="top" constant="11" id="8mT-gv-s8n"/>
+                            <constraint firstAttribute="trailing" secondItem="jvM-mf-aUR" secondAttribute="trailing" constant="10" id="NTi-MG-Q4x"/>
+                            <constraint firstAttribute="centerX" secondItem="jvM-mf-aUR" secondAttribute="centerX" id="Ps7-9A-uzX"/>
+                            <constraint firstAttribute="centerX" secondItem="cEk-SZ-ZZx" secondAttribute="centerX" id="QMy-Wl-AfJ"/>
+                            <constraint firstAttribute="height" constant="99" id="dsA-Ya-eNd"/>
+                            <constraint firstItem="jvM-mf-aUR" firstAttribute="leading" secondItem="bxs-W8-RXy" secondAttribute="leading" constant="10" id="yt9-am-npx"/>
+                            <constraint firstItem="jvM-mf-aUR" firstAttribute="top" secondItem="cEk-SZ-ZZx" secondAttribute="bottom" constant="8" id="zEe-vH-DHL"/>
+                        </constraints>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <binding destination="-2" name="hidden" keyPath="server.connected" id="1bH-BT-k6h"/>
+                        </connections>
+                    </box>
                 </subviews>
                 <constraints>
                     <constraint firstItem="U14-E7-WY7" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" id="18v-Im-UiS"/>
                     <constraint firstAttribute="trailing" secondItem="lpp-6H-0bX" secondAttribute="trailing" constant="10" id="1vt-pH-6mn"/>
                     <constraint firstItem="jZp-JT-hkn" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" id="2Xe-PE-fBs"/>
+                    <constraint firstAttribute="centerX" secondItem="bxs-W8-RXy" secondAttribute="centerX" id="2zn-xY-Wbf"/>
                     <constraint firstItem="DYd-Bc-hj1" firstAttribute="centerY" secondItem="lpp-6H-0bX" secondAttribute="centerY" id="4Cf-yR-e0H"/>
+                    <constraint firstAttribute="centerY" secondItem="bxs-W8-RXy" secondAttribute="centerY" id="7j0-1Z-Qun"/>
                     <constraint firstItem="U14-E7-WY7" firstAttribute="top" secondItem="UAO-2A-G1F" secondAttribute="bottom" id="CzU-na-RC5"/>
                     <constraint firstItem="UAO-2A-G1F" firstAttribute="top" secondItem="IUp-PR-V1o" secondAttribute="top" id="IWw-2j-sj7"/>
                     <constraint firstAttribute="bottom" secondItem="UAO-2A-G1F" secondAttribute="bottom" constant="25" id="JZf-WV-HIn"/>
@@ -493,6 +538,7 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSCaution" width="32" height="32"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
         <image name="NSTrashEmpty" width="32" height="32"/>
     </resources>
