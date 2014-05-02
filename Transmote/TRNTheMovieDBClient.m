@@ -19,19 +19,18 @@
 
 @implementation TRNTheMovieDBClient
 
-static NSString *apiKey = @"***REMOVED***";
 
 
 -(AFHTTPSessionManager*) sessionManager{
     if (!_sessionManager){
-        NSURL *baseURL = [NSURL URLWithString:@"https://api.themoviedb.org/3/"];
+        NSURL *baseURL = [NSURL URLWithString:TMDB_BASE_URL];
         _sessionManager=[[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     }
     return _sessionManager;
 }
 
 -(void) fetchServiceConfigurationOnCompletion:(void (^) (void))completionBlock{
-    [self.sessionManager GET:@"/3/configuration" parameters:@{@"api_key":apiKey} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.sessionManager GET:@"configuration" parameters:@{@"api_key":TMDB_API_KEY} success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *imageBaseURLString=[(NSDictionary*)responseObject valueForKeyPath:@"images.secure_base_url"];
         self.imageSessionManager=[[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:imageBaseURLString]];
         self.imageSessionManager.responseSerializer=[AFImageResponseSerializer serializer];
@@ -46,7 +45,7 @@ static NSString *apiKey = @"***REMOVED***";
     
     NSString *method=@"search/movie";
     
-    NSDictionary *params=[@{@"api_key":apiKey,@"query":movieName} mutableCopy];
+    NSDictionary *params=[@{@"api_key":TMDB_API_KEY,@"query":movieName} mutableCopy];
     
 //    if (year){
 //        [params setValue:year forKey:@"year"];
@@ -70,11 +69,8 @@ static NSString *apiKey = @"***REMOVED***";
     
     NSString *method=@"search/tv";
     
-    NSDictionary *params=[@{@"api_key":apiKey,@"query":showName} mutableCopy];
+    NSDictionary *params=[@{@"api_key":TMDB_API_KEY,@"query":showName} mutableCopy];
     
-    //    if (year){
-    //        [params setValue:year forKey:@"year"];
-    //    }
     
     [self.sessionManager GET:method parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *results=[responseObject valueForKey:@"results"];
@@ -92,6 +88,8 @@ static NSString *apiKey = @"***REMOVED***";
 
 -(void) fetchImageAtPath:(NSString*)imagePath onCompletion:(void (^)(NSImage *image))completionBlock{
     void (^wrapBlock)(void)=^{
+        
+        // Hard-coded image size here... should perhaps extract this from TMDB config?
         NSString *realPath=[@"w342" stringByAppendingPathComponent:imagePath];
         
         [self.imageSessionManager GET:realPath  parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

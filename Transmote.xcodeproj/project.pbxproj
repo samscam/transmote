@@ -70,6 +70,7 @@
 		22B9DCBA18A5D58C003F5056 /* TransmoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TransmoteTests-Info.plist"; sourceTree = "<group>"; };
 		22B9DCBC18A5D58C003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
+		22D10D521913D00000209A79 /* TRNDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNDefinitions.h; sourceTree = "<group>"; };
 		5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		870FA36FEBEC4475A1B68205 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -141,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				229CEB2919110F11004DC29C /* Defaults.plist */,
+				22D10D521913D00000209A79 /* TRNDefinitions.h */,
 				22B9DCA618A5D58B003F5056 /* TRNAppDelegate.h */,
 				22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */,
 				22B9DCA918A5D58C003F5056 /* MainMenu.xib */,
