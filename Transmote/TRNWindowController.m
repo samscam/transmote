@@ -10,7 +10,8 @@
 
 @implementation TRNWindowController
 
-static void *obvContext=&obvContext;
+static void *serverContext=&serverContext;
+static void *collectionViewContext=&collectionViewContext;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -29,10 +30,14 @@ static void *obvContext=&obvContext;
 -(void) windowDidLoad{
     [super windowDidLoad];
     
-    self.tableView.rowHeight=100.0f;
+//    self.tableView.rowHeight=100.0f;
     
-    [self.server addObserver:self forKeyPath:@"connected" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:obvContext];
-    [self.server addObserver:self forKeyPath:@"torrents" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:obvContext];
+    self.collectionView.backgroundColors=@[[NSColor clearColor]];
+    
+    [self.arrayController addObserver:self forKeyPath:@"selectionIndexes" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:collectionViewContext];
+    
+    [self.server addObserver:self forKeyPath:@"connected" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:serverContext];
+    [self.server addObserver:self forKeyPath:@"torrents" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:serverContext];
     
     if (self.server.address){
         [self.server tryToConnect];
@@ -52,18 +57,22 @@ static void *obvContext=&obvContext;
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
-    if (context==&obvContext){
+    if (context==&serverContext){
         if ([keyPath isEqualToString:@"connected"]){
         if (self.server.connected){
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusAvailable"];
-            [self.tableScrollView setHidden:NO];
+//            [self.tableScrollView setHidden:NO];
         } else {
             self.statusBlip.image=[NSImage imageNamed:@"NSStatusUnavailable"];
-            [self.tableScrollView setHidden:YES];
+//            [self.tableScrollView setHidden:YES];
         }} else if ([keyPath isEqualToString:@"torrents"]){
 
         }
         
+        return;
+    }
+    if (context==&collectionViewContext){
+        [self collectionViewSelectionDidChange];
         return;
     }
     
@@ -76,7 +85,9 @@ static void *obvContext=&obvContext;
     
 }
 
-
+-(void) collectionViewSelectionDidChange{
+    
+}
 
 
 

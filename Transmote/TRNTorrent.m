@@ -90,7 +90,7 @@
     // Clean up dots, hyphens, underscores
 
     NSError *error=nil;
-    NSRegularExpression *dotClean=[NSRegularExpression regularExpressionWithPattern:@"[\\._-]" options:0 error:&error];
+    NSRegularExpression *dotClean=[NSRegularExpression regularExpressionWithPattern:@"[\\.+_-]" options:0 error:&error];
     NSString *semiCleaned=[dotClean stringByReplacingMatchesInString:self.name options:0 range:NSMakeRange(0,self.name.length) withTemplate:@" "];
     NSLog(@"Semi cleaned: %@",semiCleaned);
     

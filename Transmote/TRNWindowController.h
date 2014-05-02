@@ -15,14 +15,13 @@
 
 @property (weak) IBOutlet NSArrayController *arrayController;
 
-@property (weak) IBOutlet NSScrollView *tableScrollView;
-@property (weak) IBOutlet NSTableView *tableView;
 
 @property (weak) IBOutlet NSButton *serverToolbarButton;
 @property (weak) IBOutlet NSImageView *statusBlip;
 
 @property (weak) IBOutlet NSPopover *popover;
 @property (weak) IBOutlet NSViewController *popoverViewController;
+@property (weak) IBOutlet NSCollectionView *collectionView;
 
 
 -(IBAction)serverSettingsPopover:(id)sender;
