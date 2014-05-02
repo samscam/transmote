@@ -30,11 +30,15 @@
              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
 
+    // Transmission likes to send us a session id before we can talk to it
+    // It does it by failing the first request with a 409 and providing the new one in the response headers
+    // If that happens, we grab the ID and try our initial request again
+    // See: https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt
     
     void  (^wrapFailureBlock)(AFHTTPRequestOperation *operation, NSError *error)  =^(AFHTTPRequestOperation *operation, NSError *error){
         if ([operation.response statusCode] == 409){
             self.sessionID=[[operation.response allHeaderFields] valueForKey:@"X-Transmission-Session-Id"];
-            NSLog(@"setting session id to %@ and retrying",self.sessionID);
+            NSLog(@"Setting session id to %@ and retrying",self.sessionID);
             [self.requestSerializer setValue:self.sessionID forHTTPHeaderField:@"X-Transmission-Session-Id"];
             NSMutableURLRequest *request = [self requestWithMethod:method parameters:parameters requestId:requestId];
             AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
