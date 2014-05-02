@@ -10,8 +10,7 @@
 # -- the long version number is the current git hash
 
 # in RELEASE builds
-# -- the short (marketing) version number is in the form 0.1
-# -- the long version number is in the form 0.1.xx (as above without the dirty)
+# -- both long and short versions are in the form 0.1.xx (as above but without the dirty)
 
 
 
@@ -38,7 +37,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   fi
   longVersion="$gitHash"
 else
-  shortVersion="$shortVersion"
+  shortVersion="$taggedVersion.$bumps"
   longVersion="$taggedVersion.$bumps"
 fi
 
