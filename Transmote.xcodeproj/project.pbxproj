@@ -41,6 +41,7 @@
 		22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */; };
 		22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */; };
 		22D10D551913D93C00209A79 /* autoversioning.sh in Resources */ = {isa = PBXBuildFile; fileRef = 22D10D541913D93C00209A79 /* autoversioning.sh */; };
+		22E844581920DC9F003456CD /* SESImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E844571920DC9F003456CD /* SESImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
 		22D10D521913D00000209A79 /* TRNDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNDefinitions.h; sourceTree = "<group>"; };
 		22D10D541913D93C00209A79 /* autoversioning.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
+		22E844561920DC9F003456CD /* SESImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESImageView.h; sourceTree = "<group>"; };
+		22E844571920DC9F003456CD /* SESImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESImageView.m; sourceTree = "<group>"; };
 		5E7F04DA89E24FEBA3842B9F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		870FA36FEBEC4475A1B68205 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -172,14 +175,9 @@
 				220A709B18A5E039008C22F5 /* TRNWindowController.h */,
 				220A709C18A5E039008C22F5 /* TRNWindowController.m */,
 				220A709E18A5E103008C22F5 /* TRNWindowController.xib */,
-				220A709518A5DDC6008C22F5 /* TRNServer.h */,
-				220A709618A5DDC6008C22F5 /* TRNServer.m */,
-				220A709818A5DEE2008C22F5 /* TRNTorrent.h */,
-				220A709918A5DEE2008C22F5 /* TRNTorrent.m */,
-				229CEB2B1911FB52004DC29C /* TRNTheMovieDBClient.h */,
-				229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */,
-				220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */,
-				220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */,
+				22E844541920DC42003456CD /* Models */,
+				22E844551920DC4C003456CD /* API Clients */,
+				22E844531920DC37003456CD /* Categories */,
 				22B9DCAC18A5D58C003F5056 /* Images.xcassets */,
 				22B9DC9B18A5D58B003F5056 /* Supporting Files */,
 			);
@@ -215,6 +213,37 @@
 				22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22E844531920DC37003456CD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				22E844561920DC9F003456CD /* SESImageView.h */,
+				22E844571920DC9F003456CD /* SESImageView.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		22E844541920DC42003456CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				220A709518A5DDC6008C22F5 /* TRNServer.h */,
+				220A709618A5DDC6008C22F5 /* TRNServer.m */,
+				220A709818A5DEE2008C22F5 /* TRNTorrent.h */,
+				220A709918A5DEE2008C22F5 /* TRNTorrent.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		22E844551920DC4C003456CD /* API Clients */ = {
+			isa = PBXGroup;
+			children = (
+				229CEB2B1911FB52004DC29C /* TRNTheMovieDBClient.h */,
+				229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */,
+				220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */,
+				220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */,
+			);
+			name = "API Clients";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E844581920DC9F003456CD /* SESImageView.m in Sources */,
 				220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */,
 				220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */,
 				229CEB2D1911FB52004DC29C /* TRNTheMovieDBClient.m in Sources */,
@@ -516,6 +546,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
 				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
@@ -533,6 +567,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
 				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
@@ -634,6 +672,7 @@
 				22D10D5F1913DA4300209A79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
