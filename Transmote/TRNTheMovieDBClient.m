@@ -88,7 +88,9 @@
 
 -(void) fetchImageAtPath:(NSString*)imagePath onCompletion:(void (^)(NSImage *image))completionBlock{
     void (^wrapBlock)(void)=^{
-        
+        if (!imagePath || [imagePath isKindOfClass:[NSNull class]]){
+            return;
+        }
         // Hard-coded image size here... should perhaps extract this from TMDB config?
         NSString *realPath=[@"w342" stringByAppendingPathComponent:imagePath];
         
