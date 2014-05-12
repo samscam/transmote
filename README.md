@@ -3,10 +3,10 @@ Transmote
 
 Transmote is an OS X remote control app for the Transmission bittorrent client. *Before you ask, it is NOT a bittorrent client in its own right.*
 
-You can download the latest built binary from here: [Transmote.app](http://samscam.co.uk/transmote/Transmote.zip) (v0.1.18)
+You can download the latest built binary from here: [Transmote.app](http://samscam.co.uk/transmote/release/Transmote-0.1.25.zip) (v0.1.25)
 
 * It accepts magnet links from browsers and forwards them to your server - useful if you are running Transmission remotely eg on a NAS.
-* It attempts to fetch artwork and real names for movies and TV shows (though this is somewhat unreliable and based on the raw name of the torrent)
+* It *attempts* to fetch artwork and real names for movies and TV shows
 * You can *remove* and *delete* torrents from your server
 * Other functionality may be forthcoming later :)
 
