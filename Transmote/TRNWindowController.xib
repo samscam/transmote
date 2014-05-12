@@ -238,11 +238,11 @@
             </connections>
         </popover>
         <customView identifier="ServerSettings" id="AkQ-6m-vP3" userLabel="Preferences">
-            <rect key="frame" x="0.0" y="0.0" width="303" height="143"/>
+            <rect key="frame" x="0.0" y="0.0" width="289" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mhf-Ts-kZd">
-                    <rect key="frame" x="18" y="113" width="267" height="17"/>
+                    <rect key="frame" x="18" y="113" width="253" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Transimssion Server Settings" id="9k8-k3-A5Y">
                         <font key="font" metaFont="system"/>
@@ -251,7 +251,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LgH-QU-CDe">
-                    <rect key="frame" x="18" y="87" width="175" height="11"/>
+                    <rect key="frame" x="18" y="87" width="161" height="11"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Server" id="NZ8-3e-2YT">
                         <font key="font" metaFont="miniSystem"/>
@@ -260,7 +260,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nWn-3Q-dd7">
-                    <rect key="frame" x="197" y="87" width="56" height="11"/>
+                    <rect key="frame" x="183" y="87" width="56" height="11"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="52" id="n5x-GX-giS"/>
@@ -272,7 +272,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vwb-do-HMA" userLabel="Server Address">
-                    <rect key="frame" x="20" y="57" width="171" height="22"/>
+                    <rect key="frame" x="20" y="57" width="157" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Server Address" usesSingleLineMode="YES" bezelStyle="round" id="P70-xM-2gJ">
                         <font key="font" metaFont="system"/>
@@ -288,7 +288,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K22-0d-Ap5">
-                    <rect key="frame" x="80" y="20" width="203" height="22"/>
+                    <rect key="frame" x="80" y="20" width="189" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="transmission/rpc" bezelStyle="round" id="4Dd-mM-RjT">
                         <font key="font" metaFont="system"/>
@@ -304,7 +304,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OoL-A6-VP0">
-                    <rect key="frame" x="199" y="57" width="57" height="22"/>
+                    <rect key="frame" x="185" y="57" width="57" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="9091" usesSingleLineMode="YES" bezelStyle="round" id="zbR-9c-bLF">
                         <font key="font" metaFont="system"/>
@@ -320,7 +320,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="egd-hk-pat">
-                    <rect key="frame" x="18" y="26" width="56" height="11"/>
+                    <rect key="frame" x="18" y="24" width="56" height="11"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="52" id="jWY-EG-6TI"/>
@@ -332,7 +332,7 @@
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RyM-as-zmF">
-                    <rect key="frame" x="264" y="57" width="19" height="23"/>
+                    <rect key="frame" x="250" y="57" width="19" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="19" id="KWA-ln-B1C"/>
@@ -348,7 +348,7 @@
                 <constraint firstAttribute="trailing" secondItem="nWn-3Q-dd7" secondAttribute="trailing" constant="52" id="Dko-4l-8yO"/>
                 <constraint firstItem="K22-0d-Ap5" firstAttribute="top" secondItem="vwb-do-HMA" secondAttribute="bottom" constant="15" id="H5v-tC-ame"/>
                 <constraint firstItem="RyM-as-zmF" firstAttribute="trailing" secondItem="K22-0d-Ap5" secondAttribute="trailing" id="Kl0-0v-LIo"/>
-                <constraint firstItem="egd-hk-pat" firstAttribute="centerY" secondItem="K22-0d-Ap5" secondAttribute="centerY" id="USr-QD-PUI"/>
+                <constraint firstItem="egd-hk-pat" firstAttribute="baseline" secondItem="K22-0d-Ap5" secondAttribute="baseline" id="USr-QD-PUI"/>
                 <constraint firstItem="OoL-A6-VP0" firstAttribute="baseline" secondItem="vwb-do-HMA" secondAttribute="baseline" id="bzy-Z2-4vN"/>
                 <constraint firstItem="OoL-A6-VP0" firstAttribute="leading" secondItem="vwb-do-HMA" secondAttribute="trailing" constant="8" symbolic="YES" id="dsv-eg-KZX"/>
                 <constraint firstItem="LgH-QU-CDe" firstAttribute="baseline" secondItem="nWn-3Q-dd7" secondAttribute="baseline" id="dyI-5k-gsN"/>
@@ -357,11 +357,11 @@
                 <constraint firstItem="vwb-do-HMA" firstAttribute="top" secondItem="LgH-QU-CDe" secondAttribute="bottom" constant="8" symbolic="YES" id="jDs-kh-Gul"/>
                 <constraint firstItem="mhf-Ts-kZd" firstAttribute="leading" secondItem="AkQ-6m-vP3" secondAttribute="leading" constant="20" symbolic="YES" id="jRT-F4-9dq"/>
                 <constraint firstItem="RyM-as-zmF" firstAttribute="trailing" secondItem="mhf-Ts-kZd" secondAttribute="trailing" id="kOP-8c-xbg"/>
+                <constraint firstItem="mhf-Ts-kZd" firstAttribute="top" secondItem="AkQ-6m-vP3" secondAttribute="top" constant="20" symbolic="YES" id="lLz-Tf-0sC"/>
                 <constraint firstItem="nWn-3Q-dd7" firstAttribute="leading" secondItem="LgH-QU-CDe" secondAttribute="trailing" constant="8" symbolic="YES" id="lYJ-kb-fBl"/>
                 <constraint firstItem="LgH-QU-CDe" firstAttribute="top" secondItem="mhf-Ts-kZd" secondAttribute="bottom" constant="15" id="ly5-aX-jVh"/>
                 <constraint firstItem="K22-0d-Ap5" firstAttribute="leading" secondItem="egd-hk-pat" secondAttribute="trailing" constant="8" symbolic="YES" id="myt-bU-XlX"/>
                 <constraint firstItem="LgH-QU-CDe" firstAttribute="leading" secondItem="mhf-Ts-kZd" secondAttribute="leading" id="oI5-qA-pjl"/>
-                <constraint firstAttribute="bottom" secondItem="K22-0d-Ap5" secondAttribute="bottom" constant="20" symbolic="YES" id="oPB-zV-26F"/>
                 <constraint firstItem="vwb-do-HMA" firstAttribute="leading" secondItem="LgH-QU-CDe" secondAttribute="leading" id="u8J-Cy-9mQ"/>
             </constraints>
         </customView>
@@ -387,7 +387,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="135" height="170"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O5I-Y9-27H">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O5I-Y9-27H" customClass="SESImageView">
                         <rect key="frame" x="5" y="5" width="125" height="160"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="FIg-Qf-5xY"/>
@@ -484,11 +484,11 @@
             </connections>
         </box>
         <customView id="UhH-h9-gWy" userLabel="Delete confirmation">
-            <rect key="frame" x="0.0" y="0.0" width="221" height="146"/>
+            <rect key="frame" x="0.0" y="0.0" width="222" height="146"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQN-4B-Dj6">
-                    <rect key="frame" x="18" y="58" width="185" height="68"/>
+                    <rect key="frame" x="18" y="58" width="186" height="68"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Are you sure you want to permanently delete the selected torrents from the server?" id="u3t-46-ueH">
                         <font key="font" metaFont="system"/>
@@ -511,7 +511,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K8T-Vb-8CS">
-                    <rect key="frame" x="116" y="19" width="85" height="19"/>
+                    <rect key="frame" x="116" y="19" width="86" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="roundRect" title="Delete" bezelStyle="roundedRect" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="z3l-Hn-lku">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

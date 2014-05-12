@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+   <channel>
+      <title>Transmote Changelog</title>
+      <link>http://samscam.co.uk/transmote/appcast.xml</link>
+      <description>Most recent changes with links to updates.</description>
+      <language>en</language>
+	  
+		<item>
+           <title>Version 0.1.xx</title>
+			<description><![CDATA[
+		        <ul>
+				<li>Added Sparkle app updates</li>
+				<li>Slightly improved torrent name matching</li>
+				<li>Cover art fills the cells rather than fitting inside them</li>
+				<li>Bug fixes</li>
+				</ul>
+		    ]]>
+		    </description>
+           <pubDate>Mon, 12 May 2014 16:00:00 +0000</pubDate>
+           <enclosure url="http://samscam.co.uk/transmote/release/Transmote-0.1.22.zip" sparkle:version="0.1.xx" type="application/octet-stream" />
+        </item>
+		
+		<item>
+           <title>Version 0.1.18</title>
+			<description><![CDATA[
+		        <h2>Initial release</h2>
+		        <ul>
+				<li>Accepts magnet links from browsers and forwards them to your server - useful if you are running Transmission remotely eg on a NAS.</li>
+				<li>Attempts to fetch artwork and real names for movies and TV shows - though this is somewhat unreliable and based on the raw name of the torrent.</li>
+				<li>You can <em>remove</em> and <em>delete</em> torrents from your server.</li>
+				</ul>
+		    ]]>
+		    </description>
+           <pubDate>Wed, 02 May 2014 12:00:00 +0000</pubDate>
+           <enclosure url="http://samscam.co.uk/transmote/release/Transmote-0.1.18.zip" sparkle:version="0.1.18" type="application/octet-stream" />
+        </item>
+		
+   </channel>
+</rss>

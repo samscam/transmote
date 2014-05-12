@@ -8,9 +8,11 @@
 
 #import "TRNWindowController.h"
 #import "TRNTorrent.h"
+#import <Sparkle/Sparkle.h>
 
 @interface TRNWindowController (){
     BOOL delete;
+    SUAppcastItem *pendingUpdateItem;
 }
 
 @end
@@ -50,13 +52,42 @@ static void *collectionViewContext=&collectionViewContext;
     if (!self.server.address){
         [self serverSettingsPopover:nil];
     }
+    
+    // updater notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatesFound:) name:SUUpdaterDidFindValidUpdateNotification object:nil];
+    
+    [[SUUpdater sharedUpdater] checkForUpdateInformation];
+    
 }
 
+#pragma mark - Versioning and updates
 
 -(void) sortOutVersionMessage{
     NSString *versionString=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    self.versionButton.title=[NSString stringWithFormat:@"Tranmote v%@ - click to check for updates",versionString];
+    
+    
+    if (pendingUpdateItem){
+        self.versionButton.title=[NSString stringWithFormat:@"Update available: v%@",pendingUpdateItem.versionString];
+        [self.versionButton.cell setBackgroundColor:[NSColor colorWithDeviceRed:0.0 green:1.0 blue:0.0 alpha:1.0]];
+    } else {
+        self.versionButton.title=[NSString stringWithFormat:@"Transmote v%@",versionString];
+    }
 }
+
+-(void) updatesFound:(NSNotification*)notification{
+    
+    pendingUpdateItem=[notification.userInfo valueForKey:SUUpdaterAppcastItemNotificationKey];
+    [self sortOutVersionMessage];
+}
+
+
+-(IBAction) checkForUpdatesButtonPressed:(id)sender{
+    // trigger the updater
+    [[SUUpdater sharedUpdater] checkForUpdates:nil];
+}
+
+#pragma mark - Server Settings
+
 -(IBAction)serverSettingsPopover:(id)sender{
     
     NSView *toolbarItemView=self.serverToolbarButton;
@@ -137,9 +168,6 @@ static void *collectionViewContext=&collectionViewContext;
     delete=NO;
     [self.deleteConfirmPopover close];
 }
--(IBAction) checkForUpdatesButtonPressed:(id)sender{
-    NSURL *updatesURL=[NSURL URLWithString:UPDATES_URL];
-    [[NSWorkspace sharedWorkspace] openURL:updatesURL];
-}
+
 
 @end

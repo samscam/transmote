@@ -22,6 +22,12 @@
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Check for updates..." id="oQB-6H-LXe">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="MNp-8t-i8T" id="VmW-f3-9mS"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="236">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -115,5 +121,6 @@
         </menu>
         <customObject id="494" customClass="TRNAppDelegate"/>
         <customObject id="420" customClass="NSFontManager"/>
+        <customObject id="MNp-8t-i8T" customClass="SUUpdater"/>
     </objects>
 </document>
