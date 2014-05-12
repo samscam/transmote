@@ -87,14 +87,25 @@
 
 -(void) cleanName{
     
-    // Clean up dots, hyphens, underscores
-
     NSError *error=nil;
-    NSRegularExpression *dotClean=[NSRegularExpression regularExpressionWithPattern:@"[\\.+_-]" options:0 error:&error];
-    NSString *semiCleaned=[dotClean stringByReplacingMatchesInString:self.name options:0 range:NSMakeRange(0,self.name.length) withTemplate:@" "];
+    
+    // Clean up dots, hyphens, underscores, brackets
+    NSRegularExpression *cleaner=[NSRegularExpression regularExpressionWithPattern:@"[\\.+_-]" options:0 error:&error];
+    NSString *semiCleaned=[cleaner stringByReplacingMatchesInString:self.name options:0 range:NSMakeRange(0,self.name.length) withTemplate:@" "];
     NSLog(@"Semi cleaned: %@",semiCleaned);
     
-    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|([sS]\\d+[Ee]\\d+))(.*)" options:0 error:&error];
+    // Clean things in square brackets
+    cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\[.*\\]" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
+    NSLog(@"Semi cleaned: %@",semiCleaned);
+
+    // Clean references to DVD BDRIP and boxset and things
+    cleaner=[NSRegularExpression regularExpressionWithPattern:@"(complete|boxset|extras|dvd\\w*?|br\\w*?|blu\\w*?)" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
+    NSLog(@"Semi cleaned: %@",semiCleaned);
+    
+    // Figure out if we have an episode code or season or year or whatnot
+    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|(s\\d+(?:\\s?e\\d+)?)|(season\\s?\\d+))(.*)" options:(NSRegularExpressionCaseInsensitive) error:&error];
     NSTextCheckingResult *result=[regex firstMatchInString:semiCleaned options:0 range:NSMakeRange(0, semiCleaned.length)];
     
     if (!result){
@@ -109,6 +120,9 @@
     if (!NSEqualRanges([result rangeAtIndex:4],NSMakeRange(NSNotFound,0))){
         self.episode=[semiCleaned substringWithRange:[result rangeAtIndex:4]];
     }
+    if (!NSEqualRanges([result rangeAtIndex:5],NSMakeRange(NSNotFound,0))){
+        self.episode=[semiCleaned substringWithRange:[result rangeAtIndex:5]];
+    }
     NSString *fullyCleaned=[NSString stringWithFormat:@"%@",title];
     NSLog(@"Fully cleaned: %@",fullyCleaned);
     
@@ -117,6 +131,7 @@
 
 -(void) fetchMetadata{
     
+    // Assume if we have a Season or Episode code that it's TV
     TRNTheMovieDBClient *client=[[TRNTheMovieDBClient alloc] init];
     if (self.episode){
         [client fetchMetadataForTVShowNamed:self.cleanedName onCompletion:^(NSDictionary *data) {
@@ -130,6 +145,7 @@
             }
         }];
     } else {
+        // Otherwise assume that it's a movie
         [client fetchMetadataForMovieNamed:self.cleanedName year:self.year onCompletion:^(NSDictionary *data) {
             if (data){
                 self.metadata=data;
