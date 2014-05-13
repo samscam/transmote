@@ -11,6 +11,9 @@
                 <outlet property="deleteConfirmPopover" destination="eMy-fO-dMo" id="CCv-vz-Gkh"/>
                 <outlet property="deleteConfirmPopoverViewController" destination="9dl-37-7hb" id="6q8-YV-ofF"/>
                 <outlet property="deleteMessageField" destination="QQN-4B-Dj6" id="OKK-R9-MKd"/>
+                <outlet property="passiveAlertBox" destination="bxs-W8-RXy" id="9WL-hy-d1f"/>
+                <outlet property="passiveAlertImageView" destination="cEk-SZ-ZZx" id="65w-mJ-7Wg"/>
+                <outlet property="passiveAlertMessageField" destination="jvM-mf-aUR" id="l1y-z3-bMK"/>
                 <outlet property="popoverViewController" destination="E1g-if-tMX" id="GC6-WR-2pT"/>
                 <outlet property="removeTorrentButton" destination="RAu-DG-KLU" id="XW7-2I-gkx"/>
                 <outlet property="serverToolbarButton" destination="Cn0-Sh-wqM" id="429-xA-Wka"/>
@@ -99,15 +102,15 @@
                             <action selector="checkForUpdatesButtonPressed:" target="-2" id="qFw-bF-4Sr"/>
                         </connections>
                     </button>
-                    <box autoresizesSubviews="NO" title="Oh dear" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bxs-W8-RXy">
-                        <rect key="frame" x="100" y="85" width="177" height="105"/>
+                    <box autoresizesSubviews="NO" title="Oh dear" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bxs-W8-RXy" userLabel="Passive Alert">
+                        <rect key="frame" x="105" y="101" width="166" height="94"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="1" y="1" width="175" height="103"/>
+                            <rect key="frame" x="1" y="1" width="164" height="92"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cEk-SZ-ZZx">
-                                    <rect key="frame" x="66" y="49" width="42" height="42"/>
+                                    <rect key="frame" x="61" y="38" width="42" height="42"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="42" id="rqo-sh-3Ox"/>
@@ -115,10 +118,13 @@
                                     </constraints>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="ZsH-AB-gGC"/>
                                 </imageView>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jvM-mf-aUR">
-                                    <rect key="frame" x="10" y="24" width="155" height="17"/>
+                                <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jvM-mf-aUR">
+                                    <rect key="frame" x="10" y="13" width="144" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Disconnected" id="bIN-WE-6yj">
+                                    <constraints>
+                                        <constraint firstAttribute="width" priority="250" constant="180" id="Gvo-vh-5Mc"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Disconnected" id="bIN-WE-6yj">
                                         <font key="font" metaFont="systemBold"/>
                                         <color key="textColor" white="0.0" alpha="0.54000000000000004" colorSpace="deviceWhite"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -127,20 +133,17 @@
                             </subviews>
                         </view>
                         <constraints>
-                            <constraint firstAttribute="width" constant="171" id="3GQ-Sf-900"/>
+                            <constraint firstAttribute="width" priority="750" constant="160" id="3GQ-Sf-900"/>
                             <constraint firstItem="cEk-SZ-ZZx" firstAttribute="top" secondItem="bxs-W8-RXy" secondAttribute="top" constant="11" id="8mT-gv-s8n"/>
                             <constraint firstAttribute="trailing" secondItem="jvM-mf-aUR" secondAttribute="trailing" constant="10" id="NTi-MG-Q4x"/>
                             <constraint firstAttribute="centerX" secondItem="jvM-mf-aUR" secondAttribute="centerX" id="Ps7-9A-uzX"/>
                             <constraint firstAttribute="centerX" secondItem="cEk-SZ-ZZx" secondAttribute="centerX" id="QMy-Wl-AfJ"/>
-                            <constraint firstAttribute="height" constant="99" id="dsA-Ya-eNd"/>
+                            <constraint firstAttribute="bottom" secondItem="jvM-mf-aUR" secondAttribute="bottom" constant="10" id="es8-aA-BZS"/>
                             <constraint firstItem="jvM-mf-aUR" firstAttribute="leading" secondItem="bxs-W8-RXy" secondAttribute="leading" constant="10" id="yt9-am-npx"/>
                             <constraint firstItem="jvM-mf-aUR" firstAttribute="top" secondItem="cEk-SZ-ZZx" secondAttribute="bottom" constant="8" id="zEe-vH-DHL"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <binding destination="-2" name="hidden" keyPath="server.connected" id="1bH-BT-k6h"/>
-                        </connections>
                     </box>
                 </subviews>
                 <constraints>
@@ -149,7 +152,7 @@
                     <constraint firstItem="jZp-JT-hkn" firstAttribute="leading" secondItem="IUp-PR-V1o" secondAttribute="leading" id="2Xe-PE-fBs"/>
                     <constraint firstAttribute="centerX" secondItem="bxs-W8-RXy" secondAttribute="centerX" id="2zn-xY-Wbf"/>
                     <constraint firstItem="DYd-Bc-hj1" firstAttribute="centerY" secondItem="lpp-6H-0bX" secondAttribute="centerY" id="4Cf-yR-e0H"/>
-                    <constraint firstAttribute="centerY" secondItem="bxs-W8-RXy" secondAttribute="centerY" id="7j0-1Z-Qun"/>
+                    <constraint firstAttribute="centerY" secondItem="bxs-W8-RXy" secondAttribute="centerY" constant="11" id="7j0-1Z-Qun"/>
                     <constraint firstItem="U14-E7-WY7" firstAttribute="top" secondItem="UAO-2A-G1F" secondAttribute="bottom" id="CzU-na-RC5"/>
                     <constraint firstItem="UAO-2A-G1F" firstAttribute="top" secondItem="IUp-PR-V1o" secondAttribute="top" id="IWw-2j-sj7"/>
                     <constraint firstAttribute="bottom" secondItem="UAO-2A-G1F" secondAttribute="bottom" constant="25" id="JZf-WV-HIn"/>
@@ -383,14 +386,14 @@
             </connections>
         </collectionViewItem>
         <box autoresizesSubviews="NO" transparent="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="XQJ-uL-wTe" userLabel="Torrent cell template">
-            <rect key="frame" x="0.0" y="0.0" width="135" height="170"/>
+            <rect key="frame" x="0.0" y="0.0" width="135" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView">
-                <rect key="frame" x="0.0" y="0.0" width="135" height="170"/>
+                <rect key="frame" x="0.0" y="0.0" width="135" height="180"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O5I-Y9-27H" customClass="SESImageView">
-                        <rect key="frame" x="5" y="5" width="125" height="160"/>
+                        <rect key="frame" x="5" y="5" width="125" height="170"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="FIg-Qf-5xY"/>
                         <connections>
@@ -398,17 +401,17 @@
                         </connections>
                     </imageView>
                     <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-YV-4fK">
-                        <rect key="frame" x="5" y="5" width="125" height="160"/>
+                        <rect key="frame" x="5" y="5" width="125" height="170"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="0.0" y="0.0" width="125" height="160"/>
+                            <rect key="frame" x="0.0" y="0.0" width="125" height="170"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLa-hl-xv6">
-                        <rect key="frame" x="8" y="143" width="119" height="17"/>
+                        <rect key="frame" x="8" y="153" width="119" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="NLY-K8-wwO">
                             <font key="font" metaFont="systemBold"/>
@@ -432,7 +435,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdI-4z-hJD">
-                        <rect key="frame" x="8" y="127" width="119" height="11"/>
+                        <rect key="frame" x="8" y="137" width="119" height="11"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="GpE-v8-baE">
                             <font key="font" metaFont="miniSystem"/>

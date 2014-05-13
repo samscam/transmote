@@ -20,7 +20,7 @@
 @implementation TRNWindowController
 
 static void *serverContext=&serverContext;
-static void *collectionViewContext=&collectionViewContext;
+static void *arrayControllerContext=&arrayControllerContext;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -44,14 +44,14 @@ static void *collectionViewContext=&collectionViewContext;
     self.removeTorrentButton.image=[[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(filetype)];
     
     self.collectionView.backgroundColors=@[[NSColor clearColor]];
-
     
     [self.server addObserver:self forKeyPath:@"connected" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:serverContext];
-    [self.server addObserver:self forKeyPath:@"torrents" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:serverContext];
-    
+
     if (!self.server.address){
         [self serverSettingsPopover:nil];
     }
+    
+    [self.arrayController addObserver:self forKeyPath:@"arrangedObjects" options:(NSKeyValueObservingOptionInitial||NSKeyValueObservingOptionNew) context:arrayControllerContext];
     
     // updater notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatesFound:) name:SUUpdaterDidFindValidUpdateNotification object:nil];
@@ -102,21 +102,46 @@ static void *collectionViewContext=&collectionViewContext;
     
     if (context==&serverContext){
         if ([keyPath isEqualToString:@"connected"]){
-        if (self.server.connected){
-            self.statusBlip.image=[NSImage imageNamed:@"NSStatusAvailable"];
-            self.collectionView.hidden=NO;
-        } else {
-            self.statusBlip.image=[NSImage imageNamed:@"NSStatusUnavailable"];
-            self.collectionView.hidden=YES;
-        }} else if ([keyPath isEqualToString:@"torrents"]){
-
+            if (self.server.connected){
+                self.statusBlip.image=[NSImage imageNamed:@"NSStatusAvailable"];
+                self.collectionView.hidden=NO;
+            } else {
+                self.statusBlip.image=[NSImage imageNamed:@"NSStatusUnavailable"];
+                self.collectionView.hidden=YES;
+            }
+            [self sortOutPassiveAlert];
         }
-        
+
+        return;
+    }
+    
+    if (context==&arrayControllerContext){
+        [self sortOutPassiveAlert];
         return;
     }
 
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+
+
+-(void) sortOutPassiveAlert{
+    if (!self.server.connected){
+        self.passiveAlertBox.hidden=NO;
+        self.passiveAlertImageView.image=[NSImage imageNamed:@"NSCaution"];
+        self.passiveAlertMessageField.stringValue=@"Disconnected";
+        return;
+    }
+    
+    if (!((NSArray*)self.arrayController.arrangedObjects).count){
+        self.passiveAlertBox.hidden=NO;
+        self.passiveAlertImageView.image=[NSImage imageNamed:@"Magnet"];
+        self.passiveAlertMessageField.stringValue=@"Click a magnet link in a browser to add a torrent";
+        return;
+    }
+    
+    self.passiveAlertBox.hidden=YES;
+}
+
 
 -(IBAction) confirmDeleteSelectedTorrents:(id)sender{
     delete=YES;

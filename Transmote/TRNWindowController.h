@@ -33,6 +33,10 @@
 @property (weak) IBOutlet NSButton *versionButton;
 
 
+@property (weak) IBOutlet NSBox *passiveAlertBox;
+@property (weak) IBOutlet NSTextField *passiveAlertMessageField;
+@property (weak) IBOutlet NSImageView *passiveAlertImageView;
+
 -(IBAction) serverSettingsPopover:(id)sender;
 -(IBAction) confirmDeleteSelectedTorrents:(id)sender;
 -(IBAction) confirmRemoveSelectedTorrents:(id)sender;
