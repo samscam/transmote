@@ -73,7 +73,16 @@
     
 }
 
+-(void) setCleanedName:(NSString *)cleanedName{
+    [self willChangeValueForKey:@"cleanedName"];
+    [self willChangeValueForKey:@"bestName"];
+    _cleanedName=cleanedName;
+    [self didChangeValueForKey:@"cleanedName"];
+    [self didChangeValueForKey:@"bestName"];
+    
+}
 -(NSString*) bestName{
+
     if (_bestName){
         return _bestName;
     }
@@ -89,20 +98,24 @@
     
     NSError *error=nil;
     
-    // Clean up dots, hyphens, underscores, brackets
-    NSRegularExpression *cleaner=[NSRegularExpression regularExpressionWithPattern:@"[\\.+_-]" options:0 error:&error];
+    // Clean up dots, underscores
+    NSRegularExpression *cleaner=[NSRegularExpression regularExpressionWithPattern:@"[\\.+_]" options:0 error:&error];
     NSString *semiCleaned=[cleaner stringByReplacingMatchesInString:self.name options:0 range:NSMakeRange(0,self.name.length) withTemplate:@" "];
-    NSLog(@"Semi cleaned: %@",semiCleaned);
     
     // Clean things in square brackets
     cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\[.*\\]" options:(NSRegularExpressionCaseInsensitive) error:&error];
     semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
-    NSLog(@"Semi cleaned: %@",semiCleaned);
 
     // Clean references to DVD BDRIP and boxset and things
-    cleaner=[NSRegularExpression regularExpressionWithPattern:@"(complete|boxset|extras|dvd\\w*?|br\\w*?|blu\\w*?)" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    cleaner=[NSRegularExpression regularExpressionWithPattern:@"(complete|boxset|extras|dvd\\w*?|br\\w*?|blu\\w*?|bd\\w*?)" options:(NSRegularExpressionCaseInsensitive) error:&error];
     semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
-    NSLog(@"Semi cleaned: %@",semiCleaned);
+    
+    // Clean runs of whitespace
+    cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\s+" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
+    NSLog(@"Semi cleaned name: %@",semiCleaned);
+    
+    
     
     // Figure out if we have an episode code or season or year or whatnot
     NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|(s\\d+(?:\\s?e\\d+)?)|(season\\s?\\d+))(.*)" options:(NSRegularExpressionCaseInsensitive) error:&error];
@@ -124,7 +137,7 @@
         self.episode=[semiCleaned substringWithRange:[result rangeAtIndex:5]];
     }
     NSString *fullyCleaned=[NSString stringWithFormat:@"%@",title];
-    NSLog(@"Fully cleaned: %@",fullyCleaned);
+    NSLog(@"Fully cleaned name: %@",fullyCleaned);
     
     self.cleanedName=fullyCleaned;
 }
