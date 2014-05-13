@@ -13,6 +13,8 @@
 @property (nonatomic,strong) NSString *address;
 @property (nonatomic,strong) NSString *port;
 @property (nonatomic,strong) NSString *rpcPath;
+@property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *password;
 
 @property (nonatomic,readonly) BOOL connected;
 @property (nonatomic,readonly) NSMutableArray *torrents;

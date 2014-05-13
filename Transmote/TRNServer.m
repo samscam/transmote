@@ -15,8 +15,10 @@
 @interface TRNServer(){
     BOOL connecting;
     BOOL updating;
+    NSURLProtectionSpace *protectionSpace;
 }
 
+@property (nonatomic,strong) NSURLCredential *credential;
 @property (nonatomic,readwrite) BOOL connected;
 @property (nonatomic,readwrite) NSMutableArray *torrents;
 @property (nonatomic,readwrite) NSMutableDictionary *torrentDict;
@@ -54,10 +56,17 @@ static void *connectionContext=&connectionContext;
        withKeyPath:@"values.rpcPath"
            options:@{NSContinuouslyUpdatesValueBindingOption : @YES }];
         
+        [self bind:@"username"
+          toObject:userDefaultsController
+       withKeyPath:@"values.username"
+           options:@{NSContinuouslyUpdatesValueBindingOption : @YES }];
         
-        [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:connectionContext];
+
         [self addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionNew context:connectionContext];
         [self addObserver:self forKeyPath:@"port" options:NSKeyValueObservingOptionNew context:connectionContext];
+        [self addObserver:self forKeyPath:@"rpcPath" options:NSKeyValueObservingOptionNew context:connectionContext];
+        [self addObserver:self forKeyPath:@"username" options:NSKeyValueObservingOptionNew context:connectionContext];
+        [self addObserver:self forKeyPath:@"password" options:NSKeyValueObservingOptionNew context:connectionContext];
         
         [self tryToConnect];
     }
@@ -93,12 +102,18 @@ static void *connectionContext=&connectionContext;
     [self.torrents removeAllObjects];
     
     self.client=[TRNJSONRPCClient clientWithEndpointURL:[self serverURL]];
+
+
+    if (self.credential){
+        self.client.credential=self.credential;
+    }
     
     [self.client invokeMethod:@"session-get" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //WOO
         NSLog(@"Session alive\n%@",responseObject);
         self.connected=YES;
         connecting=NO;
+
         
         // force an immediate update of torrents
         [self updateTorrents];
@@ -190,6 +205,11 @@ static void *connectionContext=&connectionContext;
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
     if (context==&connectionContext){
+        
+        if ([keyPath isEqualToString:@"password"] || [keyPath isEqualToString:@"username"]){
+            [self passwordChanged];
+        }
+        
         // The user edited the connection details - force a reconnect
         connecting=NO;
         [self connect];
@@ -206,6 +226,7 @@ static void *connectionContext=&connectionContext;
     [defaults setValue:self.address forKey:@"address"];
     [defaults setValue:self.rpcPath forKey:@"rpcPath"];
     [defaults setValue:self.port forKey:@"port"];
+    [defaults setValue:self.username forKey:@"username"];
 }
 
 
@@ -229,6 +250,45 @@ static void *connectionContext=&connectionContext;
         self.connected=NO;
     }];
 
+}
+
+-(void) passwordChanged{
+    
+    if (!self.username || [self.username isEqualToString:@""])
+        return;
+
+    protectionSpace=[[NSURLProtectionSpace alloc] initWithHost:self.address port:[self.port integerValue] protocol:@"http" realm:self.rpcPath authenticationMethod:nil];
+
+    NSURLCredentialStorage *credentialStore=[NSURLCredentialStorage sharedCredentialStorage];
+    
+    if (_credential){
+        // clear out old credentials?
+        [credentialStore removeCredential:_credential forProtectionSpace:protectionSpace];
+    }
+
+    [self willChangeValueForKey:@"credential"];
+    _credential=[NSURLCredential credentialWithUser:self.username password:self.password persistence:NSURLCredentialPersistencePermanent];
+    
+    [credentialStore setCredential:_credential forProtectionSpace:protectionSpace];
+    [self didChangeValueForKey:@"credential"];
+    
+}
+
+-(NSURLCredential*) credential{
+    if (!self.username || [self.username isEqualToString:@""])
+        return nil;
+
+    protectionSpace=[[NSURLProtectionSpace alloc] initWithHost:self.address port:[self.port integerValue] protocol:@"http" realm:self.rpcPath authenticationMethod:nil];
+    
+    NSURLCredentialStorage *credentialStore=[NSURLCredentialStorage sharedCredentialStorage];
+    
+    NSDictionary *credentials=[credentialStore credentialsForProtectionSpace:protectionSpace];
+    NSLog(@"Credentials: %@",credentials);
+    
+    _credential=[credentials valueForKey:self.username];
+    NSLog(@"Using credential: %@",_credential);
+    
+    return _credential;
 }
 
 @end
