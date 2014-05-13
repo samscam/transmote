@@ -6,7 +6,7 @@
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
 	<item>
-         <title>Version 0.1.31</title>
+         <title>Version 0.1.32</title>
 		<description><![CDATA[
 	        <ul>
 			<li>Added ability to log in with username and password</li>
@@ -17,7 +17,7 @@
 	    ]]>
 	    </description>
          <pubDate>Tue, 13 May 2014 18:00:00 +0000</pubDate>
-         <enclosure url="http://samscam.co.uk/transmote/release/Transmote-0.1.25.zip" sparkle:version="0.1.31" type="application/octet-stream" />
+         <enclosure url="http://samscam.co.uk/transmote/release/Transmote-0.1.32.zip" sparkle:version="0.1.32" type="application/octet-stream" />
       </item>
 	  
 		<item>
