@@ -196,6 +196,7 @@
                             </buttonCell>
                             <connections>
                                 <action selector="confirmRemoveSelectedTorrents:" target="-2" id="inC-ly-qjA"/>
+                                <binding destination="xfd-hp-RO0" name="enabled" keyPath="canRemove" id="FOK-Cm-aoa"/>
                             </connections>
                         </button>
                     </toolbarItem>
@@ -212,6 +213,7 @@
                             </buttonCell>
                             <connections>
                                 <action selector="confirmDeleteSelectedTorrents:" target="-2" id="mrT-zv-Qvd"/>
+                                <binding destination="xfd-hp-RO0" name="enabled" keyPath="canRemove" id="OVu-4m-a9P"/>
                             </connections>
                         </button>
                     </toolbarItem>
