@@ -5,6 +5,20 @@
       <link>http://samscam.co.uk/transmote/appcast.xml</link>
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
+	<item>
+         <title>Version 0.1.31</title>
+		<description><![CDATA[
+	        <ul>
+			<li>Added ability to log in with username and password</li>
+			<li>Improved torrent name matching and display</li>
+			<li>Added help-message when there are no torrents on the server</li>
+			<li>Added sensible things to the credits</li>
+			</ul>
+	    ]]>
+	    </description>
+         <pubDate>Tue, 13 May 2014 18:00:00 +0000</pubDate>
+         <enclosure url="http://samscam.co.uk/transmote/release/Transmote-0.1.25.zip" sparkle:version="0.1.31" type="application/octet-stream" />
+      </item>
 	  
 		<item>
            <title>Version 0.1.25</title>
