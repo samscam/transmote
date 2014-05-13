@@ -61,19 +61,33 @@
         @catch (NSException *exception) {
             NSLog(@"Did not set %@ to %@",thisKey,thisVal);
         }
-        if ([thisKey isEqualToString:@"name"] && !_cleanedName){
-            // Presume it is new and clean up name
-            [self cleanName];
-            
-            // And then fetch some metadata
-            [self fetchMetadata];
-        }
 
     }
     
 }
 
+-(void) setName:(NSString *)name{
+    if ([name isEqualToString:_name]){
+        return;
+    }
+    
+    [self willChangeValueForKey:@"name"];
+    _name=name;
+    [self didChangeValueForKey:@"name"];
+    
+    // Presume it is new and clean up name
+    [self cleanName];
+    
+    // And then fetch some metadata
+    [self fetchMetadata];
+    
+}
+
 -(void) setCleanedName:(NSString *)cleanedName{
+    if ([cleanedName isEqualToString:_cleanedName]){
+        return;
+    }
+    
     [self willChangeValueForKey:@"cleanedName"];
     [self willChangeValueForKey:@"bestName"];
     _cleanedName=cleanedName;
