@@ -23,6 +23,8 @@
 @property (nonatomic,strong) NSNumber *percentDone;
 @property (nonatomic,strong) NSNumber *rateDownload;
 
+@property (nonatomic,strong) NSDate *eta;
+
 @property (nonatomic,strong) NSNumber *ulProgress;
 @property (nonatomic,strong) NSNumber *rateUpload;
 
@@ -56,6 +58,11 @@
     for (NSString *thisKey in data){
         id thisVal=[data valueForKey:thisKey];
         @try {
+            
+            if ([thisKey isEqualToString:@"eta"]){
+                self.eta=[NSDate dateWithTimeIntervalSinceNow:[thisVal doubleValue]];
+            }
+            
             [self setValue:thisVal forKey:thisKey];
         }
         @catch (NSException *exception) {

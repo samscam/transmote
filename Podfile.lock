@@ -18,15 +18,18 @@ PODS:
   - AFNetworking/Security (2.2.3)
   - AFNetworking/Serialization (2.2.3)
   - Sparkle-pornel (1.6.1)
+  - SORelativeDateTransformer (1.1.10)
 
 DEPENDENCIES:
   - AFJSONRPCClient
   - AFNetworking
-  - Sparkle-pornel (~> 1.6)
+  - SORelativeDateTransformer
+  - SORelativeDateTransformer
 
 SPEC CHECKSUMS:
   AFJSONRPCClient: d958b85037eef397f7c3c7657802392b5335583a
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
   Sparkle-pornel: b624b1aeac3584136396faaaee3e3f74a4d0c0e8
+  SORelativeDateTransformer: eba9b9bcc290eb7c9754b9955ace59b890fa59f8
 
 COCOAPODS: 0.32.1

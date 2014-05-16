@@ -21,6 +21,7 @@
 
 @property (nonatomic,readonly) NSNumber *percentDone;
 @property (nonatomic,readonly) NSNumber *rateDownload;
+@property (nonatomic,readonly) NSDate *eta;
 
 @property (nonatomic,readonly) NSNumber *ulProgress;
 @property (nonatomic,readonly) NSNumber *rateUpload;

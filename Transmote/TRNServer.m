@@ -161,7 +161,7 @@ static void *connectionContext=&connectionContext;
     }
     
     updating=YES;
-    [self.client invokeMethod:@"torrent-get" withParameters:@{@"fields":@[@"id",@"name",@"totalSize",@"rateDownload",@"rateUpload",@"percentDone"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.client invokeMethod:@"torrent-get" withParameters:@{@"fields":@[@"id",@"name",@"totalSize",@"rateDownload",@"rateUpload",@"percentDone",@"eta"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *responseDict=(NSDictionary*)responseObject;
         

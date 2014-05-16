@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B42EC29F43B146189EAC8612"
+               BlueprintIdentifier = "7A42079AE7B7480F8D5FE1BE"
                BuildableName = "libPods-AFJSONRPCClient.a"
                BlueprintName = "Pods-AFJSONRPCClient"
                ReferencedContainer = "container:Pods.xcodeproj">

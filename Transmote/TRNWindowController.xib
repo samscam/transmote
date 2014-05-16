@@ -33,7 +33,7 @@
         <window title="Transmote" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="tJN-gT-RSQ">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="335" y="390" width="376" height="276"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
             <value key="minSize" type="size" width="254" height="155"/>
             <view key="contentView" id="IUp-PR-V1o">
                 <rect key="frame" x="0.0" y="0.0" width="376" height="276"/>
@@ -526,6 +526,18 @@
                             <binding destination="7fE-CF-icn" name="value" keyPath="representedObject.percentDone" id="hh5-4n-ct9"/>
                         </connections>
                     </levelIndicator>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uwR-d5-tPd">
+                        <rect key="frame" x="8" y="10" width="119" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="e2p-zJ-SYR">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="7fE-CF-icn" name="value" keyPath="representedObject.eta" id="Mik-lQ-xDt"/>
+                        </connections>
+                    </textField>
                 </subviews>
             </view>
             <constraints>

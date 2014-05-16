@@ -48,9 +48,9 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_Serialization 2
 #define COCOAPODS_VERSION_PATCH_AFNetworking_Serialization 3
 
-// Sparkle-pornel
-#define COCOAPODS_POD_AVAILABLE_Sparkle_pornel
-#define COCOAPODS_VERSION_MAJOR_Sparkle_pornel 1
-#define COCOAPODS_VERSION_MINOR_Sparkle_pornel 6
-#define COCOAPODS_VERSION_PATCH_Sparkle_pornel 1
+// SORelativeDateTransformer
+#define COCOAPODS_POD_AVAILABLE_SORelativeDateTransformer
+#define COCOAPODS_VERSION_MAJOR_SORelativeDateTransformer 1
+#define COCOAPODS_VERSION_MINOR_SORelativeDateTransformer 1
+#define COCOAPODS_VERSION_PATCH_SORelativeDateTransformer 10
 
