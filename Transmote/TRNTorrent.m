@@ -142,8 +142,7 @@
     NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|(s?\\d+(?:\\s?[ex]\\d+)?)|(season\\s?\\d+))(.*)" options:(NSRegularExpressionCaseInsensitive) error:&error];
     NSTextCheckingResult *result=[regex firstMatchInString:semiCleaned options:0 range:NSMakeRange(0, semiCleaned.length)];
     
-    if (!result){BBC
-Scheduled: 11 Aug 2014 to 14 Nov 2014
+    if (!result){
         self.cleanedName=semiCleaned;
         return;
     }
