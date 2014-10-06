@@ -163,6 +163,11 @@ static void *connectionContext=&connectionContext;
     updating=YES;
     [self.client invokeMethod:@"torrent-get" withParameters:@{@"fields":@[@"id",@"name",@"totalSize",@"rateDownload",@"rateUpload",@"percentDone",@"eta"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        if (![responseObject isKindOfClass:[NSDictionary class]]){
+            // Oh dear - the response object was not a dictionary! What happened??
+            return;
+        }
+            
         NSDictionary *responseDict=(NSDictionary*)responseObject;
         
         if ([responseDict valueForKeyPath:@"arguments.torrents"]){
