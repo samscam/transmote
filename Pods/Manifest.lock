@@ -1,35 +1,37 @@
 PODS:
-  - AFJSONRPCClient (2.0.0):
-    - AFNetworking (~> 2.0)
-  - AFNetworking (2.2.4):
+  - AFJSONRPCClient (2.1.1):
+    - AFNetworking (~> 2.1)
+  - AFNetworking (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.4):
+  - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.4):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.4)
-  - AFNetworking/Security (2.2.4)
-  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
   - SORelativeDateTransformer (1.1.10)
-  - Sparkle-pornel (1.6.1)
+  - Sparkle (1.8.0)
 
 DEPENDENCIES:
-  - AFJSONRPCClient
-  - AFNetworking
-  - SORelativeDateTransformer
-  - Sparkle-pornel (~> 1.6)
+  - AFJSONRPCClient (~> 2.1)
+  - AFNetworking (~> 2.4)
+  - SORelativeDateTransformer (~> 1.1)
+  - Sparkle (~> 1.8)
 
 SPEC CHECKSUMS:
-  AFJSONRPCClient: d958b85037eef397f7c3c7657802392b5335583a
-  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
-  SORelativeDateTransformer: eba9b9bcc290eb7c9754b9955ace59b890fa59f8
-  Sparkle-pornel: b624b1aeac3584136396faaaee3e3f74a4d0c0e8
+  AFJSONRPCClient: 7f6c046122e0ad39ea3ed829664ecdf56edf86d0
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  SORelativeDateTransformer: de7936811c9988af8e129a097af48c828f933f5f
+  Sparkle: 5eb20bb37ca21e471dab8417dee880198d905327
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.34.1
