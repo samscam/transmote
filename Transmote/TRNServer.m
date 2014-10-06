@@ -119,7 +119,7 @@ static void *connectionContext=&connectionContext;
         [self updateTorrents];
         
         // Check for a deferred URL
-        TRNAppDelegate *appDelegate=[NSApp delegate];
+        TRNAppDelegate *appDelegate=(TRNAppDelegate*)[NSApp delegate];
         if (appDelegate.deferredMagnetURL){
             [self addMagnetLink:appDelegate.deferredMagnetURL];
             appDelegate.deferredMagnetURL=nil;
