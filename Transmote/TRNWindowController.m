@@ -9,6 +9,7 @@
 #import "TRNWindowController.h"
 #import "TRNTorrent.h"
 #import <Sparkle/Sparkle.h>
+#import <SORelativeDateTransformer/SORelativeDateTransformer.h>
 
 @interface TRNWindowController (){
     BOOL delete;
@@ -32,6 +33,7 @@ static void *arrayControllerContext=&arrayControllerContext;
 }
 
 -(void)awakeFromNib{
+    [SORelativeDateTransformer registeredTransformer];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"percentDone" ascending:YES];
     [_arrayController setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 

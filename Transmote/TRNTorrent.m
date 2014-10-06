@@ -61,9 +61,9 @@
             
             if ([thisKey isEqualToString:@"eta"]){
                 self.eta=[NSDate dateWithTimeIntervalSinceNow:[thisVal doubleValue]];
+            } else {
+                [self setValue:thisVal forKey:thisKey];
             }
-            
-            [self setValue:thisVal forKey:thisKey];
         }
         @catch (NSException *exception) {
             NSLog(@"Did not set %@ to %@",thisKey,thisVal);
@@ -128,7 +128,7 @@
     semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
 
     // Clean references to DVD BDRIP and boxset and things
-    cleaner=[NSRegularExpression regularExpressionWithPattern:@"(complete|boxset|extras|dvd\\w*?|br\\w*?|blu\\w*?|bd\\w*?)" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\b(complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?)\\b" options:(NSRegularExpressionCaseInsensitive) error:&error];
     semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
     
     // Clean runs of whitespace
@@ -139,10 +139,11 @@
     
     
     // Figure out if we have an episode code or season or year or whatnot
-    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|(s\\d+(?:\\s?e\\d+)?)|(season\\s?\\d+))(.*)" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|(s?\\d+(?:\\s?[ex]\\d+)?)|(season\\s?\\d+))(.*)" options:(NSRegularExpressionCaseInsensitive) error:&error];
     NSTextCheckingResult *result=[regex firstMatchInString:semiCleaned options:0 range:NSMakeRange(0, semiCleaned.length)];
     
-    if (!result){
+    if (!result){BBC
+Scheduled: 11 Aug 2014 to 14 Nov 2014
         self.cleanedName=semiCleaned;
         return;
     }
