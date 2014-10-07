@@ -18,7 +18,10 @@
 @property (nonatomic,strong) NSString *bestName;
 
 @property (nonatomic,strong) NSString *year;
-@property (nonatomic,strong) NSString *episode;
+@property (nonatomic,strong) NSNumber *season;
+@property (nonatomic,strong) NSNumber *episode;
+
+@property (nonatomic,copy) NSString *episodeTitle;
 
 @property (nonatomic,strong) NSNumber *percentDone;
 @property (nonatomic,strong) NSNumber *rateDownload;
@@ -82,11 +85,13 @@
     _name=name;
     [self didChangeValueForKey:@"name"];
     
-    // Presume it is new and clean up name
-    [self cleanName];
-    
-    // And then fetch some metadata
-    [self fetchMetadata];
+    if (_name){
+        // Presume it is new and clean up name
+        [self cleanName];
+        
+        // And then fetch some metadata
+        [self fetchMetadata];
+    }
     
 }
 
@@ -120,15 +125,11 @@
     NSError *error=nil;
     
     // Clean up dots, underscores
-    NSRegularExpression *cleaner=[NSRegularExpression regularExpressionWithPattern:@"[\\.+_]" options:0 error:&error];
+    NSRegularExpression *cleaner=[NSRegularExpression regularExpressionWithPattern:@"[\\[\\]\\(\\)\\.+_-]" options:0 error:&error];
     NSString *semiCleaned=[cleaner stringByReplacingMatchesInString:self.name options:0 range:NSMakeRange(0,self.name.length) withTemplate:@" "];
     
-    // Clean things in square brackets
-    cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\[.*\\]" options:(NSRegularExpressionCaseInsensitive) error:&error];
-    semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
-
     // Clean references to DVD BDRIP and boxset and things
-    cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\b(complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?)\\b" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    cleaner=[NSRegularExpression regularExpressionWithPattern:@"\\b(1080p|720p|x264|dts|aac|complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?)\\b" options:(NSRegularExpressionCaseInsensitive) error:&error];
     semiCleaned=[cleaner stringByReplacingMatchesInString:semiCleaned options:0 range:NSMakeRange(0,semiCleaned.length) withTemplate:@" "];
     
     // Clean runs of whitespace
@@ -139,7 +140,10 @@
     
     
     // Figure out if we have an episode code or season or year or whatnot
-    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"(.*?)\\s((\\(?\\d{4}\\)?)|(s?\\d+(?:\\s?[ex]\\d+)?)|(season\\s?\\d+))(.*)" options:(NSRegularExpressionCaseInsensitive) error:&error];
+    //@"^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\bs?(\\d+)[ex](\\d+)))){1,2}";
+    NSString *pattern=@"^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?\\s?)?(\\d+)(?:(?:ep|episode|[ex]){1}\\s?(\\d+\\b)))|(?:season\\s?(\\d+)))){1,2}";
+    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:pattern options:(NSRegularExpressionCaseInsensitive) error:&error];
+    
     NSTextCheckingResult *result=[regex firstMatchInString:semiCleaned options:0 range:NSMakeRange(0, semiCleaned.length)];
     
     if (!result){
@@ -148,15 +152,24 @@
     }
     
     NSString *title=[semiCleaned substringWithRange:[result rangeAtIndex:1]];
+    
+    if (!NSEqualRanges([result rangeAtIndex:2],NSMakeRange(NSNotFound,0))){
+        self.year=[semiCleaned substringWithRange:[result rangeAtIndex:2]];
+    }
+
     if (!NSEqualRanges([result rangeAtIndex:3],NSMakeRange(NSNotFound,0))){
-        self.year=[semiCleaned substringWithRange:[result rangeAtIndex:3]];
+        self.season=[NSNumber numberWithInteger:[[semiCleaned substringWithRange:[result rangeAtIndex:3]] integerValue]];
+    } else if (!NSEqualRanges([result rangeAtIndex:5],NSMakeRange(NSNotFound,0))){
+        self.season=[NSNumber numberWithInteger:[[semiCleaned substringWithRange:[result rangeAtIndex:5]] integerValue]];
     }
-    if (!NSEqualRanges([result rangeAtIndex:4],NSMakeRange(NSNotFound,0))){
-        self.episode=[semiCleaned substringWithRange:[result rangeAtIndex:4]];
-    }
-    if (!NSEqualRanges([result rangeAtIndex:5],NSMakeRange(NSNotFound,0))){
-        self.episode=[semiCleaned substringWithRange:[result rangeAtIndex:5]];
-    }
+    
+        if (!NSEqualRanges([result rangeAtIndex:4],NSMakeRange(NSNotFound,0))){
+            self.episode=[NSNumber numberWithInteger:[[semiCleaned substringWithRange:[result rangeAtIndex:4]] integerValue]];
+        }
+    
+    
+        
+
     NSString *fullyCleaned=[NSString stringWithFormat:@"%@",title];
     NSLog(@"Fully cleaned name: %@",fullyCleaned);
     
@@ -167,15 +180,28 @@
     
     // Assume if we have a Season or Episode code that it's TV
     TRNTheMovieDBClient *client=[[TRNTheMovieDBClient alloc] init];
-    if (self.episode){
-        [client fetchMetadataForTVShowNamed:self.cleanedName onCompletion:^(NSDictionary *data) {
+    if (self.season){
+        [client fetchMetadataForTVShowNamed:self.cleanedName year:self.year onCompletion:^(NSDictionary *data) {
             if (data){
                 self.metadata=data;
                 self.bestName=[data valueForKey:@"title"];
-                NSString *posterPath=[data valueForKey:@"poster_path"];
-                [client fetchImageAtPath:posterPath onCompletion:^(NSImage *image) {
-                    self.poster=image;
-                }];
+                NSString *showID=[data valueForKey:@"id"];
+                
+                if (self.episode && self.season){
+                    [client fetchDetailsForTVShowWithID:showID season:self.season episode:self.episode onCompletion:^(NSDictionary *res) {
+                        // somethign
+                        self.episodeTitle=[res valueForKey:@"name"];
+                        NSString *posterPath=[res valueForKey:@"still_path"];
+                        [client fetchImageAtPath:posterPath onCompletion:^(NSImage *image) {
+                            self.poster=image;
+                        }];
+                    } ];
+                } else {
+                    NSString *posterPath=[data valueForKey:@"poster_path"];
+                    [client fetchImageAtPath:posterPath onCompletion:^(NSImage *image) {
+                        self.poster=image;
+                    }];
+                }
             }
         }];
     } else {
