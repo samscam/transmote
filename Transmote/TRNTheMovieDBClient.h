@@ -13,7 +13,9 @@
 
 
 -(void) fetchMetadataForMovieNamed:(NSString*)movieName year:(NSString*)year onCompletion:(void (^)(NSDictionary *data))completionBlock;
--(void) fetchMetadataForTVShowNamed:(NSString *)showName onCompletion:(void (^)(NSDictionary *))completionBlock;
+-(void) fetchMetadataForTVShowNamed:(NSString *)showName year:(NSString*)year onCompletion:(void (^)(NSDictionary *))completionBlock;
+-(void) fetchDetailsForTVShowWithID:(NSString*)showID season:(NSNumber*)season episode:(NSNumber*)episode onCompletion:(void (^)(NSDictionary*))completionBlock;
+
 -(void) fetchImageAtPath:(NSString*)imagePath onCompletion:(void (^)(NSImage *image))completionBlock;
                                                                    
 @end

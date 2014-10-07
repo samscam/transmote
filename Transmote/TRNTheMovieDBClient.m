@@ -47,9 +47,9 @@
     
     NSDictionary *params=[@{@"api_key":TMDB_API_KEY,@"query":movieName} mutableCopy];
     
-//    if (year){
-//        [params setValue:year forKey:@"year"];
-//    }
+    if (year){
+        [params setValue:year forKey:@"year"];
+    }
     
     [self.sessionManager GET:method parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *results=[responseObject valueForKey:@"results"];
@@ -65,12 +65,15 @@
 
 }
 
--(void) fetchMetadataForTVShowNamed:(NSString *)showName onCompletion:(void (^)(NSDictionary *))completionBlock{
+-(void) fetchMetadataForTVShowNamed:(NSString *)showName year:(NSString*)year onCompletion:(void (^)(NSDictionary *))completionBlock{
     
     NSString *method=@"search/tv";
     
-    NSDictionary *params=[@{@"api_key":TMDB_API_KEY,@"query":showName} mutableCopy];
+    NSMutableDictionary *params=[@{@"api_key":TMDB_API_KEY,@"query":showName} mutableCopy];
     
+    if (year){
+        params[@"first_air_date_year"]=year;
+    }
     
     [self.sessionManager GET:method parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *results=[responseObject valueForKey:@"results"];
@@ -82,8 +85,20 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error %@",error.localizedDescription);
     } ];
+}
+
+-(void) fetchDetailsForTVShowWithID:(NSString*)showID season:(NSNumber*)season episode:(NSNumber*)episode onCompletion:(void (^)(NSDictionary*))completionBlock {
+    
+        NSString *method=[NSString stringWithFormat:@"tv/%@/season/%@/episode/%@",showID,season,episode];
+        NSMutableDictionary *params=[@{@"api_key":TMDB_API_KEY} mutableCopy];
     
     
+        [self.sessionManager GET:method parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSLog(@"%@",responseObject);
+            completionBlock(responseObject);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"ERR %@",error.localizedDescription);
+        }];
 }
 
 -(void) fetchImageAtPath:(NSString*)imagePath onCompletion:(void (^)(NSImage *image))completionBlock{
@@ -92,7 +107,7 @@
             return;
         }
         // Hard-coded image size here... should perhaps extract this from TMDB config?
-        NSString *realPath=[@"w342" stringByAppendingPathComponent:imagePath];
+        NSString *realPath=[@"w300" stringByAppendingPathComponent:imagePath];
         
         [self.imageSessionManager GET:realPath  parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             completionBlock(responseObject);
