@@ -273,9 +273,10 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="server.address" id="u2N-vo-i8R">
+                        <binding destination="-2" name="value" keyPath="server.address" id="OM5-bO-F2G">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSNullPlaceholder">Server Address</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -288,9 +289,10 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="server.rpcPath" id="14G-0O-J2i">
+                        <binding destination="-2" name="value" keyPath="server.rpcPath" id="4Op-yz-Xdk">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSNullPlaceholder">transmission/rpc</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -303,9 +305,10 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="server.username" id="i80-AS-u5m">
+                        <binding destination="-2" name="value" keyPath="server.username" id="crT-An-R7h">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSNullPlaceholder">Username</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -318,9 +321,10 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="server.port" id="DO1-dl-zrI">
+                        <binding destination="-2" name="value" keyPath="server.port" id="Mqi-KQ-6YD">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSNullPlaceholder">9091</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -376,9 +380,10 @@
                         </allowedInputSourceLocales>
                     </secureTextFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="server.password" id="SEf-53-104">
+                        <binding destination="-2" name="value" keyPath="server.password" id="8qJ-4W-BCX">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSNullPlaceholder">Password</string>
                             </dictionary>
                         </binding>
                     </connections>
