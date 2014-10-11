@@ -41,17 +41,20 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     return self;
 }
 
+
+/** 
+    Transmission likes to send us a session id before we can talk to it
+    It does it by failing the first request with a 409 and providing the new one in the response headers
+    If that happens, we grab the ID and try our initial request again
+    See: https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt
+ */
+
 - (void)invokeMethod:(NSString *)method
       withParameters:(id)parameters
            requestId:(id)requestId
              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-
-    // Transmission likes to send us a session id before we can talk to it
-    // It does it by failing the first request with a 409 and providing the new one in the response headers
-    // If that happens, we grab the ID and try our initial request again
-    // See: https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt
     
     void  (^wrappedFailureBlock)(AFHTTPRequestOperation *operation, NSError *error)  =^(AFHTTPRequestOperation *operation, NSError *error){
         if ([operation.response statusCode] == 409){
@@ -73,7 +76,7 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     [self.operationQueue addOperation:operation];
 }
 
-// THIS is to change the outgoing "parameters" into "arguments"
+/** This is to change the outgoing "parameters" into "arguments" */
 
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                 parameters:(id)parameters
@@ -100,7 +103,7 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     return [self.requestSerializer requestWithMethod:@"POST" URLString:[self.endpointURL absoluteString] parameters:payload error:nil];
 }
 
-// THIS is to change the incoming JSON to not dump everything other than the "result"
+// This is to change the client to return the whole json payload rather than just whatever is in the "result" key
 
 - (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
@@ -158,6 +161,8 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
             failure(operation, error);
         }
     };
+    
+    // We have to skip over the superclass (the AFJSONRPCClient) to the super-superclass (ie the AFHTTPRequestOperationManager) to call this...
     
     Class granny = [[self superclass] superclass];
     IMP grannyImp = class_getMethodImplementation(granny, _cmd);
