@@ -1,7 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
+project 'Transmote.xcodeproj'
 platform :osx, '10.9'
 
-pod 'AFJSONRPCClient', '~> 2.1'
-pod 'AFNetworking', '~> 2.4'
-pod 'Sparkle', '~> 1.8'
-pod 'SORelativeDateTransformer', '~> 1.1'
+target 'Transmote' do
+    pod 'AFJSONRPCClient'
+    pod 'AFNetworking'
+    pod 'Sparkle', '~> 1.14'
+    pod 'SORelativeDateTransformer', '~> 1.1'
+end

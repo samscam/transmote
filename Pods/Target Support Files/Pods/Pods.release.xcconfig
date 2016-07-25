@@ -1,6 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = "${PODS_ROOT}/Sparkle" "$(PODS_ROOT)/Sparkle"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFJSONRPCClient" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/SORelativeDateTransformer" "${PODS_ROOT}/Headers/Public/Sparkle"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFJSONRPCClient" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/SORelativeDateTransformer" -isystem "${PODS_ROOT}/Headers/Public/Sparkle"
-OTHER_LDFLAGS = -ObjC -l"Pods-AFJSONRPCClient" -l"Pods-AFNetworking" -l"Pods-SORelativeDateTransformer" -l"Pods-Sparkle" -framework "CoreServices" -framework "Security" -framework "Sparkle" -framework "SystemConfiguration"
-PODS_ROOT = ${SRCROOT}/Pods

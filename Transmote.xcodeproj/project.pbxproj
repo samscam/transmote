@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		11E82D4211F647D7B6A7D3BA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 870FA36FEBEC4475A1B68205 /* libPods.a */; };
 		220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709618A5DDC6008C22F5 /* TRNServer.m */; };
 		220A709A18A5DEE2008C22F5 /* TRNTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709918A5DEE2008C22F5 /* TRNTorrent.m */; };
 		220A709D18A5E039008C22F5 /* TRNWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709C18A5E039008C22F5 /* TRNWindowController.m */; };
@@ -42,6 +41,7 @@
 		22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */; };
 		22D10D551913D93C00209A79 /* autoversioning.sh in Resources */ = {isa = PBXBuildFile; fileRef = 22D10D541913D93C00209A79 /* autoversioning.sh */; };
 		22E844581920DC9F003456CD /* SESImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E844571920DC9F003456CD /* SESImageView.m */; };
+		81CBC0D45CA12153D8F4B1E2 /* libPods-Transmote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DDA36DD3E16BC1E3BD3B639 /* libPods-Transmote.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2140FABE0CA2135ADEC0927F /* Pods-Transmote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Transmote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Transmote/Pods-Transmote.release.xcconfig"; sourceTree = "<group>"; };
 		220A709518A5DDC6008C22F5 /* TRNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNServer.h; sourceTree = "<group>"; };
 		220A709618A5DDC6008C22F5 /* TRNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNServer.m; sourceTree = "<group>"; };
 		220A709818A5DEE2008C22F5 /* TRNTorrent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNTorrent.h; sourceTree = "<group>"; };
@@ -97,9 +98,8 @@
 		22D10D541913D93C00209A79 /* autoversioning.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
 		22E844561920DC9F003456CD /* SESImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESImageView.h; sourceTree = "<group>"; };
 		22E844571920DC9F003456CD /* SESImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESImageView.m; sourceTree = "<group>"; };
-		5C56541A67A6EF7D564E8B55 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		870FA36FEBEC4475A1B68205 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A935D91059BEC1DDA81CE11 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2A2D3DF40D2B9A32A9CFF8C2 /* Pods-Transmote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Transmote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Transmote/Pods-Transmote.debug.xcconfig"; sourceTree = "<group>"; };
+		2DDA36DD3E16BC1E3BD3B639 /* libPods-Transmote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Transmote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */,
-				11E82D4211F647D7B6A7D3BA /* libPods.a in Frameworks */,
+				81CBC0D45CA12153D8F4B1E2 /* libPods-Transmote.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +131,7 @@
 				22B9DCB818A5D58C003F5056 /* TransmoteTests */,
 				22B9DC9318A5D58B003F5056 /* Frameworks */,
 				22B9DC9218A5D58B003F5056 /* Products */,
-				F5E298BC815D5272AAB2EE42 /* Pods */,
+				3B9AB6F6E64AE9A180F9B04C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,7 +150,7 @@
 				22B9DC9418A5D58B003F5056 /* Cocoa.framework */,
 				22B9DCB318A5D58C003F5056 /* XCTest.framework */,
 				22B9DC9618A5D58B003F5056 /* Other Frameworks */,
-				870FA36FEBEC4475A1B68205 /* libPods.a */,
+				2DDA36DD3E16BC1E3BD3B639 /* libPods-Transmote.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -247,11 +247,11 @@
 			name = "API Clients";
 			sourceTree = "<group>";
 		};
-		F5E298BC815D5272AAB2EE42 /* Pods */ = {
+		3B9AB6F6E64AE9A180F9B04C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C56541A67A6EF7D564E8B55 /* Pods.debug.xcconfig */,
-				9A935D91059BEC1DDA81CE11 /* Pods.release.xcconfig */,
+				2A2D3DF40D2B9A32A9CFF8C2 /* Pods-Transmote.debug.xcconfig */,
+				2140FABE0CA2135ADEC0927F /* Pods-Transmote.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -263,11 +263,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22B9DCC218A5D58C003F5056 /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
-				559953F3FD1247C3AF7279CE /* Check Pods Manifest.lock */,
+				752656C3B6A7000F1408B359 /* [CP] Check Pods Manifest.lock */,
 				22B9DC8D18A5D58B003F5056 /* Sources */,
 				22B9DC8E18A5D58B003F5056 /* Frameworks */,
 				22B9DC8F18A5D58B003F5056 /* Resources */,
-				5D98EB75502347C1AFE7D8C7 /* Copy Pods Resources */,
+				E33253A72E21B31E77C30BA1 /* [CP] Embed Pods Frameworks */,
+				E4E31FE1A3E7906CA248F974 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -304,7 +305,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TRN;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Spotlight Kid";
 				TargetAttributes = {
 					22B9DC9018A5D58B003F5056 = {
@@ -374,14 +375,14 @@
 			shellPath = /bin/sh;
 			shellScript = ./Transmote/autoversioning.sh;
 		};
-		559953F3FD1247C3AF7279CE /* Check Pods Manifest.lock */ = {
+		752656C3B6A7000F1408B359 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,19 +390,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		5D98EB75502347C1AFE7D8C7 /* Copy Pods Resources */ = {
+		E33253A72E21B31E77C30BA1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Transmote/Pods-Transmote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4E31FE1A3E7906CA248F974 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Transmote/Pods-Transmote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -497,6 +513,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -551,7 +568,7 @@
 		};
 		22B9DCC318A5D58C003F5056 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C56541A67A6EF7D564E8B55 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 2A2D3DF40D2B9A32A9CFF8C2 /* Pods-Transmote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
@@ -568,6 +585,7 @@
 				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
 				INFOPLIST_PREPROCESS = YES;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -576,7 +594,7 @@
 		};
 		22B9DCC418A5D58C003F5056 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A935D91059BEC1DDA81CE11 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 2140FABE0CA2135ADEC0927F /* Pods-Transmote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
@@ -593,6 +611,7 @@
 				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
 				INFOPLIST_PREPROCESS = YES;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -615,6 +634,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TransmoteTests/TransmoteTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -633,6 +653,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
 				INFOPLIST_FILE = "TransmoteTests/TransmoteTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
