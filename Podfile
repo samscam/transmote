@@ -1,5 +1,6 @@
 project 'Transmote.xcodeproj'
 platform :osx, '10.9'
+use_frameworks!
 
 target 'Transmote' do
     pod 'AFJSONRPCClient'

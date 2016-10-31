@@ -21,18 +21,18 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709618A5DDC6008C22F5 /* TRNServer.m */; };
-		220A709A18A5DEE2008C22F5 /* TRNTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709918A5DEE2008C22F5 /* TRNTorrent.m */; };
-		220A709D18A5E039008C22F5 /* TRNWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A709C18A5E039008C22F5 /* TRNWindowController.m */; };
 		220A709F18A5E103008C22F5 /* TRNWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220A709E18A5E103008C22F5 /* TRNWindowController.xib */; };
-		220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */; };
+		2264AC061DC7F0A0000F7EEF /* TRNWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC051DC7F0A0000F7EEF /* TRNWindowController.swift */; };
+		2264AC081DC7F175000F7EEF /* TRNAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC071DC7F175000F7EEF /* TRNAppDelegate.swift */; };
+		2264AC0A1DC7F1E1000F7EEF /* SESImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC091DC7F1E1000F7EEF /* SESImageView.swift */; };
+		2264AC0D1DC7F1FB000F7EEF /* TRNServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC0B1DC7F1FB000F7EEF /* TRNServer.swift */; };
+		2264AC0E1DC7F1FB000F7EEF /* TRNTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC0C1DC7F1FB000F7EEF /* TRNTorrent.swift */; };
+		2264AC111DC7F20D000F7EEF /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC0F1DC7F20D000F7EEF /* TRNJSONRPCClient.swift */; };
+		2264AC121DC7F20D000F7EEF /* TRNTheMovieDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC101DC7F20D000F7EEF /* TRNTheMovieDBClient.swift */; };
 		229CEB2A19110F11004DC29C /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 229CEB2919110F11004DC29C /* Defaults.plist */; };
-		229CEB2D1911FB52004DC29C /* TRNTheMovieDBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */; };
 		22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
 		22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */; };
-		22B9DCA118A5D58B003F5056 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCA018A5D58B003F5056 /* main.m */; };
 		22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCA318A5D58B003F5056 /* Credits.rtf */; };
-		22B9DCA818A5D58B003F5056 /* TRNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */; };
 		22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCA918A5D58C003F5056 /* MainMenu.xib */; };
 		22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCAC18A5D58C003F5056 /* Images.xcassets */; };
 		22B9DCB418A5D58C003F5056 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DCB318A5D58C003F5056 /* XCTest.framework */; };
@@ -40,7 +40,6 @@
 		22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */; };
 		22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */; };
 		22D10D551913D93C00209A79 /* autoversioning.sh in Resources */ = {isa = PBXBuildFile; fileRef = 22D10D541913D93C00209A79 /* autoversioning.sh */; };
-		22E844581920DC9F003456CD /* SESImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E844571920DC9F003456CD /* SESImageView.m */; };
 		81CBC0D45CA12153D8F4B1E2 /* libPods-Transmote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DDA36DD3E16BC1E3BD3B639 /* libPods-Transmote.a */; };
 /* End PBXBuildFile section */
 
@@ -63,18 +62,15 @@
 
 /* Begin PBXFileReference section */
 		2140FABE0CA2135ADEC0927F /* Pods-Transmote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Transmote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Transmote/Pods-Transmote.release.xcconfig"; sourceTree = "<group>"; };
-		220A709518A5DDC6008C22F5 /* TRNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNServer.h; sourceTree = "<group>"; };
-		220A709618A5DDC6008C22F5 /* TRNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNServer.m; sourceTree = "<group>"; };
-		220A709818A5DEE2008C22F5 /* TRNTorrent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNTorrent.h; sourceTree = "<group>"; };
-		220A709918A5DEE2008C22F5 /* TRNTorrent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNTorrent.m; sourceTree = "<group>"; };
-		220A709B18A5E039008C22F5 /* TRNWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNWindowController.h; sourceTree = "<group>"; };
-		220A709C18A5E039008C22F5 /* TRNWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNWindowController.m; sourceTree = "<group>"; };
 		220A709E18A5E103008C22F5 /* TRNWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRNWindowController.xib; sourceTree = "<group>"; };
-		220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNJSONRPCClient.h; sourceTree = "<group>"; };
-		220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNJSONRPCClient.m; sourceTree = "<group>"; };
+		2264AC051DC7F0A0000F7EEF /* TRNWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNWindowController.swift; sourceTree = "<group>"; };
+		2264AC071DC7F175000F7EEF /* TRNAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNAppDelegate.swift; sourceTree = "<group>"; };
+		2264AC091DC7F1E1000F7EEF /* SESImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SESImageView.swift; sourceTree = "<group>"; };
+		2264AC0B1DC7F1FB000F7EEF /* TRNServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNServer.swift; sourceTree = "<group>"; };
+		2264AC0C1DC7F1FB000F7EEF /* TRNTorrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTorrent.swift; sourceTree = "<group>"; };
+		2264AC0F1DC7F20D000F7EEF /* TRNJSONRPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNJSONRPCClient.swift; sourceTree = "<group>"; };
+		2264AC101DC7F20D000F7EEF /* TRNTheMovieDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTheMovieDBClient.swift; sourceTree = "<group>"; };
 		229CEB2919110F11004DC29C /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
-		229CEB2B1911FB52004DC29C /* TRNTheMovieDBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNTheMovieDBClient.h; sourceTree = "<group>"; };
-		229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRNTheMovieDBClient.m; sourceTree = "<group>"; };
 		22B9DC9118A5D58B003F5056 /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B9DC9418A5D58B003F5056 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22B9DC9718A5D58B003F5056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -82,11 +78,7 @@
 		22B9DC9918A5D58B003F5056 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Transmote-Info.plist"; sourceTree = "<group>"; };
 		22B9DC9E18A5D58B003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		22B9DCA018A5D58B003F5056 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		22B9DCA218A5D58B003F5056 /* Transmote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Transmote-Prefix.pch"; sourceTree = "<group>"; };
 		22B9DCA418A5D58B003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		22B9DCA618A5D58B003F5056 /* TRNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRNAppDelegate.h; sourceTree = "<group>"; };
-		22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRNAppDelegate.m; sourceTree = "<group>"; };
 		22B9DCAA18A5D58C003F5056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		22B9DCAC18A5D58C003F5056 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransmoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,8 +88,6 @@
 		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
 		22D10D521913D00000209A79 /* TRNDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRNDefinitions.h; sourceTree = "<group>"; };
 		22D10D541913D93C00209A79 /* autoversioning.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
-		22E844561920DC9F003456CD /* SESImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESImageView.h; sourceTree = "<group>"; };
-		22E844571920DC9F003456CD /* SESImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESImageView.m; sourceTree = "<group>"; };
 		2A2D3DF40D2B9A32A9CFF8C2 /* Pods-Transmote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Transmote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Transmote/Pods-Transmote.debug.xcconfig"; sourceTree = "<group>"; };
 		2DDA36DD3E16BC1E3BD3B639 /* libPods-Transmote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Transmote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -170,11 +160,9 @@
 			children = (
 				229CEB2919110F11004DC29C /* Defaults.plist */,
 				22D10D521913D00000209A79 /* TRNDefinitions.h */,
-				22B9DCA618A5D58B003F5056 /* TRNAppDelegate.h */,
-				22B9DCA718A5D58B003F5056 /* TRNAppDelegate.m */,
+				2264AC071DC7F175000F7EEF /* TRNAppDelegate.swift */,
 				22B9DCA918A5D58C003F5056 /* MainMenu.xib */,
-				220A709B18A5E039008C22F5 /* TRNWindowController.h */,
-				220A709C18A5E039008C22F5 /* TRNWindowController.m */,
+				2264AC051DC7F0A0000F7EEF /* TRNWindowController.swift */,
 				220A709E18A5E103008C22F5 /* TRNWindowController.xib */,
 				22E844541920DC42003456CD /* Models */,
 				22E844551920DC4C003456CD /* API Clients */,
@@ -191,8 +179,6 @@
 				22D10D541913D93C00209A79 /* autoversioning.sh */,
 				22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */,
 				22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */,
-				22B9DCA018A5D58B003F5056 /* main.m */,
-				22B9DCA218A5D58B003F5056 /* Transmote-Prefix.pch */,
 				22B9DCA318A5D58B003F5056 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -219,8 +205,7 @@
 		22E844531920DC37003456CD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				22E844561920DC9F003456CD /* SESImageView.h */,
-				22E844571920DC9F003456CD /* SESImageView.m */,
+				2264AC091DC7F1E1000F7EEF /* SESImageView.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -228,10 +213,8 @@
 		22E844541920DC42003456CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				220A709518A5DDC6008C22F5 /* TRNServer.h */,
-				220A709618A5DDC6008C22F5 /* TRNServer.m */,
-				220A709818A5DEE2008C22F5 /* TRNTorrent.h */,
-				220A709918A5DEE2008C22F5 /* TRNTorrent.m */,
+				2264AC0B1DC7F1FB000F7EEF /* TRNServer.swift */,
+				2264AC0C1DC7F1FB000F7EEF /* TRNTorrent.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -239,10 +222,8 @@
 		22E844551920DC4C003456CD /* API Clients */ = {
 			isa = PBXGroup;
 			children = (
-				229CEB2B1911FB52004DC29C /* TRNTheMovieDBClient.h */,
-				229CEB2C1911FB52004DC29C /* TRNTheMovieDBClient.m */,
-				220A70A018A5F092008C22F5 /* TRNJSONRPCClient.h */,
-				220A70A118A5F092008C22F5 /* TRNJSONRPCClient.m */,
+				2264AC0F1DC7F20D000F7EEF /* TRNJSONRPCClient.swift */,
+				2264AC101DC7F20D000F7EEF /* TRNTheMovieDBClient.swift */,
 			);
 			name = "API Clients";
 			sourceTree = "<group>";
@@ -305,11 +286,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TRN;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Spotlight Kid";
 				TargetAttributes = {
 					22B9DC9018A5D58B003F5056 = {
 						DevelopmentTeam = 9M28MQ9SZC;
+						LastSwiftMigration = 0810;
 					};
 					22B9DCB118A5D58C003F5056 = {
 						TestTargetID = 22B9DC9018A5D58B003F5056;
@@ -427,14 +409,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22E844581920DC9F003456CD /* SESImageView.m in Sources */,
-				220A709718A5DDC6008C22F5 /* TRNServer.m in Sources */,
-				220A70A218A5F092008C22F5 /* TRNJSONRPCClient.m in Sources */,
-				229CEB2D1911FB52004DC29C /* TRNTheMovieDBClient.m in Sources */,
-				220A709D18A5E039008C22F5 /* TRNWindowController.m in Sources */,
-				220A709A18A5DEE2008C22F5 /* TRNTorrent.m in Sources */,
-				22B9DCA118A5D58B003F5056 /* main.m in Sources */,
-				22B9DCA818A5D58B003F5056 /* TRNAppDelegate.m in Sources */,
+				2264AC061DC7F0A0000F7EEF /* TRNWindowController.swift in Sources */,
+				2264AC0D1DC7F1FB000F7EEF /* TRNServer.swift in Sources */,
+				2264AC121DC7F20D000F7EEF /* TRNTheMovieDBClient.swift in Sources */,
+				2264AC0A1DC7F1E1000F7EEF /* SESImageView.swift in Sources */,
+				2264AC081DC7F175000F7EEF /* TRNAppDelegate.swift in Sources */,
+				2264AC0E1DC7F1FB000F7EEF /* TRNTorrent.swift in Sources */,
+				2264AC111DC7F20D000F7EEF /* TRNJSONRPCClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,14 +490,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -547,14 +533,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -563,6 +554,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -571,6 +563,7 @@
 			baseConfigurationReference = 2A2D3DF40D2B9A32A9CFF8C2 /* Pods-Transmote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -587,7 +580,8 @@
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -597,6 +591,7 @@
 			baseConfigurationReference = 2140FABE0CA2135ADEC0927F /* Pods-Transmote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -613,7 +608,7 @@
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -621,6 +616,7 @@
 		22B9DCC618A5D58C003F5056 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -644,6 +640,7 @@
 		22B9DCC718A5D58C003F5056 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
