@@ -54,7 +54,7 @@ class TRNServer: NSObject {
         })
     }
 
-    static var connectionContext = connectionContext
+    static var connectionContext = "connectionContext"
 
     convenience init() {
         if (super.init()) {

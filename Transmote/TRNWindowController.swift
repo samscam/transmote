@@ -7,7 +7,7 @@
 //
 import Cocoa
 import Sparkle
-import SORelativeDateTransformer
+//import SORelativeDateTransformer
 
 class TRNWindowController: NSWindowController {
     var server: TRNServer!
@@ -78,8 +78,8 @@ class TRNWindowController: NSWindowController {
         SUUpdater.shared().check(forUpdates: nil)
     }
 
-    static var serverContext = serverContext
-    static var arrayControllerContext = arrayControllerContext
+    static let serverContext = "serverContext"
+    static let arrayControllerContext = "arrayControllerContext"
 
     override init(window: NSWindow) {
         super.init(window)
