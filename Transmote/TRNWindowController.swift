@@ -81,8 +81,8 @@ class TRNWindowController: NSWindowController {
     static let serverContext = "serverContext"
     static let arrayControllerContext = "arrayControllerContext"
 
-    override init(window: NSWindow) {
-        super.init(window)
+    override init(window: NSWindow?) {
+        super.init(window: window)
         
         self.server = TRNServer.init()
     

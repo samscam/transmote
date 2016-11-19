@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Spotlight Kid. All rights reserved.
 //
 import Foundation
+import Cocoa
 import AFNetworking
+
 class TRNTheMovieDBClient: NSObject {
     func fetchMetadata(forMovieNamed movieName: String, year: String, onCompletion completionBlock: @escaping () -> Void) {
         var method = "search/movie"

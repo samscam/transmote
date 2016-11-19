@@ -6,29 +6,67 @@
 //  Copyright (c) 2014 Spotlight Kid. All rights reserved.
 //
 import Foundation
-class TRNServer: NSObject {
-    var address = ""
-    var port = ""
-    var rpcPath = ""
-    var username = ""
-    var password = ""
-    private(set) var isConnected = false
-    private(set) var torrents = [Any]()
+import Cocoa
+import AFNetworking
+import AFJSONRPCClient
 
+
+class TRNServer: NSObject {
+    
+    var address: String?
+    var port: String?
+    var rpcPath: String?
+    var username: String?
+    var password: String?
+    
+    var isConnected = false
+    var torrents: [TRNTorrent] = []
+    var torrentDict = [AnyHashable: Any]()
+    var client: TRNJSONRPCClient?
+    var timer: Timer?
+    
+    var connecting = false
+    var updating = false
+    var protectionSpace: URLProtectionSpace!
+    
+    var connectionContext = "connectionContext"
+
+    override init() {
+        
+        // Bind user defaults
+        let userDefaultsController = NSUserDefaultsController.shared()
+
+        self.bind("address", to: userDefaultsController, withKeyPath: "values.address", options: [NSContinuouslyUpdatesValueBindingOption: true])
+        self.bind("port", to: userDefaultsController, withKeyPath: "values.port", options: [NSContinuouslyUpdatesValueBindingOption: true])
+        self.bind("rpcPath", to: userDefaultsController, withKeyPath: "values.rpcPath", options: [NSContinuouslyUpdatesValueBindingOption: true])
+        self.bind("username", to: userDefaultsController, withKeyPath: "values.username", options: [NSContinuouslyUpdatesValueBindingOption: true])
+
+        self.addObserver(self, forKeyPath: "address", options: .new, context: &connectionContext)
+        self.addObserver(self, forKeyPath: "port", options: .new, context: &connectionContext)
+        self.addObserver(self, forKeyPath: "rpcPath", options: .new, context: &connectionContext)
+        self.addObserver(self, forKeyPath: "username", options: .new, context: &connectionContext)
+        self.addObserver(self, forKeyPath: "password", options: .new, context: &connectionContext)
+        
+        
+        self.tryToConnect()
+    }
+    
+    
+    
     func tryToConnect() {
         self.timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.timerDidFire), userInfo: nil, repeats: true)
         self.connect()
     }
 
-    override func disconnect() {
+    func disconnect() {
         self.connected = false
-        self.client! = nil
+        self.client = nil
         self.timer.invalidate()
         self.timer = nil
     }
 
     func addMagnetLink(_ magnetLink: URL) {
-        self.client!.invokeMethod("torrent-add", withParameters: ["filename": magnetLink.absoluteString], success: {(_ operation: AFHTTPRequestOperation, _ responseObject: Any) -> Void in
+        self.client?.invokeMethod("torrent-add", withParameters: ["filename": magnetLink.absoluteString], success: {(_ operation: AFHTTPRequestOperation, _ responseObject: Any) -> Void in
             print("Torrent added: \(responseObject)")
         }, failure: {(_ operation: AFHTTPRequestOperation, _ error: Error) -> Void in
             print("Torrent failed to add: \(error.localizedDescription)")
@@ -54,25 +92,8 @@ class TRNServer: NSObject {
         })
     }
 
-    static var connectionContext = "connectionContext"
 
-    convenience init() {
-        if (super.init()) {
-            self.torrents = [Any]()
-            self.torrentDict = [AnyHashable: Any]()
-            var userDefaultsController = NSUserDefaultsController.shared()
-            self.bind("address", toObject: userDefaultsController, withKeyPath: "values.address", options: [NSContinuouslyUpdatesValueBindingOption: true])
-            self.bind("port", toObject: userDefaultsController, withKeyPath: "values.port", options: [NSContinuouslyUpdatesValueBindingOption: true])
-            self.bind("rpcPath", toObject: userDefaultsController, withKeyPath: "values.rpcPath", options: [NSContinuouslyUpdatesValueBindingOption: true])
-            self.bind("username", toObject: userDefaultsController, withKeyPath: "values.username", options: [NSContinuouslyUpdatesValueBindingOption: true])
-            self.addObserver(self, forKeyPath: "address", options: .new, context: connectionContext)
-            self.addObserver(self, forKeyPath: "port", options: .new, context: connectionContext)
-            self.addObserver(self, forKeyPath: "rpcPath", options: .new, context: connectionContext)
-            self.addObserver(self, forKeyPath: "username", options: .new, context: connectionContext)
-            self.addObserver(self, forKeyPath: "password", options: .new, context: connectionContext)
-            self.tryToConnect()
-        }
-    }
+
 
     func timerDidFire(_ timer: Any) {
         // the timer will fire every three seconds...
@@ -221,10 +242,6 @@ class TRNServer: NSObject {
         print("Using credential: \(credential)")
         return credential
     }
-    var connecting = false
-    var updating = false
-    var protectionSpace: URLProtectionSpace!
-
 
     var credential: URLCredential? {
         if !self.username| (self.username == "") {
@@ -238,11 +255,7 @@ class TRNServer: NSObject {
             print("Using credential: \(credential)")
             return credential
     }
-    var isConnected = false
-    var torrents = [Any]()
-    var torrentDict = [AnyHashable: Any]()
-    var client: TRNJSONRPCClient!
-    var timer: Timer!
+
 }
 //
 //  TRNServer.m
