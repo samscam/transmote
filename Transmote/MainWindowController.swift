@@ -1,15 +1,36 @@
-////
-////  TRNWindowController.h
-////  Transmote
-////
-////  Created by Sam Easterby-Smith on 08/02/2014.
-////  Copyright (c) 2014 Spotlight Kid. All rights reserved.
-////
-//import Cocoa
-//import Sparkle
+//
+//  MainWindowController.h
+//  Transmote
+//
+//  Created by Sam Easterby-Smith on 08/02/2014.
+//  Copyright (c) 2014 Spotlight Kid. All rights reserved.
+//
+
+import Cocoa
+import Sparkle
+
 ////import SORelativeDateTransformer
 //
-//class TRNWindowController: NSWindowController {
+class MainWindowController: NSWindowController {
+    
+    @IBOutlet weak var serverToolbarButton: NSButton!
+    
+    var settingsPopover: NSPopover!
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        
+        settingsPopover = NSPopover()
+        settingsPopover.contentViewController = self.storyboard!.instantiateController(withIdentifier: "SettingsPopoverViewController") as? NSViewController
+    }
+    
+    @IBAction func serverSettingsToolbarButtonPressed(_ sender: Any) {
+        let toolbarButtonView = self.serverToolbarButton as NSView
+        self.settingsPopover.show(relativeTo: toolbarButtonView.bounds, of: toolbarButtonView, preferredEdge: NSRectEdge.maxY)
+    }
+
+}
+
 //    var server: TRNServer!
 //    @IBOutlet weak var arrayController: NSArrayController!
 //    @IBOutlet weak var serverToolbarButton: NSButton!
@@ -26,10 +47,7 @@
 //    @IBOutlet weak var passiveAlertMessageField: NSTextField!
 //    @IBOutlet weak var passiveAlertImageView: NSImageView!
 //
-//    @IBAction func serverSettingsPopover(_ sender: Any) {
-//        var toolbarItemView = self.serverToolbarButton
-//        self.settingsPopover.show(relativeTo: toolbarItemView.bounds, of: toolbarItemView, preferredEdge: NSMaxYEdge)
-//    }
+
 //
 //    @IBAction func confirmDeleteSelectedTorrents(_ sender: Any) {
 //        delete = true

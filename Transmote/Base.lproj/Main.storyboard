@@ -121,7 +121,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="MainWindowController" customModule="Transmote" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -141,6 +141,9 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <connections>
+                                        <action selector="serverSettingsToolbarButtonPressed:" target="B8D-0N-5wS" id="I3D-mc-aUi"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="k1X-tw-37e"/>
                                 <toolbarItem implicitItemIdentifier="1FB5569E-8D01-43BA-8A1B-B8FA2649A760" label="Remove" paletteLabel="Remove Torrent" image="NSStopProgressTemplate" id="6I3-AJ-fGM" userLabel="Remove">
@@ -179,6 +182,7 @@
                         </toolbar>
                     </window>
                     <connections>
+                        <outlet property="serverToolbarButton" destination="b45-nN-2QF" id="bZr-99-ls7"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
@@ -306,7 +310,7 @@
         <!--View Controller-->
         <scene sceneID="tzs-le-FPc">
             <objects>
-                <viewController id="LGs-aS-H3y" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsPopoverViewController" id="LGs-aS-H3y" sceneMemberID="viewController">
                     <customView key="view" identifier="ServerSettings" id="E1X-Vz-jvo" userLabel="Preferences">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="211"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
