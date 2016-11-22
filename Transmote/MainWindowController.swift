@@ -21,6 +21,7 @@ class MainWindowController: NSWindowController {
         super.windowDidLoad()
         
         settingsPopover = NSPopover()
+        settingsPopover.behavior = NSPopoverBehavior.semitransient
         settingsPopover.contentViewController = self.storyboard!.instantiateController(withIdentifier: "SettingsPopoverViewController") as? NSViewController
     }
     
