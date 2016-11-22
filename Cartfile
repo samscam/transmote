@@ -1,3 +1,4 @@
 github "sparkle-project/Sparkle" ~> 1.14
-github "AFNetworking/AFNetworking"
-github "samscam/AFJSONRPCClient" "4365756e95522618837a55c5d8f7c42d03e95765"
+github "Hearst-DD/ObjectMapper" ~> 2.2
+github "Moya/Moya" ~> 8.0
+github "ReactiveX/RxSwift" ~> 3.0

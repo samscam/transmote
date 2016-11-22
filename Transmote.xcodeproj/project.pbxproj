@@ -6,75 +6,30 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		22D10D5C1913DA4300209A79 /* Autoversioning */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 22D10D5D1913DA4300209A79 /* Build configuration list for PBXAggregateTarget "Autoversioning" */;
-			buildPhases = (
-				22D10D621913DA6000209A79 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = Autoversioning;
-			productName = Autoversioning;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		220A709F18A5E103008C22F5 /* TRNWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220A709E18A5E103008C22F5 /* TRNWindowController.xib */; };
-		2264AC061DC7F0A0000F7EEF /* TRNWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC051DC7F0A0000F7EEF /* TRNWindowController.swift */; };
-		2264AC081DC7F175000F7EEF /* TRNAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC071DC7F175000F7EEF /* TRNAppDelegate.swift */; };
-		2264AC0A1DC7F1E1000F7EEF /* SESImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC091DC7F1E1000F7EEF /* SESImageView.swift */; };
-		2264AC0D1DC7F1FB000F7EEF /* TRNServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC0B1DC7F1FB000F7EEF /* TRNServer.swift */; };
-		2264AC0E1DC7F1FB000F7EEF /* TRNTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC0C1DC7F1FB000F7EEF /* TRNTorrent.swift */; };
-		2264AC111DC7F20D000F7EEF /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC0F1DC7F20D000F7EEF /* TRNJSONRPCClient.swift */; };
-		2264AC121DC7F20D000F7EEF /* TRNTheMovieDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264AC101DC7F20D000F7EEF /* TRNTheMovieDBClient.swift */; };
-		2264AC141DC7F72E000F7EEF /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 2264AC131DC7F72E000F7EEF /* Cartfile */; };
-		229CEB2A19110F11004DC29C /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 229CEB2919110F11004DC29C /* Defaults.plist */; };
-		22B569D31DC9F1E10050F957 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B569D01DC9F1E10050F957 /* AFNetworking.framework */; };
-		22B569D41DC9F1E10050F957 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B569D01DC9F1E10050F957 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22B569D61DC9F7D90050F957 /* AFJSONRPCClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B569D51DC9F7D90050F957 /* AFJSONRPCClient.framework */; };
-		22B569D71DC9F7D90050F957 /* AFJSONRPCClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B569D51DC9F7D90050F957 /* AFJSONRPCClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
-		22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */; };
-		22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCA318A5D58B003F5056 /* Credits.rtf */; };
-		22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCA918A5D58C003F5056 /* MainMenu.xib */; };
-		22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCAC18A5D58C003F5056 /* Images.xcassets */; };
-		22B9DCB518A5D58C003F5056 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DC9418A5D58B003F5056 /* Cocoa.framework */; };
-		22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */; };
-		22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */; };
-		22D10D551913D93C00209A79 /* autoversioning.sh in Resources */ = {isa = PBXBuildFile; fileRef = 22D10D541913D93C00209A79 /* autoversioning.sh */; };
-		22F2E0551DC9DFCC0010A503 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F2E0461DC9DFCC0010A503 /* Sparkle.framework */; };
-		22F2E0561DC9DFCC0010A503 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F2E0461DC9DFCC0010A503 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
+		22EBE38B1DE1000A00588FFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* ViewController.swift */; };
+		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
+		22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38E1DE1000A00588FFD /* Main.storyboard */; };
+		22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3971DE1010800588FFD /* SESImageView.swift */; };
+		22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3981DE1010800588FFD /* TRNDefinitions.swift */; };
+		22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */; };
+		22EBE3A11DE1010800588FFD /* TRNServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TRNServer.swift */; };
+		22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */; };
+		22EBE3A31DE1010800588FFD /* TRNTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* TRNTorrent.swift */; };
+		22EBE3A41DE1010800588FFD /* TRNWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39D1DE1010800588FFD /* TRNWindowController.swift */; };
+		22EBE3AE1DE1017900588FFD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3A91DE1017900588FFD /* Sparkle.framework */; };
+		22EBE3AF1DE1017900588FFD /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3A91DE1017900588FFD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		22B9DCB618A5D58C003F5056 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22B9DC8918A5D58B003F5056 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22B9DC9018A5D58B003F5056;
-			remoteInfo = Transmote;
-		};
-		22D10D601913DA5800209A79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22B9DC8918A5D58B003F5056 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22D10D5C1913DA4300209A79;
-			remoteInfo = Autoversioning;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		22F2E0571DC9DFCD0010A503 /* Embed Frameworks */ = {
+		22EBE3B01DE1017900588FFD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				22B569D71DC9F7D90050F957 /* AFJSONRPCClient.framework in Embed Frameworks */,
-				22B569D41DC9F1E10050F957 /* AFNetworking.framework in Embed Frameworks */,
-				22F2E0561DC9DFCC0010A503 /* Sparkle.framework in Embed Frameworks */,
+				22EBE3AF1DE1017900588FFD /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,237 +37,121 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		220A709E18A5E103008C22F5 /* TRNWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRNWindowController.xib; sourceTree = "<group>"; };
-		225AC34C1DC89D72007D0ED2 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
-		2264AC051DC7F0A0000F7EEF /* TRNWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNWindowController.swift; sourceTree = "<group>"; };
-		2264AC071DC7F175000F7EEF /* TRNAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNAppDelegate.swift; sourceTree = "<group>"; };
-		2264AC091DC7F1E1000F7EEF /* SESImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SESImageView.swift; sourceTree = "<group>"; };
-		2264AC0B1DC7F1FB000F7EEF /* TRNServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNServer.swift; sourceTree = "<group>"; };
-		2264AC0C1DC7F1FB000F7EEF /* TRNTorrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTorrent.swift; sourceTree = "<group>"; };
-		2264AC0F1DC7F20D000F7EEF /* TRNJSONRPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNJSONRPCClient.swift; sourceTree = "<group>"; };
-		2264AC101DC7F20D000F7EEF /* TRNTheMovieDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTheMovieDBClient.swift; sourceTree = "<group>"; };
-		2264AC131DC7F72E000F7EEF /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		229CEB2919110F11004DC29C /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
-		22B569D01DC9F1E10050F957 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = Carthage/Build/Mac/AFNetworking.framework; sourceTree = "<group>"; };
-		22B569D51DC9F7D90050F957 /* AFJSONRPCClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFJSONRPCClient.framework; path = Carthage/Build/Mac/AFJSONRPCClient.framework; sourceTree = "<group>"; };
-		22B9DC9118A5D58B003F5056 /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22B9DC9418A5D58B003F5056 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		22B9DC9718A5D58B003F5056 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		22B9DC9818A5D58B003F5056 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		22B9DC9918A5D58B003F5056 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Transmote-Info.plist"; sourceTree = "<group>"; };
-		22B9DC9E18A5D58B003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		22B9DCA418A5D58B003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		22B9DCAA18A5D58C003F5056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		22B9DCAC18A5D58C003F5056 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransmoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		22B9DCBA18A5D58C003F5056 /* TransmoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TransmoteTests-Info.plist"; sourceTree = "<group>"; };
-		22B9DCBC18A5D58C003F5056 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransmoteTests.m; sourceTree = "<group>"; };
-		22D10D521913D00000209A79 /* TRNDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNDefinitions.swift; sourceTree = "<group>"; };
-		22D10D541913D93C00209A79 /* autoversioning.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
-		22F2E0461DC9DFCC0010A503 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22EBE38A1DE1000A00588FFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22EBE38C1DE1000A00588FFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22EBE38F1DE1000A00588FFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22EBE3911DE1000A00588FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22EBE3971DE1010800588FFD /* SESImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SESImageView.swift; sourceTree = "<group>"; };
+		22EBE3981DE1010800588FFD /* TRNDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNDefinitions.swift; sourceTree = "<group>"; };
+		22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNJSONRPCClient.swift; sourceTree = "<group>"; };
+		22EBE39A1DE1010800588FFD /* TRNServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNServer.swift; sourceTree = "<group>"; };
+		22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTheMovieDBClient.swift; sourceTree = "<group>"; };
+		22EBE39C1DE1010800588FFD /* TRNTorrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTorrent.swift; sourceTree = "<group>"; };
+		22EBE39D1DE1010800588FFD /* TRNWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNWindowController.swift; sourceTree = "<group>"; };
+		22EBE3A91DE1017900588FFD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		22EBE3B21DE3A25D00588FFD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		22EBE3B61DE4482A00588FFD /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22B9DC8E18A5D58B003F5056 /* Frameworks */ = {
+		22EBE3821DE1000900588FFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B569D31DC9F1E10050F957 /* AFNetworking.framework in Frameworks */,
-				22B9DC9518A5D58B003F5056 /* Cocoa.framework in Frameworks */,
-				22B569D61DC9F7D90050F957 /* AFJSONRPCClient.framework in Frameworks */,
-				22F2E0551DC9DFCC0010A503 /* Sparkle.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22B9DCAF18A5D58C003F5056 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22B9DCB518A5D58C003F5056 /* Cocoa.framework in Frameworks */,
+				22EBE3AE1DE1017900588FFD /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22B9DC8818A5D58B003F5056 = {
+		22EBE37C1DE1000900588FFD = {
 			isa = PBXGroup;
 			children = (
-				2264AC131DC7F72E000F7EEF /* Cartfile */,
-				225AC34C1DC89D72007D0ED2 /* Cartfile.resolved */,
-				22B9DC9A18A5D58B003F5056 /* Transmote */,
-				22B9DCB818A5D58C003F5056 /* TransmoteTests */,
-				22B9DC9618A5D58B003F5056 /* Apple Frameworks */,
-				22B9DC9318A5D58B003F5056 /* Frameworks */,
-				22B9DC9218A5D58B003F5056 /* Products */,
+				22EBE3871DE1000A00588FFD /* Transmote */,
+				22EBE3861DE1000A00588FFD /* Products */,
+				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		22B9DC9218A5D58B003F5056 /* Products */ = {
+		22EBE3861DE1000A00588FFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22B9DC9118A5D58B003F5056 /* Transmote.app */,
-				22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */,
+				22EBE3851DE1000A00588FFD /* Transmote.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22B9DC9318A5D58B003F5056 /* Frameworks */ = {
+		22EBE3871DE1000A00588FFD /* Transmote */ = {
 			isa = PBXGroup;
 			children = (
-				22B569D51DC9F7D90050F957 /* AFJSONRPCClient.framework */,
-				22B569D01DC9F1E10050F957 /* AFNetworking.framework */,
-				22F2E0461DC9DFCC0010A503 /* Sparkle.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		22B9DC9618A5D58B003F5056 /* Apple Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				22B9DC9418A5D58B003F5056 /* Cocoa.framework */,
-				22B9DC9718A5D58B003F5056 /* AppKit.framework */,
-				22B9DC9818A5D58B003F5056 /* CoreData.framework */,
-				22B9DC9918A5D58B003F5056 /* Foundation.framework */,
-			);
-			name = "Apple Frameworks";
-			sourceTree = "<group>";
-		};
-		22B9DC9A18A5D58B003F5056 /* Transmote */ = {
-			isa = PBXGroup;
-			children = (
-				229CEB2919110F11004DC29C /* Defaults.plist */,
-				22D10D521913D00000209A79 /* TRNDefinitions.swift */,
-				2264AC071DC7F175000F7EEF /* TRNAppDelegate.swift */,
-				22B9DCA918A5D58C003F5056 /* MainMenu.xib */,
-				2264AC051DC7F0A0000F7EEF /* TRNWindowController.swift */,
-				220A709E18A5E103008C22F5 /* TRNWindowController.xib */,
-				22E844541920DC42003456CD /* Models */,
-				22E844551920DC4C003456CD /* API Clients */,
-				22E844531920DC37003456CD /* Categories */,
-				22B9DCAC18A5D58C003F5056 /* Images.xcassets */,
-				22B9DC9B18A5D58B003F5056 /* Supporting Files */,
+				22EBE3881DE1000A00588FFD /* AppDelegate.swift */,
+				22EBE38A1DE1000A00588FFD /* ViewController.swift */,
+				22EBE3971DE1010800588FFD /* SESImageView.swift */,
+				22EBE3981DE1010800588FFD /* TRNDefinitions.swift */,
+				22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */,
+				22EBE39A1DE1010800588FFD /* TRNServer.swift */,
+				22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */,
+				22EBE39C1DE1010800588FFD /* TRNTorrent.swift */,
+				22EBE39D1DE1010800588FFD /* TRNWindowController.swift */,
+				22EBE38C1DE1000A00588FFD /* Assets.xcassets */,
+				22EBE38E1DE1000A00588FFD /* Main.storyboard */,
+				22EBE3911DE1000A00588FFD /* Info.plist */,
 			);
 			path = Transmote;
 			sourceTree = "<group>";
 		};
-		22B9DC9B18A5D58B003F5056 /* Supporting Files */ = {
+		22EBE3B11DE1018900588FFD /* Carthage Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22D10D541913D93C00209A79 /* autoversioning.sh */,
-				22B9DC9C18A5D58B003F5056 /* Transmote-Info.plist */,
-				22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */,
-				22B9DCA318A5D58B003F5056 /* Credits.rtf */,
+				22EBE3B21DE3A25D00588FFD /* Cartfile */,
+				22EBE3B61DE4482A00588FFD /* Cartfile.resolved */,
+				22EBE3A91DE1017900588FFD /* Sparkle.framework */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		22B9DCB818A5D58C003F5056 /* TransmoteTests */ = {
-			isa = PBXGroup;
-			children = (
-				22B9DCBE18A5D58C003F5056 /* TransmoteTests.m */,
-				22B9DCB918A5D58C003F5056 /* Supporting Files */,
-			);
-			path = TransmoteTests;
-			sourceTree = "<group>";
-		};
-		22B9DCB918A5D58C003F5056 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				22B9DCBA18A5D58C003F5056 /* TransmoteTests-Info.plist */,
-				22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		22E844531920DC37003456CD /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				2264AC091DC7F1E1000F7EEF /* SESImageView.swift */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
-		22E844541920DC42003456CD /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2264AC0B1DC7F1FB000F7EEF /* TRNServer.swift */,
-				2264AC0C1DC7F1FB000F7EEF /* TRNTorrent.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		22E844551920DC4C003456CD /* API Clients */ = {
-			isa = PBXGroup;
-			children = (
-				2264AC0F1DC7F20D000F7EEF /* TRNJSONRPCClient.swift */,
-				2264AC101DC7F20D000F7EEF /* TRNTheMovieDBClient.swift */,
-			);
-			name = "API Clients";
+			name = "Carthage Frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22B9DC9018A5D58B003F5056 /* Transmote */ = {
+		22EBE3841DE1000900588FFD /* Transmote */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22B9DCC218A5D58C003F5056 /* Build configuration list for PBXNativeTarget "Transmote" */;
+			buildConfigurationList = 22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
-				22B9DC8D18A5D58B003F5056 /* Sources */,
-				22B9DC8E18A5D58B003F5056 /* Frameworks */,
-				22B9DC8F18A5D58B003F5056 /* Resources */,
-				22F2E0571DC9DFCD0010A503 /* Embed Frameworks */,
+				22EBE3811DE1000900588FFD /* Sources */,
+				22EBE3821DE1000900588FFD /* Frameworks */,
+				22EBE3831DE1000900588FFD /* Resources */,
+				22EBE3B01DE1017900588FFD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				22D10D611913DA5800209A79 /* PBXTargetDependency */,
 			);
 			name = Transmote;
 			productName = Transmote;
-			productReference = 22B9DC9118A5D58B003F5056 /* Transmote.app */;
+			productReference = 22EBE3851DE1000A00588FFD /* Transmote.app */;
 			productType = "com.apple.product-type.application";
-		};
-		22B9DCB118A5D58C003F5056 /* TransmoteTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22B9DCC518A5D58C003F5056 /* Build configuration list for PBXNativeTarget "TransmoteTests" */;
-			buildPhases = (
-				22B9DCAE18A5D58C003F5056 /* Sources */,
-				22B9DCAF18A5D58C003F5056 /* Frameworks */,
-				22B9DCB018A5D58C003F5056 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22B9DCB718A5D58C003F5056 /* PBXTargetDependency */,
-			);
-			name = TransmoteTests;
-			productName = TransmoteTests;
-			productReference = 22B9DCB218A5D58C003F5056 /* TransmoteTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		22B9DC8918A5D58B003F5056 /* Project object */ = {
+		22EBE37D1DE1000900588FFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = TRN;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
-				ORGANIZATIONNAME = "Spotlight Kid";
+				ORGANIZATIONNAME = "Sam Easterby-Smith";
 				TargetAttributes = {
-					22B9DC9018A5D58B003F5056 = {
+					22EBE3841DE1000900588FFD = {
+						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 9M28MQ9SZC;
-						LastSwiftMigration = 0810;
-					};
-					22B9DCB118A5D58C003F5056 = {
-						TestTargetID = 22B9DC9018A5D58B003F5056;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 22B9DC8C18A5D58B003F5056 /* Build configuration list for PBXProject "Transmote" */;
+			buildConfigurationList = 22EBE3801DE1000900588FFD /* Build configuration list for PBXProject "Transmote" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -320,369 +159,207 @@
 				en,
 				Base,
 			);
-			mainGroup = 22B9DC8818A5D58B003F5056;
-			productRefGroup = 22B9DC9218A5D58B003F5056 /* Products */;
+			mainGroup = 22EBE37C1DE1000900588FFD;
+			productRefGroup = 22EBE3861DE1000A00588FFD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22B9DC9018A5D58B003F5056 /* Transmote */,
-				22B9DCB118A5D58C003F5056 /* TransmoteTests */,
-				22D10D5C1913DA4300209A79 /* Autoversioning */,
+				22EBE3841DE1000900588FFD /* Transmote */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		22B9DC8F18A5D58B003F5056 /* Resources */ = {
+		22EBE3831DE1000900588FFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B9DC9F18A5D58B003F5056 /* InfoPlist.strings in Resources */,
-				220A709F18A5E103008C22F5 /* TRNWindowController.xib in Resources */,
-				2264AC141DC7F72E000F7EEF /* Cartfile in Resources */,
-				229CEB2A19110F11004DC29C /* Defaults.plist in Resources */,
-				22B9DCAD18A5D58C003F5056 /* Images.xcassets in Resources */,
-				22B9DCA518A5D58B003F5056 /* Credits.rtf in Resources */,
-				22B9DCAB18A5D58C003F5056 /* MainMenu.xib in Resources */,
-				22D10D551913D93C00209A79 /* autoversioning.sh in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22B9DCB018A5D58C003F5056 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22B9DCBD18A5D58C003F5056 /* InfoPlist.strings in Resources */,
+				22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */,
+				22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		22D10D621913DA6000209A79 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ./Transmote/autoversioning.sh;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		22B9DC8D18A5D58B003F5056 /* Sources */ = {
+		22EBE3811DE1000900588FFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2264AC061DC7F0A0000F7EEF /* TRNWindowController.swift in Sources */,
-				2264AC0D1DC7F1FB000F7EEF /* TRNServer.swift in Sources */,
-				2264AC121DC7F20D000F7EEF /* TRNTheMovieDBClient.swift in Sources */,
-				2264AC0A1DC7F1E1000F7EEF /* SESImageView.swift in Sources */,
-				2264AC081DC7F175000F7EEF /* TRNAppDelegate.swift in Sources */,
-				2264AC0E1DC7F1FB000F7EEF /* TRNTorrent.swift in Sources */,
-				2264AC111DC7F20D000F7EEF /* TRNJSONRPCClient.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22B9DCAE18A5D58C003F5056 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22B9DCBF18A5D58C003F5056 /* TransmoteTests.m in Sources */,
+				22EBE3A41DE1010800588FFD /* TRNWindowController.swift in Sources */,
+				22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */,
+				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
+				22EBE38B1DE1000A00588FFD /* ViewController.swift in Sources */,
+				22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */,
+				22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */,
+				22EBE3A31DE1010800588FFD /* TRNTorrent.swift in Sources */,
+				22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */,
+				22EBE3A11DE1010800588FFD /* TRNServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		22B9DCB718A5D58C003F5056 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22B9DC9018A5D58B003F5056 /* Transmote */;
-			targetProxy = 22B9DCB618A5D58C003F5056 /* PBXContainerItemProxy */;
-		};
-		22D10D611913DA5800209A79 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22D10D5C1913DA4300209A79 /* Autoversioning */;
-			targetProxy = 22D10D601913DA5800209A79 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		22B9DC9D18A5D58B003F5056 /* InfoPlist.strings */ = {
+		22EBE38E1DE1000A00588FFD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				22B9DC9E18A5D58B003F5056 /* en */,
+				22EBE38F1DE1000A00588FFD /* Base */,
 			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		22B9DCA318A5D58B003F5056 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22B9DCA418A5D58B003F5056 /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		22B9DCA918A5D58C003F5056 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22B9DCAA18A5D58C003F5056 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		22B9DCBB18A5D58C003F5056 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22B9DCBC18A5D58C003F5056 /* en */,
-			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		22B9DCC018A5D58C003F5056 /* Debug */ = {
+		22EBE3921DE1000A00588FFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		22B9DCC118A5D58C003F5056 /* Release */ = {
+		22EBE3931DE1000A00588FFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
-		22B9DCC318A5D58C003F5056 /* Debug */ = {
+		22EBE3951DE1000A00588FFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9M28MQ9SZC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
-				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
-				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_FILE = Transmote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				OTHER_CODE_SIGN_FLAGS = "--deep";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
-				WRAPPER_EXTENSION = app;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		22B9DCC418A5D58C003F5056 /* Release */ = {
+		22EBE3961DE1000A00588FFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9M28MQ9SZC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
-				INFOPLIST_FILE = "Transmote/Transmote-Info.plist";
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
-				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_FILE = Transmote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				OTHER_CODE_SIGN_FLAGS = "--deep";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		22B9DCC618A5D58C003F5056 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "TransmoteTests/TransmoteTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		22B9DCC718A5D58C003F5056 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Transmote/Transmote-Prefix.pch";
-				INFOPLIST_FILE = "TransmoteTests/TransmoteTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.spotlightkid.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		22D10D5E1913DA4300209A79 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		22D10D5F1913DA4300209A79 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22B9DC8C18A5D58B003F5056 /* Build configuration list for PBXProject "Transmote" */ = {
+		22EBE3801DE1000900588FFD /* Build configuration list for PBXProject "Transmote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22B9DCC018A5D58C003F5056 /* Debug */,
-				22B9DCC118A5D58C003F5056 /* Release */,
+				22EBE3921DE1000A00588FFD /* Debug */,
+				22EBE3931DE1000A00588FFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22B9DCC218A5D58C003F5056 /* Build configuration list for PBXNativeTarget "Transmote" */ = {
+		22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22B9DCC318A5D58C003F5056 /* Debug */,
-				22B9DCC418A5D58C003F5056 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22B9DCC518A5D58C003F5056 /* Build configuration list for PBXNativeTarget "TransmoteTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22B9DCC618A5D58C003F5056 /* Debug */,
-				22B9DCC718A5D58C003F5056 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22D10D5D1913DA4300209A79 /* Build configuration list for PBXAggregateTarget "Autoversioning" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22D10D5E1913DA4300209A79 /* Debug */,
-				22D10D5F1913DA4300209A79 /* Release */,
+				22EBE3951DE1000A00588FFD /* Debug */,
+				22EBE3961DE1000A00588FFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 22B9DC8918A5D58B003F5056 /* Project object */;
+	rootObject = 22EBE37D1DE1000900588FFD /* Project object */;
 }
