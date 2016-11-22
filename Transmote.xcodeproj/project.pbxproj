@@ -18,8 +18,23 @@
 		22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */; };
 		22EBE3A31DE1010800588FFD /* TRNTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* TRNTorrent.swift */; };
 		22EBE3A41DE1010800588FFD /* TRNWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39D1DE1010800588FFD /* TRNWindowController.swift */; };
-		22EBE3AE1DE1017900588FFD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3A91DE1017900588FFD /* Sparkle.framework */; };
-		22EBE3AF1DE1017900588FFD /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3A91DE1017900588FFD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3B91DE44FB100588FFD /* Alamofire.framework */; };
+		22EBE3C21DE44FB100588FFD /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3B91DE44FB100588FFD /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3C31DE44FB100588FFD /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BA1DE44FB100588FFD /* Moya.framework */; };
+		22EBE3C41DE44FB100588FFD /* Moya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BA1DE44FB100588FFD /* Moya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3C51DE44FB100588FFD /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BB1DE44FB100588FFD /* ObjectMapper.framework */; };
+		22EBE3C61DE44FB100588FFD /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BB1DE44FB100588FFD /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3C71DE44FB100588FFD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BC1DE44FB100588FFD /* Result.framework */; };
+		22EBE3C81DE44FB100588FFD /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BC1DE44FB100588FFD /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3C91DE44FB100588FFD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BD1DE44FB100588FFD /* RxCocoa.framework */; };
+		22EBE3CA1DE44FB100588FFD /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BD1DE44FB100588FFD /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3CB1DE44FB100588FFD /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BE1DE44FB100588FFD /* RxMoya.framework */; };
+		22EBE3CC1DE44FB100588FFD /* RxMoya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BE1DE44FB100588FFD /* RxMoya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3CD1DE44FB100588FFD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BF1DE44FB100588FFD /* RxSwift.framework */; };
+		22EBE3CE1DE44FB100588FFD /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3BF1DE44FB100588FFD /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3D11DE44FD600588FFD /* Sparkle.framework */; };
+		22EBE3D31DE44FD600588FFD /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3D11DE44FD600588FFD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE3D41DE4502C00588FFD /* Defaults.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +44,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				22EBE3AF1DE1017900588FFD /* Sparkle.framework in Embed Frameworks */,
+				22EBE3CA1DE44FB100588FFD /* RxCocoa.framework in Embed Frameworks */,
+				22EBE3C41DE44FB100588FFD /* Moya.framework in Embed Frameworks */,
+				22EBE3C81DE44FB100588FFD /* Result.framework in Embed Frameworks */,
+				22EBE3CE1DE44FB100588FFD /* RxSwift.framework in Embed Frameworks */,
+				22EBE3C61DE44FB100588FFD /* ObjectMapper.framework in Embed Frameworks */,
+				22EBE3CC1DE44FB100588FFD /* RxMoya.framework in Embed Frameworks */,
+				22EBE3C21DE44FB100588FFD /* Alamofire.framework in Embed Frameworks */,
+				22EBE3D31DE44FD600588FFD /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,9 +72,17 @@
 		22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTheMovieDBClient.swift; sourceTree = "<group>"; };
 		22EBE39C1DE1010800588FFD /* TRNTorrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTorrent.swift; sourceTree = "<group>"; };
 		22EBE39D1DE1010800588FFD /* TRNWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNWindowController.swift; sourceTree = "<group>"; };
-		22EBE3A91DE1017900588FFD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		22EBE3B21DE3A25D00588FFD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		22EBE3B61DE4482A00588FFD /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		22EBE3B91DE44FB100588FFD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
+		22EBE3BA1DE44FB100588FFD /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/Mac/Moya.framework; sourceTree = "<group>"; };
+		22EBE3BB1DE44FB100588FFD /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/Mac/ObjectMapper.framework; sourceTree = "<group>"; };
+		22EBE3BC1DE44FB100588FFD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		22EBE3BD1DE44FB100588FFD /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
+		22EBE3BE1DE44FB100588FFD /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/Mac/RxMoya.framework; sourceTree = "<group>"; };
+		22EBE3BF1DE44FB100588FFD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
+		22EBE3D11DE44FD600588FFD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		22EBE3D41DE4502C00588FFD /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +90,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22EBE3AE1DE1017900588FFD /* Sparkle.framework in Frameworks */,
+				22EBE3C91DE44FB100588FFD /* RxCocoa.framework in Frameworks */,
+				22EBE3C31DE44FB100588FFD /* Moya.framework in Frameworks */,
+				22EBE3C71DE44FB100588FFD /* Result.framework in Frameworks */,
+				22EBE3CD1DE44FB100588FFD /* RxSwift.framework in Frameworks */,
+				22EBE3C51DE44FB100588FFD /* ObjectMapper.framework in Frameworks */,
+				22EBE3CB1DE44FB100588FFD /* RxMoya.framework in Frameworks */,
+				22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */,
+				22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +135,7 @@
 				22EBE39D1DE1010800588FFD /* TRNWindowController.swift */,
 				22EBE38C1DE1000A00588FFD /* Assets.xcassets */,
 				22EBE38E1DE1000A00588FFD /* Main.storyboard */,
+				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
 				22EBE3911DE1000A00588FFD /* Info.plist */,
 			);
 			path = Transmote;
@@ -108,7 +146,14 @@
 			children = (
 				22EBE3B21DE3A25D00588FFD /* Cartfile */,
 				22EBE3B61DE4482A00588FFD /* Cartfile.resolved */,
-				22EBE3A91DE1017900588FFD /* Sparkle.framework */,
+				22EBE3D11DE44FD600588FFD /* Sparkle.framework */,
+				22EBE3B91DE44FB100588FFD /* Alamofire.framework */,
+				22EBE3BA1DE44FB100588FFD /* Moya.framework */,
+				22EBE3BB1DE44FB100588FFD /* ObjectMapper.framework */,
+				22EBE3BC1DE44FB100588FFD /* Result.framework */,
+				22EBE3BD1DE44FB100588FFD /* RxCocoa.framework */,
+				22EBE3BE1DE44FB100588FFD /* RxMoya.framework */,
+				22EBE3BF1DE44FB100588FFD /* RxSwift.framework */,
 			);
 			name = "Carthage Frameworks";
 			sourceTree = "<group>";
@@ -176,6 +221,7 @@
 			files = (
 				22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */,
 				22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */,
+				22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
