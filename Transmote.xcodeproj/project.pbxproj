@@ -14,9 +14,9 @@
 		22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3971DE1010800588FFD /* SESImageView.swift */; };
 		22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3981DE1010800588FFD /* TRNDefinitions.swift */; };
 		22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */; };
-		22EBE3A11DE1010800588FFD /* TRNServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TRNServer.swift */; };
+		22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TransmissionServer.swift */; };
 		22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */; };
-		22EBE3A31DE1010800588FFD /* TRNTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* TRNTorrent.swift */; };
+		22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* Torrent.swift */; };
 		22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39D1DE1010800588FFD /* MainWindowController.swift */; };
 		22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3B91DE44FB100588FFD /* Alamofire.framework */; };
 		22EBE3C21DE44FB100588FFD /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3B91DE44FB100588FFD /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -35,6 +35,8 @@
 		22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3D11DE44FD600588FFD /* Sparkle.framework */; };
 		22EBE3D31DE44FD600588FFD /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3D11DE44FD600588FFD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE3D41DE4502C00588FFD /* Defaults.plist */; };
+		22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3D61DE4572700588FFD /* SettingsViewController.swift */; };
+		22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,11 +68,11 @@
 		22EBE38F1DE1000A00588FFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22EBE3911DE1000A00588FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22EBE3971DE1010800588FFD /* SESImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SESImageView.swift; sourceTree = "<group>"; };
-		22EBE3981DE1010800588FFD /* TRNDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNDefinitions.swift; sourceTree = "<group>"; };
+		22EBE3981DE1010800588FFD /* TRNDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRNDefinitions.swift; path = Transmote/TRNDefinitions.swift; sourceTree = "<group>"; };
 		22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNJSONRPCClient.swift; sourceTree = "<group>"; };
-		22EBE39A1DE1010800588FFD /* TRNServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNServer.swift; sourceTree = "<group>"; };
+		22EBE39A1DE1010800588FFD /* TransmissionServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransmissionServer.swift; path = Transmote/TransmissionServer.swift; sourceTree = "<group>"; };
 		22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTheMovieDBClient.swift; sourceTree = "<group>"; };
-		22EBE39C1DE1010800588FFD /* TRNTorrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTorrent.swift; sourceTree = "<group>"; };
+		22EBE39C1DE1010800588FFD /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Torrent.swift; path = Transmote/Torrent.swift; sourceTree = "<group>"; };
 		22EBE39D1DE1010800588FFD /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		22EBE3B21DE3A25D00588FFD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		22EBE3B61DE4482A00588FFD /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
@@ -83,6 +85,8 @@
 		22EBE3BF1DE44FB100588FFD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		22EBE3D11DE44FD600588FFD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		22EBE3D41DE4502C00588FFD /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		22EBE3D61DE4572700588FFD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransmissionTarget.swift; path = Transmote/TransmissionTarget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		22EBE37C1DE1000900588FFD = {
 			isa = PBXGroup;
 			children = (
+				22EBE3D81DE45EB400588FFD /* Core */,
 				22EBE3871DE1000A00588FFD /* Transmote */,
 				22EBE3861DE1000A00588FFD /* Products */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
@@ -127,12 +132,10 @@
 				22EBE3881DE1000A00588FFD /* AppDelegate.swift */,
 				22EBE39D1DE1010800588FFD /* MainWindowController.swift */,
 				22EBE38A1DE1000A00588FFD /* MainViewController.swift */,
+				22EBE3D61DE4572700588FFD /* SettingsViewController.swift */,
 				22EBE3971DE1010800588FFD /* SESImageView.swift */,
-				22EBE3981DE1010800588FFD /* TRNDefinitions.swift */,
 				22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */,
-				22EBE39A1DE1010800588FFD /* TRNServer.swift */,
 				22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */,
-				22EBE39C1DE1010800588FFD /* TRNTorrent.swift */,
 				22EBE38C1DE1000A00588FFD /* Assets.xcassets */,
 				22EBE38E1DE1000A00588FFD /* Main.storyboard */,
 				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
@@ -156,6 +159,17 @@
 				22EBE3BF1DE44FB100588FFD /* RxSwift.framework */,
 			);
 			name = "Carthage Frameworks";
+			sourceTree = "<group>";
+		};
+		22EBE3D81DE45EB400588FFD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				22EBE3981DE1010800588FFD /* TRNDefinitions.swift */,
+				22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */,
+				22EBE39A1DE1010800588FFD /* TransmissionServer.swift */,
+				22EBE39C1DE1010800588FFD /* Torrent.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,15 +246,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */,
 				22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */,
 				22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */,
 				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
+				22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */,
 				22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */,
 				22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */,
 				22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */,
-				22EBE3A31DE1010800588FFD /* TRNTorrent.swift in Sources */,
+				22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */,
 				22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */,
-				22EBE3A11DE1010800588FFD /* TRNServer.swift in Sources */,
+				22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

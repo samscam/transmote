@@ -1,18 +1,47 @@
-////
-////  TRNServer.h
-////  Transmote
-////
-////  Created by Sam Easterby-Smith on 08/02/2014.
-////  Copyright (c) 2014 Spotlight Kid. All rights reserved.
-////
-//import Foundation
-//import Cocoa
+//
+//  TransmissionServer.h
+//  Transmote
+//
+//  Created by Sam Easterby-Smith on 08/02/2014.
+//  Copyright (c) 2014 Spotlight Kid. All rights reserved.
+//
+import Foundation
+import Cocoa
+
 //import AFNetworking
 //import AFJSONRPCClient
+
+
+struct TransmissionServer {
+    
+    enum Status{
+        case indeterminate
+        case unreachable
+        case authFailed
+        case connecting
+        case connected
+    }
+    
+    var address: String?
+    var port: String?
+    var rpcPath: String?
+    
+    var username: String?
+    var password: String?
+
+//    var torrents: [TRNTorrent] = []
+//    var torrentDict = [AnyHashable: Any]()
+//    var client: TRNJSONRPCClient?
+    var timer: Timer?
+    
+    var status: Status = .indeterminate
+    var updating = false
+    
+//    var protectionSpace: URLProtectionSpace!
+    
+}
+
 //
-//
-//class TRNServer: NSObject {
-//    
 //    var address: String?
 //    var port: String?
 //    var rpcPath: String?

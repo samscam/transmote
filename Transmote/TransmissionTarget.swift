@@ -1,0 +1,63 @@
+//
+//  TransmissionTarget.swift
+//  Transmote
+//
+//  Created by Sam Easterby-Smith on 27/11/2016.
+//  Copyright © 2016 Sam Easterby-Smith. All rights reserved.
+//
+
+import Foundation
+import Moya
+
+public enum TransmissionTarget {
+    case connect
+    case torrents
+    case addTorrent(URL)
+    case removeTorrents([Torrent])
+    case deleteTorrents([Torrent])
+}
+
+extension TransmissionTarget: TargetType {
+    
+    // These will always be ignored
+    public var baseURL: URL { return URL(string: "http://localhost/")! }
+    public var path: String { return "/rpc/" }
+    
+    // This is JSON/RPC so it will always be POST
+    public var method: Moya.Method { return .post }
+    
+    // And here's the fun part
+    public var parameters: [String: Any]? {
+        let method: String
+        var arguments: [String:Any]?
+        switch self {
+        case .connect:
+            method = "session-get"
+        case .addTorrent(let url):
+            method = "torrent-add"
+            arguments = ["filename":url.absoluteString]
+        case .deleteTorrents(let torrents):
+            method = "torrent-remove"
+            arguments = ["ids": torrents.map{ $0.id }, "delete-local-data": true ]
+        case .removeTorrents(let torrents):
+            method = "torrent-remove"
+            arguments = ["ids": torrents.map{ $0.id }, "delete-local-data": false ]
+        case .torrents:
+            method = "torrent-get"
+        }
+        
+        var payload: [String: Any] = ["method":method]
+        if let arguments = arguments {
+            payload["arguments"] = arguments
+        }
+        return payload
+    }
+    
+    public var sampleData: Data {
+        return "Just can't be bothered".data(using: String.Encoding.utf8)!
+    }
+    
+    public var task: Task {
+        return .request
+    }
+}

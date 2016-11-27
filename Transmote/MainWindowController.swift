@@ -9,27 +9,21 @@
 import Cocoa
 import Sparkle
 
-////import SORelativeDateTransformer
-//
 class MainWindowController: NSWindowController {
     
-    @IBOutlet weak var serverToolbarButton: NSButton!
+    var server: TransmissionServer?
     
-    var settingsPopover: NSPopover!
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
-        settingsPopover = NSPopover()
-        settingsPopover.behavior = NSPopoverBehavior.semitransient
-        settingsPopover.contentViewController = self.storyboard!.instantiateController(withIdentifier: "SettingsPopoverViewController") as? NSViewController
+        switch segue.identifier! {
+        case "SettingsSegue":
+            if let settingsViewController = segue.destinationController as? SettingsViewController {
+                settingsViewController.server = self.server
+            }
+        default:
+            break
+        }
     }
-    
-    @IBAction func serverSettingsToolbarButtonPressed(_ sender: Any) {
-        let toolbarButtonView = self.serverToolbarButton as NSView
-        self.settingsPopover.show(relativeTo: toolbarButtonView.bounds, of: toolbarButtonView, preferredEdge: NSRectEdge.maxY)
-    }
-
 }
 
 //    var server: TRNServer!
@@ -148,27 +142,7 @@ class MainWindowController: NSWindowController {
 //    }
 //// MARK: - Server Settings
 //
-//    override func observeValue(forKeyPath keyPath: String, ofObject object: Any, change: [AnyHashable: Any], context: UnsafeMutableRawPointer) {
-//        if context == serverContext {
-//            if (keyPath == "connected") {
-//                if self.server.connected {
-//                    self.statusBlip.image = UIImage(named: "NSStatusAvailable")!
-//                    self.collectionView!.isHidden = false
-//                }
-//                else {
-//                    self.statusBlip.image = UIImage(named: "NSStatusUnavailable")!
-//                    self.collectionView!.isHidden = true
-//                }
-//                self.sortOutPassiveAlert()
-//            }
-//            return
-//        }
-//        if context == arrayControllerContext {
-//            self.sortOutPassiveAlert()
-//            return
-//        }
-//        super.observeValue(forKeyPath: keyPath, ofObject: object, change: change, context: context)
-//    }
+
 //
 //    func sortOutPassiveAlert() {
 //        if !self.server.connected {
