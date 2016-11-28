@@ -190,10 +190,10 @@
             </objects>
             <point key="canvasLocation" x="74" y="303"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Transmote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="Transmote" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="e3Q-Y6-v5X">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -485,12 +485,12 @@
                 </viewController>
                 <customObject id="ijl-j3-oBr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="274"/>
+            <point key="canvasLocation" x="663" y="185"/>
         </scene>
         <!--Collection View Item-->
         <scene sceneID="ZKi-xH-PjT">
             <objects>
-                <collectionViewItem id="vuX-o6-hR1" sceneMemberID="viewController">
+                <collectionViewItem storyboardIdentifier="TorrentCollectionViewItem" id="vuX-o6-hR1" sceneMemberID="viewController">
                     <box key="view" autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" id="0k7-YZ-0OD" userLabel="Torrent cell template">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -581,7 +581,7 @@
         <!--View Controller-->
         <scene sceneID="s5g-a5-Mf8">
             <objects>
-                <viewController id="M6y-C0-WB3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeletePopover" id="M6y-C0-WB3" sceneMemberID="viewController">
                     <customView key="view" id="6fq-Tf-CAA" userLabel="Delete confirmation">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="112"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -628,7 +628,7 @@
                 </viewController>
                 <customObject id="128-4A-ACM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228" y="1327"/>
+            <point key="canvasLocation" x="646" y="451"/>
         </scene>
     </scenes>
     <resources>
