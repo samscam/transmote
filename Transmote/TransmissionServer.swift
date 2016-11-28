@@ -23,8 +23,9 @@ struct TransmissionServer {
     }
     
     var address: String?
-    var port: String?
-    var rpcPath: String?
+    var port: Int = 9091
+    var rpcPath: String = "transmission/rpc"
+    var useTLS: Bool = false
     
     var username: String?
     var password: String?
@@ -36,8 +37,18 @@ struct TransmissionServer {
     
     var status: Status = .indeterminate
     var updating = false
+    init(address: String){
+        self.address = address
+    }
     
-//    var protectionSpace: URLProtectionSpace!
+    var serverURL: URL? {
+        guard let address = self.address else {
+            return nil
+        }
+        let scheme: String = useTLS ? "https" : "http"
+        let theURL = URL(string: "\(scheme)://\(address):\(self.port)/\(self.rpcPath)")
+        return theURL
+    }
     
 }
 
