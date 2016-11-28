@@ -37,6 +37,7 @@
 		22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE3D41DE4502C00588FFD /* Defaults.plist */; };
 		22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3D61DE4572700588FFD /* SettingsViewController.swift */; };
 		22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */; };
+		22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +88,7 @@
 		22EBE3D41DE4502C00588FFD /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		22EBE3D61DE4572700588FFD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransmissionTarget.swift; path = Transmote/TransmissionTarget.swift; sourceTree = "<group>"; };
+		22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransmissionSession.swift; path = Transmote/TransmissionSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				22EBE3981DE1010800588FFD /* TRNDefinitions.swift */,
+				22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */,
 				22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */,
 				22EBE39A1DE1010800588FFD /* TransmissionServer.swift */,
 				22EBE39C1DE1010800588FFD /* Torrent.swift */,
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */,
+				22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */,
 				22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */,
 				22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */,
 				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
