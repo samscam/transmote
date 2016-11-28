@@ -11,7 +11,16 @@ import Sparkle
 
 class MainWindowController: NSWindowController {
     
-    var server: TransmissionServer?
+    var server = TransmissionServer(address: "drobo5n.local")
+    
+    var session: TransmissionSession?
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        //poke the session
+        session = TransmissionSession(server: server)
+        session?.connect()
+    }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
