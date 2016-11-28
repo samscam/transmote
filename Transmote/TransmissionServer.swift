@@ -13,15 +13,7 @@ import Cocoa
 
 
 struct TransmissionServer {
-    
-    enum Status{
-        case indeterminate
-        case unreachable
-        case authFailed
-        case connecting
-        case connected
-    }
-    
+
     var address: String?
     var port: Int = 9091
     var rpcPath: String = "transmission/rpc"
@@ -30,13 +22,6 @@ struct TransmissionServer {
     var username: String?
     var password: String?
 
-//    var torrents: [TRNTorrent] = []
-//    var torrentDict = [AnyHashable: Any]()
-//    var client: TRNJSONRPCClient?
-    var timer: Timer?
-    
-    var status: Status = .indeterminate
-    var updating = false
     init(address: String){
         self.address = address
     }
@@ -52,24 +37,6 @@ struct TransmissionServer {
     
 }
 
-//
-//    var address: String?
-//    var port: String?
-//    var rpcPath: String?
-//    var username: String?
-//    var password: String?
-//    
-//    var isConnected = false
-//    var torrents: [TRNTorrent] = []
-//    var torrentDict = [AnyHashable: Any]()
-//    var client: TRNJSONRPCClient?
-//    var timer: Timer?
-//    
-//    var connecting = false
-//    var updating = false
-//    var protectionSpace: URLProtectionSpace!
-//    
-//    var connectionContext = "connectionContext"
 //
 //    override init() {
 //        
