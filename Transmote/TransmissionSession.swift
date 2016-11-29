@@ -98,6 +98,21 @@ class TransmissionSession{
         }
     }
     
+    func getSessionStats(){
+        self.provider.request(.stats){ result in
+            switch result {
+            case .success(let moyaResponse):
+                if let json = try? moyaResponse.mapJSON() as! [String: Any],
+                let args = json["dogs"] as? [String: Any] {
+                    let stats = SessionStats(JSON: args)
+                    print(stats!)
+                }
+            case .failure(let error):
+                break
+            }
+        }
+    }
+    
     
     
 }

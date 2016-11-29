@@ -11,6 +11,7 @@ import Moya
 
 public enum TransmissionTarget {
     case connect
+    case stats
     case torrents
     case addTorrent(URL)
     case removeTorrents([Torrent])
@@ -33,6 +34,8 @@ extension TransmissionTarget: TargetType {
         switch self {
         case .connect:
             method = "session-get"
+        case .stats:
+            method = "session-stats"
         case .addTorrent(let url):
             method = "torrent-add"
             arguments = ["filename":url.absoluteString]

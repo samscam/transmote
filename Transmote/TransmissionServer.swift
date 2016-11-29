@@ -5,11 +5,10 @@
 //  Created by Sam Easterby-Smith on 08/02/2014.
 //  Copyright (c) 2014 Spotlight Kid. All rights reserved.
 //
+
 import Foundation
 import Cocoa
-
-//import AFNetworking
-//import AFJSONRPCClient
+import ObjectMapper
 
 
 struct TransmissionServer {
@@ -33,6 +32,19 @@ struct TransmissionServer {
         let scheme: String = useTLS ? "https" : "http"
         let theURL = URL(string: "\(scheme)://\(address):\(self.port)/\(self.rpcPath)")
         return theURL
+    }
+    
+}
+
+struct SessionStats: Mappable {
+    var activeTorrentCount: Int!
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        activeTorrentCount <- map["activeTorrentCount"]
     }
     
 }
