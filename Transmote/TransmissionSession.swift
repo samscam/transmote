@@ -52,18 +52,12 @@ class TransmissionSession{
             
             let endpoint = Endpoint<TransmissionTarget>(URL: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
             
-
-            // Sign all non-authenticating requests with the session id
-            switch target {
-            case .connect:
+            if let sessionId = self.sessionId {
+                return endpoint.adding(newHttpHeaderFields: ["X-Transmission-Session-Id": sessionId])
+            } else {
                 return endpoint
-            default:
-                if let sessionId = self.sessionId {
-                    return endpoint.adding(newHttpHeaderFields: ["X-Transmission-Session-Id": sessionId])
-                } else {
-                    return endpoint
-                }
             }
+
         }
         
         self.provider = MoyaProvider<TransmissionTarget>(endpointClosure: endpointClosure)
