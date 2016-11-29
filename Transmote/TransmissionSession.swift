@@ -74,12 +74,20 @@ class TransmissionSession{
                     if let httpResponse = moyaResponse.response as? HTTPURLResponse, let sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as? String {
                         self.sessionId = sessionId
                         print("Got session Id \(sessionId)")
-                        self.status = .connected
+                        self.connect()
                     }
                 case 200:
                     // All is well with the world
+                    
+                    // NO beware! if you point it at the wrong path it will try for a redirect to the web interface - we should check the payload
                     self.status = .connected
+                    let json = try? moyaResponse.mapJSON()
+                    print(json!)
+                    self.getSessionStats()
                     print("Connected woo!")
+                case 404:
+                    // The path was wrong probably
+                    print("404 - wrong path")
                 default:
                     // Something else happened - I wonder what it was
                     print("Oh dear - status code \(moyaResponse.statusCode)")
