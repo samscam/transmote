@@ -11,7 +11,7 @@ import Sparkle
 
 class MainWindowController: NSWindowController {
     
-    var server = TransmissionServer(address: "drobo5n.local")
+    var server = TransmissionServer(address: "localhost")
     
     var session: TransmissionSession?
     
