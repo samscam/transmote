@@ -11,7 +11,7 @@ import Cocoa
 import ObjectMapper
 
 
-struct TransmissionServer {
+class TransmissionServer {
 
     var address: String?
     var port: Int = 9091
