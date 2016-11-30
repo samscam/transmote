@@ -10,6 +10,8 @@ import Foundation
 
 import Moya
 
+import RxSwift
+
 // A session - which coordinates access to a server and its torrents
 
 public enum SessionError: Swift.Error{
@@ -28,23 +30,33 @@ class TransmissionSession{
         case connected
     }
     
-    var server: TransmissionServer {
+    var server: TransmissionServer? {
         didSet{
+            let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
+                
+                // If we have no url then the provider ain't going to be no use...
+                guard let serverURL = self.server?.serverURL?.absoluteString else {
+                    return MoyaProvider.defaultEndpointMapping(target)
+                }
+                
+                
+                let endpoint = Endpoint<TransmissionTarget>(URL: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
+                
+                if let sessionId = self.sessionId {
+                    return endpoint.adding(newHttpHeaderFields: ["X-Transmission-Session-Id": sessionId])
+                } else {
+                    return endpoint
+                }
+                
+            }
+            
+            self.provider = MoyaProvider<TransmissionTarget>(endpointClosure: endpointClosure)
+            
             connect()
         }
     }
     
-    var status: Status = .indeterminate {
-        didSet{
-            switch status {
-            case .connected:
-                self.startTimers()
-            default:
-                self.stopTimers()
-            }
-        }
-    }
-    
+    var status: Variable<Status> = Variable<Status>(.indeterminate)
     var sessionId: String?
     
     var provider: MoyaProvider<TransmissionTarget>!
@@ -56,39 +68,31 @@ class TransmissionSession{
     
     var updating = false
     
-    init(server: TransmissionServer){
-        self.server = server
+    var disposeBag = DisposeBag()
+    
+    init(){
         
-        let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
-            
-            // If we have no url then the provider ain't going to be no use...
-            guard let serverURL = self.server.serverURL?.absoluteString else {
-                return MoyaProvider.defaultEndpointMapping(target)
+        // Observe our own status to start/stop update timer
+        status.asObservable().subscribe(onNext: { status in
+            print("Status is \(status)")
+            switch status {
+                case .connected:
+                    self.startTimers()
+                default:
+                    self.stopTimers()
             }
-            
-            
-            let endpoint = Endpoint<TransmissionTarget>(URL: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
-            
-            if let sessionId = self.sessionId {
-                return endpoint.adding(newHttpHeaderFields: ["X-Transmission-Session-Id": sessionId])
-            } else {
-                return endpoint
-            }
-
-        }
+        }).addDisposableTo(disposeBag)
         
-        self.provider = MoyaProvider<TransmissionTarget>(endpointClosure: endpointClosure)
     }
     
     // Timers
     
     func startTimers(){
-        self.updateSessionStats()
-        self.updateTorrents()
+
+        self.updateEverything()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { (timer) in
-            self.updateSessionStats()
-            self.updateTorrents()
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { [weak self] (timer) in
+            self?.updateEverything()
         })
 
     }
@@ -98,10 +102,16 @@ class TransmissionSession{
         timer = nil
     }
     
+    func updateEverything(){
+        self.updateSessionStats()
+        self.updateTorrents()
+    }
+    
     // Initial connection
     
     func connect(){
-        self.status = .connecting
+        
+        self.status.value = .connecting
         self.provider.request(.connect){ result in
             switch result {
             case let .success(moyaResponse):
@@ -119,24 +129,24 @@ class TransmissionSession{
                     do {
                         // We should expect to have valid RPC response saying "success"
                         let _ = try moyaResponse.mapJsonRpc()
-                        self.status = .connected
+                        self.status.value = .connected
                         
                     } catch {
                         print("There was an error \(error)")
-                        self.status = .failed(error)
+                        self.status.value = .failed(error)
                     }
                 case 404:
                     // The path was wrong probably
                     print("404 - wrong path")
-                    self.status = .failed(SessionError.badRpcPath)
+                    self.status.value = .failed(SessionError.badRpcPath)
                 default:
                     // Something else happened - I wonder what it was
                     print("Oh dear - status code \(moyaResponse.statusCode)")
-                    self.status = .failed(SessionError.unknownError)
+                    self.status.value = .failed(SessionError.unknownError)
                 }
             case let .failure(error):
                 print(error)
-                self.status = .failed(error)
+                self.status.value = .failed(error)
             }
         }
     }
@@ -156,7 +166,7 @@ class TransmissionSession{
             case .failure(let error):
                 // Network error
                 print(error)
-                break
+                self.status.value = .failed(error)
             }
         }
     }
@@ -177,10 +187,11 @@ class TransmissionSession{
                 }
             case .failure(let error):
                 print(error)
-                break
+                self.status.value = .failed(error)
             }
         }
     }
     
-    
 }
+
+
