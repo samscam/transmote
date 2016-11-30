@@ -23,7 +23,7 @@ class TransmissionSession{
     
     enum Status{
         case indeterminate
-        case failed(SessionError)
+        case failed(Swift.Error)
         case connecting
         case connected
     }
@@ -50,6 +50,7 @@ class TransmissionSession{
     var provider: MoyaProvider<TransmissionTarget>!
     
     var torrents: [Torrent] = []
+    var stats: SessionStats?
     
     var timer: Timer?
     
@@ -82,10 +83,14 @@ class TransmissionSession{
     // Timers
     
     func startTimers(){
-        timer = Timer(fire: Date(), interval: 10, repeats: true, block: { (timer) in
+        self.updateSessionStats()
+        self.updateTorrents()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { (timer) in
             self.updateSessionStats()
-//            self.updateTorrents()
+            self.updateTorrents()
         })
+
     }
     
     func stopTimers(){
@@ -109,35 +114,29 @@ class TransmissionSession{
                         self.connect()
                     }
                 case 200:
-                    // All is well with the world
+                    // Good so far
                     
-                    // NO beware! if you point it at the wrong path it will try for a redirect to the web interface - we should check the payload
-
                     do {
-                        let json = try moyaResponse.mapJSON() as! [String: Any]
-                        if let result = json["result"] as? String, result == "success" {
-                            self.status = .connected
-                            print("Connected woo!")
-                            print(json)
-                            self.updateSessionStats()
-                        } else {
-                            print("looks like it isn't Transmission on the other end...")
-                        }
+                        // We should expect to have valid RPC response saying "success"
+                        let _ = try moyaResponse.mapJsonRpc()
+                        self.status = .connected
                         
                     } catch {
-                        print("Not JSON - we are probably hitting the web interface by mistake")
+                        print("There was an error \(error)")
+                        self.status = .failed(error)
                     }
                 case 404:
                     // The path was wrong probably
                     print("404 - wrong path")
+                    self.status = .failed(SessionError.badRpcPath)
                 default:
                     // Something else happened - I wonder what it was
                     print("Oh dear - status code \(moyaResponse.statusCode)")
-                    self.status = .failed(.unknownError)
+                    self.status = .failed(SessionError.unknownError)
                 }
             case let .failure(error):
                 print(error)
-                self.status = .failed(.networkError(error))
+                self.status = .failed(error)
             }
         }
     }
@@ -149,8 +148,30 @@ class TransmissionSession{
             case .success(let moyaResponse):
                 do {
                     let json = try moyaResponse.mapJsonRpc()
-                    let stats = SessionStats(JSON: json)
-                    print(stats!)
+                    self.stats = SessionStats(JSON: json)
+                } catch {
+                    // RPC or server error
+                    print(error)
+                }
+            case .failure(let error):
+                // Network error
+                print(error)
+                break
+            }
+        }
+    }
+    
+    func updateTorrents(){
+        self.provider.request(.torrents){ result in
+            switch result {
+            case .success(let moyaResponse):
+                do {
+                    let json = try moyaResponse.mapJsonRpc()
+                    self.torrents = (json["torrents"] as! [[String:Any]]).flatMap{ Torrent(JSON:$0) }
+                    for torrent in self.torrents {
+                        var torrent = torrent
+                        print(torrent.derivedMetadata!)
+                    }
                 } catch {
                     print(error)
                 }
@@ -160,7 +181,6 @@ class TransmissionSession{
             }
         }
     }
-    
     
     
 }
