@@ -34,7 +34,16 @@ class TransmissionSession{
         }
     }
     
-    var status: Status = .indeterminate
+    var status: Status = .indeterminate {
+        didSet{
+            switch status {
+            case .connected:
+                self.startTimers()
+            default:
+                self.stopTimers()
+            }
+        }
+    }
     
     var sessionId: String?
     
@@ -69,6 +78,22 @@ class TransmissionSession{
         
         self.provider = MoyaProvider<TransmissionTarget>(endpointClosure: endpointClosure)
     }
+    
+    // Timers
+    
+    func startTimers(){
+        timer = Timer(fire: Date(), interval: 10, repeats: true, block: { (timer) in
+            self.updateSessionStats()
+//            self.updateTorrents()
+        })
+    }
+    
+    func stopTimers(){
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    // Initial connection
     
     func connect(){
         self.status = .connecting
