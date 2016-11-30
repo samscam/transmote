@@ -11,12 +11,19 @@ import Foundation
 import Moya
 
 // A session - which coordinates access to a server and its torrents
+
+public enum SessionError: Swift.Error{
+    case networkError(Moya.Error)
+    case badRpcPath
+    case unknownError
+    case serverError(String)
+}
+
 class TransmissionSession{
     
     enum Status{
         case indeterminate
-        case unreachable
-        case authFailed
+        case failed(SessionError)
         case connecting
         case connected
     }
@@ -80,36 +87,50 @@ class TransmissionSession{
                     // All is well with the world
                     
                     // NO beware! if you point it at the wrong path it will try for a redirect to the web interface - we should check the payload
-                    self.status = .connected
-                    let json = try? moyaResponse.mapJSON()
-                    print(json!)
-                    self.getSessionStats()
-                    print("Connected woo!")
+
+                    do {
+                        let json = try moyaResponse.mapJSON() as! [String: Any]
+                        if let result = json["result"] as? String, result == "success" {
+                            self.status = .connected
+                            print("Connected woo!")
+                            print(json)
+                            self.updateSessionStats()
+                        } else {
+                            print("looks like it isn't Transmission on the other end...")
+                        }
+                        
+                    } catch {
+                        print("Not JSON - we are probably hitting the web interface by mistake")
+                    }
                 case 404:
                     // The path was wrong probably
                     print("404 - wrong path")
                 default:
                     // Something else happened - I wonder what it was
                     print("Oh dear - status code \(moyaResponse.statusCode)")
-                    self.status = .authFailed
+                    self.status = .failed(.unknownError)
                 }
             case let .failure(error):
                 print(error)
-                self.status = .unreachable
+                self.status = .failed(.networkError(error))
             }
         }
     }
     
-    func getSessionStats(){
+    
+    func updateSessionStats(){
         self.provider.request(.stats){ result in
             switch result {
             case .success(let moyaResponse):
-                if let json = try? moyaResponse.mapJSON() as! [String: Any],
-                let args = json["dogs"] as? [String: Any] {
-                    let stats = SessionStats(JSON: args)
+                do {
+                    let json = try moyaResponse.mapJsonRpc()
+                    let stats = SessionStats(JSON: json)
                     print(stats!)
+                } catch {
+                    print(error)
                 }
             case .failure(let error):
+                print(error)
                 break
             }
         }
