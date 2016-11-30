@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-public enum TransmissionTarget {
+enum TransmissionTarget {
     case connect
     case stats
     case torrents
@@ -47,6 +47,7 @@ extension TransmissionTarget: TargetType {
             arguments = ["ids": torrents.map{ $0.id }, "delete-local-data": false ]
         case .torrents:
             method = "torrent-get"
+            arguments = ["fields": ["id", "activityDate", "addedDate", "doneDate", "isFinished", "name", "totalSize", "rateDownload", "rateUpload", "percentDone", "eta"]]
         }
         
         var payload: [String: Any] = ["method":method]
