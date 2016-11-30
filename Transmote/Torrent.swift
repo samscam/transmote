@@ -8,9 +8,119 @@
 //
 
 import Foundation
+import ObjectMapper
 
-public struct Torrent {
-    let id: Int
+struct Torrent: Mappable {
+    
+    // Mappable variables
+    var id: Int!
+    var activityDate: Date?
+    var addedDate: Date?
+    var doneDate: Date?
+    var isFinished: Bool?
+    var eta: Date?
+    var name: String?
+    var rateDownload: Int?
+    var rateUpload: Int?
+    var percentDone: Double?
+    var totalSize: Int?
+    
+    // Calculated variables
+    
+    lazy var derivedMetadata: Metadata? = {
+        return Metadata(from: self.name!)
+        }()
+    
+    init?(map: Map){
+        
+    }
+    
+    mutating func mapping(map: Map){
+        id              <- map["id"]
+        activityDate    <- (map["activityDate"], DateTransform())
+        addedDate       <- (map["addedDate"], DateTransform())
+        doneDate        <- (map["doneDate"], DateTransform())
+        isFinished      <- map["isFinished"]
+        eta             <- (map["eta"], DateTransform())
+        name            <- map["name"]
+        rateDownload    <- map["rateDownload"]
+        rateUpload      <- map["rateUpload"]
+        percentDone     <- map["percentDone"]
+        totalSize       <- map["totalSize"]
+        
+    }
+    
+}
+
+enum TorrentMetadataType{
+    case tv(season: Int?,episode: Int?)
+    case movie(year: Int)
+    case other
+}
+
+struct Metadata {
+    
+    var name: String = ""
+    var type: TorrentMetadataType = .other
+    
+    init?(from rawName: String){
+        
+        self.name = rawName
+        
+        // Clean up dots, underscores
+        var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
+        var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.characters.count), withTemplate: " ")
+        
+        // Clean references to DVD BDRIP and boxset and things
+        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?)\\b", options: .caseInsensitive)
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        
+        // Clean runs of whitespace
+        cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        print("Semi cleaned name: \(semiCleaned)")
+        
+        self.name = semiCleaned
+        
+        // Figure out if we have an episode code or season or year or whatnot
+        let pattern = "^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?\\s?)?(\\d+)(?:(?:ep|episode|[ex]){1}\\s?(\\d+\\b)))|(?:season\\s?(\\d+)))){1,2}"
+        let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        
+        guard let result = regex.firstMatch(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count)) else {
+        // If we can't match the regex then give up, returning the name as cleaned up as we have it
+            return
+        }
+        
+        let title = (semiCleaned as NSString).substring(with: result.rangeAt(1))
+        
+        print("Fully cleaned name: \(title)")
+        self.name = title
+        
+        var year: Int?
+        if !NSEqualRanges(result.rangeAt(2), NSRange(location: NSNotFound, length: 0)) {
+            year = Int((semiCleaned as NSString).substring(with: result.rangeAt(2)))
+        }
+        
+        var season: Int?
+        if !NSEqualRanges(result.rangeAt(3), NSRange(location: NSNotFound, length: 0)) {
+            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(3)))
+        } else if !NSEqualRanges(result.rangeAt(5), NSRange(location: NSNotFound, length: 0)) {
+            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(5)))
+        }
+        
+        var episode: Int?
+        if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
+            episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
+        }
+        
+        if (season != nil || episode != nil) {
+            self.type = .tv(season: season, episode: episode)
+        } else if (year != nil) {
+            self.type = .movie(year: year!)
+        }
+        
+    }
+
 }
 
 //    private(set) var id = ""
@@ -87,45 +197,7 @@ public struct Torrent {
 //        self.didChangeValue(forKey: "bestName")
 //    }
 //
-//    func cleanName() {
-//        var error: Error? = nil
-//            // Clean up dots, underscores
-//        var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
-//        var semiCleaned = cleaner.stringByReplacingMatches(in: self.name, options: [], range: NSRange(location: 0, length: self.name.characters.count), withTemplate: " ")
-//        // Clean references to DVD BDRIP and boxset and things
-//        cleaner = NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?)\\b", options: (error as! NSRegularExpressionCaseInsensitive), error)
-//        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
-//        // Clean runs of whitespace
-//        cleaner = NSRegularExpression(pattern: "\\s+", options: (error as! NSRegularExpressionCaseInsensitive), error)
-//        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
-//        print("Semi cleaned name: \(semiCleaned)")
-//            // Figure out if we have an episode code or season or year or whatnot
-//            //@"^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\bs?(\\d+)[ex](\\d+)))){1,2}";
-//        var pattern = "^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?\\s?)?(\\d+)(?:(?:ep|episode|[ex]){1}\\s?(\\d+\\b)))|(?:season\\s?(\\d+)))){1,2}"
-//        var regex = NSRegularExpression(pattern: pattern, options: (error as! NSRegularExpressionCaseInsensitive), error)
-//        var result = regex.firstMatch(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count))!
-//        if !result {
-//            self.cleanedName = semiCleaned
-//            return
-//        }
-//        var title = (semiCleaned as NSString).substring(with: result.rangeAt(1))
-//        if !NSEqualRanges(result.rangeAt(2), NSRange(location: NSNotFound, length: 0)) {
-//            self.year = (semiCleaned as NSString).substring(with: result.rangeAt(2))
-//        }
-//        if !NSEqualRanges(result.rangeAt(3), NSRange(location: NSNotFound, length: 0)) {
-//            self.season = Int(CInt((semiCleaned as NSString).substring(with: result.rangeAt(3))))
-//        }
-//        else if !NSEqualRanges(result.rangeAt(5), NSRange(location: NSNotFound, length: 0)) {
-//            self.season = Int(CInt((semiCleaned as NSString).substring(with: result.rangeAt(5))))
-//        }
-//
-//        if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
-//            self.episode = Int(CInt((semiCleaned as NSString).substring(with: result.rangeAt(4))))
-//        }
-//        var fullyCleaned = "\(title)"
-//        print("Fully cleaned name: \(fullyCleaned)")
-//        self.cleanedName = fullyCleaned
-//    }
+
 //
 //    func fetchMetadata() {
 //            // Assume if we have a Season or Episode code that it's TV
