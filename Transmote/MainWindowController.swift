@@ -13,13 +13,14 @@ class MainWindowController: NSWindowController {
     
     var server = TransmissionServer(address: "localhost")
     
-    var session: TransmissionSession?
+    var session: TransmissionSession = TransmissionSession()
     
     override func windowDidLoad() {
         super.windowDidLoad()
         //poke the session
-        session = TransmissionSession(server: server)
-        session?.connect()
+        session.server = server
+        
+        
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -27,7 +28,7 @@ class MainWindowController: NSWindowController {
         switch segue.identifier! {
         case "SettingsSegue":
             if let settingsViewController = segue.destinationController as? SettingsViewController {
-                settingsViewController.server = self.server
+                settingsViewController.session = self.session
             }
         default:
             break
