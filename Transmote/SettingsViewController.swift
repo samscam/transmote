@@ -78,25 +78,5 @@ class SettingsViewController: NSViewController {
         }).addDisposableTo(disposeBag)
         
     }
-    //    override func observeValue(forKeyPath keyPath: String, ofObject object: Any, change: [AnyHashable: Any], context: UnsafeMutableRawPointer) {
-    //        if context == serverContext {
-    //            if (keyPath == "connected") {
-    //                if self.server.connected {
-    //                    self.statusBlip.image = UIImage(named: "NSStatusAvailable")!
-    //                    self.collectionView!.isHidden = false
-    //                }
-    //                else {
-    //                    self.statusBlip.image = UIImage(named: "NSStatusUnavailable")!
-    //                    self.collectionView!.isHidden = true
-    //                }
-    //                self.sortOutPassiveAlert()
-    //            }
-    //            return
-    //        }
-    //        if context == arrayControllerContext {
-    //            self.sortOutPassiveAlert()
-    //            return
-    //        }
-    //        super.observeValue(forKeyPath: keyPath, ofObject: object, change: change, context: context)
-    //    }
+
 }
