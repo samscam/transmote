@@ -42,7 +42,9 @@ class SettingsViewController: NSViewController {
         
         // Observe the session status
         
-        session.status.asObservable().subscribe(onNext:{ status in
+        session.status.asObservable()
+            .debounce(0.2, scheduler: MainScheduler.instance)
+            .subscribe(onNext:{ status in
             
             switch status {
             case .connected:
