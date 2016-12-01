@@ -14,18 +14,39 @@ import RxSwift
 
 // A session - which coordinates access to a server and its torrents
 
-public enum SessionError: Swift.Error{
+public enum SessionError: Swift.Error, CustomStringConvertible{
     case networkError(Moya.Error)
     case badRpcPath
-    case unknownError
+    case unknownError(Swift.Error)
     case serverError(String)
+    
+    public var description: String{
+        switch self {
+        case .networkError(let moyaError):
+            switch moyaError {
+            case .underlying(let underlying):
+                return underlying.localizedDescription
+            case .jsonMapping:
+                return "The server returned something other than JSON"
+            default:
+                return "Network error:\n\n\(moyaError.localizedDescription)"
+            }
+            
+        case .badRpcPath:
+            return "Bad RPC path"
+        case .unknownError:
+            return "Unknown error"
+        case .serverError(let str):
+            return "Server error:\n\(str)"
+        }
+    }
 }
 
 class TransmissionSession{
     
     enum Status{
         case indeterminate
-        case failed(Swift.Error)
+        case failed(SessionError)
         case connecting
         case connected
     }
@@ -133,10 +154,15 @@ class TransmissionSession{
                         let _ = try moyaResponse.mapJsonRpc()
                         self.status.value = .connected
                         
-                    } catch {
+                    } catch let error as Moya.Error {
                         print("There was an error \(error)")
+                        self.status.value = .failed(.networkError(error))
+                    } catch let error as SessionError {
                         self.status.value = .failed(error)
+                    } catch {
+                        self.status.value = .failed(.unknownError(error))
                     }
+                    
                 case 404:
                     // The path was wrong probably
                     print("404 - wrong path")
@@ -144,11 +170,12 @@ class TransmissionSession{
                 default:
                     // Something else happened - I wonder what it was
                     print("Oh dear - status code \(moyaResponse.statusCode)")
-                    self.status.value = .failed(SessionError.unknownError)
+                    self.status.value = .failed(SessionError.serverError("Unexpected status code \(moyaResponse.statusCode)"))
+                    
                 }
             case let .failure(error):
                 print(error)
-                self.status.value = .failed(error)
+                self.status.value = .failed(.networkError(error))
             }
         }
     }
@@ -168,7 +195,7 @@ class TransmissionSession{
             case .failure(let error):
                 // Network error
                 print(error)
-                self.status.value = .failed(error)
+                self.status.value = .failed(.networkError(error))
             }
         }
     }
@@ -189,7 +216,7 @@ class TransmissionSession{
                 }
             case .failure(let error):
                 print(error)
-                self.status.value = .failed(error)
+                self.status.value = .failed(.networkError(error))
             }
         }
     }
