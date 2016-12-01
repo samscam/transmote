@@ -108,11 +108,13 @@ class TransmissionSession{
     }
     
     // Initial connection
-    
+    var connectCancellable: Cancellable?
     func connect(){
         
+        connectCancellable?.cancel()
+        
         self.status.value = .connecting
-        self.provider.request(.connect){ result in
+        connectCancellable = self.provider.request(.connect){ result in
             switch result {
             case let .success(moyaResponse):
                 switch moyaResponse.statusCode {
