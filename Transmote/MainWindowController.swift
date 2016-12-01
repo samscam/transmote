@@ -19,7 +19,7 @@ class MainWindowController: NSWindowController {
         super.windowDidLoad()
         //poke the session
         session.server = server
-        
+        (self.contentViewController as! MainViewController).session = session
         
     }
     
