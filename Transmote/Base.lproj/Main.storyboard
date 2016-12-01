@@ -322,8 +322,8 @@
         <scene sceneID="tzs-le-FPc">
             <objects>
                 <viewController storyboardIdentifier="SettingsPopoverViewController" id="LGs-aS-H3y" customClass="SettingsViewController" customModule="Transmote" customModuleProvider="target" sceneMemberID="viewController">
-                    <customView key="view" identifier="ServerSettings" autoresizesSubviews="NO" misplaced="YES" id="E1X-Vz-jvo" userLabel="Preferences">
-                        <rect key="frame" x="0.0" y="0.0" width="305" height="203"/>
+                    <customView key="view" identifier="ServerSettings" autoresizesSubviews="NO" id="E1X-Vz-jvo" userLabel="Preferences">
+                        <rect key="frame" x="0.0" y="0.0" width="305" height="143"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U8H-pn-jAD">
