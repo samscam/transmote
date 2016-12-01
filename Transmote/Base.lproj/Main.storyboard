@@ -199,25 +199,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="vw9-v3-iVI">
-                                <rect key="frame" x="0.0" y="297" width="450" height="5"/>
+                            <box boxType="custom" borderWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="t2x-q9-BVN">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <view key="contentView" id="W0Z-Jf-J0D">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="fillColor" red="0.92812067269999998" green="0.92882484200000004" blue="0.92822974920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </box>
-                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcT-fe-qU0">
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcT-fe-qU0">
                                 <rect key="frame" x="0.0" y="30" width="450" height="269"/>
-                                <clipView key="contentView" drawsBackground="NO" id="KGz-u8-9cn">
-                                    <rect key="frame" x="1" y="1" width="448" height="267"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="KGz-u8-9cn">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="269"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="LSW-tT-MvJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="448" height="267"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="269"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lRJ-jo-tcM">
                                                 <size key="itemSize" width="50" height="50"/>
                                             </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="primaryBackgroundColor" red="0.92812067270278931" green="0.92882484197616577" blue="0.92822974920272827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </collectionView>
                                     </subviews>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ETX-zV-kzD">
                                     <rect key="frame" x="1" y="144" width="233" height="15"/>
@@ -266,12 +271,25 @@
                                     <constraint firstAttribute="width" priority="750" constant="160" id="zWM-Ug-oV9"/>
                                 </constraints>
                             </box>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="vw9-v3-iVI">
+                                <rect key="frame" x="0.0" y="297" width="450" height="5"/>
+                            </box>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="rsf-nu-qAh" userLabel="Bottom Bar">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
                                 <subviews>
-                                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="hj5-gl-9ia">
-                                        <rect key="frame" x="118" y="-183" width="72" height="5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <box boxType="custom" borderType="none" borderWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="RPT-CA-gA8">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
+                                        <view key="contentView" id="5NO-oQ-mSd">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <color key="fillColor" red="0.89488776272167847" green="0.8955705046653748" blue="0.89499350407680489" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </box>
+                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="hj5-gl-9ia">
+                                        <rect key="frame" x="0.0" y="27" width="450" height="5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Ha0-6A-2XR"/>
+                                        </constraints>
                                     </box>
                                     <button verticalHuggingPriority="1000" placeholderIntrinsicWidth="86" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="RfL-YG-JPX">
                                         <rect key="frame" x="20" y="6" width="86" height="17"/>
@@ -290,10 +308,17 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="hj5-gl-9ia" firstAttribute="top" secondItem="rsf-nu-qAh" secondAttribute="top" id="1Je-0d-ikq"/>
+                                    <constraint firstItem="RPT-CA-gA8" firstAttribute="leading" secondItem="rsf-nu-qAh" secondAttribute="leading" id="CrR-sO-0ca"/>
+                                    <constraint firstAttribute="trailing" secondItem="RPT-CA-gA8" secondAttribute="trailing" id="HVn-eA-AUa"/>
+                                    <constraint firstItem="RPT-CA-gA8" firstAttribute="top" secondItem="rsf-nu-qAh" secondAttribute="top" id="Kv6-ZE-JCK"/>
+                                    <constraint firstItem="hj5-gl-9ia" firstAttribute="leading" secondItem="rsf-nu-qAh" secondAttribute="leading" id="SCb-tZ-mep"/>
                                     <constraint firstItem="Zgi-dt-uQh" firstAttribute="centerY" secondItem="rsf-nu-qAh" secondAttribute="centerY" id="YDx-IH-84N"/>
+                                    <constraint firstAttribute="trailing" secondItem="hj5-gl-9ia" secondAttribute="trailing" id="hUd-lb-a6G"/>
                                     <constraint firstAttribute="trailing" secondItem="Zgi-dt-uQh" secondAttribute="trailing" constant="20" id="jb6-ml-huv"/>
                                     <constraint firstItem="RfL-YG-JPX" firstAttribute="centerY" secondItem="rsf-nu-qAh" secondAttribute="centerY" id="rf2-uJ-zFK"/>
                                     <constraint firstItem="RfL-YG-JPX" firstAttribute="leading" secondItem="rsf-nu-qAh" secondAttribute="leading" constant="20" id="sU6-cX-T9D"/>
+                                    <constraint firstAttribute="bottom" secondItem="RPT-CA-gA8" secondAttribute="bottom" id="swR-lY-MHX"/>
                                     <constraint firstAttribute="height" constant="30" id="z44-tW-Ox2"/>
                                 </constraints>
                             </customView>
@@ -302,17 +327,28 @@
                             <constraint firstAttribute="trailing" secondItem="WcT-fe-qU0" secondAttribute="trailing" id="0TX-ko-2Ef"/>
                             <constraint firstAttribute="centerY" secondItem="nGX-eU-cXa" secondAttribute="centerY" constant="11" id="1sv-5X-1vi"/>
                             <constraint firstItem="WcT-fe-qU0" firstAttribute="top" secondItem="vw9-v3-iVI" secondAttribute="bottom" id="2Qt-44-FyY"/>
+                            <constraint firstItem="t2x-q9-BVN" firstAttribute="top" secondItem="e3Q-Y6-v5X" secondAttribute="top" id="6Sf-da-TgK"/>
                             <constraint firstAttribute="centerX" secondItem="nGX-eU-cXa" secondAttribute="centerX" id="8m6-kM-YNR"/>
                             <constraint firstItem="vw9-v3-iVI" firstAttribute="leading" secondItem="e3Q-Y6-v5X" secondAttribute="leading" id="9lp-vp-UaI"/>
                             <constraint firstItem="WcT-fe-qU0" firstAttribute="leading" secondItem="e3Q-Y6-v5X" secondAttribute="leading" id="CdP-KV-MDV"/>
                             <constraint firstAttribute="trailing" secondItem="vw9-v3-iVI" secondAttribute="trailing" id="K2c-p0-JEl"/>
                             <constraint firstAttribute="trailing" secondItem="rsf-nu-qAh" secondAttribute="trailing" id="KI6-iF-NOD"/>
+                            <constraint firstAttribute="trailing" secondItem="t2x-q9-BVN" secondAttribute="trailing" id="ORU-PL-9U4"/>
                             <constraint firstItem="rsf-nu-qAh" firstAttribute="leading" secondItem="e3Q-Y6-v5X" secondAttribute="leading" id="RPU-HK-tmD"/>
                             <constraint firstItem="vw9-v3-iVI" firstAttribute="top" secondItem="e3Q-Y6-v5X" secondAttribute="top" id="asa-uB-A3p"/>
+                            <constraint firstAttribute="bottom" secondItem="t2x-q9-BVN" secondAttribute="bottom" id="mpQ-G2-Pg2"/>
                             <constraint firstAttribute="bottom" secondItem="rsf-nu-qAh" secondAttribute="bottom" id="pS0-Ob-EKf"/>
+                            <constraint firstItem="t2x-q9-BVN" firstAttribute="leading" secondItem="e3Q-Y6-v5X" secondAttribute="leading" id="qhq-Cp-NxV"/>
                             <constraint firstItem="rsf-nu-qAh" firstAttribute="top" secondItem="WcT-fe-qU0" secondAttribute="bottom" id="wN9-zt-vbh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="LSW-tT-MvJ" id="B0c-jD-XQU"/>
+                        <outlet property="collectionViewContainer" destination="WcT-fe-qU0" id="nch-Sx-wua"/>
+                        <outlet property="passiveAlertContainer" destination="nGX-eU-cXa" id="o7b-Mj-3PB"/>
+                        <outlet property="passiveAlertImageView" destination="T7X-xN-jaF" id="cZU-vM-1IW"/>
+                        <outlet property="passiveAlertLabel" destination="LGc-OD-jdz" id="zso-ud-E9A"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -541,7 +577,7 @@
                 </viewController>
                 <customObject id="ijl-j3-oBr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="590.5" y="240"/>
+            <point key="canvasLocation" x="640" y="155"/>
         </scene>
         <!--Collection View Item-->
         <scene sceneID="ZKi-xH-PjT">
