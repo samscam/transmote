@@ -19,10 +19,15 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var statusBlobImageView: NSImageView!
     
     @IBOutlet weak var serverAddressField: NSTextField!
+    
     @IBOutlet weak var portField: NSTextField!
     @IBOutlet weak var rpcPathField: NSTextField!
     @IBOutlet weak var usernameField: NSTextField!
     @IBOutlet weak var passwordField: NSSecureTextField!
+    
+    @IBOutlet weak var rpcPathStack: NSStackView!
+    @IBOutlet weak var usernameStack: NSStackView!
+    @IBOutlet weak var passwordStack: NSStackView!
     
     var disposeBag: DisposeBag = DisposeBag()
 
@@ -38,6 +43,9 @@ class SettingsViewController: NSViewController {
         }
         
         disposeBag = DisposeBag()
+        
+        usernameStack.isHidden = true
+        passwordStack.isHidden = true
         
         
         // Observe the session status
