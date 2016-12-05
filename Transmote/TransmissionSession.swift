@@ -27,13 +27,13 @@ public enum SessionError: Swift.Error, CustomStringConvertible{
             case .underlying(let underlying):
                 return underlying.localizedDescription
             case .jsonMapping:
-                return "The server returned something other than JSON"
+                return "The server returned something other than JSON\n\nProbably a bad RPC path or not a Transmission Server"
             default:
                 return "Network error:\n\n\(moyaError.localizedDescription)"
             }
             
         case .badRpcPath:
-            return "Bad RPC path"
+            return "Bad RPC path or not a Transmission Server"
         case .unknownError:
             return "Unknown error"
         case .serverError(let str):
