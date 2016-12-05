@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
+		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
+		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
 		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
+		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
+		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				22EBE3881DE1000A00588FFD /* AppDelegate.swift */,
 				22EBE39D1DE1010800588FFD /* MainWindowController.swift */,
 				22EBE38A1DE1000A00588FFD /* MainViewController.swift */,
+				2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */,
+				2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */,
 				22EBE3D61DE4572700588FFD /* SettingsViewController.swift */,
 				22EBE3971DE1010800588FFD /* SESImageView.swift */,
 				22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */,
@@ -242,6 +248,7 @@
 			files = (
 				22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */,
 				22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */,
+				2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */,
 				22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +273,7 @@
 				22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */,
 				22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */,
 				22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */,
+				2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

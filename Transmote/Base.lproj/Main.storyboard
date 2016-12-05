@@ -216,9 +216,10 @@
                                         <collectionView id="LSW-tT-MvJ">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="346"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lRJ-jo-tcM">
-                                                <size key="itemSize" width="50" height="50"/>
-                                            </collectionViewFlowLayout>
+                                            <collectionViewGridLayout key="collectionViewLayout" id="Zif-8B-jEB">
+                                                <size key="minimumItemSize" width="250" height="250"/>
+                                                <size key="maximumItemSize" width="250" height="250"/>
+                                            </collectionViewGridLayout>
                                             <color key="primaryBackgroundColor" red="0.92812067270278931" green="0.92882484197616577" blue="0.92822974920272827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </collectionView>
                                     </subviews>
@@ -599,97 +600,6 @@
                 <customObject id="ijl-j3-oBr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="639.5" y="154.5"/>
-        </scene>
-        <!--Collection View Item-->
-        <scene sceneID="ZKi-xH-PjT">
-            <objects>
-                <collectionViewItem storyboardIdentifier="TorrentCollectionViewItem" id="vuX-o6-hR1" sceneMemberID="viewController">
-                    <box key="view" autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" id="0k7-YZ-0OD" userLabel="Torrent cell template">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <view key="contentView" id="qFQ-fZ-afK">
-                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MkD-6g-EvY" customClass="SESImageView">
-                                    <rect key="frame" x="5" y="5" width="440" height="290"/>
-                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="sYy-FS-QUF"/>
-                                </imageView>
-                                <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="KmE-lN-H7f">
-                                    <rect key="frame" x="5" y="5" width="440" height="290"/>
-                                    <view key="contentView" id="STn-3I-x1x">
-                                        <rect key="frame" x="0.0" y="0.0" width="440" height="290"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </view>
-                                    <color key="fillColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                </box>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r3P-G9-hN0">
-                                    <rect key="frame" x="8" y="273" width="434" height="17"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="8Lg-hW-cb9">
-                                        <font key="font" metaFont="systemBold"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETz-Tw-NDK">
-                                    <rect key="frame" x="8" y="37" width="434" height="14"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="nBv-ct-c0n">
-                                        <font key="font" metaFont="smallSystem"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a64-jp-pCG">
-                                    <rect key="frame" x="8" y="257" width="434" height="11"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="HwY-Xl-sbP">
-                                        <font key="font" metaFont="miniSystem"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Ev-JK-VVb">
-                                    <rect key="frame" x="10" y="10" width="430" height="16"/>
-                                    <levelIndicatorCell key="cell" alignment="left" maxValue="1" levelIndicatorStyle="continuousCapacity" id="9fF-o7-0B3"/>
-                                </levelIndicator>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h52-dc-hyc">
-                                    <rect key="frame" x="8" y="130" width="119" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="c7R-7v-QVC">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                            </subviews>
-                        </view>
-                        <constraints>
-                            <constraint firstItem="ETz-Tw-NDK" firstAttribute="leading" secondItem="a64-jp-pCG" secondAttribute="leading" id="0hy-fn-mSt"/>
-                            <constraint firstItem="KmE-lN-H7f" firstAttribute="top" secondItem="0k7-YZ-0OD" secondAttribute="top" constant="5" id="0ye-pf-fje"/>
-                            <constraint firstAttribute="trailing" secondItem="KmE-lN-H7f" secondAttribute="trailing" constant="5" id="21P-Bc-O2T"/>
-                            <constraint firstItem="MkD-6g-EvY" firstAttribute="top" secondItem="0k7-YZ-0OD" secondAttribute="top" constant="5" id="396-i3-JQX"/>
-                            <constraint firstItem="MkD-6g-EvY" firstAttribute="leading" secondItem="0k7-YZ-0OD" secondAttribute="leading" constant="5" id="70X-Dw-tnS"/>
-                            <constraint firstAttribute="bottom" secondItem="KmE-lN-H7f" secondAttribute="bottom" constant="5" id="97z-6U-kN7"/>
-                            <constraint firstItem="a64-jp-pCG" firstAttribute="centerX" secondItem="0k7-YZ-0OD" secondAttribute="centerX" id="IXb-ea-F2g"/>
-                            <constraint firstItem="r3P-G9-hN0" firstAttribute="leading" secondItem="0k7-YZ-0OD" secondAttribute="leading" constant="10" id="Lta-el-h3o"/>
-                            <constraint firstItem="a64-jp-pCG" firstAttribute="trailing" secondItem="r3P-G9-hN0" secondAttribute="trailing" id="VPG-jJ-CIE"/>
-                            <constraint firstItem="KmE-lN-H7f" firstAttribute="leading" secondItem="0k7-YZ-0OD" secondAttribute="leading" constant="5" id="VwD-y9-wsG"/>
-                            <constraint firstItem="a64-jp-pCG" firstAttribute="top" secondItem="r3P-G9-hN0" secondAttribute="bottom" constant="5" id="W9Y-OA-kUh"/>
-                            <constraint firstAttribute="bottom" secondItem="MkD-6g-EvY" secondAttribute="bottom" constant="5" id="WvZ-rz-Mu9"/>
-                            <constraint firstAttribute="bottom" secondItem="0Ev-JK-VVb" secondAttribute="bottom" constant="10" id="Xxz-Sk-kKg"/>
-                            <constraint firstAttribute="trailing" secondItem="MkD-6g-EvY" secondAttribute="trailing" constant="5" id="YdP-nr-F4H"/>
-                            <constraint firstItem="r3P-G9-hN0" firstAttribute="top" secondItem="0k7-YZ-0OD" secondAttribute="top" constant="10" id="Z9H-DQ-adY"/>
-                            <constraint firstItem="r3P-G9-hN0" firstAttribute="leading" secondItem="a64-jp-pCG" secondAttribute="leading" id="hnb-qs-ZPv"/>
-                            <constraint firstItem="ETz-Tw-NDK" firstAttribute="leading" secondItem="0Ev-JK-VVb" secondAttribute="leading" id="mVc-Nm-8GM"/>
-                            <constraint firstItem="ETz-Tw-NDK" firstAttribute="trailing" secondItem="0Ev-JK-VVb" secondAttribute="trailing" id="paz-oD-ZUp"/>
-                            <constraint firstItem="ETz-Tw-NDK" firstAttribute="trailing" secondItem="a64-jp-pCG" secondAttribute="trailing" id="wsc-3C-jr2"/>
-                            <constraint firstItem="0Ev-JK-VVb" firstAttribute="top" secondItem="ETz-Tw-NDK" secondAttribute="bottom" constant="11" id="zTD-SB-ouy"/>
-                        </constraints>
-                        <color key="fillColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
-                    </box>
-                </collectionViewItem>
-                <customObject id="KsW-Sg-SYH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="584" y="750"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="s5g-a5-Mf8">
