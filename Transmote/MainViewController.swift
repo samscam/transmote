@@ -6,11 +6,11 @@
 //  Copyright © 2016 Sam Easterby-Smith. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 import RxSwift
 import Moya
 
-class MainViewController: NSViewController {
+class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate {
 
     var session: TransmissionSession? {
         didSet{
@@ -29,6 +29,14 @@ class MainViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Register cell
+        let nib = NSNib(nibNamed: "TorrentCollectionViewItem", bundle: nil)
+        self.collectionView.register(nib, forItemWithIdentifier: "TorrentCell")
+        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        
         bindToSession()
     }
 
@@ -65,6 +73,22 @@ class MainViewController: NSViewController {
                 }
                 
             }).addDisposableTo(disposeBag)
+        
+        session.torrents.asDriver().drive(onNext: { _ in
+            self.collectionView.reloadData()
+        }).addDisposableTo(disposeBag)
+        
     }
+    
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.session?.torrents.value.count ?? 0
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        let item = self.collectionView.makeItem(withIdentifier: "TorrentCell", for: indexPath) as! TorrentCollectionViewItem
+        item.torrent = self.session?.torrents.value[indexPath.item]
+        return item
+    }
+    
 }
 
