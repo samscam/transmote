@@ -82,7 +82,7 @@ class TransmissionSession{
     
     var provider: MoyaProvider<TransmissionTarget>!
     
-    var torrents: [Torrent] = []
+    var torrents: Variable<[Torrent]> = Variable([])
     var stats: SessionStats?
     
     var timer: Timer?
@@ -206,11 +206,20 @@ class TransmissionSession{
             case .success(let moyaResponse):
                 do {
                     let json = try moyaResponse.mapJsonRpc()
-                    self.torrents = (json["torrents"] as! [[String:Any]]).flatMap{ Torrent(JSON:$0) }
-                    for torrent in self.torrents {
-                        var torrent = torrent
-                        print(torrent.derivedMetadata!)
+                    
+                    self.torrents.value = (json["torrents"] as! [[String:Any]]).flatMap{
+                        guard let id = $0["id"] as? Int else {
+                            return nil
+                        }
+                        if let existing = self.torrents.value.element(matching: id) {
+                            // Update existing torrent
+                            return existing.update(JSON:$0)
+                        } else {
+                            // Create a new one
+                            return Torrent(JSON:$0)
+                        }
                     }
+ 
                 } catch {
                     print(error)
                 }
@@ -223,4 +232,8 @@ class TransmissionSession{
     
 }
 
-
+extension Collection where Iterator.Element: Hashable {
+    func element(matching hash: Int) -> Iterator.Element? {
+        return self.first(where: { $0.hashValue == hash })
+    }
+}
