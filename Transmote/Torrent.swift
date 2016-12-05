@@ -10,7 +10,15 @@
 import Foundation
 import ObjectMapper
 
-struct Torrent: Mappable {
+enum TorrentStatus{
+    case fetchingMetadata
+    case downloading
+    case seeding
+    case stalled
+    case complete
+}
+
+struct Torrent: Mappable, Equatable, Hashable {
     
     // Mappable variables
     var id: Int!
@@ -18,18 +26,39 @@ struct Torrent: Mappable {
     var addedDate: Date?
     var doneDate: Date?
     var isFinished: Bool?
+    var isStalled: Bool?
     var eta: Date?
     var name: String?
     var rateDownload: Int?
     var rateUpload: Int?
     var percentDone: Double?
     var totalSize: Int?
+    var rawStatus: Int?
     
     // Calculated variables
     
     lazy var derivedMetadata: Metadata? = {
         return Metadata(from: self.name!)
         }()
+    
+    var progress: Double { return (percentDone ?? 0.0) * 100.0 }
+    
+    lazy var bestName: String = {
+        if let derived = self.derivedMetadata {
+            return derived.name
+        } else {
+            return self.name ?? "Unknown"
+        }
+    }()
+    
+    var status: TorrentStatus {
+        if self.percentDone! == 1 { return .complete }
+        if self.isFinished! { return .complete }
+        if self.isStalled! { return .stalled }
+        return .downloading
+    }
+    
+    // Initialisation and parsing
     
     init?(map: Map){
         
@@ -41,16 +70,29 @@ struct Torrent: Mappable {
         addedDate       <- (map["addedDate"], DateTransform())
         doneDate        <- (map["doneDate"], DateTransform())
         isFinished      <- map["isFinished"]
+        isStalled       <- map["isStalled"]
         eta             <- (map["eta"], DateTransform())
         name            <- map["name"]
         rateDownload    <- map["rateDownload"]
         rateUpload      <- map["rateUpload"]
         percentDone     <- map["percentDone"]
         totalSize       <- map["totalSize"]
+        rawStatus       <- map["status"]
         
     }
     
+    func update(JSON:[String: Any]) -> Torrent {
+        return Mapper<Torrent>().map(JSON: JSON, toObject: self)
+    }
+    
+    var hashValue: Int { return id! }
 }
+
+func == (lhs: Torrent, rhs: Torrent) -> Bool {
+    return (lhs.id! == rhs.id!)
+}
+
+
 
 enum TorrentMetadataType{
     case tv(season: Int?,episode: Int?)
@@ -78,7 +120,6 @@ struct Metadata {
         // Clean runs of whitespace
         cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
-        print("Semi cleaned name: \(semiCleaned)")
         
         self.name = semiCleaned
         
@@ -92,8 +133,7 @@ struct Metadata {
         }
         
         let title = (semiCleaned as NSString).substring(with: result.rangeAt(1))
-        
-        print("Fully cleaned name: \(title)")
+
         self.name = title
         
         var year: Int?
@@ -118,6 +158,10 @@ struct Metadata {
         } else if (year != nil) {
             self.type = .movie(year: year!)
         }
+        
+        print("Raw name: \(rawName)")
+        print("... converted to: \(self.name)")
+        
         
     }
 
