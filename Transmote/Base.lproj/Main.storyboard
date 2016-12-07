@@ -216,7 +216,7 @@
                                         <collectionView id="LSW-tT-MvJ">
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="346"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lcl-Jw-2jJ">
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="poU-8T-koY">
                                                 <size key="itemSize" width="200" height="200"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" red="0.92812067270278931" green="0.92882484197616577" blue="0.92822974920272827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
