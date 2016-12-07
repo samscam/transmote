@@ -61,10 +61,10 @@ class TransmissionSession{
                 }
                 
                 
-                let endpoint = Endpoint<TransmissionTarget>(URL: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
+                let endpoint = Endpoint<TransmissionTarget>(url: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
                 
                 if let sessionId = self.sessionId {
-                    return endpoint.adding(newHttpHeaderFields: ["X-Transmission-Session-Id": sessionId])
+                    return endpoint.adding(newHTTPHeaderFields: ["X-Transmission-Session-Id": sessionId])
                 } else {
                     return endpoint
                 }
