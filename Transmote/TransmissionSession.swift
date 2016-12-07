@@ -206,7 +206,7 @@ class TransmissionSession{
             case .success(let moyaResponse):
                 do {
                     let json = try moyaResponse.mapJsonRpc()
-                    
+                    /*
                     self.torrents.value = (json["torrents"] as! [[String:Any]]).flatMap{
                         guard let id = $0["id"] as? Int else {
                             return nil
@@ -219,7 +219,37 @@ class TransmissionSession{
                             return Torrent(JSON:$0)
                         }
                     }
- 
+                    */
+                    
+                    var torrentsCpy = self.torrents.value
+                    
+                    let updatedTorrents: [Torrent] = (json["torrents"] as! [[String:Any]]).flatMap{
+                        guard let id = $0["id"] as? Int else {
+                            return nil
+                        }
+                        if let existing = torrentsCpy.element(matching: id) {
+                            // Update existing torrent
+                            return existing.update(JSON:$0)
+                        } else {
+                            // Create a new one
+                            return Torrent(JSON:$0)
+                        }
+                    }
+                    
+                    for t in updatedTorrents {
+                        // add new ones
+                        if self.torrents.value.index(of: t) == nil {
+                            self.torrents.value.append(t)
+                        }
+                    }
+                    
+                    torrentsCpy = self.torrents.value
+                    for t in self.torrents.value {
+                        if updatedTorrents.index(of: t) == nil ,
+                            let index = self.torrents.value.index(of: t){
+                            self.torrents.value.remove(at: index)
+                        }
+                    }
                 } catch {
                     print(error)
                 }
