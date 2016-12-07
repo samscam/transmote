@@ -12,6 +12,7 @@ import QuartzCore
 
 import RxSwift
 import RxCocoa
+import ProgressKit
 
 class TorrentCollectionViewItem: NSCollectionViewItem {
     
@@ -20,15 +21,17 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     @IBOutlet weak var episodeLabel: NSTextField!
     
     @IBOutlet weak var progressStatusLabel: NSTextField!
-    @IBOutlet weak var progressBar: NSProgressIndicator!
+    @IBOutlet weak var progressView: CircularProgressView!
     
 //    var hueFilter: CIFilter = CIFilter(name: "CIFalseColor" , withInputParameters:["inputColor0":CIColor(red:0,green:0,blue:0), "inputColor1":CIColor(red:1,green:1,blue:1)] )!
     var hueFilter: CIFilter = CIFilter(name: "CIHueAdjust" , withInputParameters:["inputAngle":0] )!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        progressBar.controlTint = .blueControlTint
-        progressBar.contentFilters = [hueFilter]
+        progressView.strokeWidth = 3
+        progressView.background = NSColor.clear
+        progressView.foreground = NSColor.white
+        
     }
     
     var disposeBag = DisposeBag()
@@ -54,7 +57,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
             
             torrent.percentDone.subscribe(onNext: { newValue in
-                self.progressBar.doubleValue = newValue * 100
+                self.progressView.progress = CGFloat(newValue)
             }).addDisposableTo(disposeBag)
             
 

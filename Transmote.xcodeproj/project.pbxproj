@@ -10,6 +10,8 @@
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
+		2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; };
+		2247B7C61DF83259001B4C95 /* ProgressKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
@@ -58,6 +60,7 @@
 				22EBE3CC1DE44FB100588FFD /* RxMoya.framework in Embed Frameworks */,
 				22EBE3C21DE44FB100588FFD /* Alamofire.framework in Embed Frameworks */,
 				22EBE3D31DE44FD600588FFD /* Sparkle.framework in Embed Frameworks */,
+				2247B7C61DF83259001B4C95 /* ProgressKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +71,7 @@
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
+		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				22EBE3CB1DE44FB100588FFD /* RxMoya.framework in Frameworks */,
 				22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */,
 				22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */,
+				2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +164,7 @@
 			children = (
 				22EBE3B21DE3A25D00588FFD /* Cartfile */,
 				22EBE3B61DE4482A00588FFD /* Cartfile.resolved */,
+				2247B7C41DF83259001B4C95 /* ProgressKit.framework */,
 				22EBE3D11DE44FD600588FFD /* Sparkle.framework */,
 				22EBE3B91DE44FB100588FFD /* Alamofire.framework */,
 				22EBE3BA1DE44FB100588FFD /* Moya.framework */,

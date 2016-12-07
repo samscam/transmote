@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C60b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
@@ -14,67 +14,73 @@
             <connections>
                 <outlet property="episodeLabel" destination="s6N-yI-x06" id="Dal-8q-yOW"/>
                 <outlet property="imageView" destination="ts4-vb-TLb" id="x0i-Sl-kZA"/>
-                <outlet property="progressBar" destination="TSY-3w-sh8" id="5Vk-JY-MMy"/>
                 <outlet property="progressStatusLabel" destination="VZS-1p-7Ih" id="wJ1-PY-Vt7"/>
+                <outlet property="progressView" destination="gxl-JK-iJZ" id="4qg-Oc-kbF"/>
                 <outlet property="titleLabel" destination="o5B-Qk-Z9k" id="X22-Kk-CgL"/>
                 <outlet property="view" destination="afG-HD-eFG" id="RDU-Ei-FYK"/>
             </connections>
             <point key="canvasLocation" x="584" y="750"/>
         </collectionViewItem>
         <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" id="afG-HD-eFG" userLabel="Torrent cell template">
-            <rect key="frame" x="0.0" y="0.0" width="310" height="134"/>
+            <rect key="frame" x="0.0" y="0.0" width="310" height="226"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" id="fse-0A-fHe">
-                <rect key="frame" x="0.0" y="0.0" width="310" height="134"/>
+                <rect key="frame" x="0.0" y="0.0" width="310" height="226"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ts4-vb-TLb">
-                        <rect key="frame" x="5" y="5" width="300" height="124"/>
+                        <rect key="frame" x="5" y="5" width="300" height="216"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Magnet" id="7Nm-Ys-2Ll"/>
                     </imageView>
-                    <box autoresizesSubviews="NO" borderType="line" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
-                        <rect key="frame" x="2" y="1" width="306" height="130"/>
+                    <box autoresizesSubviews="NO" boxType="custom" borderType="bezel" cornerRadius="8" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
+                        <rect key="frame" x="5" y="5" width="300" height="216"/>
                         <view key="contentView" id="TkE-v7-kSP">
-                            <rect key="frame" x="1" y="1" width="304" height="128"/>
+                            <rect key="frame" x="1" y="1" width="298" height="214"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </view>
+                        <color key="borderColor" red="0.64640066964285714" green="0.64640066964285714" blue="0.64640066964285714" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <color key="fillColor" red="0.68925781249999996" green="0.68925781249999996" blue="0.68925781249999996" alpha="0.68659220950704225" colorSpace="calibratedRGB"/>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-Qk-Z9k">
-                        <rect key="frame" x="8" y="107" width="294" height="17"/>
+                        <rect key="frame" x="8" y="199" width="294" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="AS0-KO-qaH">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="gxl-JK-iJZ" customClass="CircularProgressView" customModule="ProgressKit">
+                        <rect key="frame" x="105" y="41" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="MPn-Fe-PGJ"/>
+                            <constraint firstAttribute="width" constant="100" id="X40-qK-vYW"/>
+                        </constraints>
+                    </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZS-1p-7Ih">
-                        <rect key="frame" x="11" y="20" width="288" height="11"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="bZO-DP-WVJ">
-                            <font key="font" metaFont="system" size="9"/>
+                        <rect key="frame" x="18" y="10" width="274" height="11"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="bZO-DP-WVJ">
+                            <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6N-yI-x06">
-                        <rect key="frame" x="8" y="91" width="294" height="11"/>
+                        <rect key="frame" x="8" y="183" width="294" height="11"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="EIP-b8-MbQ">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="TSY-3w-sh8">
-                        <rect key="frame" x="10" y="4" width="290" height="20"/>
-                    </progressIndicator>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="TSY-3w-sh8" firstAttribute="trailing" secondItem="VZS-1p-7Ih" secondAttribute="trailing" constant="3" id="CPu-uz-0hz"/>
-                    <constraint firstItem="VZS-1p-7Ih" firstAttribute="leading" secondItem="TSY-3w-sh8" secondAttribute="leading" constant="3" id="Hgo-dZ-Qhs"/>
-                    <constraint firstItem="VZS-1p-7Ih" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6N-yI-x06" secondAttribute="bottom" constant="40" id="cHc-gs-XkA"/>
-                    <constraint firstItem="TSY-3w-sh8" firstAttribute="top" secondItem="VZS-1p-7Ih" secondAttribute="bottom" constant="-3" id="iCW-ij-nNo"/>
-                    <constraint firstItem="TSY-3w-sh8" firstAttribute="leading" secondItem="fse-0A-fHe" secondAttribute="leading" constant="10" id="pgS-x0-cFi"/>
-                    <constraint firstAttribute="bottom" secondItem="TSY-3w-sh8" secondAttribute="bottom" constant="5" id="rDu-Bi-gh0"/>
-                    <constraint firstAttribute="trailing" secondItem="TSY-3w-sh8" secondAttribute="trailing" constant="10" id="rkz-59-BFb"/>
+                    <constraint firstItem="VZS-1p-7Ih" firstAttribute="leading" secondItem="fse-0A-fHe" secondAttribute="leading" constant="20" id="1dF-SX-SNJ"/>
+                    <constraint firstAttribute="bottom" secondItem="VZS-1p-7Ih" secondAttribute="bottom" constant="10" id="QfW-uM-wZg"/>
+                    <constraint firstAttribute="trailing" secondItem="VZS-1p-7Ih" secondAttribute="trailing" constant="20" id="UQI-qD-FFg"/>
+                    <constraint firstItem="VZS-1p-7Ih" firstAttribute="top" secondItem="gxl-JK-iJZ" secondAttribute="bottom" constant="20" id="XYT-gq-Dxh"/>
+                    <constraint firstItem="gxl-JK-iJZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6N-yI-x06" secondAttribute="bottom" constant="20" id="buS-2b-S7b"/>
+                    <constraint firstItem="gxl-JK-iJZ" firstAttribute="centerX" secondItem="fse-0A-fHe" secondAttribute="centerX" id="gzy-eU-Nuy"/>
+                    <constraint firstItem="VZS-1p-7Ih" firstAttribute="centerX" secondItem="fse-0A-fHe" secondAttribute="centerX" id="sNN-JV-5c7"/>
                 </constraints>
             </view>
             <constraints>
@@ -94,6 +100,7 @@
                 <constraint firstItem="WM3-nd-Dig" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="5" id="wB4-XD-r4h"/>
             </constraints>
             <color key="fillColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
+            <point key="canvasLocation" x="132" y="214"/>
         </box>
     </objects>
     <resources>
