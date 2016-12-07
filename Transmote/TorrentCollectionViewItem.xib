@@ -17,6 +17,7 @@
                 <outlet property="progressStatusLabel" destination="VZS-1p-7Ih" id="wJ1-PY-Vt7"/>
                 <outlet property="progressView" destination="gxl-JK-iJZ" id="4qg-Oc-kbF"/>
                 <outlet property="titleLabel" destination="o5B-Qk-Z9k" id="X22-Kk-CgL"/>
+                <outlet property="torrentImageView" destination="ts4-vb-TLb" id="Zah-Th-HrS"/>
                 <outlet property="view" destination="afG-HD-eFG" id="RDU-Ei-FYK"/>
             </connections>
             <point key="canvasLocation" x="584" y="750"/>
@@ -39,7 +40,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </view>
                         <color key="borderColor" red="0.64640066964285714" green="0.64640066964285714" blue="0.64640066964285714" alpha="0.5" colorSpace="calibratedRGB"/>
-                        <color key="fillColor" red="0.68925781249999996" green="0.68925781249999996" blue="0.68925781249999996" alpha="0.68659220950704225" colorSpace="calibratedRGB"/>
+                        <color key="fillColor" red="0.0035435267857142857" green="0.0035435267857142857" blue="0.0035435267857142857" alpha="0.68659220950704225" colorSpace="calibratedRGB"/>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-Qk-Z9k">
                         <rect key="frame" x="8" y="199" width="294" height="17"/>

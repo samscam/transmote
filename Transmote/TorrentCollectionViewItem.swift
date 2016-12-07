@@ -52,12 +52,17 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             
             torrent.name.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
             torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
+            torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
+//            torrent.image.bindTo(torrentImageView.rx.image).addDisposableTo(disposeBag)
             
             torrent.percentDone.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
                 
             }).addDisposableTo(disposeBag)
             
+            torrent.metadata.subscribe(onNext: { newValue in
+                print(newValue)
+            }).addDisposableTo(disposeBag)
 
             torrent.status.subscribe(onNext: { status in
                 self.progressStatusLabel.stringValue = status.description
