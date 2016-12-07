@@ -12,7 +12,7 @@ import Moya
 
 enum TMDBTarget {
     case serviceConfiguration
-    case tvShowMetadata(showName: String, year: Int?)
+    case tvShowMetadata(showName: String)
     case tvShowDetails(showID:String, season:Int, episode:Int)
     case movieMetadata(movieName: String, year: Int?)
     case image(path: String)
@@ -36,7 +36,7 @@ extension TMDBTarget: TargetType {
         case .serviceConfiguration:
             return "configuration"
         case .image(let path):
-            return "w300/" + path
+            return "w500/" + path
         case .movieMetadata:
             return "search/movie"
         case .tvShowDetails(let showID, let season, let episode):
@@ -61,11 +61,8 @@ extension TMDBTarget: TargetType {
                 params["year"] = year
             }
 
-        case .tvShowMetadata(let showName, let year):
+        case .tvShowMetadata(let showName):
             params["query"] = showName
-            if let year = year {
-                params["year"] = year
-            }
         }
         return params
     }
