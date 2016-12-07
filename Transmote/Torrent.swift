@@ -9,75 +9,113 @@
 
 import Foundation
 import ObjectMapper
+import RxSwift
+import RxCocoa
 
-enum TorrentStatus{
-    case fetchingMetadata
-    case downloading
-    case seeding
-    case stalled
-    case complete
+
+enum TorrentStatus: Int, CustomStringConvertible{
+    case stopped = 0
+    case checkWait = 1
+    case check = 2
+    case downloadWait = 3
+    case download = 4
+    case seedWait = 5
+    case seed = 6
+    
+    var description: String {
+        switch self {
+        case .stopped:
+            return "Stopped"
+        case .checkWait:
+            return "Waiting to check files"
+        case .check:
+            return  "Checking files"
+        case .downloadWait:
+            return  "Queued for download"
+        case .download:
+            return "Downloading"
+        case .seedWait:
+            return "Queued for seeding"
+        case .seed:
+            return "Seeding"
+        }
+    }
 }
 
-struct Torrent: Mappable, Equatable, Hashable {
+class Torrent: Mappable, Equatable, Hashable {
     
     // Mappable variables
     var id: Int!
-    var activityDate: Date?
-    var addedDate: Date?
-    var doneDate: Date?
-    var isFinished: Bool?
-    var isStalled: Bool?
-    var eta: Date?
-    var name: String?
-    var rateDownload: Int?
-    var rateUpload: Int?
-    var percentDone: Double?
-    var totalSize: Int?
-    var rawStatus: Int?
+    
+    private let _activityDate = Variable<Date?>(nil)
+    var activityDate: Observable<Date?> { return _activityDate.asObservable() }
+    
+    private let _addedDate = Variable<Date?>(nil)
+    var addedDate: Observable<Date?> { return _addedDate.asObservable() }
+    
+    private let _doneDate = Variable<Date?>(nil)
+    var doneDate: Observable<Date?> { return _doneDate.asObservable() }
+    
+    private let _isFinished = Variable<Bool>(false)
+    var isFinished: Observable<Bool> { return _isFinished.asObservable() }
+    
+    private let _isStalled = Variable<Bool>(false)
+    var isStalled: Observable<Bool> { return _isStalled.asObservable() }
+    
+    private let _eta = Variable<Date?>(nil)
+    var eta: Observable<Date?> { return _eta.asObservable() }
+    
+    private let _name = Variable<String>("")
+    var name: Observable<String> { return _name.asObservable() }
+    
+    private let _rateDownload = Variable<Int>(0)
+    var rateDownload: Observable<Int> { return _rateDownload.asObservable() }
+    
+    private let _rateUpload = Variable<Int>(0)
+    var rateUpload: Observable<Int> { return _rateUpload.asObservable() }
+    
+    private let _percentDone = Variable<Double>(0)
+    var percentDone: Observable<Double> { return _percentDone.asObservable() }
+    
+    private let _totalSize = Variable<Int>(0)
+    var totalSize: Observable<Int> { return _totalSize.asObservable() }
+    
+    private let _rawStatus = Variable<Int>(0)
+    var rawStatus: Observable<Int> { return _rawStatus.asObservable() }
+    
     
     // Calculated variables
     
-    lazy var derivedMetadata: Metadata? = {
-        return Metadata(from: self.name!)
-        }()
+    var derivedMetadata: Observable<Metadata> { return name.map{ return Metadata(from: $0) } }
     
-    var progress: Double { return (percentDone ?? 0.0) * 100.0 }
+    var bestName: Observable<String> { return derivedMetadata.map{ $0.name } }
     
-    lazy var bestName: String = {
-        if let derived = self.derivedMetadata {
-            return derived.name
-        } else {
-            return self.name ?? "Unknown"
+    
+    var status: Observable<TorrentStatus> { return self.rawStatus.map{ rawValue in
+        return TorrentStatus(rawValue: rawValue)!
         }
-    }()
-    
-    var status: TorrentStatus {
-        if self.percentDone! == 1 { return .complete }
-        if self.isFinished! { return .complete }
-        if self.isStalled! { return .stalled }
-        return .downloading
     }
     
     // Initialisation and parsing
     
-    init?(map: Map){
+    required init?(map: Map){
         
     }
     
-    mutating func mapping(map: Map){
-        id              <- map["id"]
-        activityDate    <- (map["activityDate"], DateTransform())
-        addedDate       <- (map["addedDate"], DateTransform())
-        doneDate        <- (map["doneDate"], DateTransform())
-        isFinished      <- map["isFinished"]
-        isStalled       <- map["isStalled"]
-        eta             <- (map["eta"], DateTransform())
-        name            <- map["name"]
-        rateDownload    <- map["rateDownload"]
-        rateUpload      <- map["rateUpload"]
-        percentDone     <- map["percentDone"]
-        totalSize       <- map["totalSize"]
-        rawStatus       <- map["status"]
+    func mapping(map: Map){
+        id        <- map["id"]
+        _activityDate.value    <- (map["activityDate"], DateTransform())
+        _addedDate.value       <- (map["addedDate"], DateTransform())
+        _doneDate.value        <- (map["doneDate"], DateTransform())
+        _isFinished.value      <- map["isFinished"]
+        _isStalled.value       <- map["isStalled"]
+        _eta.value             <- (map["eta"], DateTransform())
+        _name.value            <- map["name"]
+        _rateDownload.value    <- map["rateDownload"]
+        _rateUpload.value      <- map["rateUpload"]
+        _percentDone.value     <- map["percentDone"]
+        _totalSize.value       <- map["totalSize"]
+        _rawStatus.value       <- map["status"]
         
     }
     
@@ -87,6 +125,9 @@ struct Torrent: Mappable, Equatable, Hashable {
     
     var hashValue: Int { return id! }
 }
+
+
+
 
 func == (lhs: Torrent, rhs: Torrent) -> Bool {
     return (lhs.id! == rhs.id!)
@@ -105,7 +146,7 @@ struct Metadata {
     var name: String = ""
     var type: TorrentMetadataType = .other
     
-    init?(from rawName: String){
+    init(from rawName: String){
         
         self.name = rawName
         

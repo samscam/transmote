@@ -10,6 +10,9 @@ import Foundation
 import AppKit
 import QuartzCore
 
+import RxSwift
+import RxCocoa
+
 class TorrentCollectionViewItem: NSCollectionViewItem {
     
     @IBOutlet weak var torrentImageView: NSImageView!
@@ -27,35 +30,42 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         progressBar.controlTint = .blueControlTint
         progressBar.contentFilters = [hueFilter]
     }
-    var torrent: Torrent? { didSet {
-            titleLabel.stringValue = torrent?.bestName ?? ""
-            episodeLabel.stringValue = torrent?.name ?? ""
-            progressBar.doubleValue = torrent?.progress ?? 0
-        
-        if let torrent = torrent {
-            switch torrent.status{
-            case .fetchingMetadata:
-                progressStatusLabel.stringValue = "Fetching metadata..."
-                hueFilter.setValue( Double.pi * 2 * 0.3 , forKey: "inputAngle")
-            case .downloading:
-                hueFilter.setValue(Double.pi * 2 * 0, forKey: "inputAngle")
-                progressStatusLabel.stringValue = "Downloading"
-            case .seeding:
-                hueFilter.setValue(Double.pi * 2 * 0.3, forKey: "inputAngle")
-                progressStatusLabel.stringValue = "Seeding"
-            case .stalled:
-                hueFilter.setValue(Double.pi * 2 * 0.5, forKey: "inputAngle")
-                progressStatusLabel.stringValue = "Stalled"
-            case .complete:
-                hueFilter.setValue(Double.pi * 2 * 0.65, forKey: "inputAngle")
-                progressStatusLabel.stringValue = "Complete"
+    
+    var disposeBag = DisposeBag()
+    
+    var torrent: Torrent? {
+        didSet {
+            
+            guard torrent != oldValue else {
+                // It was the same torrent we are already bound to. Ignore
+                return
             }
-           
-        } else {
-            progressStatusLabel.stringValue = ""
-            hueFilter.setValue(Double.pi * 2 * 0.3, forKey: "inputAngle")
-        }
+            
+            disposeBag = DisposeBag()
+            
+            guard let torrent = torrent else {
+                // we got a nil. clean up and return
+                return
+            }
+            
+            print("Cell set torrent \(torrent.id)")
+            
+            torrent.name.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
+            torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
+            
+            torrent.percentDone.subscribe(onNext: { newValue in
+                self.progressBar.doubleValue = newValue * 100
+            }).addDisposableTo(disposeBag)
+            
 
+            torrent.status.subscribe(onNext: { status in
+                self.progressStatusLabel.stringValue = status.description
+                let angle = (Double(status.rawValue+1)/7.0)
+                print(angle)
+                self.hueFilter.setValue(Double.pi * 2 * angle, forKey: "inputAngle")
+                
+            }).addDisposableTo(disposeBag)
+            
         }
     }
 }
