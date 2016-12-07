@@ -58,14 +58,13 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             
             torrent.percentDone.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
+                
             }).addDisposableTo(disposeBag)
             
 
             torrent.status.subscribe(onNext: { status in
                 self.progressStatusLabel.stringValue = status.description
-                let angle = (Double(status.rawValue+1)/7.0)
-                print(angle)
-                self.hueFilter.setValue(Double.pi * 2 * angle, forKey: "inputAngle")
+                self.progressView.foreground = status.color
                 
             }).addDisposableTo(disposeBag)
             

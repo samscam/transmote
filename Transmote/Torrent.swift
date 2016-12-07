@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import AppKit
 import ObjectMapper
 import RxSwift
 import RxCocoa
@@ -38,6 +39,25 @@ enum TorrentStatus: Int, CustomStringConvertible{
             return "Queued for seeding"
         case .seed:
             return "Seeding"
+        }
+    }
+    
+    var color: NSColor {
+        switch self {
+        case .stopped:
+            return NSColor(red: 1, green: 0, blue: 0, alpha: 1)
+        case .checkWait:
+            return NSColor(red: 1, green: 0.2, blue: 0, alpha: 1)
+        case .check:
+            return NSColor(red: 1, green: 0.5, blue: 0, alpha: 1)
+        case .downloadWait:
+            return NSColor(red: 0, green: 0.5, blue: 0, alpha: 1)
+        case .download:
+            return NSColor(red: 0, green: 0.8, blue: 0, alpha: 1)
+        case .seedWait:
+            return NSColor(red: 0, green: 0.5, blue: 0.5, alpha: 1)
+        case .seed:
+            return NSColor(red: 0, green: 0.5, blue: 1.0, alpha: 1)
         }
     }
 }
