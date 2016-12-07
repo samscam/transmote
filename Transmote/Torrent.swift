@@ -85,6 +85,10 @@ class Torrent: Mappable, Equatable, Hashable {
     private let _eta = Variable<Date?>(nil)
     var eta: Observable<Date?> { return _eta.asObservable() }
     
+    private var __name: String {
+        get{ return _name.value }
+        set{ if newValue != __name { _name.value = newValue } }
+    }
     private let _name = Variable<String>("")
     var name: Observable<String> { return _name.asObservable() }
     
@@ -130,7 +134,7 @@ class Torrent: Mappable, Equatable, Hashable {
         _isFinished.value      <- map["isFinished"]
         _isStalled.value       <- map["isStalled"]
         _eta.value             <- (map["eta"], DateTransform())
-        _name.value            <- map["name"]
+        __name            <- map["name"]
         _rateDownload.value    <- map["rateDownload"]
         _rateUpload.value      <- map["rateUpload"]
         _percentDone.value     <- map["percentDone"]
