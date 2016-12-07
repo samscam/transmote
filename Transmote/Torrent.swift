@@ -45,7 +45,7 @@ enum TorrentStatus: Int, CustomStringConvertible{
     var color: NSColor {
         switch self {
         case .stopped:
-            return NSColor(red: 1, green: 0, blue: 0, alpha: 1)
+            return NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         case .checkWait:
             return NSColor(red: 1, green: 0.2, blue: 0, alpha: 1)
         case .check:
@@ -53,11 +53,12 @@ enum TorrentStatus: Int, CustomStringConvertible{
         case .downloadWait:
             return NSColor(red: 0, green: 0.5, blue: 0, alpha: 1)
         case .download:
-            return NSColor(red: 0, green: 0.8, blue: 0, alpha: 1)
+            return NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 1)
+           
         case .seedWait:
             return NSColor(red: 0, green: 0.5, blue: 0.5, alpha: 1)
         case .seed:
-            return NSColor(red: 0, green: 0.5, blue: 1.0, alpha: 1)
+            return NSColor(red: 0, green: 0.8, blue: 0, alpha: 1)
         }
     }
 }
