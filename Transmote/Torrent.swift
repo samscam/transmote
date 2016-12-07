@@ -12,7 +12,8 @@ import AppKit
 import ObjectMapper
 import RxSwift
 import RxCocoa
-
+import Moya
+import RxMoya
 
 enum TorrentStatus: Int, CustomStringConvertible{
     case stopped = 0
@@ -113,7 +114,7 @@ class Torrent: Mappable, Equatable, Hashable {
     
     var derivedMetadata: Observable<Metadata> { return name.map{ return Metadata(from: $0) } }
     
-    var bestName: Observable<String> { return derivedMetadata.map{ $0.name } }
+    var bestName: Observable<String> { return metadata.map{ $0.name } }
     
     
     var status: Observable<TorrentStatus> { return self.rawStatus.map{ rawValue in
@@ -128,14 +129,14 @@ class Torrent: Mappable, Equatable, Hashable {
     }
     
     func mapping(map: Map){
-        id        <- map["id"]
+        id                     <- map["id"]
+        __name                 <- map["name"]
         _activityDate.value    <- (map["activityDate"], DateTransform())
         _addedDate.value       <- (map["addedDate"], DateTransform())
         _doneDate.value        <- (map["doneDate"], DateTransform())
         _isFinished.value      <- map["isFinished"]
         _isStalled.value       <- map["isStalled"]
         _eta.value             <- (map["eta"], DateTransform())
-        __name            <- map["name"]
         _rateDownload.value    <- map["rateDownload"]
         _rateUpload.value      <- map["rateUpload"]
         _percentDone.value     <- map["percentDone"]
@@ -147,6 +148,62 @@ class Torrent: Mappable, Equatable, Hashable {
     func update(JSON:[String: Any]) -> Torrent {
         return Mapper<Torrent>().map(JSON: JSON, toObject: self)
     }
+    
+    // External metadata
+    let tmdbProvider = RxMoyaProvider<TMDBTarget>()
+    
+
+    var externalMetadata: Observable<Metadata?> {
+        
+        let response = derivedMetadata.flatMap({ derived -> Observable<Response> in
+            switch derived.type {
+            case .tv:
+                return self.tmdbProvider.request(.tvShowMetadata(showName: derived.name))
+            case .movie(let year):
+                return self.tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
+            default:
+                throw MetadataError.couldNotRequest
+            }
+        })
+        
+        let json = response.mapJSON()
+        
+        let metadata: Observable<Metadata?> = json.map{ latestJSON in
+            if let jsonDict = latestJSON as? [String:Any],
+                let firstResult: [String: Any] = (jsonDict["results"] as! [Any]).first as! [String : Any]? {
+                return Metadata(JSON: firstResult)
+            }
+            return nil
+        }
+        
+        return metadata
+        
+    }
+    
+    var metadata: Observable<Metadata> {
+        return Observable.combineLatest(self.derivedMetadata, self.externalMetadata){
+            if let external = $1 {
+                return external
+            }
+            return $0
+        }
+    }
+    
+    var image: Observable<NSImage?> {
+        
+        let imageResponse = metadata.flatMap{ bestMetadata -> Observable<Response> in
+            if let path = bestMetadata.posterPath {
+                return self.tmdbProvider.request(.image(path:path))
+            } else {
+//                return Observable.error(MetadataError.noImagePath)
+                throw MetadataError.noImagePath
+            }
+        }
+
+        return imageResponse.mapImage()
+    }
+    
+    // Hashable
     
     var hashValue: Int { return id! }
 }
