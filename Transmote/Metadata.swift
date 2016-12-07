@@ -7,18 +7,25 @@
 //
 
 import Foundation
-
+import ObjectMapper
 
 enum TorrentMetadataType{
-    case tv(season: Int?,episode: Int?)
+    case tv(season: Int?, episode: Int?, episodeName: String?)
     case movie(year: Int)
     case other
 }
 
-struct Metadata {
+enum MetadataError: Swift.Error {
+    case couldNotRequest
+    case noImagePath
+}
+
+struct Metadata: Mappable {
     
+    var id: Int?
     var name: String = ""
     var type: TorrentMetadataType = .other
+    var posterPath: String?
     
     init(from rawName: String){
         
@@ -69,7 +76,7 @@ struct Metadata {
         }
         
         if (season != nil || episode != nil) {
-            self.type = .tv(season: season, episode: episode)
+            self.type = .tv(season: season, episode: episode, episodeName: nil)
         } else if (year != nil) {
             self.type = .movie(year: year!)
         }
@@ -77,8 +84,20 @@ struct Metadata {
         print("Raw name: \(rawName)")
         print("... converted to: \(self.name)")
         
+    }
+    
+    init?(map: Map){
         
     }
+    
+    mutating func mapping(map: Map){
+        id <- map["id"]
+        name <- map["name"]
+        name <- map["title"]
+        posterPath <- map["poster_path"]
+        
+    }
+    
     
 }
 
