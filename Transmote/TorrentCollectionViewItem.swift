@@ -23,9 +23,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     @IBOutlet weak var progressStatusLabel: NSTextField!
     @IBOutlet weak var progressView: CircularProgressView!
     
-//    var hueFilter: CIFilter = CIFilter(name: "CIFalseColor" , withInputParameters:["inputColor0":CIColor(red:0,green:0,blue:0), "inputColor1":CIColor(red:1,green:1,blue:1)] )!
-    var hueFilter: CIFilter = CIFilter(name: "CIHueAdjust" , withInputParameters:["inputAngle":0] )!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.strokeWidth = 3
