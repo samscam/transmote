@@ -12,6 +12,8 @@
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
 		2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; };
 		2247B7C61DF83259001B4C95 /* ProgressKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */; };
+		2247B7CA1DF84BAA001B4C95 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247B7C91DF84BAA001B4C95 /* Metadata.swift */; };
 		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
@@ -20,7 +22,6 @@
 		22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3981DE1010800588FFD /* TRNDefinitions.swift */; };
 		22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */; };
 		22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TransmissionServer.swift */; };
-		22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */; };
 		22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* Torrent.swift */; };
 		22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39D1DE1010800588FFD /* MainWindowController.swift */; };
 		22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3B91DE44FB100588FFD /* Alamofire.framework */; };
@@ -72,6 +73,8 @@
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
 		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
+		2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBTarget.swift; sourceTree = "<group>"; };
+		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -182,10 +185,12 @@
 			children = (
 				22EBE3981DE1010800588FFD /* TRNDefinitions.swift */,
 				22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */,
-				2211B4981DEE530900DDA453 /* Moya-RPC.swift */,
 				22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */,
 				22EBE39A1DE1010800588FFD /* TransmissionServer.swift */,
 				22EBE39C1DE1010800588FFD /* Torrent.swift */,
+				2247B7C91DF84BAA001B4C95 /* Metadata.swift */,
+				2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */,
+				2211B4981DEE530900DDA453 /* Moya-RPC.swift */,
 			);
 			name = Core;
 			path = Transmote;
@@ -271,13 +276,14 @@
 				22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */,
 				22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */,
 				2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */,
+				2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */,
 				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
+				2247B7CA1DF84BAA001B4C95 /* Metadata.swift in Sources */,
 				22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */,
 				22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */,
 				22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */,
 				22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */,
 				22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */,
-				22EBE3A21DE1010800588FFD /* TRNTheMovieDBClient.swift in Sources */,
 				22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */,
 				2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */,
 			);
