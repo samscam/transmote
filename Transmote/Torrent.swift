@@ -66,8 +66,19 @@ enum TorrentStatus: Int, CustomStringConvertible{
 
 class Torrent: Mappable, Equatable, Hashable {
     
-    // Mappable variables
+    // MARK: - Mappable variables
     var id: Int!
+    
+    // Slightly funny arrangement here so that the Observable only changes when the value actually changes
+    
+    private var __name: String {
+        get{ return _name.value }
+        set{ if newValue != __name { _name.value = newValue } }
+    }
+    private let _name = Variable<String>("")
+    var name: Observable<String> { return _name.asObservable() }
+    
+    // The rest is more straightforward
     
     private let _activityDate = Variable<Date?>(nil)
     var activityDate: Observable<Date?> { return _activityDate.asObservable() }
@@ -87,13 +98,6 @@ class Torrent: Mappable, Equatable, Hashable {
     private let _eta = Variable<Date?>(nil)
     var eta: Observable<Date?> { return _eta.asObservable() }
     
-    private var __name: String {
-        get{ return _name.value }
-        set{ if newValue != __name { _name.value = newValue } }
-    }
-    private let _name = Variable<String>("")
-    var name: Observable<String> { return _name.asObservable() }
-    
     private let _rateDownload = Variable<Int>(0)
     var rateDownload: Observable<Int> { return _rateDownload.asObservable() }
     
@@ -109,20 +113,7 @@ class Torrent: Mappable, Equatable, Hashable {
     private let _rawStatus = Variable<Int>(0)
     var rawStatus: Observable<Int> { return _rawStatus.asObservable() }
     
-    
-    // Calculated variables
-    
-    var derivedMetadata: Observable<Metadata> { return name.map{ return Metadata(from: $0) } }
-    
-    var bestName: Observable<String> { return metadata.map{ $0.name } }
-    
-    
-    var status: Observable<TorrentStatus> { return self.rawStatus.map{ rawValue in
-        return TorrentStatus(rawValue: rawValue)!
-        }
-    }
-    
-    // Initialisation and parsing
+    // MARK: - Initialisation and parsing
     
     required init?(map: Map){
         
@@ -149,7 +140,20 @@ class Torrent: Mappable, Equatable, Hashable {
         return Mapper<Torrent>().map(JSON: JSON, toObject: self)
     }
     
+    // MARK: - Calculated variables
+    
+    var derivedMetadata: Observable<Metadata> { return name.map{ return Metadata(from: $0) } }
+    
+    var bestName: Observable<String> { return metadata.map{ $0.name } }
+    
+    
+    var status: Observable<TorrentStatus> { return self.rawStatus.map{ rawValue in
+        return TorrentStatus(rawValue: rawValue)!
+        }
+    }
+    
     // External metadata
+    
     let tmdbProvider = RxMoyaProvider<TMDBTarget>()
     
 
@@ -195,7 +199,6 @@ class Torrent: Mappable, Equatable, Hashable {
             if let path = bestMetadata.posterPath {
                 return self.tmdbProvider.request(.image(path:path))
             } else {
-//                return Observable.error(MetadataError.noImagePath)
                 throw MetadataError.noImagePath
             }
         }
