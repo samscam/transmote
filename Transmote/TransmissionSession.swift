@@ -100,6 +100,7 @@ class TransmissionSession{
                 case .connected:
                     self.startTimers()
                 default:
+                    self.torrents.value = []
                     self.stopTimers()
             }
         }).addDisposableTo(disposeBag)
