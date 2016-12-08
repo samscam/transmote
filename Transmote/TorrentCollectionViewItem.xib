@@ -13,11 +13,10 @@
         <collectionViewItem storyboardIdentifier="TorrentCollectionViewItem" id="2l3-8k-wz2" customClass="TorrentCollectionViewItem" customModule="Transmote" customModuleProvider="target">
             <connections>
                 <outlet property="episodeLabel" destination="s6N-yI-x06" id="Dal-8q-yOW"/>
-                <outlet property="imageView" destination="ts4-vb-TLb" id="x0i-Sl-kZA"/>
                 <outlet property="progressStatusLabel" destination="VZS-1p-7Ih" id="wJ1-PY-Vt7"/>
                 <outlet property="progressView" destination="gxl-JK-iJZ" id="4qg-Oc-kbF"/>
                 <outlet property="titleLabel" destination="o5B-Qk-Z9k" id="X22-Kk-CgL"/>
-                <outlet property="torrentImageView" destination="ts4-vb-TLb" id="Zah-Th-HrS"/>
+                <outlet property="torrentImageView" destination="3b3-D2-Yqf" id="IXB-jQ-Va7"/>
                 <outlet property="view" destination="afG-HD-eFG" id="RDU-Ei-FYK"/>
             </connections>
             <point key="canvasLocation" x="584" y="750"/>
@@ -29,15 +28,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="310" height="226"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ts4-vb-TLb">
-                        <rect key="frame" x="5" y="5" width="300" height="216"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Magnet" id="7Nm-Ys-2Ll"/>
-                    </imageView>
                     <box autoresizesSubviews="NO" boxType="custom" borderType="bezel" cornerRadius="8" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
                         <rect key="frame" x="5" y="5" width="300" height="216"/>
                         <view key="contentView" id="TkE-v7-kSP">
                             <rect key="frame" x="1" y="1" width="298" height="214"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="3b3-D2-Yqf" customClass="ProperImageView" customModule="Transmote" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="298" height="214"/>
+                                </customView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="3b3-D2-Yqf" secondAttribute="trailing" id="E74-yz-rAY"/>
+                                <constraint firstItem="3b3-D2-Yqf" firstAttribute="leading" secondItem="TkE-v7-kSP" secondAttribute="leading" id="Pq5-ia-7r2"/>
+                                <constraint firstAttribute="bottom" secondItem="3b3-D2-Yqf" secondAttribute="bottom" id="Yht-Hs-qqi"/>
+                                <constraint firstItem="3b3-D2-Yqf" firstAttribute="top" secondItem="TkE-v7-kSP" secondAttribute="top" id="rbS-Yc-F54"/>
+                            </constraints>
                         </view>
                         <color key="borderColor" red="0.64640066964285714" green="0.64640066964285714" blue="0.64640066964285714" alpha="0.5" colorSpace="calibratedRGB"/>
                         <color key="fillColor" red="0.0035435267857142857" green="0.0035435267857142857" blue="0.0035435267857142857" alpha="0.68659220950704225" colorSpace="calibratedRGB"/>
@@ -85,17 +91,13 @@
                 </constraints>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ts4-vb-TLb" secondAttribute="trailing" constant="5" id="3rD-1x-Lec"/>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" constant="10" id="5iV-a9-vgs"/>
-                <constraint firstItem="ts4-vb-TLb" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" constant="5" id="9LB-kg-0EX"/>
                 <constraint firstAttribute="trailing" secondItem="WM3-nd-Dig" secondAttribute="trailing" constant="5" id="ORD-Hp-ESG"/>
                 <constraint firstItem="s6N-yI-x06" firstAttribute="top" secondItem="o5B-Qk-Z9k" secondAttribute="bottom" constant="5" id="OyO-sH-XA8"/>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="leading" secondItem="s6N-yI-x06" secondAttribute="leading" id="SUn-dY-gxI"/>
                 <constraint firstAttribute="bottom" secondItem="WM3-nd-Dig" secondAttribute="bottom" constant="5" id="SaZ-Za-otl"/>
                 <constraint firstItem="s6N-yI-x06" firstAttribute="trailing" secondItem="o5B-Qk-Z9k" secondAttribute="trailing" id="Slj-7M-Dan"/>
                 <constraint firstItem="WM3-nd-Dig" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" constant="5" id="bBb-el-QvC"/>
-                <constraint firstItem="ts4-vb-TLb" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="5" id="c9L-dA-2CV"/>
-                <constraint firstAttribute="bottom" secondItem="ts4-vb-TLb" secondAttribute="bottom" constant="5" id="csS-2r-dOL"/>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="10" id="fTo-EU-E5A"/>
                 <constraint firstItem="s6N-yI-x06" firstAttribute="centerX" secondItem="afG-HD-eFG" secondAttribute="centerX" id="hOL-hi-ivo"/>
                 <constraint firstItem="WM3-nd-Dig" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="5" id="wB4-XD-r4h"/>
@@ -104,7 +106,4 @@
             <point key="canvasLocation" x="132" y="214"/>
         </box>
     </objects>
-    <resources>
-        <image name="Magnet" width="95" height="95"/>
-    </resources>
 </document>

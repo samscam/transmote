@@ -16,7 +16,9 @@ import ProgressKit
 
 class TorrentCollectionViewItem: NSCollectionViewItem {
     
-    @IBOutlet weak var torrentImageView: NSImageView!
+//    @IBOutlet weak var torrentImageView: NSImageView!
+    @IBOutlet weak var torrentImageView: ProperImageView!
+    
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var episodeLabel: NSTextField!
     
@@ -53,7 +55,9 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             torrent.name.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
             torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
             torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
-//            torrent.image.bindTo(torrentImageView.rx.image).addDisposableTo(disposeBag)
+            torrent.image.map{ if $0 == nil { return ContentMode.center } else { return ContentMode.scaleAspectFill } }.subscribe(onNext: { contentMode in
+                self.torrentImageView.contentMode = contentMode
+            }).addDisposableTo(disposeBag)
             
             torrent.percentDone.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)

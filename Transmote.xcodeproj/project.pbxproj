@@ -18,7 +18,7 @@
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
 		22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38E1DE1000A00588FFD /* Main.storyboard */; };
-		22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3971DE1010800588FFD /* SESImageView.swift */; };
+		22EBE39E1DE1010800588FFD /* ProperImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3971DE1010800588FFD /* ProperImageView.swift */; };
 		22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3981DE1010800588FFD /* TRNDefinitions.swift */; };
 		22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */; };
 		22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TransmissionServer.swift */; };
@@ -81,7 +81,7 @@
 		22EBE38C1DE1000A00588FFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22EBE38F1DE1000A00588FFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22EBE3911DE1000A00588FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22EBE3971DE1010800588FFD /* SESImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SESImageView.swift; sourceTree = "<group>"; };
+		22EBE3971DE1010800588FFD /* ProperImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperImageView.swift; sourceTree = "<group>"; };
 		22EBE3981DE1010800588FFD /* TRNDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNDefinitions.swift; sourceTree = "<group>"; };
 		22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNJSONRPCClient.swift; sourceTree = "<group>"; };
 		22EBE39A1DE1010800588FFD /* TransmissionServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionServer.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 				2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */,
 				2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */,
 				22EBE3D61DE4572700588FFD /* SettingsViewController.swift */,
-				22EBE3971DE1010800588FFD /* SESImageView.swift */,
+				22EBE3971DE1010800588FFD /* ProperImageView.swift */,
 				22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */,
 				22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */,
 				22EBE38C1DE1000A00588FFD /* Assets.xcassets */,
@@ -274,7 +274,7 @@
 				22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */,
 				22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */,
 				22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */,
-				22EBE39E1DE1010800588FFD /* SESImageView.swift in Sources */,
+				22EBE39E1DE1010800588FFD /* ProperImageView.swift in Sources */,
 				2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */,
 				2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */,
 				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
