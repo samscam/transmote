@@ -78,6 +78,7 @@ class SettingsViewController: NSViewController {
 
         Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text){ ($0,$1,$2) }
             .throttle(0.5, scheduler: MainScheduler.instance )
+            .skip(1)
             .subscribe(onNext:{(address,port,path) in
                 server.address = address
                 server.port = Int(port!) ?? 9091
