@@ -73,7 +73,12 @@ class Torrent: Mappable, Equatable, Hashable {
     
     private var __name: String {
         get{ return _name.value }
-        set{ if newValue != __name { _name.value = newValue } }
+        set{
+            
+            if newValue != __name {
+                print("Name set to \(newValue)")
+                _name.value = newValue
+            } }
     }
     private let _name = Variable<String>("")
     var name: Observable<String> { return _name.asObservable() }
@@ -142,24 +147,27 @@ class Torrent: Mappable, Equatable, Hashable {
     
     // MARK: - Calculated variables
     
-    var derivedMetadata: Observable<Metadata> { return name.map{ return Metadata(from: $0) } }
+    lazy var derivedMetadata: Observable<Metadata> = self.name.map{
+        print("Deriving metadata for \($0)")
+        return Metadata(from: $0)
+    }.shareReplay(1) // << If this isn't here it does it repeatedly
     
-    var bestName: Observable<String> { return metadata.map{ $0.name } }
+    lazy var bestName: Observable<String> = self.metadata.map{ $0.name }
     
     
-    var status: Observable<TorrentStatus> { return self.rawStatus.map{ rawValue in
+    lazy var status: Observable<TorrentStatus> = self.rawStatus.map{ rawValue in
         return TorrentStatus(rawValue: rawValue)!
         }
-    }
     
     // External metadata
     
     let tmdbProvider = RxMoyaProvider<TMDBTarget>()
     
 
-    var externalMetadata: Observable<Metadata?> {
+    lazy var externalMetadata: Observable<Metadata?> = {
         
-        let response = derivedMetadata.flatMap({ derived -> Observable<Response> in
+        let response = self.derivedMetadata.flatMap({ derived -> Observable<Response> in
+            
             switch derived.type {
             case .tv:
                 return self.tmdbProvider.request(.tvShowMetadata(showName: derived.name))
@@ -182,20 +190,19 @@ class Torrent: Mappable, Equatable, Hashable {
         
         return metadata
         
-    }
+    }()
     
-    var metadata: Observable<Metadata> {
-        return Observable.combineLatest(self.derivedMetadata, self.externalMetadata){
+    lazy var metadata: Observable<Metadata> = Observable.combineLatest(self.derivedMetadata, self.externalMetadata){
             if let external = $1 {
                 return external
             }
             return $0
         }
-    }
     
-    var image: Observable<NSImage?> {
+    
+    lazy var image: Observable<NSImage?> = {
         
-        let imageResponse = metadata.flatMap{ bestMetadata -> Observable<Response> in
+        let imageResponse = self.metadata.flatMap{ bestMetadata -> Observable<Response> in
             if let path = bestMetadata.posterPath {
                 return self.tmdbProvider.request(.image(path:path))
             } else {
@@ -204,7 +211,7 @@ class Torrent: Mappable, Equatable, Hashable {
         }
 
         return imageResponse.mapImage()
-    }
+    }()
     
     // Hashable
     

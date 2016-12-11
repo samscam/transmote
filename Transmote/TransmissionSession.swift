@@ -62,25 +62,18 @@ class TransmissionSession{
                 
                 
                 let endpoint = Endpoint<TransmissionTarget>(url: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
-                
-                if let sessionId = self.sessionId {
-                    return endpoint.adding(newHTTPHeaderFields: ["X-Transmission-Session-Id": sessionId])
-                } else {
-                    return endpoint
-                }
-                
+                return endpoint
             }
             
-            self.provider = MoyaProvider<TransmissionTarget>(endpointClosure: endpointClosure)
+            self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
             
             connect()
         }
     }
     
     var status: Variable<Status> = Variable<Status>(.indeterminate)
-    var sessionId: String?
     
-    var provider: MoyaProvider<TransmissionTarget>!
+    var provider: JSONRPCProvider<TransmissionTarget>!
     
     var torrents: Variable<[Torrent]> = Variable([])
     var stats: SessionStats?
@@ -140,13 +133,7 @@ class TransmissionSession{
             switch result {
             case let .success(moyaResponse):
                 switch moyaResponse.statusCode {
-                case 409:
-                    // we should have a session id in this response
-                    if let httpResponse = moyaResponse.response as? HTTPURLResponse, let sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as? String {
-                        self.sessionId = sessionId
-                        print("Got session Id \(sessionId)")
-                        self.connect()
-                    }
+
                 case 200:
                     // Good so far
                     
@@ -175,7 +162,6 @@ class TransmissionSession{
                     
                 }
             case let .failure(error):
-                print(error)
                 self.status.value = .failed(.networkError(error))
             }
         }

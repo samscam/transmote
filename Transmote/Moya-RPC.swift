@@ -9,11 +9,61 @@
 import Foundation
 import Moya
 
-extension Response {
+class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
     
-    func catchSessionId() throws -> Response {
-        return self
+    var sessionId: String?
+
+    override public init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,
+                            requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,
+                            stubClosure: @escaping StubClosure = MoyaProvider.neverStub,
+                            manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
+                            plugins: [PluginType] = [],
+                            trackInflights: Bool = false) {
+        
+        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
+    
+    /// Injects the session id into the endpoint
+    override func endpoint(_ token: Target) -> Endpoint<Target> {
+        let endpoint = endpointClosure(token)
+        if let sessionId = sessionId {
+            return endpoint.adding(newHTTPHeaderFields: ["X-Transmission-Session-Id": sessionId])
+        } else {
+            return endpoint
+        }
+    }
+    
+    /// Catches 409 status codes, stores the sessionID, and retries the request
+    @discardableResult
+    override func request(_ target: Target, completion: @escaping Completion) -> Cancellable {
+        return super.request(target){ result in
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 409:
+                    if let httpResponse = response.response as? HTTPURLResponse,
+                        let sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as? String {
+                        self.sessionId = sessionId
+                        print("Got new session id: \(sessionId)")
+                        // We are discarding the inner cancellable - this is kinda bad...
+                        _ = self.request(target, completion: completion)
+                        return
+                    }
+                default:
+                    break
+                }
+            case .failure:
+                break
+            }
+            
+            completion(result)
+        }
+        
+        
+    }
+}
+
+extension Response {
     
     func mapJsonRpc() throws -> [String: Any] {
 
