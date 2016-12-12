@@ -84,26 +84,41 @@ class TransmissionSession{
     
     var disposeBag = DisposeBag()
     
+    var retryTimer: BackoffTimer?
+    
     init(){
         
         // Observe our own status to start/stop update timer
-        status.asObservable().subscribe(onNext: { status in
+        status.asObservable()
+            .debounce(0.2, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { status in
             print("Status is \(status)")
             switch status {
                 case .connected:
                     self.startTimers()
-                default:
+                case .failed:
                     self.torrents.value = []
                     self.stopTimers()
+                    if self.retryTimer == nil {
+                        self.retryTimer = BackoffTimer(min: 1, max: 10){
+                            self.connect()
+                        }
+                    }
+                default:
+                    break
             }
         }).addDisposableTo(disposeBag)
         
+
     }
     
     // Timers
     
     func startTimers(){
-
+        
+        retryTimer?.invalidate()
+        retryTimer = nil
+        
         self.updateEverything()
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
@@ -118,16 +133,18 @@ class TransmissionSession{
     }
     
     func updateEverything(){
-        self.updateSessionStats()
+//        self.updateSessionStats()
         self.updateTorrents()
     }
     
     // Initial connection
     var connectCancellable: Cancellable?
     func connect(){
-        
-        connectCancellable?.cancel()
-        
+        if let connectCancellable = self.connectCancellable {
+            print("cancelling")
+            connectCancellable.cancel()
+        }
+        print("connecting")
         self.status.value = .connecting
         connectCancellable = self.provider.request(.connect){ result in
             switch result {
@@ -188,7 +205,7 @@ class TransmissionSession{
     }
     
     func updateTorrents(){
-        self.provider.request(.torrents){ result in
+        self.provider.request(.torrents) { result in
             switch result {
             case .success(let moyaResponse):
                 do {

@@ -14,6 +14,7 @@
 		2247B7C61DF83259001B4C95 /* ProgressKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */; };
 		2247B7CA1DF84BAA001B4C95 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247B7C91DF84BAA001B4C95 /* Metadata.swift */; };
+		22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27D661DFEA9560080B2E8 /* Backoff.swift */; };
 		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
 		2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBTarget.swift; sourceTree = "<group>"; };
 		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
+		22D27D661DFEA9560080B2E8 /* Backoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backoff.swift; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				2247B7C91DF84BAA001B4C95 /* Metadata.swift */,
 				2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */,
 				2211B4981DEE530900DDA453 /* Moya-RPC.swift */,
+				22D27D661DFEA9560080B2E8 /* Backoff.swift */,
 			);
 			name = Core;
 			path = Transmote;
@@ -275,6 +278,7 @@
 				22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */,
 				22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */,
 				22EBE39E1DE1010800588FFD /* ProperImageView.swift in Sources */,
+				22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */,
 				2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */,
 				2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */,
 				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
