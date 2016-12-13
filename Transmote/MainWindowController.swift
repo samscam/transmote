@@ -11,14 +11,12 @@ import Sparkle
 
 class MainWindowController: NSWindowController {
     
-    var server = TransmissionServer(address: "drobo5n.local")
-    
     var session: TransmissionSession = TransmissionSession()
     
     override func windowDidLoad() {
         super.windowDidLoad()
         //poke the session
-        session.server = server
+        
         (self.contentViewController as! MainViewController).session = session
         
     }

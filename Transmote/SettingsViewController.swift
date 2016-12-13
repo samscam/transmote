@@ -78,12 +78,14 @@ class SettingsViewController: NSViewController {
 
         Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text){ ($0,$1,$2) }
             .throttle(0.5, scheduler: MainScheduler.instance )
+            .debug("SERVER CHANGE")
             .skip(1)
             .subscribe(onNext:{(address,port,path) in
-                server.address = address
-                server.port = Int(port!) ?? 9091
-                server.rpcPath = path!
-                self.session?.connect()
+                if let address = address {
+                    let portInt: Int? = port != nil ? Int(port!) : nil
+                    let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
+                    self.session?.server = server
+                }
         }).addDisposableTo(disposeBag)
         
     }

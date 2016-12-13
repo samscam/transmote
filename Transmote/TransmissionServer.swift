@@ -11,18 +11,24 @@ import Cocoa
 import ObjectMapper
 
 
-class TransmissionServer {
+struct TransmissionServer {
 
     var address: String?
-    var port: Int = 9091
-    var rpcPath: String = "transmission/rpc"
-    var useTLS: Bool = false
+    var port: Int
+    var rpcPath: String
+    var useTLS: Bool
     
     var username: String?
     var password: String?
 
-    init(address: String){
+
+    init(address: String, port: Int? = nil, rpcPath:String? = nil, useTLS: Bool = false){
+        
         self.address = address
+        self.port = port ?? 9091
+        self.rpcPath = rpcPath ?? "transmission/rpc"
+        self.useTLS = useTLS
+        
     }
     
     var serverURL: URL? {

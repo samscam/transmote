@@ -67,13 +67,17 @@ class TransmissionSession{
             
             self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
             
+            if let server = self.server {
+                self.storeDefaultsServer(server: server)
+            }
+            
             connect()
         }
     }
     
     var status: Variable<Status> = Variable<Status>(.indeterminate)
     
-    var provider: JSONRPCProvider<TransmissionTarget>!
+    var provider: JSONRPCProvider<TransmissionTarget>?
     
     var torrents: Variable<[Torrent]> = Variable([])
     var stats: SessionStats?
@@ -99,18 +103,38 @@ class TransmissionSession{
                 case .failed:
                     self.torrents.value = []
                     self.stopTimers()
-                    if self.retryTimer == nil {
-                        self.retryTimer = BackoffTimer(min: 1, max: 10){
-                            self.connect()
-                        }
-                    }
+                    self.startRetryTimer()
                 default:
                     break
             }
         }).addDisposableTo(disposeBag)
         
-
+        
+        defer{
+            self.server = self.fetchDefaultsServer()
+        }
+        
     }
+    
+    // User defaults
+    
+    func fetchDefaultsServer() -> TransmissionServer? {
+        let defaults = UserDefaults.standard
+        if let address = defaults.string(forKey: "address"),
+            let port = defaults.value(forKey: "port") as? Int,
+            let rpcPath = defaults.string(forKey: "rpcPath"){
+            return TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+        }
+        return nil
+    }
+    
+    func storeDefaultsServer(server: TransmissionServer){
+        let defaults = UserDefaults.standard
+        defaults.set(server.address, forKey: "address")
+        defaults.set(server.port, forKey: "port")
+        defaults.set(server.rpcPath, forKey: "rpcPath")
+    }
+    
     
     // Timers
     
@@ -132,6 +156,14 @@ class TransmissionSession{
         timer = nil
     }
     
+    func startRetryTimer(){
+        if self.retryTimer == nil {
+            self.retryTimer = BackoffTimer(min: 1, max: 10){
+                self.connect()
+            }
+        }
+    }
+    
     func updateEverything(){
 //        self.updateSessionStats()
         self.updateTorrents()
@@ -146,7 +178,7 @@ class TransmissionSession{
         }
         print("connecting")
         self.status.value = .connecting
-        connectCancellable = self.provider.request(.connect){ result in
+        connectCancellable = self.provider?.request(.connect){ result in
             switch result {
             case let .success(moyaResponse):
                 switch moyaResponse.statusCode {
@@ -186,7 +218,7 @@ class TransmissionSession{
     
     
     func updateSessionStats(){
-        self.provider.request(.stats){ result in
+        self.provider?.request(.stats){ result in
             switch result {
             case .success(let moyaResponse):
                 do {
@@ -205,7 +237,7 @@ class TransmissionSession{
     }
     
     func updateTorrents(){
-        self.provider.request(.torrents) { result in
+        self.provider?.request(.torrents) { result in
             switch result {
             case .success(let moyaResponse):
                 do {
