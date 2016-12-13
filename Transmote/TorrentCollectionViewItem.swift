@@ -52,8 +52,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             
             print("Cell set torrent \(torrent.id)")
             
-            torrent.name.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
+
             torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
+            
+            torrent.episodeDescription.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
+            
             torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
             torrent.image
                 .map{ if $0 == nil { return ContentMode.center } else { return ContentMode.scaleAspectFill } }
@@ -71,6 +74,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             torrent.metadata.subscribe(onNext: { newValue in
                 print(newValue)
             }).addDisposableTo(disposeBag)
+            
+            torrent.episodeMetadata.subscribe(onNext: { episode in
+                print("\(episode?.name)")
+            }).addDisposableTo(disposeBag)
+            
 
             torrent.status.subscribe(onNext: { status in
                 self.progressStatusLabel.stringValue = status.description

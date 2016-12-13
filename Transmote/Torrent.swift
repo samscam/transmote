@@ -154,6 +154,13 @@ class Torrent: Mappable, Equatable, Hashable {
     
     lazy var bestName: Observable<String> = self.metadata.map{ $0.name }
     
+    lazy var episodeDescription: Observable<String> = self.episodeMetadata.map{ episodeMetadata in
+        if let episodeMetadata = episodeMetadata{
+            return "Season \(episodeMetadata.season) • Episode \(episodeMetadata.episode)\n\(episodeMetadata.name)"
+        }
+        return ""
+    }
+    
     
     lazy var status: Observable<TorrentStatus> = self.rawStatus.map{ rawValue in
         return TorrentStatus(rawValue: rawValue)!
