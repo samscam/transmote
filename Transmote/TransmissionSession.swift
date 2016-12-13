@@ -100,6 +100,7 @@ class TransmissionSession{
             switch status {
                 case .connected:
                     self.startTimers()
+                    self.addDeferredTorrents()
                 case .failed:
                     self.torrents.value = []
                     self.stopTimers()
@@ -114,8 +115,25 @@ class TransmissionSession{
             self.server = self.fetchDefaultsServer()
         }
         
+        let appleEventManager = NSAppleEventManager.shared()
+        appleEventManager.setEventHandler(self, andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass) , andEventID: AEEventID(kAEGetURL))
+        
     }
     
+    var deferredMagnetURLs: [URL] = []
+    @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor){
+    
+        if let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
+            let url = URL(string: urlString) {
+            if case .connected = self.status.value {
+                self.addTorrent(url: url)
+            } else {
+                self.deferredMagnetURLs.append(url)
+            }
+        }
+    }
+    
+
     // User defaults
     
     func fetchDefaultsServer() -> TransmissionServer? {
@@ -294,6 +312,19 @@ class TransmissionSession{
                 self.status.value = .failed(.networkError(error))
             }
         }
+    }
+    
+    func addTorrent(url: URL){
+        provider?.request(.addTorrent(url), completion: { (result) in
+            print(result)
+        })
+    }
+    
+    func addDeferredTorrents(){
+        for t in self.deferredMagnetURLs {
+            self.addTorrent(url: t)
+        }
+        deferredMagnetURLs = []
     }
     
 }
