@@ -188,7 +188,9 @@ class Torrent: Mappable, Equatable, Hashable {
             return nil
         }
         
-        return metadata
+        return metadata.catchError{ error in
+            return Observable<Metadata?>.just(nil)
+        }
         
     }()
     
@@ -201,7 +203,7 @@ class Torrent: Mappable, Equatable, Hashable {
     }
     
     lazy var episodeMetadata: Observable<Episode?> = {
-        let response = self.metadata
+        let response: Observable<Response> = self.metadata
             .flatMap{ metadata -> Observable<Response> in
                 if let id = metadata.id {
                     switch metadata.type {
@@ -214,7 +216,7 @@ class Torrent: Mappable, Equatable, Hashable {
                     }
                 }
                 throw MetadataError.couldNotRequest
-        }
+            }
         
         let episode = response.mapJSON().map{ latestJSON -> Episode? in
             if let jsonDict = latestJSON as? [String: Any] {
@@ -224,13 +226,22 @@ class Torrent: Mappable, Equatable, Hashable {
             return nil
         }
         
-        return episode
+        return episode.catchError{ error in
+            return Observable<Episode?>.just(nil)
+        }
     }()
     
     lazy var image: Observable<NSImage?> = {
+        let path: Observable<String?> = Observable.combineLatest(self.metadata, self.episodeMetadata){ overall, episode in
+            if let episodeImage = episode?.stillPath {
+                return episodeImage
+            } else {
+                return overall.posterPath
+            }
+        }
         
-        let imageResponse = self.metadata.flatMap{ bestMetadata -> Observable<Response> in
-            if let path = bestMetadata.posterPath {
+        let imageResponse = path.flatMapLatest{ path -> Observable<Response> in
+            if let path = path {
                 return self.tmdbProvider.request(.image(path:path))
             } else {
                 throw MetadataError.noImagePath
