@@ -13,7 +13,7 @@ import Moya
 enum TMDBTarget {
     case serviceConfiguration
     case tvShowMetadata(showName: String)
-    case tvShowDetails(showID:String, season:Int, episode:Int)
+    case tvShowDetails(showID:Int, season:Int, episode:Int)
     case movieMetadata(movieName: String, year: Int?)
     case image(path: String)
 }

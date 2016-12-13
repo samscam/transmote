@@ -192,13 +192,40 @@ class Torrent: Mappable, Equatable, Hashable {
         
     }()
     
-    lazy var metadata: Observable<Metadata> = Observable.combineLatest(self.derivedMetadata, self.externalMetadata){
-            if let external = $1 {
+    lazy var metadata: Observable<Metadata> = Observable.combineLatest(self.derivedMetadata, self.externalMetadata){ derived, external in
+            if var external = external {
+                external.type = derived.type
                 return external
             }
-            return $0
-        }
+            return derived
+    }
     
+    lazy var episodeMetadata: Observable<Episode?> = {
+        let response = self.metadata
+            .flatMap{ metadata -> Observable<Response> in
+                if let id = metadata.id {
+                    switch metadata.type {
+                    case .tv(let season, let episode):
+                        if let season = season, let episode = episode {
+                            return self.tmdbProvider.request(.tvShowDetails(showID: id, season: season, episode: episode))
+                        }
+                    default:
+                        break
+                    }
+                }
+                throw MetadataError.couldNotRequest
+        }
+        
+        let episode = response.mapJSON().map{ latestJSON -> Episode? in
+            if let jsonDict = latestJSON as? [String: Any] {
+                let ep = try? Episode(JSON: jsonDict)
+                return ep
+            }
+            return nil
+        }
+        
+        return episode
+    }()
     
     lazy var image: Observable<NSImage?> = {
         

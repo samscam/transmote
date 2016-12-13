@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 enum TorrentMetadataType{
-    case tv(season: Int?, episode: Int?, episodeName: String?)
+    case tv(season: Int?, episode: Int?)
     case movie(year: Int)
     case other
 }
@@ -76,7 +76,7 @@ struct Metadata: Mappable {
         }
         
         if (season != nil || episode != nil) {
-            self.type = .tv(season: season, episode: episode, episodeName: nil)
+            self.type = .tv(season: season, episode: episode)
         } else if (year != nil) {
             self.type = .movie(year: year!)
         }
@@ -102,7 +102,29 @@ struct Metadata: Mappable {
 }
 
 
-
+struct Episode: ImmutableMappable {
+    let id: Int
+    let stillPath: String?
+    let season: Int
+    let episode: Int
+    let name: String
+    
+    init(map: Map) throws{
+        id = try map.value("id")
+        name = try map.value("name")
+        season = try map.value("season_number")
+        episode = try map.value("episode_number")
+        stillPath = try? map.value("still_path")
+    }
+    
+    mutating func mapping(map: Map){
+        id >>> map["id"]
+        name >>> map["name"]
+        season >>> map["season_number"]
+        episode >>> map["episode_number"]
+        stillPath >>> map["still_path"]
+    }
+}
 
 //
 //    func fetchMetadata() {
