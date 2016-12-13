@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C60b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
@@ -85,7 +85,6 @@
                     <constraint firstAttribute="bottom" secondItem="VZS-1p-7Ih" secondAttribute="bottom" constant="15" id="QfW-uM-wZg"/>
                     <constraint firstAttribute="trailing" secondItem="VZS-1p-7Ih" secondAttribute="trailing" constant="20" id="UQI-qD-FFg"/>
                     <constraint firstItem="VZS-1p-7Ih" firstAttribute="top" secondItem="gxl-JK-iJZ" secondAttribute="bottom" constant="5" id="XYT-gq-Dxh"/>
-                    <constraint firstItem="gxl-JK-iJZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6N-yI-x06" secondAttribute="bottom" constant="10" id="buS-2b-S7b"/>
                     <constraint firstItem="gxl-JK-iJZ" firstAttribute="centerX" secondItem="fse-0A-fHe" secondAttribute="centerX" id="gzy-eU-Nuy"/>
                     <constraint firstItem="VZS-1p-7Ih" firstAttribute="centerX" secondItem="fse-0A-fHe" secondAttribute="centerX" id="sNN-JV-5c7"/>
                 </constraints>
