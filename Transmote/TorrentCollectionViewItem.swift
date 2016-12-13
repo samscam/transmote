@@ -71,14 +71,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 
             }).addDisposableTo(disposeBag)
             
-            torrent.metadata.subscribe(onNext: { newValue in
-                print(newValue)
-            }).addDisposableTo(disposeBag)
-            
-            torrent.episodeMetadata.subscribe(onNext: { episode in
-                print("\(episode?.name)")
-            }).addDisposableTo(disposeBag)
-            
 
             torrent.status.subscribe(onNext: { status in
                 self.progressStatusLabel.stringValue = status.description
