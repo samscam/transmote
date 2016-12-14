@@ -52,17 +52,17 @@ class SettingsViewController: NSViewController {
         
         session.status.asObservable()
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext:{ status in
+            .subscribe(onNext:{ [weak self] status in
             
             switch status {
             case .connected:
-                self.statusBlobImageView.image = NSImage(named: "status-green")
+                self?.statusBlobImageView.image = NSImage(named: "status-green")
             case .connecting:
-                self.statusBlobImageView.image = NSImage(named: "status-orange")
+                self?.statusBlobImageView.image = NSImage(named: "status-orange")
             case .indeterminate:
-                self.statusBlobImageView.image = NSImage(named: "status-gray")
+                self?.statusBlobImageView.image = NSImage(named: "status-gray")
             case .failed:
-                self.statusBlobImageView.image = NSImage(named: "status-red")
+                self?.statusBlobImageView.image = NSImage(named: "status-red")
             }
             
         }).addDisposableTo(disposeBag)
@@ -80,11 +80,11 @@ class SettingsViewController: NSViewController {
             .throttle(0.5, scheduler: MainScheduler.instance )
             .debug("SERVER CHANGE")
             .skip(1)
-            .subscribe(onNext:{(address,port,path) in
+            .subscribe(onNext:{ [weak self] (address,port,path) in
                 if let address = address {
                     let portInt: Int? = port != nil ? Int(port!) : nil
                     let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
-                    self.session?.server = server
+                    self?.session?.server = server
                 }
         }).addDisposableTo(disposeBag)
         
