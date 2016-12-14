@@ -184,7 +184,7 @@ class Torrent: Mappable, Equatable, Hashable {
             default:
                 throw MetadataError.couldNotRequest
             }
-        })
+        }).filterSuccessfulStatusCodes()
         
         let json = response.mapJSON()
         
