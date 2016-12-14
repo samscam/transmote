@@ -260,22 +260,10 @@ class TransmissionSession{
             case .success(let moyaResponse):
                 do {
                     let json = try moyaResponse.mapJsonRpc()
-                    /*
-                    self.torrents.value = (json["torrents"] as! [[String:Any]]).flatMap{
-                        guard let id = $0["id"] as? Int else {
-                            return nil
-                        }
-                        if let existing = self.torrents.value.element(matching: id) {
-                            // Update existing torrent
-                            return existing.update(JSON:$0)
-                        } else {
-                            // Create a new one
-                            return Torrent(JSON:$0)
-                        }
-                    }
-                    */
-                    
+
                     var torrentsCpy = self.torrents.value
+                    
+                    // We are mutating the existing array rather than simply replacing it with a fresh one - this could be genericised
                     
                     let updatedTorrents: [Torrent] = (json["torrents"] as! [[String:Any]]).flatMap{
                         guard let id = $0["id"] as? Int else {

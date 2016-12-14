@@ -21,7 +21,6 @@
 		22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38E1DE1000A00588FFD /* Main.storyboard */; };
 		22EBE39E1DE1010800588FFD /* ProperImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3971DE1010800588FFD /* ProperImageView.swift */; };
 		22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3981DE1010800588FFD /* TRNDefinitions.swift */; };
-		22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */; };
 		22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TransmissionServer.swift */; };
 		22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* Torrent.swift */; };
 		22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39D1DE1010800588FFD /* MainWindowController.swift */; };
@@ -85,9 +84,7 @@
 		22EBE3911DE1000A00588FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22EBE3971DE1010800588FFD /* ProperImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperImageView.swift; sourceTree = "<group>"; };
 		22EBE3981DE1010800588FFD /* TRNDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNDefinitions.swift; sourceTree = "<group>"; };
-		22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNJSONRPCClient.swift; sourceTree = "<group>"; };
 		22EBE39A1DE1010800588FFD /* TransmissionServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionServer.swift; sourceTree = "<group>"; };
-		22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRNTheMovieDBClient.swift; sourceTree = "<group>"; };
 		22EBE39C1DE1010800588FFD /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
 		22EBE39D1DE1010800588FFD /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		22EBE3B21DE3A25D00588FFD /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
@@ -130,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				22EBE3D81DE45EB400588FFD /* Core */,
-				22EBE3871DE1000A00588FFD /* Transmote */,
+				22EBE3871DE1000A00588FFD /* Transmote - macOS */,
 				22EBE3861DE1000A00588FFD /* Products */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
 			);
@@ -144,7 +141,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22EBE3871DE1000A00588FFD /* Transmote */ = {
+		22EBE3871DE1000A00588FFD /* Transmote - macOS */ = {
 			isa = PBXGroup;
 			children = (
 				22EBE3881DE1000A00588FFD /* AppDelegate.swift */,
@@ -154,13 +151,12 @@
 				2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */,
 				22EBE3D61DE4572700588FFD /* SettingsViewController.swift */,
 				22EBE3971DE1010800588FFD /* ProperImageView.swift */,
-				22EBE3991DE1010800588FFD /* TRNJSONRPCClient.swift */,
-				22EBE39B1DE1010800588FFD /* TRNTheMovieDBClient.swift */,
 				22EBE38C1DE1000A00588FFD /* Assets.xcassets */,
 				22EBE38E1DE1000A00588FFD /* Main.storyboard */,
 				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
 				22EBE3911DE1000A00588FFD /* Info.plist */,
 			);
+			name = "Transmote - macOS";
 			path = Transmote;
 			sourceTree = "<group>";
 		};
@@ -281,7 +277,6 @@
 				22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */,
 				2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */,
 				2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */,
-				22EBE3A01DE1010800588FFD /* TRNJSONRPCClient.swift in Sources */,
 				2247B7CA1DF84BAA001B4C95 /* Metadata.swift in Sources */,
 				22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */,
 				22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */,

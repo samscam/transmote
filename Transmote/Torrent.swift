@@ -146,6 +146,7 @@ class Torrent: Mappable, Equatable, Hashable {
     }
     
     // MARK: - Calculated variables
+    // This has all got a bit ViewModelly and should probably be moved out of here...
     
     lazy var derivedMetadata: Observable<Metadata> = self.name.map{
         print("Deriving metadata for \($0)")

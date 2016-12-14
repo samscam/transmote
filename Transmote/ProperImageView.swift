@@ -16,16 +16,19 @@ public enum ContentMode : Int {
     case scaleToFill
     case scaleAspectFit
     case scaleAspectFill
-//    case redraw
     case center
-//    case top
-//    case bottom
-//    case left
-//    case right
-//    case topLeft
-//    case topRight
-//    case bottomLeft
-//    case bottomRight
+/* 
+     TODO: There are other modes in UIImageView which could be implemented:
+    case redraw
+    case top
+    case bottom
+    case left
+    case right
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
+ */
 }
 
 public class ProperImageView: NSView {
@@ -33,11 +36,8 @@ public class ProperImageView: NSView {
     // Public properties
     public var image: NSImage? {
         set{
-//            print("\(newValue)")
             self.innerImageView.image = newValue
             self.updateLayout()
-//            self.setNeedsDisplay(self.bounds)
-//            self.layoutSubtreeIfNeeded()
         }
         get {
             return self.innerImageView.image
@@ -93,21 +93,12 @@ public class ProperImageView: NSView {
                 result = CGRect(x: 0 , y:  -( ( bounds.width / imageAspect) - bounds.height) / 2, width: bounds.width, height:  bounds.width / imageAspect)
             }
         case .scaleAspectFit:
+            // erm yeah...
             result = bounds
         case .scaleToFill:
             result = bounds
-            
-//        case .bottom:
-//        case .bottomLeft:
-//        case .bottomRight:
         case .center:
             result = CGRect(x: (bounds.width - imageSize.width)/2, y: (bounds.height - imageSize.height)/2, width: imageSize.width, height: imageSize.height)
-//        case .left:
-//        case .redraw:
-//        case .right:
-//        case .top:
-//        case .topLeft:
-//        case .topRight:
             
         }
         

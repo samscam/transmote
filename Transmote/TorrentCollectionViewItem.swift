@@ -16,7 +16,6 @@ import ProgressKit
 
 class TorrentCollectionViewItem: NSCollectionViewItem {
     
-//    @IBOutlet weak var torrentImageView: NSImageView!
     @IBOutlet weak var torrentImageView: ProperImageView!
     
     @IBOutlet weak var titleLabel: NSTextField!
