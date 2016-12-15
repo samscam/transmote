@@ -4,7 +4,7 @@
 ###### USAGE #######
 
 # Create (and push) ANNOTATED tags in git prefixed with "v" (eg "v1.2.0") to define the 'marketing' version number for commits going forward
-# The following environment variables will become available (eg from your Info.plist)
+# The following variables will become available from your Info.plist (and by extension the project's general settings)
 
 # -- SHORT_VERSION : whatever the tag was, eg 1.2.0 - without the "v"
 # -- LONG_VERSION : is in the form 1.2.0.xx (where xx is the number of commits since the tag)
@@ -29,6 +29,7 @@
 # Add a Run Script phase
 # Add the line "./autoversioning.sh"
 # Back in your main target, add the aggregate target to target dependencies
+# ... this is because the script needs to run before the plist gets preprocessed
 
 # In the General settings of the main target:
 # Version => SHORT_VERSION
@@ -91,8 +92,6 @@ echo "#define BUMPS $bumps" >> revision.prefix
 echo "#define LONG_VERSION $longVersion" >> revision.prefix
 echo "#define SHORT_VERSION $shortVersion" >> revision.prefix
 echo "#define REV_COUNT $revCount" >> revision.prefix
-
-export GIT_HASH=$gitHash
 
 cd "$PROJECT_DIR/$PROJECT_NAME"
 touch "Info.plist"

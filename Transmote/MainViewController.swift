@@ -44,7 +44,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
-        self.versionWidget.title = "Version \(shortVersion) (\(longVersion))"
+        self.versionWidget.title = "Transmote \(shortVersion)"
         
         bindToSession()
     }
