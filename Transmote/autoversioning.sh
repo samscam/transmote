@@ -24,6 +24,7 @@
 # Set the following in the Build Settings of the target:
 # Info.plist Preprocessor Prefix File => $PROJECT_TEMP_DIR/revision.prefix
 # Preprocess Info.plist file => Yes
+# Optionally pass the -traditional flag to the Info.plist Other Preprocessor Flags build setting to stop URLs being turned into comments
 
 # Create an aggregate target (called Autoversioning or whatever)
 # Add a Run Script phase
@@ -31,7 +32,7 @@
 # Back in your main target, add the aggregate target to target dependencies
 # ... this is because the script needs to run before the plist gets preprocessed
 
-# In the General settings of the main target:
+# In the General settings of the main target assign some variables how you want them:
 # Version => SHORT_VERSION
 # Build => REV_COUNT
 
