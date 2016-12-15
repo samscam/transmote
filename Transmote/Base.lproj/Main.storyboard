@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D12b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -292,15 +292,18 @@
                                         </constraints>
                                     </box>
                                     <button verticalHuggingPriority="1000" placeholderIntrinsicWidth="86" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="RfL-YG-JPX">
-                                        <rect key="frame" x="20" y="6" width="86" height="17"/>
-                                        <buttonCell key="cell" type="inline" title="Version" bezelStyle="inline" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="Ic9-Jw-O7L">
+                                        <rect key="frame" x="20" y="5" width="86" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="wpU-65-3bC"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="inline" title="Version" bezelStyle="inline" alignment="center" controlSize="small" borderStyle="border" inset="2" id="Ic9-Jw-O7L">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="miniSystemBold"/>
+                                            <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Zgi-dt-uQh">
                                         <rect key="frame" x="190" y="10" width="180" height="11"/>
-                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="Images and metadata from TheMovieDB" usesSingleLineMode="YES" id="4ye-x4-edc">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Images and metadata from TheMovieDB" usesSingleLineMode="YES" id="4ye-x4-edc">
                                             <font key="font" metaFont="miniSystem"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -310,6 +313,7 @@
                                 <constraints>
                                     <constraint firstItem="hj5-gl-9ia" firstAttribute="top" secondItem="rsf-nu-qAh" secondAttribute="top" id="1Je-0d-ikq"/>
                                     <constraint firstItem="RPT-CA-gA8" firstAttribute="leading" secondItem="rsf-nu-qAh" secondAttribute="leading" id="CrR-sO-0ca"/>
+                                    <constraint firstItem="Zgi-dt-uQh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RfL-YG-JPX" secondAttribute="trailing" constant="20" id="DaW-8A-4OA"/>
                                     <constraint firstAttribute="trailing" secondItem="RPT-CA-gA8" secondAttribute="trailing" id="HVn-eA-AUa"/>
                                     <constraint firstItem="RPT-CA-gA8" firstAttribute="top" secondItem="rsf-nu-qAh" secondAttribute="top" id="Kv6-ZE-JCK"/>
                                     <constraint firstItem="hj5-gl-9ia" firstAttribute="leading" secondItem="rsf-nu-qAh" secondAttribute="leading" id="SCb-tZ-mep"/>
@@ -352,6 +356,7 @@
                         <outlet property="passiveAlertContainer" destination="nGX-eU-cXa" id="o7b-Mj-3PB"/>
                         <outlet property="passiveAlertImageView" destination="T7X-xN-jaF" id="cZU-vM-1IW"/>
                         <outlet property="passiveAlertLabel" destination="LGc-OD-jdz" id="zso-ud-E9A"/>
+                        <outlet property="versionWidget" destination="RfL-YG-JPX" id="IuY-sB-1cZ"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -416,7 +421,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xui-JC-rBQ">
-                                                <rect key="frame" x="-2" y="6" width="49" height="11"/>
+                                                <rect key="frame" x="-2" y="5.5" width="49" height="11"/>
                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="RPC Path" id="rk4-oV-XNN">
                                                     <font key="font" metaFont="miniSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

@@ -75,7 +75,9 @@
 		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
 		2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBTarget.swift; sourceTree = "<group>"; };
 		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
+		2279390D1E01B13F0063B3E1 /* appcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = SOURCE_ROOT; };
 		22D27D661DFEA9560080B2E8 /* Backoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backoff.swift; sourceTree = "<group>"; };
+		22DB05261E0286E600419CBD /* autoversioning.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -123,11 +125,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22DB05271E0286F300419CBD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
+				22EBE3911DE1000A00588FFD /* Info.plist */,
+				22DB05261E0286E600419CBD /* autoversioning.sh */,
+				2279390D1E01B13F0063B3E1 /* appcast.xml */,
+			);
+			name = "Supporting Files";
+			path = Transmote;
+			sourceTree = "<group>";
+		};
 		22EBE37C1DE1000900588FFD = {
 			isa = PBXGroup;
 			children = (
 				22EBE3D81DE45EB400588FFD /* Core */,
 				22EBE3871DE1000A00588FFD /* Transmote - macOS */,
+				22DB05271E0286F300419CBD /* Supporting Files */,
 				22EBE3861DE1000A00588FFD /* Products */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
 			);
@@ -153,8 +168,6 @@
 				22EBE3971DE1010800588FFD /* ProperImageView.swift */,
 				22EBE38C1DE1000A00588FFD /* Assets.xcassets */,
 				22EBE38E1DE1000A00588FFD /* Main.storyboard */,
-				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
-				22EBE3911DE1000A00588FFD /* Info.plist */,
 			);
 			name = "Transmote - macOS";
 			path = Transmote;
@@ -202,6 +215,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
+				22DB05281E029E6700419CBD /* ShellScript */,
+				22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */,
 				22EBE3811DE1000900588FFD /* Sources */,
 				22EBE3821DE1000900588FFD /* Frameworks */,
 				22EBE3831DE1000900588FFD /* Resources */,
@@ -264,6 +279,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22DB05281E029E6700419CBD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$PROJECT_DIR/$PROJECT_NAME\"\n./autoversioning.sh";
+		};
+		22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "TODO and FIXME and WARNING";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"(TODO|FIXME|WARNING):\"\necho \"searching ${SRCROOT}/${PROJECT_NAME} for ${TAGS}\"\nfind \"${SRCROOT}/${PROJECT_NAME}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --ignore-case --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/i\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		22EBE3811DE1000900588FFD /* Sources */ = {
@@ -403,6 +448,8 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -421,6 +468,8 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";

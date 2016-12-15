@@ -27,6 +27,13 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     @IBOutlet weak var passiveAlertLabel: NSTextField!
     @IBOutlet weak var passiveAlertImageView: NSImageView!
     
+    @IBOutlet weak var versionWidget: NSButton!
+    
+    let shortVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    
+    let longVersion: String=Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +43,8 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        self.versionWidget.title = "Version \(shortVersion) (\(longVersion))"
         
         bindToSession()
     }
