@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		22DB052B1E02AB4800419CBD /* Autoversioning */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 22DB052C1E02AB4800419CBD /* Build configuration list for PBXAggregateTarget "Autoversioning" */;
+			buildPhases = (
+				22DB052F1E02AB6000419CBD /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Autoversioning;
+			productName = Autoversioning;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
@@ -45,6 +59,16 @@
 		22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */; };
 		22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22DB05301E02AB6E00419CBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22EBE37D1DE1000900588FFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22DB052B1E02AB4800419CBD;
+			remoteInfo = Autoversioning;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		22EBE3B01DE1017900588FFD /* Embed Frameworks */ = {
@@ -215,7 +239,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
-				22DB05281E029E6700419CBD /* ShellScript */,
 				22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */,
 				22EBE3811DE1000900588FFD /* Sources */,
 				22EBE3821DE1000900588FFD /* Frameworks */,
@@ -225,6 +248,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				22DB05311E02AB6E00419CBD /* PBXTargetDependency */,
 			);
 			name = Transmote;
 			productName = Transmote;
@@ -241,6 +265,10 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Sam Easterby-Smith";
 				TargetAttributes = {
+					22DB052B1E02AB4800419CBD = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
 					22EBE3841DE1000900588FFD = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 9M28MQ9SZC;
@@ -262,6 +290,7 @@
 			projectRoot = "";
 			targets = (
 				22EBE3841DE1000900588FFD /* Transmote */,
+				22DB052B1E02AB4800419CBD /* Autoversioning */,
 			);
 		};
 /* End PBXProject section */
@@ -281,19 +310,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		22DB05281E029E6700419CBD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"$PROJECT_DIR/$PROJECT_NAME\"\n./autoversioning.sh";
-		};
 		22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,6 +323,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"(TODO|FIXME|WARNING):\"\necho \"searching ${SRCROOT}/${PROJECT_NAME} for ${TAGS}\"\nfind \"${SRCROOT}/${PROJECT_NAME}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --ignore-case --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/i\"";
+		};
+		22DB052F1E02AB6000419CBD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$PROJECT_DIR/$PROJECT_NAME\"\n./autoversioning.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -335,6 +364,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		22DB05311E02AB6E00419CBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22DB052B1E02AB4800419CBD /* Autoversioning */;
+			targetProxy = 22DB05301E02AB6E00419CBD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		22EBE38E1DE1000A00588FFD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -347,6 +384,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		22DB052D1E02AB4800419CBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		22DB052E1E02AB4800419CBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		22EBE3921DE1000A00588FFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -480,6 +531,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22DB052C1E02AB4800419CBD /* Build configuration list for PBXAggregateTarget "Autoversioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22DB052D1E02AB4800419CBD /* Debug */,
+				22DB052E1E02AB4800419CBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		22EBE3801DE1000900588FFD /* Build configuration list for PBXProject "Transmote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
