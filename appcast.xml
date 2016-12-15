@@ -5,6 +5,22 @@
       <link>http://samscam.co.uk/transmote/appcast.xml</link>
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
+      
+      <item>
+          <title>Version 0.3.x</title>
+          <description><![CDATA[
+              <ul>
+              <li>Completely re-written in Swift using modern gubbins.</li>
+              <li>New UI</li>
+              <li>No new features</li>
+              </ul>
+          ]]>
+          </description>
+          <pubDate>Tue, 14 Dec 2016 18:00:00 +0000</pubDate>
+          <enclosure url="http://samscam.co.uk/transmote/release/Transmote-0.3.xx.zip" sparkle:version="0.1.32" type="application/octet-stream" />
+      </item>
+      
+      
 	<item>
          <title>Version 0.1.32</title>
 		<description><![CDATA[
