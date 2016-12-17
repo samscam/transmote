@@ -9,8 +9,9 @@
 import AppKit
 import RxSwift
 import Moya
+import Sparkle
 
-class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate {
+class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, SUUpdaterDelegate {
 
     var session: TransmissionSession? {
         didSet{
@@ -44,11 +45,13 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
-        self.versionWidget.title = "Transmote \(shortVersion)"
-        
+        sortOutVersionWidget()
+        startUpdater()
         bindToSession()
     }
 
+
+    
     func bindToSession(){
         
         guard let session = session else {
@@ -99,5 +102,30 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         return item
     }
     
-}
+    // MARK: Sparkle Updater Stuff
+    
+    let updater = SUUpdater.shared()
+    var pendingUpdateItem: SUAppcastItem?
+    
+    func startUpdater(){
+        updater?.delegate = self
+        updater?.checkForUpdatesInBackground()
+    }
+    
+    func sortOutVersionWidget(){
+        if let pendingUpdateItem = pendingUpdateItem {
+            self.versionWidget.title="Update available: v\(pendingUpdateItem.versionString)"
+        } else {
+            self.versionWidget.title = "Transmote v\(shortVersion)"
+        }
+    }
 
+    @IBAction func updateWidgetClicked(_ sender: Any) {
+        self.updater?.checkForUpdates(self)
+    }
+    func updater(_ updater: SUUpdater!, didFindValidUpdate item: SUAppcastItem!) {
+        pendingUpdateItem = item
+        sortOutVersionWidget()
+    }
+
+}

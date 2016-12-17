@@ -296,10 +296,13 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="wpU-65-3bC"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="inline" title="Version" bezelStyle="inline" alignment="center" controlSize="small" borderStyle="border" inset="2" id="Ic9-Jw-O7L">
+                                        <buttonCell key="cell" type="inline" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="Ic9-Jw-O7L">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystemBold"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="updateWidgetClicked:" target="XfG-lQ-9wD" id="Iy4-5P-xDD"/>
+                                        </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Zgi-dt-uQh">
                                         <rect key="frame" x="190" y="10" width="180" height="11"/>
