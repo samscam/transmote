@@ -23,12 +23,6 @@
                                         <menuItem title="Check for updates..." id="D30-nQ-CUL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="EC3-EI-aZG">
-                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                                        </menuItem>
-                                        <menuItem title="Services" id="Mza-hZ-ko8">
-                                            <menu key="submenu" title="Services" systemMenu="services" id="CSe-qd-dOa"/>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="iGT-VE-ub4">
                                             <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                         </menuItem>
@@ -51,7 +45,11 @@
                                         <menuItem isSeparatorItem="YES" id="OQc-b8-mke">
                                             <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                         </menuItem>
-                                        <menuItem title="Quit Transmote" keyEquivalent="q" id="EcU-rt-7ai"/>
+                                        <menuItem title="Quit Transmote" keyEquivalent="q" id="EcU-rt-7ai">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="nN7-1u-Dzc"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
