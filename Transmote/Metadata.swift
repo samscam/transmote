@@ -35,8 +35,12 @@ struct Metadata: Mappable {
         var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
         var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.characters.count), withTemplate: " ")
         
+        // Clean runs of whitespace
+        cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        
         // Clean references to DVD BDRIP and boxset and things
-        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?)\\b", options: .caseInsensitive)
+        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|(from \\w* \\w* \\w*))\\b", options: .caseInsensitive)
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
         
         // Clean runs of whitespace
