@@ -61,11 +61,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         switch _highlightState {
         case .none:
             if _isSelected {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.7)
                 self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
                 self.box.borderWidth = 3
             } else {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
                 self.box.borderWidth = 0
             }
         case .forSelection:
