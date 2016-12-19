@@ -81,7 +81,7 @@ class Torrent: Mappable, Equatable, Hashable {
             } }
     }
     private let _name = Variable<String>("")
-    var name: Observable<String> { return _name.asObservable().share() }
+    var name: Observable<String> { return _name.asObservable().shareReplay(1) }
     
     // The rest is more straightforward
     
@@ -198,7 +198,7 @@ class Torrent: Mappable, Equatable, Hashable {
         
         return metadata.catchError{ error in
             return Observable<Metadata?>.just(nil)
-        }
+        }.shareReplay(1)
         
     }()
     
@@ -208,7 +208,7 @@ class Torrent: Mappable, Equatable, Hashable {
                 return external
             }
             return derived
-    }
+    }.shareReplay(1)
     
     lazy var episodeMetadata: Observable<Episode?> = {
         let response: Observable<Response> = self.metadata
@@ -236,7 +236,7 @@ class Torrent: Mappable, Equatable, Hashable {
         
         return episode.catchError{ error in
             return Observable<Episode?>.just(nil)
-        }
+        }.shareReplay(1)
     }()
     
     lazy var image: Observable<NSImage?> = {
