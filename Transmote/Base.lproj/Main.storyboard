@@ -158,6 +158,9 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <connections>
+                                        <segue destination="M6y-C0-WB3" kind="popover" identifier="RemoveSegue" popoverAnchorView="6I3-AJ-fGM" popoverBehavior="t" preferredEdge="maxY" id="vk7-eq-X85"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="CBE2191F-D7EC-442F-8130-B8EDD2D2DE6C" label="Delete" paletteLabel="Delete Torrent" image="NSTrashEmpty" id="F1X-C5-LpX" userLabel="Delete">
                                     <nil key="toolTip"/>
@@ -171,6 +174,9 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <connections>
+                                        <segue destination="M6y-C0-WB3" kind="popover" identifier="DeleteSegue" popoverAnchorView="F1X-C5-LpX" popoverBehavior="t" preferredEdge="maxY" id="up7-jv-ogf"/>
+                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -215,7 +221,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="388" height="346"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lbx-AU-g3M">
-                                                <size key="itemSize" width="250" height="250"/>
+                                                <size key="itemSize" width="350" height="200"/>
                                                 <edgeInsets key="sectionInset" left="10" right="10" top="10" bottom="10"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" red="0.92812067270278931" green="0.92882484197616577" blue="0.92822974920272827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -607,10 +613,10 @@
             </objects>
             <point key="canvasLocation" x="639.5" y="154.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Confirmation View Controller-->
         <scene sceneID="s5g-a5-Mf8">
             <objects>
-                <viewController storyboardIdentifier="DeletePopover" id="M6y-C0-WB3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeletePopover" id="M6y-C0-WB3" customClass="ConfirmationViewController" customModule="Transmote" customModuleProvider="target" sceneMemberID="viewController">
                     <customView key="view" id="6fq-Tf-CAA" userLabel="Delete confirmation">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="112"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -632,6 +638,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="cancelButtonClicked:" target="M6y-C0-WB3" id="nmI-bq-ciR"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="coY-EY-3Ve">
                                 <rect key="frame" x="230" y="19" width="200" height="19"/>
@@ -654,10 +663,16 @@
                             <constraint firstAttribute="bottom" secondItem="U3X-a3-CS5" secondAttribute="bottom" constant="20" id="wXM-9c-yWE"/>
                         </constraints>
                     </customView>
+                    <connections>
+                        <outlet property="cancelButton" destination="U3X-a3-CS5" id="V2E-wY-bGO"/>
+                        <outlet property="deleteButton" destination="coY-EY-3Ve" id="bG7-JC-aXF"/>
+                        <outlet property="deleteButtonClicked" destination="coY-EY-3Ve" id="0Pd-sy-5Fr"/>
+                        <outlet property="messageField" destination="sMt-aO-9bc" id="qQE-VY-T6b"/>
+                    </connections>
                 </viewController>
                 <customObject id="128-4A-ACM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="646" y="451"/>
+            <point key="canvasLocation" x="773" y="369"/>
         </scene>
     </scenes>
     <resources>
@@ -667,4 +682,7 @@
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="NSTrashEmpty" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="up7-jv-ogf"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -28,6 +28,14 @@ class MainWindowController: NSWindowController {
             if let settingsViewController = segue.destinationController as? SettingsViewController {
                 settingsViewController.session = self.session
             }
+        case "DeleteSegue":
+            if let confirmationViewController = segue.destinationController as? ConfirmationViewController{
+                confirmationViewController.session = self.session
+            }
+        case "RemoveSegue":
+            if let confirmationViewController = segue.destinationController as? ConfirmationViewController{
+                confirmationViewController.session = self.session
+            }
         default:
             break
         }
