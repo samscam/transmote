@@ -81,7 +81,7 @@ class Torrent: Mappable, Equatable, Hashable {
             } }
     }
     private let _name = Variable<String>("")
-    var name: Observable<String> { return _name.asObservable() }
+    var name: Observable<String> { return _name.asObservable().share() }
     
     // The rest is more straightforward
     

@@ -102,6 +102,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         return item
     }
     
+//    func collectionView(_ collectionView: NSCollectionView, shouldSelectItemsAt indexPaths: Set<IndexPath>) -> Set<IndexPath> {
+//        return indexPaths
+//    }
+//    
+    
     // MARK: Sparkle Updater Stuff
     
     let updater = SUUpdater.shared()

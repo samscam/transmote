@@ -69,9 +69,6 @@ public class ProperImageView: NSView {
         self.layer?.masksToBounds = true
         innerImageView.imageScaling = .scaleAxesIndependently
         self.addSubview(innerImageView)
-        innerImageView.layer?.opacity = 0.3
-        self.layer?.backgroundColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-//        self.innerImageView.layer?.backgroundColor =  CGColor(red: 0, green: 2, blue: 0, alpha: 1)
     }
 
     public func updateLayout() {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D12b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +12,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <collectionViewItem storyboardIdentifier="TorrentCollectionViewItem" id="2l3-8k-wz2" customClass="TorrentCollectionViewItem" customModule="Transmote" customModuleProvider="target">
             <connections>
+                <outlet property="box" destination="WM3-nd-Dig" id="oKO-cb-WWl"/>
                 <outlet property="episodeLabel" destination="s6N-yI-x06" id="Dal-8q-yOW"/>
                 <outlet property="progressStatusLabel" destination="VZS-1p-7Ih" id="wJ1-PY-Vt7"/>
                 <outlet property="progressView" destination="gxl-JK-iJZ" id="4qg-Oc-kbF"/>
@@ -22,34 +23,26 @@
             <point key="canvasLocation" x="584" y="750"/>
         </collectionViewItem>
         <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" id="afG-HD-eFG" userLabel="Torrent cell template">
-            <rect key="frame" x="0.0" y="0.0" width="310" height="226"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" id="fse-0A-fHe">
-                <rect key="frame" x="0.0" y="0.0" width="310" height="226"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" boxType="custom" borderType="bezel" cornerRadius="8" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
-                        <rect key="frame" x="5" y="5" width="300" height="216"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3b3-D2-Yqf" customClass="ProperImageView" customModule="Transmote" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
+                    </customView>
+                    <box autoresizesSubviews="NO" boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
                         <view key="contentView" id="TkE-v7-kSP">
-                            <rect key="frame" x="1" y="1" width="298" height="214"/>
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="3b3-D2-Yqf" customClass="ProperImageView" customModule="Transmote" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="298" height="214"/>
-                                </customView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="3b3-D2-Yqf" secondAttribute="trailing" id="E74-yz-rAY"/>
-                                <constraint firstItem="3b3-D2-Yqf" firstAttribute="leading" secondItem="TkE-v7-kSP" secondAttribute="leading" id="Pq5-ia-7r2"/>
-                                <constraint firstAttribute="bottom" secondItem="3b3-D2-Yqf" secondAttribute="bottom" id="Yht-Hs-qqi"/>
-                                <constraint firstItem="3b3-D2-Yqf" firstAttribute="top" secondItem="TkE-v7-kSP" secondAttribute="top" id="rbS-Yc-F54"/>
-                            </constraints>
                         </view>
-                        <color key="borderColor" red="0.64640066964285714" green="0.64640066964285714" blue="0.64640066964285714" alpha="0.5" colorSpace="calibratedRGB"/>
-                        <color key="fillColor" red="0.0035435267857142857" green="0.0035435267857142857" blue="0.0035435267857142857" alpha="0.68659220950704225" colorSpace="calibratedRGB"/>
+                        <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="fillColor" red="0.0035435267857142857" green="0.0035435267857142857" blue="0.0035435267857142857" alpha="0.0" colorSpace="calibratedRGB"/>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-Qk-Z9k">
-                        <rect key="frame" x="8" y="199" width="294" height="17"/>
+                        <rect key="frame" x="8" y="383" width="384" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="AS0-KO-qaH">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,14 +50,14 @@
                         </textFieldCell>
                     </textField>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="gxl-JK-iJZ" customClass="CircularProgressView" customModule="ProgressKit">
-                        <rect key="frame" x="125" y="31" width="60" height="60"/>
+                        <rect key="frame" x="170" y="31" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="MPn-Fe-PGJ"/>
                             <constraint firstAttribute="width" constant="60" id="X40-qK-vYW"/>
                         </constraints>
                     </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZS-1p-7Ih">
-                        <rect key="frame" x="18" y="15" width="274" height="11"/>
+                        <rect key="frame" x="18" y="15" width="364" height="11"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="bZO-DP-WVJ">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -72,7 +65,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6N-yI-x06">
-                        <rect key="frame" x="8" y="183" width="294" height="11"/>
+                        <rect key="frame" x="8" y="367" width="384" height="11"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="EIP-b8-MbQ">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,24 +75,28 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="VZS-1p-7Ih" firstAttribute="leading" secondItem="fse-0A-fHe" secondAttribute="leading" constant="20" id="1dF-SX-SNJ"/>
+                    <constraint firstAttribute="bottom" secondItem="3b3-D2-Yqf" secondAttribute="bottom" id="4PB-Ih-GZa"/>
                     <constraint firstAttribute="bottom" secondItem="VZS-1p-7Ih" secondAttribute="bottom" constant="15" id="QfW-uM-wZg"/>
                     <constraint firstAttribute="trailing" secondItem="VZS-1p-7Ih" secondAttribute="trailing" constant="20" id="UQI-qD-FFg"/>
                     <constraint firstItem="VZS-1p-7Ih" firstAttribute="top" secondItem="gxl-JK-iJZ" secondAttribute="bottom" constant="5" id="XYT-gq-Dxh"/>
+                    <constraint firstAttribute="trailing" secondItem="3b3-D2-Yqf" secondAttribute="trailing" id="bE4-Gf-9xc"/>
                     <constraint firstItem="gxl-JK-iJZ" firstAttribute="centerX" secondItem="fse-0A-fHe" secondAttribute="centerX" id="gzy-eU-Nuy"/>
+                    <constraint firstItem="3b3-D2-Yqf" firstAttribute="top" secondItem="fse-0A-fHe" secondAttribute="top" id="hRQ-nq-qZR"/>
                     <constraint firstItem="VZS-1p-7Ih" firstAttribute="centerX" secondItem="fse-0A-fHe" secondAttribute="centerX" id="sNN-JV-5c7"/>
+                    <constraint firstItem="3b3-D2-Yqf" firstAttribute="leading" secondItem="fse-0A-fHe" secondAttribute="leading" id="zXq-xC-pja"/>
                 </constraints>
             </view>
             <constraints>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" constant="10" id="5iV-a9-vgs"/>
-                <constraint firstAttribute="trailing" secondItem="WM3-nd-Dig" secondAttribute="trailing" constant="5" id="ORD-Hp-ESG"/>
+                <constraint firstAttribute="trailing" secondItem="WM3-nd-Dig" secondAttribute="trailing" id="ORD-Hp-ESG"/>
                 <constraint firstItem="s6N-yI-x06" firstAttribute="top" secondItem="o5B-Qk-Z9k" secondAttribute="bottom" constant="5" id="OyO-sH-XA8"/>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="leading" secondItem="s6N-yI-x06" secondAttribute="leading" id="SUn-dY-gxI"/>
-                <constraint firstAttribute="bottom" secondItem="WM3-nd-Dig" secondAttribute="bottom" constant="5" id="SaZ-Za-otl"/>
+                <constraint firstAttribute="bottom" secondItem="WM3-nd-Dig" secondAttribute="bottom" id="SaZ-Za-otl"/>
                 <constraint firstItem="s6N-yI-x06" firstAttribute="trailing" secondItem="o5B-Qk-Z9k" secondAttribute="trailing" id="Slj-7M-Dan"/>
-                <constraint firstItem="WM3-nd-Dig" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" constant="5" id="bBb-el-QvC"/>
+                <constraint firstItem="WM3-nd-Dig" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" id="bBb-el-QvC"/>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="10" id="fTo-EU-E5A"/>
                 <constraint firstItem="s6N-yI-x06" firstAttribute="centerX" secondItem="afG-HD-eFG" secondAttribute="centerX" id="hOL-hi-ivo"/>
-                <constraint firstItem="WM3-nd-Dig" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="5" id="wB4-XD-r4h"/>
+                <constraint firstItem="WM3-nd-Dig" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" id="wB4-XD-r4h"/>
             </constraints>
             <color key="fillColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
             <point key="canvasLocation" x="132" y="214"/>
