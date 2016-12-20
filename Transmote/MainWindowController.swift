@@ -12,12 +12,14 @@ import Sparkle
 class MainWindowController: NSWindowController {
     
     var session: TransmissionSession = TransmissionSession()
+    weak var mainViewController: MainViewController!
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        //poke the session
         
-        (self.contentViewController as! MainViewController).session = session
+        //poke the session
+        mainViewController = self.contentViewController! as! MainViewController
+        mainViewController.session = session
         
     }
     
@@ -29,12 +31,23 @@ class MainWindowController: NSWindowController {
                 settingsViewController.session = self.session
             }
         case "DeleteSegue":
+            
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController{
-                confirmationViewController.session = self.session
+                confirmationViewController.message = "Do you really want to DELETE this torrent and any downloaded files?"
+                confirmationViewController.action = { [weak self] in
+                    if let strongSelf = self {
+                        strongSelf.session.removeTorrents(torrents: strongSelf.mainViewController.selectedTorrents, delete: true)
+                    }
+                }
             }
         case "RemoveSegue":
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController{
-                confirmationViewController.session = self.session
+                confirmationViewController.message = "This will remove the torrent from the list, leaving files intact."
+                confirmationViewController.action = { [weak self] in
+                    if let strongSelf = self {
+                        strongSelf.session.removeTorrents(torrents: strongSelf.mainViewController.selectedTorrents, delete: false)
+                    }
+                }
             }
         default:
             break

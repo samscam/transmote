@@ -617,12 +617,12 @@
         <scene sceneID="s5g-a5-Mf8">
             <objects>
                 <viewController storyboardIdentifier="DeletePopover" id="M6y-C0-WB3" customClass="ConfirmationViewController" customModule="Transmote" customModuleProvider="target" sceneMemberID="viewController">
-                    <customView key="view" id="6fq-Tf-CAA" userLabel="Delete confirmation">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="112"/>
+                    <customView key="view" misplaced="YES" id="6fq-Tf-CAA" userLabel="Delete confirmation">
+                        <rect key="frame" x="0.0" y="0.0" width="355" height="117"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sMt-aO-9bc">
-                                <rect key="frame" x="18" y="58" width="414" height="34"/>
+                                <rect key="frame" x="18" y="61" width="319" height="34"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Are you sure you want to permanently delete the selected torrents from the server?" id="uYJ-QX-Ytv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -630,24 +630,40 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U3X-a3-CS5">
-                                <rect key="frame" x="20" y="19" width="200" height="19"/>
+                                <rect key="frame" x="14" y="13" width="165" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="UoO-xi-P3s"/>
                                 </constraints>
-                                <buttonCell key="cell" type="roundRect" title="Cancel" bezelStyle="roundedRect" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVD-SN-9f8">
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVD-SN-9f8">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="cellTitle"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">.</string>
+                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="cancelButtonClicked:" target="M6y-C0-WB3" id="nmI-bq-ciR"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="coY-EY-3Ve">
-                                <rect key="frame" x="230" y="19" width="200" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Delete" bezelStyle="roundedRect" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zUt-su-DDy">
+                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="coY-EY-3Ve">
+                                <rect key="frame" x="177" y="13" width="164" height="32"/>
+                                <contentFilters>
+                                    <ciFilter name="CIHueAdjust">
+                                        <configuration>
+                                            <real key="inputAngle" value="2.2000000000000002"/>
+                                            <null key="inputImage"/>
+                                        </configuration>
+                                    </ciFilter>
+                                </contentFilters>
+                                <buttonCell key="cell" type="push" title="Confirm" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zUt-su-DDy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="cellTitle"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="deleteButtonClicked:" target="M6y-C0-WB3" id="aiZ-1v-yMH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -666,13 +682,12 @@
                     <connections>
                         <outlet property="cancelButton" destination="U3X-a3-CS5" id="V2E-wY-bGO"/>
                         <outlet property="deleteButton" destination="coY-EY-3Ve" id="bG7-JC-aXF"/>
-                        <outlet property="deleteButtonClicked" destination="coY-EY-3Ve" id="0Pd-sy-5Fr"/>
                         <outlet property="messageField" destination="sMt-aO-9bc" id="qQE-VY-T6b"/>
                     </connections>
                 </viewController>
                 <customObject id="128-4A-ACM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="773" y="369"/>
+            <point key="canvasLocation" x="800.5" y="371.5"/>
         </scene>
     </scenes>
     <resources>

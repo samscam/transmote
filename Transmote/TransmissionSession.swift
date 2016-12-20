@@ -163,7 +163,7 @@ class TransmissionSession{
         
         self.updateEverything()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (timer) in
             self?.updateEverything()
         })
 
@@ -302,6 +302,8 @@ class TransmissionSession{
         }
     }
     
+    // MARK: Add torrents
+    
     func addTorrent(url: URL){
         provider?.request(.addTorrent(url), completion: { (result) in
             print(result)
@@ -313,6 +315,20 @@ class TransmissionSession{
             self.addTorrent(url: t)
         }
         deferredMagnetURLs = []
+    }
+    
+    // MARK: Remove torrents
+    
+    func removeTorrents(torrents: [Torrent],delete: Bool){
+        if delete {
+            provider?.request(.removeTorrents(torrents)) { (result) in
+                print(result)
+            }
+        } else {
+            provider?.request(.deleteTorrents(torrents)) { (result) in
+                print(result)
+            }
+        }
     }
     
 }
