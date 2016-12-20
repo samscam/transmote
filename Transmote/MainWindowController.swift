@@ -8,11 +8,18 @@
 
 import Cocoa
 import Sparkle
+import RxSwift
+import RxCocoa
 
 class MainWindowController: NSWindowController {
     
     var session: TransmissionSession = TransmissionSession()
     weak var mainViewController: MainViewController!
+    
+    var disposeBag = DisposeBag()
+    
+    @IBOutlet weak var removeTorrentToolbarItem: NSToolbarItem!
+    @IBOutlet weak var deleteTorrentToolbarItem: NSToolbarItem!
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -20,6 +27,11 @@ class MainWindowController: NSWindowController {
         //poke the session
         mainViewController = self.contentViewController! as! MainViewController
         mainViewController.session = session
+        
+        mainViewController.hasSelectedTorrents.subscribe(onNext: { hasSelectedTorrents in
+            self.deleteTorrentToolbarItem.isEnabled = hasSelectedTorrents
+            self.removeTorrentToolbarItem.isEnabled = hasSelectedTorrents
+        }).addDisposableTo(disposeBag)
         
     }
     

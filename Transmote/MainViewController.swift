@@ -8,6 +8,7 @@
 
 import AppKit
 import RxSwift
+import RxCocoa
 import Moya
 import Sparkle
 
@@ -108,6 +109,33 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         let indexes = self.collectionView.selectionIndexPaths
         return indexes.flatMap{ self.session?.torrents.value[$0.item] }
     }
+    
+    lazy var øSelectedTorrents: Observable<[Torrent]> = {
+        let obs = self.collectionView.rx
+            .observe(Set<IndexPath>.self,"selectionIndexPaths")
+        
+        let tor = obs
+            .map{ optionalIndexes -> Set<IndexPath> in
+            if optionalIndexes == nil { return Set<IndexPath>() } else { return optionalIndexes! }
+            }
+            .map{ $0.flatMap{ self.session?.torrents.value[$0.item] } }
+        return tor
+    }()
+    
+    lazy var hasSelectedTorrents: Observable<Bool> = {
+        let obs = self.collectionView.rx
+            .observe(Set<IndexPath>.self,"selectionIndexPaths")
+        
+        return obs
+            .map{ optionalIndexes -> Set<IndexPath> in
+                if optionalIndexes == nil { return Set<IndexPath>() } else { return optionalIndexes! }
+            }
+            .map{
+                return $0.count > 0
+            }
+        
+    }()
+    
     
     // MARK: Sparkle Updater Stuff
     
