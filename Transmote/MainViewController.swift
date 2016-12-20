@@ -102,10 +102,12 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         return item
     }
     
-//    func collectionView(_ collectionView: NSCollectionView, shouldSelectItemsAt indexPaths: Set<IndexPath>) -> Set<IndexPath> {
-//        return indexPaths
-//    }
-//    
+    // MARK: Selected Torrents
+    
+    var selectedTorrents: [Torrent] {
+        let indexes = self.collectionView.selectionIndexPaths
+        return indexes.flatMap{ self.session?.torrents.value[$0.item] }
+    }
     
     // MARK: Sparkle Updater Stuff
     
