@@ -106,6 +106,7 @@ class TransmissionSession{
                     self.stopTimers()
                     self.startRetryTimer()
                 default:
+                    self.torrents.value = []
                     break
             }
         }).addDisposableTo(disposeBag)
@@ -176,7 +177,7 @@ class TransmissionSession{
     
     func startRetryTimer(){
         if self.retryTimer == nil {
-            self.retryTimer = BackoffTimer(min: 1, max: 10){
+            self.retryTimer = BackoffTimer(min: 5, max: 20){
                 self.connect()
             }
         }
