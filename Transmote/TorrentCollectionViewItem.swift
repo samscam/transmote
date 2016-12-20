@@ -69,11 +69,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 self.box.borderWidth = 0
             }
         case .forSelection:
-            self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.65)
+            self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
             self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
             self.box.borderWidth = 3
         case .forDeselection:
-            self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.65)
+            self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
             self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
             self.box.borderWidth = 3
         case .asDropTarget:
