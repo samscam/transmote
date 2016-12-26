@@ -230,7 +230,16 @@ class TransmissionSession{
                     
                 }
             case let .failure(error):
-                self.status.value = .failed(.networkError(error))
+                // Ignore cancellations - otherwise, pass the error along...
+                switch error {
+                case .underlying(let err):
+                    if (err as NSError).code != -999 {
+                        self.status.value = .failed(.networkError(error))
+                    }
+                default:
+                    self.status.value = .failed(.networkError(error))
+                }
+
             }
         }
     }
