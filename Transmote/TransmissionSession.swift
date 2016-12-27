@@ -57,7 +57,7 @@ class TransmissionSession{
                 
                 // If we have no url then the provider ain't going to be no use...
                 guard let serverURL = self.server?.serverURL?.absoluteString else {
-                    return MoyaProvider.defaultEndpointMapping(target)
+                    return MoyaProvider.defaultEndpointMapping(for: target)
                 }
                 
                 
