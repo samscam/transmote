@@ -3,7 +3,6 @@
 //  Transmote
 //
 //  Created by Sam Easterby-Smith on 07/12/2016.
-//  Copyright © 2016 Sam Easterby-Smith. All rights reserved.
 //
 
 import Foundation
@@ -24,13 +23,13 @@ extension TMDBTarget: TargetType {
     public var baseURL: URL {
         switch self {
         case .image:
-            return URL(string: TMDB_IMAGES_URL)!
+            return URL(string: TMDB_IMAGES_URL)! // swiftlint:disable:this force_unwrapping
         default:
-            return URL(string: TMDB_BASE_URL)!
+            return URL(string: TMDB_BASE_URL)! // swiftlint:disable:this force_unwrapping
         }
-       
+
     }
-    
+
     public var path: String {
         switch self {
         case .serviceConfiguration:
@@ -45,15 +44,14 @@ extension TMDBTarget: TargetType {
             return "search/tv"
         }
     }
-    
+
     public var method: Moya.Method { return .get }
-    
-    
+
     // And here's the fun part
     public var parameters: [String: Any]? {
         var params: [String: Any] = ["api_key": TMDB_API_KEY]
         switch self {
-        case .serviceConfiguration, .image,.tvShowDetails:
+        case .serviceConfiguration, .image, .tvShowDetails:
             break
         case .movieMetadata(let movieName, let year):
             params["query"] = movieName
@@ -66,11 +64,11 @@ extension TMDBTarget: TargetType {
         }
         return params
     }
-    
+
     public var sampleData: Data {
-        return "Just can't be bothered".data(using: String.Encoding.utf8)!
+        return "Just can't be bothered".data(using: String.Encoding.utf8)! // swiftlint:disable:this force_unwrapping
     }
-    
+
     public var task: Task {
         return .request
     }
