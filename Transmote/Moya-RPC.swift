@@ -8,6 +8,21 @@
 import Foundation
 import Moya
 
+public enum JSONRPCError: Swift.Error, CustomStringConvertible{
+    case jsonParsingError(String)
+    case errorResponse(String)
+    
+    public var description: String{
+        switch self {
+
+        case .jsonParsingError(let str):
+            return "JSON parsing error:\n\(str)"
+        case .errorResponse(let str):
+            return "Server error:\n\(str)"
+        }
+    }
+}
+
 class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
     
     var sessionId: String?
@@ -65,17 +80,22 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
 extension Response {
     
     func mapJsonRpc() throws -> [String: Any] {
-
-        let json = try self.mapJSON() as! [String: Any]
-        if let result = json["result"] as? String {
-            if result == "success" {
-                return json["arguments"] as! [String: Any]
-            } else {
-                throw SessionError.serverError(result)
-            }
-        } else {
-            throw SessionError.badRpcPath
+        guard let json = try self.mapJSON() as? [String: Any] else {
+            throw JSONRPCError.jsonParsingError("Top level container not a dictionary")
         }
-
+        
+        guard let result = json["result"] as? String else {
+            throw JSONRPCError.jsonParsingError("Missing or mis-typed result token")
+        }
+        
+        guard result == "success" else {
+            throw JSONRPCError.errorResponse(result)
+        }
+        
+        guard let arguments = json["arguments"] as? [String: Any] else {
+            throw JSONRPCError.jsonParsingError("Arguments missing or mis-typed in response")
+        }
+        
+        return arguments
     }
 }

@@ -16,8 +16,9 @@ import RxSwift
 public enum SessionError: Swift.Error, CustomStringConvertible{
     case networkError(Moya.Error)
     case badRpcPath
+    case unexpectedStatusCode(Int)
     case unknownError(Swift.Error)
-    case serverError(String)
+    case rpcError(JSONRPCError)
     
     public var description: String{
         switch self {
@@ -35,8 +36,10 @@ public enum SessionError: Swift.Error, CustomStringConvertible{
             return "Bad RPC path or not a Transmission Server"
         case .unknownError:
             return "Unknown error"
-        case .serverError(let str):
-            return "Server error:\n\(str)"
+        case .unexpectedStatusCode(let statusCode):
+            return "Unexpected status code: \(statusCode)"
+        case .rpcError(let rpcError):
+            return rpcError.description
         }
     }
 }
@@ -227,8 +230,7 @@ class TransmissionSession{
                 default:
                     // Something else happened - I wonder what it was
                     print("Oh dear - status code \(moyaResponse.statusCode)")
-                    self.status.value = .failed(SessionError.serverError("Unexpected status code \(moyaResponse.statusCode)"))
-                    
+                    self.status.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
                 }
             case let .failure(error):
                 // Ignore cancellations - otherwise, pass the error along...
