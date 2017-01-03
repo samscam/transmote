@@ -24,7 +24,7 @@ struct TransmissionServer {
     init(address: String, port: Int? = nil, rpcPath: String? = nil, useTLS: Bool = false){
         
         self.address = address
-        self.port = port ?? 9091
+        self.port = port ?? 9_091
         self.rpcPath = rpcPath ?? "transmission/rpc"
         self.useTLS = useTLS
         

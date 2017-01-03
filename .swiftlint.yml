@@ -1,9 +1,6 @@
 disabled_rules:
-- mark
 - missing_docs
-- nesting
-- nimble_operator
-- number_separator
+
 - opening_brace
 - operator_usage_whitespace
 - operator_whitespace
@@ -65,6 +62,10 @@ opt_in_rules:
 - legacy_constructor
 - legacy_nsgeometry_functions
 - line_length
+- mark
+- nesting
+- nimble_operator
+- number_separator
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
