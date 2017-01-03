@@ -139,7 +139,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                 }
             }
             .map{
-                return $0.count > 0
+                return !$0.isEmpty
             }
         
     }()
