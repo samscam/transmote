@@ -188,7 +188,8 @@ class Torrent: Mappable, Equatable, Hashable {
         
         let metadata: Observable<Metadata?> = json.map{ latestJSON in
             if let jsonDict = latestJSON as? [String:Any],
-                let firstResult: [String: Any] = (jsonDict["results"] as! [Any]).first as! [String : Any]? {
+                let resultsArray = jsonDict["results"] as? [Any],
+                let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
                 return Metadata(JSON: firstResult)
             }
             return nil

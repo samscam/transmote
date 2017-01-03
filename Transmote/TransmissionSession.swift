@@ -277,8 +277,11 @@ class TransmissionSession{
                     var torrentsCpy = self.torrents.value
                     
                     // We are mutating the existing array rather than simply replacing it with a fresh one - this could be genericised
+                    guard let torrentsArray = json["torrents"] as? [[String:Any]] else {
+                        throw JSONRPCError.jsonParsingError("Missing Torrents array")
+                    }
                     
-                    let updatedTorrents: [Torrent] = (json["torrents"] as! [[String:Any]]).flatMap{
+                    let updatedTorrents: [Torrent] = torrentsArray.flatMap{
                         guard let id = $0["id"] as? Int else {
                             return nil
                         }
