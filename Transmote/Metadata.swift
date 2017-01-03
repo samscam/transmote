@@ -31,6 +31,9 @@ struct Metadata: Mappable {
         self.name = rawName
         
         // Clean up dots, underscores
+        
+        // swiftlint:disable force_try
+        
         var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
         var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.characters.count), withTemplate: " ")
         
@@ -51,6 +54,8 @@ struct Metadata: Mappable {
         // Figure out if we have an episode code or season or year or whatnot
         let pattern = "^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?)?(\\d+)\\W*(?:(?:ep|episode|[ex])\\s?(\\d+\\b))?)|(?:season\\s?(\\d+)))){1,2}"
         let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        
+        // swiftlint:enable force_try
         
         guard let result = regex.firstMatch(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count)) else {
             // If we can't match the regex then give up, returning the name as cleaned up as we have it
