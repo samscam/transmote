@@ -15,7 +15,7 @@ class BackoffTimer {
     var count: Int = 0
     var timer: Timer?
     
-    init?(min: TimeInterval, max: TimeInterval, block:@escaping ()->()){
+    init?(min: TimeInterval, max: TimeInterval, block:@escaping ()->()) {
         guard min <= max else {
             return nil
         }
@@ -25,7 +25,7 @@ class BackoffTimer {
         fire()
     }
     
-    func fire(){
+    func fire() {
 
         let time: TimeInterval = min + ((max - min) / Double(steps)) * Double(count)
         timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false, block: { (timer) in
@@ -35,7 +35,7 @@ class BackoffTimer {
         count += 1
     }
     
-    func invalidate(){
+    func invalidate() {
         timer?.invalidate()
     }
     

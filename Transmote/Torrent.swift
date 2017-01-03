@@ -13,7 +13,7 @@ import RxCocoa
 import Moya
 import RxMoya
 
-enum TorrentStatus: Int, CustomStringConvertible{
+enum TorrentStatus: Int, CustomStringConvertible {
     case stopped = 0
     case checkWait = 1
     case check = 2
@@ -70,8 +70,8 @@ class Torrent: Mappable, Equatable, Hashable {
     // Slightly funny arrangement here so that the Observable only changes when the value actually changes
     
     private var __name: String {
-        get{ return _name.value }
-        set{
+        get { return _name.value }
+        set {
             
             if newValue != __name {
                 print("Name set to \(newValue)")
@@ -118,11 +118,11 @@ class Torrent: Mappable, Equatable, Hashable {
     
     // MARK: - Initialisation and parsing
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     
-    func mapping(map: Map){
+    func mapping(map: Map) {
         id                     <- map["id"]
         __name                 <- map["name"]
         _activityDate.value    <- (map["activityDate"], DateTransform())
@@ -146,22 +146,22 @@ class Torrent: Mappable, Equatable, Hashable {
     // MARK: - Calculated variables
     // This has all got a bit ViewModelly and should probably be moved out of here...
     
-    lazy var derivedMetadata: Observable<Metadata> = self.name.map{
+    lazy var derivedMetadata: Observable<Metadata> = self.name.map {
         print("Deriving metadata for \($0)")
         return Metadata(from: $0)
     }.shareReplay(1) // << If this isn't here it does it repeatedly
     
-    lazy var bestName: Observable<String> = self.metadata.map{ $0.name }
+    lazy var bestName: Observable<String> = self.metadata.map { $0.name }
     
-    lazy var episodeDescription: Observable<String> = self.episodeMetadata.map{ episodeMetadata in
-        if let episodeMetadata = episodeMetadata{
+    lazy var episodeDescription: Observable<String> = self.episodeMetadata.map { episodeMetadata in
+        if let episodeMetadata = episodeMetadata {
             return "Season \(episodeMetadata.season) • Episode \(episodeMetadata.episode)\n\(episodeMetadata.name)"
         }
         return ""
     }
     
     
-    lazy var status: Observable<TorrentStatus> = self.rawStatus.map{ rawValue in
+    lazy var status: Observable<TorrentStatus> = self.rawStatus.map { rawValue in
         guard let statusEnum = TorrentStatus(rawValue: rawValue) else {
             return TorrentStatus.stopped
         }
@@ -189,7 +189,7 @@ class Torrent: Mappable, Equatable, Hashable {
         
         let json = response.mapJSON()
         
-        let metadata: Observable<Metadata?> = json.map{ latestJSON in
+        let metadata: Observable<Metadata?> = json.map { latestJSON in
             if let jsonDict = latestJSON as? [String:Any],
                 let resultsArray = jsonDict["results"] as? [Any],
                 let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
@@ -198,13 +198,13 @@ class Torrent: Mappable, Equatable, Hashable {
             return nil
         }
         
-        return metadata.catchError{ error in
+        return metadata.catchError { error in
             return Observable<Metadata?>.just(nil)
         }.shareReplay(1)
         
     }()
     
-    lazy var metadata: Observable<Metadata> = Observable.combineLatest(self.derivedMetadata, self.externalMetadata){ derived, external in
+    lazy var metadata: Observable<Metadata> = Observable.combineLatest(self.derivedMetadata, self.externalMetadata) { derived, external in
             if var external = external {
                 external.type = derived.type
                 return external
@@ -214,7 +214,7 @@ class Torrent: Mappable, Equatable, Hashable {
     
     lazy var episodeMetadata: Observable<Episode?> = {
         let response: Observable<Response> = self.metadata
-            .flatMap{ metadata -> Observable<Response> in
+            .flatMap { metadata -> Observable<Response> in
                 if let id = metadata.id {
                     switch metadata.type {
                     case .tv(let season, let episode):
@@ -228,7 +228,7 @@ class Torrent: Mappable, Equatable, Hashable {
                 throw MetadataError.couldNotRequest
             }
         
-        let episode = response.mapJSON().map{ latestJSON -> Episode? in
+        let episode = response.mapJSON().map { latestJSON -> Episode? in
             if let jsonDict = latestJSON as? [String: Any] {
                 let ep = try? Episode(JSON: jsonDict)
                 return ep
@@ -236,13 +236,13 @@ class Torrent: Mappable, Equatable, Hashable {
             return nil
         }
         
-        return episode.catchError{ error in
+        return episode.catchError { error in
             return Observable<Episode?>.just(nil)
         }.shareReplay(1)
     }()
     
     lazy var image: Observable<NSImage?> = {
-        let path: Observable<String?> = Observable.combineLatest(self.metadata, self.episodeMetadata){ overall, episode in
+        let path: Observable<String?> = Observable.combineLatest(self.metadata, self.episodeMetadata) { overall, episode in
             if let episodeImage = episode?.stillPath {
                 return episodeImage
             } else {
@@ -250,7 +250,7 @@ class Torrent: Mappable, Equatable, Hashable {
             }
         }
         
-        let imageResponse = path.flatMapLatest{ path -> Observable<Response> in
+        let imageResponse = path.flatMapLatest { path -> Observable<Response> in
             if let path = path {
                 return self.tmdbProvider.request(.image(path:path))
             } else {

@@ -14,7 +14,7 @@ import Sparkle
 class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, SUUpdaterDelegate {
 
     var session: TransmissionSession? {
-        didSet{
+        didSet {
             bindToSession()
         }
     }
@@ -52,7 +52,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
 
     
-    func bindToSession(){
+    func bindToSession() {
         
         guard let session = session else {
             return
@@ -68,7 +68,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         
         session.status.asObservable()
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext:{ status in
+            .subscribe(onNext: { status in
                 
                 switch status {
                 case .connected:
@@ -109,7 +109,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     
     var selectedTorrents: [Torrent] {
         let indexes = self.collectionView.selectionIndexPaths
-        return indexes.flatMap{ self.session?.torrents.value[$0.item] }
+        return indexes.flatMap { self.session?.torrents.value[$0.item] }
     }
     
     lazy var øSelectedTorrents: Observable<[Torrent]> = {
@@ -117,14 +117,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             .observe(Set<IndexPath>.self, "selectionIndexPaths")
         
         let tor = obs
-            .map{ optionalIndexes -> Set<IndexPath> in
+            .map { optionalIndexes -> Set<IndexPath> in
                 if let optionalIndexes = optionalIndexes {
                     return optionalIndexes
                 } else {
                     return Set<IndexPath>()
                 }
             }
-            .map{ $0.flatMap{ self.session?.torrents.value[$0.item] } }
+            .map { $0.flatMap { self.session?.torrents.value[$0.item] } }
         return tor
     }()
     
@@ -133,14 +133,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             .observe(Set<IndexPath>.self, "selectionIndexPaths")
         
         return obs
-            .map{ optionalIndexes -> Set<IndexPath> in
+            .map { optionalIndexes -> Set<IndexPath> in
                 if let optionalIndexes = optionalIndexes {
                     return optionalIndexes
                 } else {
                     return Set<IndexPath>()
                 }
             }
-            .map{
+            .map {
                 return !$0.isEmpty
             }
         
@@ -152,12 +152,12 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     let updater = SUUpdater.shared()
     var pendingUpdateItem: SUAppcastItem?
     
-    func startUpdater(){
+    func startUpdater() {
         updater?.delegate = self
         updater?.checkForUpdatesInBackground()
     }
     
-    func sortOutVersionWidget(){
+    func sortOutVersionWidget() {
         if let pendingUpdateItem = pendingUpdateItem {
             self.versionWidget.title="Update available: v\(pendingUpdateItem.versionString)"
         } else {

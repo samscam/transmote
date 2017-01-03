@@ -13,14 +13,14 @@ import RxSwift
 
 // A session - which coordinates access to a server and its torrents
 
-public enum SessionError: Swift.Error, CustomStringConvertible{
+public enum SessionError: Swift.Error, CustomStringConvertible {
     case networkError(Moya.Error)
     case badRpcPath
     case unexpectedStatusCode(Int)
     case unknownError(Swift.Error)
     case rpcError(JSONRPCError)
     
-    public var description: String{
+    public var description: String {
         switch self {
         case .networkError(let moyaError):
             switch moyaError {
@@ -44,9 +44,9 @@ public enum SessionError: Swift.Error, CustomStringConvertible{
     }
 }
 
-class TransmissionSession{
+class TransmissionSession {
     
-    enum Status{
+    enum Status {
         case indeterminate
         case failed(SessionError)
         case connecting
@@ -54,7 +54,7 @@ class TransmissionSession{
     }
     
     var server: TransmissionServer? {
-        didSet{
+        didSet {
             let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
                 
                 // If we have no url then the provider ain't going to be no use...
@@ -98,7 +98,7 @@ class TransmissionSession{
     
     var retryTimer: BackoffTimer?
     
-    init(){
+    init() {
         
         // Observe our own status to start/stop update timer
         status.asObservable()
@@ -120,7 +120,7 @@ class TransmissionSession{
         }).addDisposableTo(disposeBag)
         
         
-        defer{
+        defer {
             self.server = self.fetchDefaultsServer()
         }
         
@@ -135,7 +135,7 @@ class TransmissionSession{
     var deferredMagnetURLs: [URL] = []
     
     @objc
-    func handleGetURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor){
+    func handleGetURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
     
         if let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
             let url = URL(string: urlString) {
@@ -154,13 +154,13 @@ class TransmissionSession{
         let defaults = UserDefaults.standard
         if let address = defaults.string(forKey: "address"),
             let port = defaults.value(forKey: "port") as? Int,
-            let rpcPath = defaults.string(forKey: "rpcPath"){
+            let rpcPath = defaults.string(forKey: "rpcPath") {
             return TransmissionServer(address:address, port: port, rpcPath: rpcPath)
         }
         return nil
     }
     
-    func storeDefaultsServer(server: TransmissionServer){
+    func storeDefaultsServer(server: TransmissionServer) {
         let defaults = UserDefaults.standard
         defaults.set(server.address, forKey: "address")
         defaults.set(server.port, forKey: "port")
@@ -170,7 +170,7 @@ class TransmissionSession{
     
     // Timers
     
-    func startTimers(){
+    func startTimers() {
         
         retryTimer?.invalidate()
         retryTimer = nil
@@ -183,34 +183,34 @@ class TransmissionSession{
 
     }
     
-    func stopTimers(){
+    func stopTimers() {
         timer?.invalidate()
         timer = nil
     }
     
-    func startRetryTimer(){
+    func startRetryTimer() {
         if self.retryTimer == nil {
-            self.retryTimer = BackoffTimer(min: 5, max: 20){
+            self.retryTimer = BackoffTimer(min: 5, max: 20) {
                 self.connect()
             }
         }
     }
     
-    func updateEverything(){
+    func updateEverything() {
 //        self.updateSessionStats()
         self.updateTorrents()
     }
     
     // Initial connection
     var connectCancellable: Cancellable?
-    func connect(){
+    func connect() {
         if let connectCancellable = self.connectCancellable {
             print("cancelling")
             connectCancellable.cancel()
         }
         print("connecting")
         self.status.value = .connecting
-        connectCancellable = self.provider?.request(.connect){ result in
+        connectCancellable = self.provider?.request(.connect) { result in
             switch result {
             case let .success(moyaResponse):
                 switch moyaResponse.statusCode {
@@ -257,8 +257,8 @@ class TransmissionSession{
     }
     
     
-    func updateSessionStats(){
-        self.provider?.request(.stats){ result in
+    func updateSessionStats() {
+        self.provider?.request(.stats) { result in
             switch result {
             case .success(let moyaResponse):
                 do {
@@ -276,7 +276,7 @@ class TransmissionSession{
         }
     }
     
-    func updateTorrents(){
+    func updateTorrents() {
         self.provider?.request(.torrents) { result in
             switch result {
             case .success(let moyaResponse):
@@ -290,7 +290,7 @@ class TransmissionSession{
                         throw JSONRPCError.jsonParsingError("Missing Torrents array")
                     }
                     
-                    let updatedTorrents: [Torrent] = torrentsArray.flatMap{
+                    let updatedTorrents: [Torrent] = torrentsArray.flatMap {
                         guard let id = $0["id"] as? Int else {
                             return nil
                         }
@@ -313,7 +313,7 @@ class TransmissionSession{
                     torrentsCpy = self.torrents.value
                     for t in self.torrents.value {
                         if updatedTorrents.index(of: t) == nil ,
-                            let index = self.torrents.value.index(of: t){
+                            let index = self.torrents.value.index(of: t) {
                             self.torrents.value.remove(at: index)
                         }
                     }
@@ -329,13 +329,13 @@ class TransmissionSession{
     
     // MARK: Add torrents
     
-    func addTorrent(url: URL){
+    func addTorrent(url: URL) {
         provider?.request(.addTorrent(url), completion: { (result) in
             print(result)
         })
     }
     
-    func addDeferredTorrents(){
+    func addDeferredTorrents() {
         for t in self.deferredMagnetURLs {
             self.addTorrent(url: t)
         }
@@ -344,7 +344,7 @@ class TransmissionSession{
     
     // MARK: Remove torrents
     
-    func removeTorrents(torrents: [Torrent], delete: Bool){
+    func removeTorrents(torrents: [Torrent], delete: Bool) {
         if delete {
             provider?.request(.removeTorrents(torrents)) { (result) in
                 print(result)

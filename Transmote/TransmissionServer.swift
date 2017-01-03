@@ -21,7 +21,7 @@ struct TransmissionServer {
     var password: String?
 
 
-    init(address: String, port: Int? = nil, rpcPath: String? = nil, useTLS: Bool = false){
+    init(address: String, port: Int? = nil, rpcPath: String? = nil, useTLS: Bool = false) {
         
         self.address = address
         self.port = port ?? 9_091
@@ -48,7 +48,7 @@ struct SessionStats: Mappable {
         
     }
     
-    mutating func mapping(map: Map){
+    mutating func mapping(map: Map) {
         activeTorrentCount <- map["activeTorrentCount"]
     }
     

@@ -35,7 +35,7 @@ public class ProperImageView: NSView {
     
     // Public properties
     public var image: NSImage? {
-        set{
+        set {
             self.innerImageView.image = newValue
             self.updateLayout()
         }
@@ -46,7 +46,7 @@ public class ProperImageView: NSView {
     }
     
     public var contentMode: ContentMode = .center {
-        didSet{
+        didSet {
             self.updateLayout()
         }
     }
@@ -64,7 +64,7 @@ public class ProperImageView: NSView {
     
     let innerImageView: NSImageView = NSImageView()
     
-    func sharedInit(){
+    func sharedInit() {
         self.wantsLayer = true
         self.layer?.masksToBounds = true
         innerImageView.imageScaling = .scaleAxesIndependently

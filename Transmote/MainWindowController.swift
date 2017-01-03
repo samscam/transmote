@@ -48,7 +48,7 @@ class MainWindowController: NSWindowController {
             }
         case "DeleteSegue":
             
-            if let confirmationViewController = segue.destinationController as? ConfirmationViewController{
+            if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "Do you really want to DELETE this torrent and any downloaded files?"
                 confirmationViewController.action = { [weak self] in
                     if let strongSelf = self {
@@ -57,7 +57,7 @@ class MainWindowController: NSWindowController {
                 }
             }
         case "RemoveSegue":
-            if let confirmationViewController = segue.destinationController as? ConfirmationViewController{
+            if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "This will remove the torrent from the list, leaving files intact."
                 confirmationViewController.action = { [weak self] in
                     if let strongSelf = self {

@@ -8,7 +8,7 @@
 import Foundation
 import ObjectMapper
 
-enum TorrentMetadataType{
+enum TorrentMetadataType {
     case tv(season: Int?, episode: Int?)
     case movie(year: Int)
     case other
@@ -26,7 +26,7 @@ struct Metadata: Mappable {
     var type: TorrentMetadataType = .other
     var posterPath: String?
     
-    init(from rawName: String){
+    init(from rawName: String) {
         
         self.name = rawName
         
@@ -97,11 +97,11 @@ struct Metadata: Mappable {
         
     }
     
-    init?(map: Map){
+    init?(map: Map) {
         
     }
     
-    mutating func mapping(map: Map){
+    mutating func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
         name <- map["title"]
@@ -120,7 +120,7 @@ struct Episode: ImmutableMappable {
     let episode: Int
     let name: String
     
-    init(map: Map) throws{
+    init(map: Map) throws {
         id = try map.value("id")
         name = try map.value("name")
         season = try map.value("season_number")
@@ -128,7 +128,7 @@ struct Episode: ImmutableMappable {
         stillPath = try? map.value("still_path")
     }
     
-    mutating func mapping(map: Map){
+    mutating func mapping(map: Map) {
         id >>> map["id"]
         name >>> map["name"]
         season >>> map["season_number"]

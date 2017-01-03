@@ -35,28 +35,28 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     }
     
     var _isSelected: Bool = false
-    override var isSelected: Bool{
-        set{
+    override var isSelected: Bool {
+        set {
             _isSelected = newValue
             sortSelection()
         }
-        get{
+        get {
             return _isSelected
         }
     }
     var _highlightState: NSCollectionViewItemHighlightState = .none
     
     override var highlightState: NSCollectionViewItemHighlightState {
-        set{
+        set {
             _highlightState = newValue
             sortSelection()
         }
-        get{
+        get {
             return _highlightState
         }
     }
     
-    func sortSelection(){
+    func sortSelection() {
         switch _highlightState {
         case .none:
             if _isSelected {
@@ -108,7 +108,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             
             torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
             torrent.image
-                .map{
+                .map {
                     if $0 == nil {
                         return ContentMode.center
                     } else {

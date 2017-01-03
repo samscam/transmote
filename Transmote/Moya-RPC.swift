@@ -8,11 +8,11 @@
 import Foundation
 import Moya
 
-public enum JSONRPCError: Swift.Error, CustomStringConvertible{
+public enum JSONRPCError: Swift.Error, CustomStringConvertible {
     case jsonParsingError(String)
     case errorResponse(String)
     
-    public var description: String{
+    public var description: String {
         switch self {
 
         case .jsonParsingError(let str):
@@ -50,7 +50,7 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
     /// Catches 409 status codes, stores the sessionID, and retries the request
     @discardableResult
     override func request(_ target: Target, completion: @escaping Completion) -> Cancellable {
-        return super.request(target){ result in
+        return super.request(target) { result in
             switch result {
             case .success(let response):
                 switch response.statusCode {
