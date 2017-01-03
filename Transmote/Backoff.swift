@@ -28,7 +28,7 @@ class BackoffTimer {
     func fire() {
 
         let time: TimeInterval = min + ((max - min) / Double(steps)) * Double(count)
-        timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false, block: { (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false, block: { _ in
             self.block()
             self.fire()
         })

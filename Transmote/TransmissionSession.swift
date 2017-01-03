@@ -177,7 +177,7 @@ class TransmissionSession {
 
         self.updateEverything()
 
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] _ in
             self?.updateEverything()
         })
 

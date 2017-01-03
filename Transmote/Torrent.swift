@@ -198,7 +198,7 @@ class Torrent: Mappable, Equatable, Hashable {
             return nil
         }
 
-        return metadata.catchError { error in
+        return metadata.catchError { _ in
             return Observable<Metadata?>.just(nil)
         }.shareReplay(1)
 
@@ -236,7 +236,7 @@ class Torrent: Mappable, Equatable, Hashable {
             return nil
         }
 
-        return episode.catchError { error in
+        return episode.catchError { _ in
             return Observable<Episode?>.just(nil)
         }.shareReplay(1)
     }()

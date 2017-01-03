@@ -2,9 +2,9 @@ disabled_rules:
 - missing_docs
 - todo
 
-- type_body_length
-- type_name
-- unused_closure_parameter
+
+
+
 - unused_enumerated
 - valid_docs
 - valid_ibinspectable
@@ -66,6 +66,9 @@ opt_in_rules:
 - trailing_newline
 - trailing_semicolon
 - trailing_whitespace
+- type_body_length
+- type_name
+- unused_closure_parameter
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
