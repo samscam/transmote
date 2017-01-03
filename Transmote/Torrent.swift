@@ -165,7 +165,7 @@ class Torrent: Mappable, Equatable, Hashable {
     
     lazy var status: Observable<TorrentStatus> = self.rawStatus.map{ rawValue in
         return TorrentStatus(rawValue: rawValue)!
-        }
+    }
     
     // External metadata
     

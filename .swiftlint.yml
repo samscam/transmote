@@ -1,5 +1,5 @@
 disabled_rules:
-- closure_end_indentation
+
 - closure_parameter_position
 - closure_spacing
 - colon
@@ -65,6 +65,7 @@ disabled_rules:
 opt_in_rules:
 - attributes
 - closing_brace
+- closure_end_indentation
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
