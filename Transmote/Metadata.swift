@@ -79,9 +79,9 @@ struct Metadata: Mappable {
             episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
         }
         
-        if (season != nil || episode != nil) {
+        if season != nil || episode != nil {
             self.type = .tv(season: season, episode: episode)
-        } else if (year != nil) {
+        } else if year != nil {
             self.type = .movie(year: year!)
         }
         

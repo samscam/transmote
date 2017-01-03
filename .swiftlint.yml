@@ -1,5 +1,4 @@
 disabled_rules:
-- control_statement
 - custom_rules
 - cyclomatic_complexity
 - dynamic_inline
@@ -65,6 +64,7 @@ opt_in_rules:
 - colon
 - comma
 - conditional_returns_on_newline
+- control_statement
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
