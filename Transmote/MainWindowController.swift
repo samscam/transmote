@@ -24,6 +24,8 @@ class MainWindowController: NSWindowController {
         super.windowDidLoad()
         
         //poke the session
+        
+        // swiftlint:disable:next force_cast
         mainViewController = self.contentViewController! as! MainViewController
         mainViewController.session = session
         

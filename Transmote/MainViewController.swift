@@ -30,10 +30,10 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     
     @IBOutlet weak var versionWidget: NSButton!
     
+    // swiftlint:disable force_cast
     let shortVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    
-    let longVersion: String=Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-    
+    let longVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    // swiftlint:enable force_cast
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +97,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     }
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        // swiftlint:disable:next force_cast
         let item = self.collectionView.makeItem(withIdentifier: "TorrentCell", for: indexPath) as! TorrentCollectionViewItem
         item.torrent = self.session?.torrents.value[indexPath.item]
         return item
