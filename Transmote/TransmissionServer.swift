@@ -9,7 +9,6 @@ import Foundation
 import Cocoa
 import ObjectMapper
 
-
 struct TransmissionServer {
 
     var address: String?
@@ -19,7 +18,6 @@ struct TransmissionServer {
 
     var username: String?
     var password: String?
-
 
     init(address: String, port: Int? = nil, rpcPath: String? = nil, useTLS: Bool = false) {
 

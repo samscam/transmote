@@ -109,9 +109,7 @@ struct Metadata: Mappable {
 
     }
 
-
 }
-
 
 struct Episode: ImmutableMappable {
     let id: Int // swiftlint:disable:this variable_name

@@ -62,7 +62,6 @@ class TransmissionSession {
                     return MoyaProvider.defaultEndpointMapping(for: target)
                 }
 
-
                 let endpoint = Endpoint<TransmissionTarget>(url: serverURL,
                                                             sampleResponseClosure: {
                                                                 .networkResponse(200, target.sampleData)
@@ -119,7 +118,6 @@ class TransmissionSession {
             }
         }).addDisposableTo(disposeBag)
 
-
         defer {
             self.server = self.fetchDefaultsServer()
         }
@@ -147,7 +145,6 @@ class TransmissionSession {
         }
     }
 
-
     // User defaults
 
     func fetchDefaultsServer() -> TransmissionServer? {
@@ -166,7 +163,6 @@ class TransmissionSession {
         defaults.set(server.port, forKey: "port")
         defaults.set(server.rpcPath, forKey: "rpcPath")
     }
-
 
     // Timers
 
@@ -255,7 +251,6 @@ class TransmissionSession {
             }
         }
     }
-
 
     func updateSessionStats() {
         self.provider?.request(.stats) { result in

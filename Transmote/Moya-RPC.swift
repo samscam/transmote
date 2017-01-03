@@ -73,7 +73,6 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
             completion(result)
         }
 
-
     }
 }
 

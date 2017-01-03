@@ -46,7 +46,6 @@ class SettingsViewController: NSViewController {
         usernameStack.isHidden = true
         passwordStack.isHidden = true
 
-
         // Observe the session status
 
         session.status.asObservable()
@@ -71,7 +70,6 @@ class SettingsViewController: NSViewController {
         serverAddressField.stringValue = server.address ?? ""
         portField.stringValue = String(server.port)
         rpcPathField.stringValue = server.rpcPath
-
 
         // Bind the fields back to the session
 

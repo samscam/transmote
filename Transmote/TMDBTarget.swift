@@ -47,7 +47,6 @@ extension TMDBTarget: TargetType {
 
     public var method: Moya.Method { return .get }
 
-
     // And here's the fun part
     public var parameters: [String: Any]? {
         var params: [String: Any] = ["api_key": TMDB_API_KEY]

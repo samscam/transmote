@@ -79,7 +79,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             break
         }
 
-
     }
 
     var disposeBag = DisposeBag()
@@ -100,7 +99,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             }
 
             print("Cell set torrent \(torrent.id)")
-
 
             torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
 
@@ -125,7 +123,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 self.progressView.progress = CGFloat(newValue)
 
             }).addDisposableTo(disposeBag)
-
 
             torrent.status.subscribe(onNext: { status in
                 self.progressStatusLabel.stringValue = status.description

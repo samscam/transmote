@@ -160,7 +160,6 @@ class Torrent: Mappable, Equatable, Hashable {
         return ""
     }
 
-
     lazy var status: Observable<TorrentStatus> = self.rawStatus.map { rawValue in
         guard let statusEnum = TorrentStatus(rawValue: rawValue) else {
             return TorrentStatus.stopped
@@ -171,7 +170,6 @@ class Torrent: Mappable, Equatable, Hashable {
     // External metadata
 
     let tmdbProvider = RxMoyaProvider<TMDBTarget>()
-
 
     lazy var externalMetadata: Observable<Metadata?> = {
 
@@ -265,9 +263,6 @@ class Torrent: Mappable, Equatable, Hashable {
 
     var hashValue: Int { return id }
 }
-
-
-
 
 func == (lhs: Torrent, rhs: Torrent) -> Bool {
     return (lhs.id == rhs.id)

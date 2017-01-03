@@ -109,7 +109,6 @@ public class ProperImageView: NSView {
 
 }
 
-
 extension Reactive where Base: ProperImageView {
 
     /// Bindable sink for `image` property.

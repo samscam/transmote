@@ -50,8 +50,6 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         bindToSession()
     }
 
-
-
     func bindToSession() {
 
         guard let session = session else {
@@ -62,7 +60,6 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             return
         }
         disposeBag = DisposeBag()
-
 
         // Observe the session status
 
@@ -145,7 +142,6 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             }
 
     }()
-
 
     // MARK: Sparkle Updater Stuff
 
