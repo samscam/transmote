@@ -25,7 +25,7 @@ class MainWindowController: NSWindowController {
         
         //poke the session
         
-        // swiftlint:disable:next force_cast
+        // swiftlint:disable:next force_cast force_unwrapping
         mainViewController = self.contentViewController! as! MainViewController
         mainViewController.session = session
         
@@ -37,8 +37,11 @@ class MainWindowController: NSWindowController {
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
         
-        switch segue.identifier! {
+        switch identifier {
         case "SettingsSegue":
             if let settingsViewController = segue.destinationController as? SettingsViewController {
                 settingsViewController.session = self.session

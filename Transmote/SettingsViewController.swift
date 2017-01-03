@@ -81,7 +81,10 @@ class SettingsViewController: NSViewController {
             .skip(1)
             .subscribe(onNext:{ [weak self] (address, port, path) in
                 if let address = address {
-                    let portInt: Int? = port != nil ? Int(port!) : nil
+                    var portInt: Int? = nil
+                    if let port = port {
+                        portInt = Int(port)
+                    }
                     let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
                     self?.session?.server = server
                 }

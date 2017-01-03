@@ -85,8 +85,8 @@ struct Metadata: Mappable {
         
         if season != nil || episode != nil {
             self.type = .tv(season: season, episode: episode)
-        } else if year != nil {
-            self.type = .movie(year: year!)
+        } else if let year = year {
+            self.type = .movie(year: year)
         }
         
         print("Raw name: \(rawName)")

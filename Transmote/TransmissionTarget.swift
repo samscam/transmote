@@ -20,7 +20,7 @@ enum TransmissionTarget {
 extension TransmissionTarget: TargetType {
     
     // These will always be ignored
-    public var baseURL: URL { return URL(string: "http://localhost/")! }
+    public var baseURL: URL { return URL(string: "http://localhost/")! } // swiftlint:disable:this force_unwrapping
     public var path: String { return "/rpc/" }
     
     // This is JSON/RPC so it will always be POST
@@ -57,7 +57,7 @@ extension TransmissionTarget: TargetType {
     }
     
     public var sampleData: Data {
-        return "Just can't be bothered".data(using: String.Encoding.utf8)!
+        return "Just can't be bothered".data(using: String.Encoding.utf8)! // swiftlint:disable:this force_unwrapping
     }
     
     public var task: Task {

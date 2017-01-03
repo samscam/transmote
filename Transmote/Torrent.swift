@@ -162,7 +162,10 @@ class Torrent: Mappable, Equatable, Hashable {
     
     
     lazy var status: Observable<TorrentStatus> = self.rawStatus.map{ rawValue in
-        return TorrentStatus(rawValue: rawValue)!
+        guard let statusEnum = TorrentStatus(rawValue: rawValue) else {
+            return TorrentStatus.stopped
+        }
+        return statusEnum
     }
     
     // External metadata
@@ -260,14 +263,14 @@ class Torrent: Mappable, Equatable, Hashable {
     
     // Hashable
     
-    var hashValue: Int { return id! }
+    var hashValue: Int { return id }
 }
 
 
 
 
 func == (lhs: Torrent, rhs: Torrent) -> Bool {
-    return (lhs.id! == rhs.id!)
+    return (lhs.id == rhs.id)
 }
 
 
