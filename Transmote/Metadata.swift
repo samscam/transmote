@@ -21,7 +21,7 @@ enum MetadataError: Swift.Error {
 
 struct Metadata: Mappable {
 
-    var id: Int?
+    var id: Int? // swiftlint:disable:this variable_name
     var name: String = ""
     var type: TorrentMetadataType = .other
     var posterPath: String?
@@ -114,7 +114,7 @@ struct Metadata: Mappable {
 
 
 struct Episode: ImmutableMappable {
-    let id: Int
+    let id: Int // swiftlint:disable:this variable_name
     let stillPath: String?
     let season: Int
     let episode: Int

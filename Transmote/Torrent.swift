@@ -65,11 +65,11 @@ enum TorrentStatus: Int, CustomStringConvertible {
 class Torrent: Mappable, Equatable, Hashable {
 
     // MARK: - Mappable variables
-    var id: Int!
+    var id: Int! // swiftlint:disable:this variable_name
 
     // Slightly funny arrangement here so that the Observable only changes when the value actually changes
 
-    private var __name: String {
+    private var __name: String { // swiftlint:disable:this variable_name
         get { return _name.value }
         set {
 

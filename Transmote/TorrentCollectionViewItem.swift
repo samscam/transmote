@@ -34,7 +34,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         sortSelection()
     }
 
-    var _isSelected: Bool = false
+    private var _isSelected: Bool = false
     override var isSelected: Bool {
         set {
             _isSelected = newValue
@@ -44,7 +44,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             return _isSelected
         }
     }
-    var _highlightState: NSCollectionViewItemHighlightState = .none
+    private var _highlightState: NSCollectionViewItemHighlightState = .none
 
     override var highlightState: NSCollectionViewItemHighlightState {
         set {
