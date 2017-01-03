@@ -14,7 +14,7 @@ class ConfirmationViewController: NSViewController {
     @IBOutlet weak private var cancelButton: NSButton!
     @IBOutlet weak private var deleteButton: NSButton!
 
-    var action: (() -> ())?
+    var action: (() -> Void)?
     var message: String?
 
     override func viewDidLoad() {

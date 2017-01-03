@@ -10,12 +10,12 @@ import Foundation
 class BackoffTimer {
     let min: TimeInterval
     let max: TimeInterval
-    let block: () -> ()
+    let block: () -> Void
     let steps: Int = 10
     var count: Int = 0
     var timer: Timer?
 
-    init?(min: TimeInterval, max: TimeInterval, block:@escaping () -> ()) {
+    init?(min: TimeInterval, max: TimeInterval, block:@escaping () -> Void) {
         guard min <= max else {
             return nil
         }

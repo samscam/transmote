@@ -2,7 +2,7 @@ disabled_rules:
 - missing_docs
 - todo
 
-- void_return
+
 - weak_delegate
 
 opt_in_rules:
@@ -66,6 +66,7 @@ opt_in_rules:
 - valid_ibinspectable
 - variable_name
 - vertical_whitespace
+- void_return
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
