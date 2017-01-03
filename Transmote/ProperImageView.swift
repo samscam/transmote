@@ -32,7 +32,7 @@ public enum ContentMode: Int {
 }
 
 public class ProperImageView: NSView {
-    
+
     // Public properties
     public var image: NSImage? {
         set {
@@ -44,26 +44,26 @@ public class ProperImageView: NSView {
         }
 
     }
-    
+
     public var contentMode: ContentMode = .center {
         didSet {
             self.updateLayout()
         }
     }
-    
+
     // Initialisation
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
         sharedInit()
     }
-    
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         sharedInit()
     }
-    
+
     let innerImageView: NSImageView = NSImageView()
-    
+
     func sharedInit() {
         self.wantsLayer = true
         self.layer?.masksToBounds = true
@@ -72,16 +72,16 @@ public class ProperImageView: NSView {
     }
 
     public func updateLayout() {
-        
+
         guard let imageSize = self.image?.size  else {
             return
         }
-        
+
         let bounds = self.bounds
         let imageAspect = imageSize.width / imageSize.height
         let boundsAspect = bounds.width / bounds.height
         let result: CGRect
-        
+
         switch self.contentMode {
         case .scaleAspectFill:
             if imageAspect > boundsAspect {
@@ -96,22 +96,22 @@ public class ProperImageView: NSView {
             result = bounds
         case .center:
             result = CGRect(x: (bounds.width - imageSize.width) / 2, y: (bounds.height - imageSize.height) / 2, width: imageSize.width, height: imageSize.height)
-            
+
         }
-        
+
         self.innerImageView.frame = result
     }
-    
+
     override public func layout() {
         super.layout()
         self.updateLayout()
     }
-    
+
 }
 
 
 extension Reactive where Base: ProperImageView {
-    
+
     /// Bindable sink for `image` property.
     public var image: UIBindingObserver<Base, NSImage?> {
         return UIBindingObserver(UIElement: self.base) { control, value in

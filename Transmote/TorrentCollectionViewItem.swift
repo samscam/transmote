@@ -14,18 +14,18 @@ import RxCocoa
 import ProgressKit
 
 class TorrentCollectionViewItem: NSCollectionViewItem {
-    
+
     @IBOutlet weak private var box: NSBox!
     @IBOutlet weak private var torrentImageView: ProperImageView!
-    
+
     @IBOutlet weak private var titleLabel: NSTextField!
     @IBOutlet weak private var episodeLabel: NSTextField!
-    
+
     @IBOutlet weak private var progressStatusLabel: NSTextField!
     @IBOutlet weak private var progressView: CircularProgressView!
-    
+
     var persistentDisposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.strokeWidth = 3
@@ -33,7 +33,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         progressView.foreground = NSColor.white
         sortSelection()
     }
-    
+
     var _isSelected: Bool = false
     override var isSelected: Bool {
         set {
@@ -45,7 +45,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
     }
     var _highlightState: NSCollectionViewItemHighlightState = .none
-    
+
     override var highlightState: NSCollectionViewItemHighlightState {
         set {
             _highlightState = newValue
@@ -55,7 +55,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             return _highlightState
         }
     }
-    
+
     func sortSelection() {
         switch _highlightState {
         case .none:
@@ -78,34 +78,34 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         case .asDropTarget:
             break
         }
-        
+
 
     }
-    
+
     var disposeBag = DisposeBag()
-    
+
     var torrent: Torrent? {
         didSet {
-            
+
             guard torrent != oldValue else {
                 // It was the same torrent we are already bound to. Ignore
                 return
             }
-            
+
             disposeBag = DisposeBag()
-            
+
             guard let torrent = torrent else {
                 // we got a nil. clean up and return
                 return
             }
-            
+
             print("Cell set torrent \(torrent.id)")
-            
+
 
             torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
-            
+
             torrent.episodeDescription.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
-            
+
             torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
             torrent.image
                 .map {
@@ -120,19 +120,19 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 .subscribe(onNext: { contentMode in
                     self.torrentImageView.contentMode = contentMode
                 }).addDisposableTo(disposeBag)
-            
+
             torrent.percentDone.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
-                
+
             }).addDisposableTo(disposeBag)
-            
+
 
             torrent.status.subscribe(onNext: { status in
                 self.progressStatusLabel.stringValue = status.description
                 self.progressView.foreground = status.color
-                
+
             }).addDisposableTo(disposeBag)
-            
+
         }
     }
 }

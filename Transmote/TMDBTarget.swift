@@ -27,9 +27,9 @@ extension TMDBTarget: TargetType {
         default:
             return URL(string: TMDB_BASE_URL)! // swiftlint:disable:this force_unwrapping
         }
-       
+
     }
-    
+
     public var path: String {
         switch self {
         case .serviceConfiguration:
@@ -44,10 +44,10 @@ extension TMDBTarget: TargetType {
             return "search/tv"
         }
     }
-    
+
     public var method: Moya.Method { return .get }
-    
-    
+
+
     // And here's the fun part
     public var parameters: [String: Any]? {
         var params: [String: Any] = ["api_key": TMDB_API_KEY]
@@ -65,11 +65,11 @@ extension TMDBTarget: TargetType {
         }
         return params
     }
-    
+
     public var sampleData: Data {
         return "Just can't be bothered".data(using: String.Encoding.utf8)! // swiftlint:disable:this force_unwrapping
     }
-    
+
     public var task: Task {
         return .request
     }

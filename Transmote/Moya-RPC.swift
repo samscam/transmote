@@ -11,7 +11,7 @@ import Moya
 public enum JSONRPCError: Swift.Error, CustomStringConvertible {
     case jsonParsingError(String)
     case errorResponse(String)
-    
+
     public var description: String {
         switch self {
 
@@ -24,7 +24,7 @@ public enum JSONRPCError: Swift.Error, CustomStringConvertible {
 }
 
 class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
-    
+
     var sessionId: String?
 
     override public init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,
@@ -33,10 +33,10 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
                             manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
                             plugins: [PluginType] = [],
                             trackInflights: Bool = false) {
-        
+
         super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
-    
+
     /// Injects the session id into the endpoint
     override func endpoint(_ token: Target) -> Endpoint<Target> {
         let endpoint = endpointClosure(token)
@@ -46,7 +46,7 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
             return endpoint
         }
     }
-    
+
     /// Catches 409 status codes, stores the sessionID, and retries the request
     @discardableResult
     override func request(_ target: Target, completion: @escaping Completion) -> Cancellable {
@@ -69,33 +69,33 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
             case .failure:
                 break
             }
-            
+
             completion(result)
         }
-        
-        
+
+
     }
 }
 
 extension Response {
-    
+
     func mapJsonRpc() throws -> [String: Any] {
         guard let json = try self.mapJSON() as? [String: Any] else {
             throw JSONRPCError.jsonParsingError("Top level container not a dictionary")
         }
-        
+
         guard let result = json["result"] as? String else {
             throw JSONRPCError.jsonParsingError("Missing or mis-typed result token")
         }
-        
+
         guard result == "success" else {
             throw JSONRPCError.errorResponse(result)
         }
-        
+
         guard let arguments = json["arguments"] as? [String: Any] else {
             throw JSONRPCError.jsonParsingError("Arguments missing or mis-typed in response")
         }
-        
+
         return arguments
     }
 }

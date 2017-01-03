@@ -1,20 +1,7 @@
 disabled_rules:
 - missing_docs
-
-
-- private_unit_test
-- prohibited_super_call
-- redundant_nil_coalescing
-- redundant_string_enum_value
-- return_arrow_whitespace
-- statement_position
-- switch_case_on_newline
-- syntactic_sugar
 - todo
-- trailing_comma
-- trailing_newline
-- trailing_semicolon
-- trailing_whitespace
+
 - type_body_length
 - type_name
 - unused_closure_parameter
@@ -67,6 +54,18 @@ opt_in_rules:
 - operator_whitespace
 - overridden_super_call
 - private_outlet
+- private_unit_test
+- prohibited_super_call
+- redundant_nil_coalescing
+- redundant_string_enum_value
+- return_arrow_whitespace
+- statement_position
+- switch_case_on_newline
+- syntactic_sugar
+- trailing_comma
+- trailing_newline
+- trailing_semicolon
+- trailing_whitespace
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage

@@ -19,7 +19,7 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
     case unexpectedStatusCode(Int)
     case unknownError(Swift.Error)
     case rpcError(JSONRPCError)
-    
+
     public var description: String {
         switch self {
         case .networkError(let moyaError):
@@ -31,7 +31,7 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
             default:
                 return "Network error:\n\n\(moyaError.localizedDescription)"
             }
-            
+
         case .badRpcPath:
             return "Bad RPC path or not a Transmission Server"
         case .unknownError:
@@ -45,24 +45,24 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
 }
 
 class TransmissionSession {
-    
+
     enum Status {
         case indeterminate
         case failed(SessionError)
         case connecting
         case connected
     }
-    
+
     var server: TransmissionServer? {
         didSet {
             let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
-                
+
                 // If we have no url then the provider ain't going to be no use...
                 guard let serverURL = self.server?.serverURL?.absoluteString else {
                     return MoyaProvider.defaultEndpointMapping(for: target)
                 }
-                
-                
+
+
                 let endpoint = Endpoint<TransmissionTarget>(url: serverURL,
                                                             sampleResponseClosure: {
                                                                 .networkResponse(200, target.sampleData)
@@ -72,34 +72,34 @@ class TransmissionSession {
                                                             parameterEncoding: JSONEncoding.default)
                 return endpoint
             }
-            
+
             self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
-            
+
             if let server = self.server {
                 self.storeDefaultsServer(server: server)
             }
-            
+
             connect()
         }
     }
-    
+
     var status: Variable<Status> = Variable<Status>(.indeterminate)
-    
+
     var provider: JSONRPCProvider<TransmissionTarget>?
-    
+
     var torrents: Variable<[Torrent]> = Variable([])
     var stats: SessionStats?
-    
+
     var timer: Timer?
-    
+
     var updating = false
-    
+
     var disposeBag = DisposeBag()
-    
+
     var retryTimer: BackoffTimer?
-    
+
     init() {
-        
+
         // Observe our own status to start/stop update timer
         status.asObservable()
             .debounce(0.2, scheduler: MainScheduler.instance)
@@ -118,25 +118,25 @@ class TransmissionSession {
                     break
             }
         }).addDisposableTo(disposeBag)
-        
-        
+
+
         defer {
             self.server = self.fetchDefaultsServer()
         }
-        
+
         let appleEventManager = NSAppleEventManager.shared()
         appleEventManager.setEventHandler(self,
                                           andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)),
                                           forEventClass: AEEventClass(kInternetEventClass),
                                           andEventID: AEEventID(kAEGetURL))
-        
+
     }
-    
+
     var deferredMagnetURLs: [URL] = []
-    
+
     @objc
     func handleGetURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor) {
-    
+
         if let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
             let url = URL(string: urlString) {
             if case .connected = self.status.value {
@@ -146,10 +146,10 @@ class TransmissionSession {
             }
         }
     }
-    
+
 
     // User defaults
-    
+
     func fetchDefaultsServer() -> TransmissionServer? {
         let defaults = UserDefaults.standard
         if let address = defaults.string(forKey: "address"),
@@ -159,35 +159,35 @@ class TransmissionSession {
         }
         return nil
     }
-    
+
     func storeDefaultsServer(server: TransmissionServer) {
         let defaults = UserDefaults.standard
         defaults.set(server.address, forKey: "address")
         defaults.set(server.port, forKey: "port")
         defaults.set(server.rpcPath, forKey: "rpcPath")
     }
-    
-    
+
+
     // Timers
-    
+
     func startTimers() {
-        
+
         retryTimer?.invalidate()
         retryTimer = nil
-        
+
         self.updateEverything()
-        
+
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (timer) in
             self?.updateEverything()
         })
 
     }
-    
+
     func stopTimers() {
         timer?.invalidate()
         timer = nil
     }
-    
+
     func startRetryTimer() {
         if self.retryTimer == nil {
             self.retryTimer = BackoffTimer(min: 5, max: 20) {
@@ -195,12 +195,12 @@ class TransmissionSession {
             }
         }
     }
-    
+
     func updateEverything() {
 //        self.updateSessionStats()
         self.updateTorrents()
     }
-    
+
     // Initial connection
     var connectCancellable: Cancellable?
     func connect() {
@@ -217,12 +217,12 @@ class TransmissionSession {
 
                 case 200:
                     // Good so far
-                    
+
                     do {
                         // We should expect to have valid RPC response saying "success"
                         let _ = try moyaResponse.mapJsonRpc()
                         self.status.value = .connected
-                        
+
                     } catch let error as Moya.Error {
                         print("There was an error \(error)")
                         self.status.value = .failed(.networkError(error))
@@ -231,7 +231,7 @@ class TransmissionSession {
                     } catch {
                         self.status.value = .failed(.unknownError(error))
                     }
-                    
+
                 case 404:
                     // The path was wrong probably
                     print("404 - wrong path")
@@ -255,8 +255,8 @@ class TransmissionSession {
             }
         }
     }
-    
-    
+
+
     func updateSessionStats() {
         self.provider?.request(.stats) { result in
             switch result {
@@ -275,7 +275,7 @@ class TransmissionSession {
             }
         }
     }
-    
+
     func updateTorrents() {
         self.provider?.request(.torrents) { result in
             switch result {
@@ -284,12 +284,12 @@ class TransmissionSession {
                     let json = try moyaResponse.mapJsonRpc()
 
                     var torrentsCpy = self.torrents.value
-                    
+
                     // We are mutating the existing array rather than simply replacing it with a fresh one - this could be genericised
                     guard let torrentsArray = json["torrents"] as? [[String:Any]] else {
                         throw JSONRPCError.jsonParsingError("Missing Torrents array")
                     }
-                    
+
                     let updatedTorrents: [Torrent] = torrentsArray.flatMap {
                         guard let id = $0["id"] as? Int else {
                             return nil
@@ -302,14 +302,14 @@ class TransmissionSession {
                             return Torrent(JSON:$0)
                         }
                     }
-                    
+
                     for t in updatedTorrents {
                         // add new ones
                         if self.torrents.value.index(of: t) == nil {
                             self.torrents.value.append(t)
                         }
                     }
-                    
+
                     torrentsCpy = self.torrents.value
                     for t in self.torrents.value {
                         if updatedTorrents.index(of: t) == nil ,
@@ -326,24 +326,24 @@ class TransmissionSession {
             }
         }
     }
-    
+
     // MARK: Add torrents
-    
+
     func addTorrent(url: URL) {
         provider?.request(.addTorrent(url), completion: { (result) in
             print(result)
         })
     }
-    
+
     func addDeferredTorrents() {
         for t in self.deferredMagnetURLs {
             self.addTorrent(url: t)
         }
         deferredMagnetURLs = []
     }
-    
+
     // MARK: Remove torrents
-    
+
     func removeTorrents(torrents: [Torrent], delete: Bool) {
         if delete {
             provider?.request(.removeTorrents(torrents)) { (result) in
@@ -355,7 +355,7 @@ class TransmissionSession {
             }
         }
     }
-    
+
 }
 
 extension Collection where Iterator.Element: Hashable {

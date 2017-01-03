@@ -18,14 +18,14 @@ enum TransmissionTarget {
 }
 
 extension TransmissionTarget: TargetType {
-    
+
     // These will always be ignored
     public var baseURL: URL { return URL(string: "http://localhost/")! } // swiftlint:disable:this force_unwrapping
     public var path: String { return "/rpc/" }
-    
+
     // This is JSON/RPC so it will always be POST
     public var method: Moya.Method { return .post }
-    
+
     // And here's the fun part
     public var parameters: [String: Any]? {
         let method: String
@@ -60,18 +60,18 @@ extension TransmissionTarget: TargetType {
                                     "percentDone",
                                     "eta"]]
         }
-        
+
         var payload: [String: Any] = ["method": method]
         if let arguments = arguments {
             payload["arguments"] = arguments
         }
         return payload
     }
-    
+
     public var sampleData: Data {
         return "Just can't be bothered".data(using: String.Encoding.utf8)! // swiftlint:disable:this force_unwrapping
     }
-    
+
     public var task: Task {
         return .request
     }

@@ -12,47 +12,47 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewController: NSViewController {
-    
+
     var session: TransmissionSession?
-    
+
     @IBOutlet weak private var statusBlobImageView: NSImageView!
-    
+
     @IBOutlet weak private var serverAddressField: NSTextField!
-    
+
     @IBOutlet weak private var portField: NSTextField!
     @IBOutlet weak private var rpcPathField: NSTextField!
     @IBOutlet weak private var usernameField: NSTextField!
     @IBOutlet weak private var passwordField: NSSecureTextField!
-    
+
     @IBOutlet weak private var rpcPathStack: NSStackView!
     @IBOutlet weak private var usernameStack: NSStackView!
     @IBOutlet weak private var passwordStack: NSStackView!
-    
+
     var disposeBag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         guard let session = session else {
             return
         }
-        
+
         guard let server = session.server else {
             return
         }
-        
+
         disposeBag = DisposeBag()
-        
+
         usernameStack.isHidden = true
         passwordStack.isHidden = true
-        
-        
+
+
         // Observe the session status
-        
+
         session.status.asObservable()
             .debounce(0.2, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
-            
+
             switch status {
             case .connected:
                 self?.statusBlobImageView.image = NSImage(named: "status-green")
@@ -63,15 +63,15 @@ class SettingsViewController: NSViewController {
             case .failed:
                 self?.statusBlobImageView.image = NSImage(named: "status-red")
             }
-            
+
         }).addDisposableTo(disposeBag)
-        
+
         // Initial server values
-        
+
         serverAddressField.stringValue = server.address ?? ""
         portField.stringValue = String(server.port)
         rpcPathField.stringValue = server.rpcPath
-        
+
 
         // Bind the fields back to the session
 
@@ -89,7 +89,7 @@ class SettingsViewController: NSViewController {
                     self?.session?.server = server
                 }
         }).addDisposableTo(disposeBag)
-        
+
     }
 
 }
