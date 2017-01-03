@@ -95,7 +95,7 @@ public class ProperImageView: NSView {
         case .scaleToFill:
             result = bounds
         case .center:
-            result = CGRect(x: (bounds.width - imageSize.width)/2, y: (bounds.height - imageSize.height)/2, width: imageSize.width, height: imageSize.height)
+            result = CGRect(x: (bounds.width - imageSize.width) / 2, y: (bounds.height - imageSize.height) / 2, width: imageSize.width, height: imageSize.height)
             
         }
         

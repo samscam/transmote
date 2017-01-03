@@ -123,19 +123,19 @@ class Torrent: Mappable, Equatable, Hashable {
     }
     
     func mapping(map: Map) {
-        id                     <- map["id"]
-        __name                 <- map["name"]
-        _activityDate.value    <- (map["activityDate"], DateTransform())
-        _addedDate.value       <- (map["addedDate"], DateTransform())
-        _doneDate.value        <- (map["doneDate"], DateTransform())
-        _isFinished.value      <- map["isFinished"]
-        _isStalled.value       <- map["isStalled"]
-        _eta.value             <- (map["eta"], DateTransform())
-        _rateDownload.value    <- map["rateDownload"]
-        _rateUpload.value      <- map["rateUpload"]
-        _percentDone.value     <- map["percentDone"]
-        _totalSize.value       <- map["totalSize"]
-        _rawStatus.value       <- map["status"]
+        id <- map["id"]
+        __name <- map["name"]
+        _activityDate.value <- (map["activityDate"], DateTransform())
+        _addedDate.value <- (map["addedDate"], DateTransform())
+        _doneDate.value <- (map["doneDate"], DateTransform())
+        _isFinished.value <- map["isFinished"]
+        _isStalled.value <- map["isStalled"]
+        _eta.value <- (map["eta"], DateTransform())
+        _rateDownload.value <- map["rateDownload"]
+        _rateUpload.value <- map["rateUpload"]
+        _percentDone.value <- map["percentDone"]
+        _totalSize.value <- map["totalSize"]
+        _rawStatus.value <- map["status"]
         
     }
     

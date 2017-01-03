@@ -2,7 +2,7 @@ disabled_rules:
 - missing_docs
 
 
-- operator_usage_whitespace
+
 - operator_whitespace
 - overridden_super_call
 - private_outlet
@@ -67,6 +67,7 @@ opt_in_rules:
 - nimble_operator
 - number_separator
 - opening_brace
+- operator_usage_whitespace
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
