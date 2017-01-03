@@ -61,7 +61,7 @@ class TransmissionSession{
                 }
                 
                 
-                let endpoint = Endpoint<TransmissionTarget>(url: serverURL, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
+                let endpoint = Endpoint<TransmissionTarget>(url: serverURL, sampleResponseClosure: { .networkResponse(200, target.sampleData) }, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
                 return endpoint
             }
             
