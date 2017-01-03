@@ -122,7 +122,9 @@ class TransmissionSession{
     }
     
     var deferredMagnetURLs: [URL] = []
-    @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor){
+    
+    @objc
+    func handleGetURLEvent(_ event: NSAppleEventDescriptor, withReplyEvent replyEvent: NSAppleEventDescriptor){
     
         if let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
             let url = URL(string: urlString) {
