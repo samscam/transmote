@@ -21,14 +21,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     
     var disposeBag: DisposeBag = DisposeBag()
     
-    @IBOutlet weak var collectionView: NSCollectionView!
-    @IBOutlet weak var collectionViewContainer: NSScrollView!
+    @IBOutlet weak private var collectionView: NSCollectionView!
+    @IBOutlet weak private var collectionViewContainer: NSScrollView!
     
-    @IBOutlet weak var passiveAlertContainer: NSBox!
-    @IBOutlet weak var passiveAlertLabel: NSTextField!
-    @IBOutlet weak var passiveAlertImageView: NSImageView!
+    @IBOutlet weak private var passiveAlertContainer: NSBox!
+    @IBOutlet weak private var passiveAlertLabel: NSTextField!
+    @IBOutlet weak private var passiveAlertImageView: NSImageView!
     
-    @IBOutlet weak var versionWidget: NSButton!
+    @IBOutlet weak private var versionWidget: NSButton!
     
     // swiftlint:disable force_cast
     let shortVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String

@@ -15,18 +15,18 @@ class SettingsViewController: NSViewController {
     
     var session: TransmissionSession?
     
-    @IBOutlet weak var statusBlobImageView: NSImageView!
+    @IBOutlet weak private var statusBlobImageView: NSImageView!
     
-    @IBOutlet weak var serverAddressField: NSTextField!
+    @IBOutlet weak private var serverAddressField: NSTextField!
     
-    @IBOutlet weak var portField: NSTextField!
-    @IBOutlet weak var rpcPathField: NSTextField!
-    @IBOutlet weak var usernameField: NSTextField!
-    @IBOutlet weak var passwordField: NSSecureTextField!
+    @IBOutlet weak private var portField: NSTextField!
+    @IBOutlet weak private var rpcPathField: NSTextField!
+    @IBOutlet weak private var usernameField: NSTextField!
+    @IBOutlet weak private var passwordField: NSSecureTextField!
     
-    @IBOutlet weak var rpcPathStack: NSStackView!
-    @IBOutlet weak var usernameStack: NSStackView!
-    @IBOutlet weak var passwordStack: NSStackView!
+    @IBOutlet weak private var rpcPathStack: NSStackView!
+    @IBOutlet weak private var usernameStack: NSStackView!
+    @IBOutlet weak private var passwordStack: NSStackView!
     
     var disposeBag: DisposeBag = DisposeBag()
 

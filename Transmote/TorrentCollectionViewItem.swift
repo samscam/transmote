@@ -15,14 +15,14 @@ import ProgressKit
 
 class TorrentCollectionViewItem: NSCollectionViewItem {
     
-    @IBOutlet weak var box: NSBox!
-    @IBOutlet weak var torrentImageView: ProperImageView!
+    @IBOutlet weak private var box: NSBox!
+    @IBOutlet weak private var torrentImageView: ProperImageView!
     
-    @IBOutlet weak var titleLabel: NSTextField!
-    @IBOutlet weak var episodeLabel: NSTextField!
+    @IBOutlet weak private var titleLabel: NSTextField!
+    @IBOutlet weak private var episodeLabel: NSTextField!
     
-    @IBOutlet weak var progressStatusLabel: NSTextField!
-    @IBOutlet weak var progressView: CircularProgressView!
+    @IBOutlet weak private var progressStatusLabel: NSTextField!
+    @IBOutlet weak private var progressView: CircularProgressView!
     
     var persistentDisposeBag = DisposeBag()
     

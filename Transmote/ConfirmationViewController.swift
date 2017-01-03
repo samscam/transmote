@@ -10,9 +10,9 @@ import AppKit
 
 class ConfirmationViewController: NSViewController {
     
-    @IBOutlet weak var messageField: NSTextField!
-    @IBOutlet weak var cancelButton: NSButton!
-    @IBOutlet weak var deleteButton: NSButton!
+    @IBOutlet weak private var messageField: NSTextField!
+    @IBOutlet weak private var cancelButton: NSButton!
+    @IBOutlet weak private var deleteButton: NSButton!
 
     var action: (() -> ())?
     var message: String?

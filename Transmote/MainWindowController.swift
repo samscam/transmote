@@ -17,8 +17,8 @@ class MainWindowController: NSWindowController {
     
     var disposeBag = DisposeBag()
     
-    @IBOutlet weak var removeTorrentToolbarItem: NSToolbarItem!
-    @IBOutlet weak var deleteTorrentToolbarItem: NSToolbarItem!
+    @IBOutlet weak private var removeTorrentToolbarItem: NSToolbarItem!
+    @IBOutlet weak private var deleteTorrentToolbarItem: NSToolbarItem!
     
     override func windowDidLoad() {
         super.windowDidLoad()
