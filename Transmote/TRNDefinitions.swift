@@ -3,7 +3,6 @@
 //  Transmote
 //
 //  Created by Sam Easterby-Smith on 02/05/2014.
-//  Copyright (c) 2014 Spotlight Kid. All rights reserved.
 //
 
 //  For general configuration of things, URLs and API keys

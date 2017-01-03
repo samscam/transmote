@@ -1,10 +1,10 @@
-////
-////  NSImageView+SESContentModes.h
-////  Transmote
-////
-////  Created by Sam Easterby-Smith on 12/05/2014.
-////  Copyright (c) 2014 Spotlight Kid. All rights reserved.
-////
+//
+//  NSImageView+SESContentModes.h
+//  Transmote
+//
+//  Created by Sam Easterby-Smith on 12/05/2014.
+//
+
 import Foundation
 import AppKit
 import QuartzCore
