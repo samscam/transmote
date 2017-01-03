@@ -12,7 +12,7 @@ import QuartzCore
 import RxSwift
 import RxCocoa
 
-public enum ContentMode : Int {
+public enum ContentMode: Int {
     case scaleToFill
     case scaleAspectFit
     case scaleAspectFill

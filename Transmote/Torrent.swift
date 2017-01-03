@@ -141,7 +141,7 @@ class Torrent: Mappable, Equatable, Hashable {
         
     }
     
-    func update(JSON:[String: Any]) -> Torrent {
+    func update(JSON: [String: Any]) -> Torrent {
         return Mapper<Torrent>().map(JSON: JSON, toObject: self)
     }
     

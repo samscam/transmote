@@ -1,8 +1,4 @@
 disabled_rules:
-
-
-
-- colon
 - comma
 - conditional_returns_on_newline
 - control_statement
@@ -68,6 +64,7 @@ opt_in_rules:
 - closure_end_indentation
 - closure_parameter_position
 - closure_spacing
+- colon
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage

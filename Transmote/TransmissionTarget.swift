@@ -38,7 +38,7 @@ extension TransmissionTarget: TargetType {
             method = "session-stats"
         case .addTorrent(let url):
             method = "torrent-add"
-            arguments = ["filename":url.absoluteString]
+            arguments = ["filename": url.absoluteString]
         case .deleteTorrents(let torrents):
             method = "torrent-remove"
             arguments = ["ids": torrents.map{ $0.id }, "delete-local-data": false ]
@@ -50,7 +50,7 @@ extension TransmissionTarget: TargetType {
             arguments = ["fields": ["id", "activityDate", "addedDate", "doneDate", "isFinished", "isStalled", "status", "name", "totalSize", "rateDownload", "rateUpload", "percentDone", "eta"]]
         }
         
-        var payload: [String: Any] = ["method":method]
+        var payload: [String: Any] = ["method": method]
         if let arguments = arguments {
             payload["arguments"] = arguments
         }
