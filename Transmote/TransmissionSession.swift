@@ -61,7 +61,7 @@ class TransmissionSession{
                 }
                 
                 
-                let endpoint = Endpoint<TransmissionTarget>(url: serverURL, sampleResponseClosure: { .networkResponse(200, target.sampleData) }, method: target.method, parameters: target.parameters , parameterEncoding: JSONEncoding.default)
+                let endpoint = Endpoint<TransmissionTarget>(url: serverURL, sampleResponseClosure: { .networkResponse(200, target.sampleData) }, method: target.method, parameters: target.parameters, parameterEncoding: JSONEncoding.default)
                 return endpoint
             }
             
@@ -117,7 +117,7 @@ class TransmissionSession{
         }
         
         let appleEventManager = NSAppleEventManager.shared()
-        appleEventManager.setEventHandler(self, andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass) , andEventID: AEEventID(kAEGetURL))
+        appleEventManager.setEventHandler(self, andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         
     }
     
@@ -331,7 +331,7 @@ class TransmissionSession{
     
     // MARK: Remove torrents
     
-    func removeTorrents(torrents: [Torrent],delete: Bool){
+    func removeTorrents(torrents: [Torrent], delete: Bool){
         if delete {
             provider?.request(.removeTorrents(torrents)) { (result) in
                 print(result)

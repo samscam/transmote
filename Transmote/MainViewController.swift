@@ -112,7 +112,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     
     lazy var øSelectedTorrents: Observable<[Torrent]> = {
         let obs = self.collectionView.rx
-            .observe(Set<IndexPath>.self,"selectionIndexPaths")
+            .observe(Set<IndexPath>.self, "selectionIndexPaths")
         
         let tor = obs
             .map{ optionalIndexes -> Set<IndexPath> in
@@ -124,7 +124,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     
     lazy var hasSelectedTorrents: Observable<Bool> = {
         let obs = self.collectionView.rx
-            .observe(Set<IndexPath>.self,"selectionIndexPaths")
+            .observe(Set<IndexPath>.self, "selectionIndexPaths")
         
         return obs
             .map{ optionalIndexes -> Set<IndexPath> in

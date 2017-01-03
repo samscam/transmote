@@ -76,11 +76,11 @@ class SettingsViewController: NSViewController {
 
         // Bind the fields back to the session
 
-        Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text){ ($0,$1,$2) }
+        Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text){ ($0, $1, $2) }
             .throttle(0.5, scheduler: MainScheduler.instance )
             .debug("SERVER CHANGE")
             .skip(1)
-            .subscribe(onNext:{ [weak self] (address,port,path) in
+            .subscribe(onNext:{ [weak self] (address, port, path) in
                 if let address = address {
                     let portInt: Int? = port != nil ? Int(port!) : nil
                     let server = TransmissionServer(address: address, port: portInt, rpcPath: path)

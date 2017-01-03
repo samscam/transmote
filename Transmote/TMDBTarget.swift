@@ -53,7 +53,7 @@ extension TMDBTarget: TargetType {
     public var parameters: [String: Any]? {
         var params: [String: Any] = ["api_key": TMDB_API_KEY]
         switch self {
-        case .serviceConfiguration, .image,.tvShowDetails:
+        case .serviceConfiguration, .image, .tvShowDetails:
             break
         case .movieMetadata(let movieName, let year):
             params["query"] = movieName
