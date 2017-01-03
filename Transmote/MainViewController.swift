@@ -116,7 +116,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         
         let tor = obs
             .map{ optionalIndexes -> Set<IndexPath> in
-            if optionalIndexes == nil { return Set<IndexPath>() } else { return optionalIndexes! }
+                if optionalIndexes == nil {
+                    return Set<IndexPath>()
+                } else {
+                    return optionalIndexes!
+                }
             }
             .map{ $0.flatMap{ self.session?.torrents.value[$0.item] } }
         return tor
@@ -128,7 +132,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         
         return obs
             .map{ optionalIndexes -> Set<IndexPath> in
-                if optionalIndexes == nil { return Set<IndexPath>() } else { return optionalIndexes! }
+                if optionalIndexes == nil {
+                    return Set<IndexPath>()
+                } else {
+                    return optionalIndexes!
+                }
             }
             .map{
                 return $0.count > 0

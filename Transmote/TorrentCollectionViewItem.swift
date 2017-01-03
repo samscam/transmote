@@ -109,7 +109,13 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             
             torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
             torrent.image
-                .map{ if $0 == nil { return ContentMode.center } else { return ContentMode.scaleAspectFill } }
+                .map{
+                    if $0 == nil {
+                        return ContentMode.center
+                    } else {
+                        return ContentMode.scaleAspectFill
+                    }
+                }
                 .asDriver(onErrorJustReturn: ContentMode.center)
                 .asObservable()
                 .subscribe(onNext: { contentMode in
