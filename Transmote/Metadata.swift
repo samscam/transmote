@@ -57,7 +57,10 @@ struct Metadata: Mappable {
         
         // swiftlint:enable force_try
         
-        guard let result = regex.firstMatch(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count)) else {
+        guard let result = regex.firstMatch(in: semiCleaned,
+                                            options: [],
+                                            range: NSRange(location: 0, length: semiCleaned.characters.count))
+            else {
             // If we can't match the regex then give up, returning the name as cleaned up as we have it
             return
         }

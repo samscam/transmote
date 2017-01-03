@@ -96,9 +96,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         return self.session?.torrents.value.count ?? 0
     }
 
-    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        // swiftlint:disable:next force_cast
-        let item = self.collectionView.makeItem(withIdentifier: "TorrentCell", for: indexPath) as! TorrentCollectionViewItem
+    func collectionView(_ collectionView: NSCollectionView,
+                        itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        
+        let item = self.collectionView.makeItem(withIdentifier: "TorrentCell",
+                                                for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
         item.torrent = self.session?.torrents.value[indexPath.item]
         return item
     }

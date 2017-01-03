@@ -1,13 +1,4 @@
 disabled_rules:
-- function_body_length
-- function_parameter_count
-- implicit_getter
-- leading_whitespace
-- legacy_cggeometry_functions
-- legacy_constant
-- legacy_constructor
-- legacy_nsgeometry_functions
-- line_length
 - mark
 - missing_docs
 - nesting
@@ -65,6 +56,19 @@ opt_in_rules:
 - force_cast
 - force_try
 - force_unwrapping
+- function_body_length
+- function_parameter_count
+- implicit_getter
+- leading_whitespace
+- legacy_cggeometry_functions
+- legacy_constant
+- legacy_constructor
+- legacy_nsgeometry_functions
+- line_length
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
+
+line_length:
+  warning: 200
+  error: 250

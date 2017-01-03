@@ -46,7 +46,19 @@ extension TransmissionTarget: TargetType {
             arguments = ["ids": torrents.map{ $0.id }, "delete-local-data": true ]
         case .torrents:
             method = "torrent-get"
-            arguments = ["fields": ["id", "activityDate", "addedDate", "doneDate", "isFinished", "isStalled", "status", "name", "totalSize", "rateDownload", "rateUpload", "percentDone", "eta"]]
+            arguments = ["fields": ["id",
+                                    "activityDate",
+                                    "addedDate",
+                                    "doneDate",
+                                    "isFinished",
+                                    "isStalled",
+                                    "status",
+                                    "name",
+                                    "totalSize",
+                                    "rateDownload",
+                                    "rateUpload",
+                                    "percentDone",
+                                    "eta"]]
         }
         
         var payload: [String: Any] = ["method": method]
