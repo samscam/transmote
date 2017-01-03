@@ -114,7 +114,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 .asObservable()
                 .subscribe(onNext: { contentMode in
                     self.torrentImageView.contentMode = contentMode
-                } ).addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             
             torrent.percentDone.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
