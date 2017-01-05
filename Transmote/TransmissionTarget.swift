@@ -75,4 +75,9 @@ extension TransmissionTarget: TargetType {
     public var task: Task {
         return .request
     }
+
+    /// The method used for parameter encoding.
+    public var parameterEncoding: ParameterEncoding {
+        return JSONEncoding()
+    }
 }

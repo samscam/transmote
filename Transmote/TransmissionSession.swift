@@ -68,7 +68,7 @@ class TransmissionSession {
                                                             },
                                                             method: target.method,
                                                             parameters: target.parameters,
-                                                            parameterEncoding: JSONEncoding.default)
+                                                            parameterEncoding: target.parameterEncoding)
                 return endpoint
             }
 
