@@ -9,7 +9,6 @@ import Foundation
 import AppKit
 import ObjectMapper
 import RxSwift
-import RxCocoa
 import Moya
 import RxMoya
 
@@ -41,25 +40,6 @@ enum TorrentStatus: Int, CustomStringConvertible {
         }
     }
 
-    var color: NSColor {
-        switch self {
-        case .stopped:
-            return NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-        case .checkWait:
-            return NSColor(red: 1, green: 0.2, blue: 0, alpha: 1)
-        case .check:
-            return NSColor(red: 1, green: 0.5, blue: 0, alpha: 1)
-        case .downloadWait:
-            return NSColor(red: 0, green: 0.5, blue: 0, alpha: 1)
-        case .download:
-            return NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 1)
-
-        case .seedWait:
-            return NSColor(red: 0, green: 0.5, blue: 0.5, alpha: 1)
-        case .seed:
-            return NSColor(red: 0, green: 0.8, blue: 0, alpha: 1)
-        }
-    }
 }
 
 class Torrent: Mappable, Equatable, Hashable {
@@ -79,7 +59,7 @@ class Torrent: Mappable, Equatable, Hashable {
             } }
     }
     private let _name = Variable<String>("")
-    var name: Observable<String> { return _name.asObservable().shareReplay(1) }
+    var name: Observable<String> { return _name.asObservable() }
 
     // The rest is more straightforward
 
@@ -149,7 +129,7 @@ class Torrent: Mappable, Equatable, Hashable {
     lazy var derivedMetadata: Observable<Metadata> = self.name.map {
         print("Deriving metadata for \($0)")
         return Metadata(from: $0)
-    }.shareReplay(1) // << If this isn't here it does it repeatedly
+    }.shareReplay(1).debug("derived metadata")
 
     lazy var bestName: Observable<String> = self.metadata.map { $0.name }
 
@@ -169,7 +149,7 @@ class Torrent: Mappable, Equatable, Hashable {
 
     // External metadata
 
-    let tmdbProvider = RxMoyaProvider<TMDBTarget>()
+    let tmdbProvider = RxMoyaProvider<TMDBTarget>( plugins:[ NetworkLoggerPlugin() ])
 
     lazy var externalMetadata: Observable<Metadata?> = {
 
@@ -256,7 +236,7 @@ class Torrent: Mappable, Equatable, Hashable {
             }
         }
 
-        return imageResponse.mapImage()
+        return imageResponse.mapImage().shareReplay(1)
     }()
 
     // Hashable

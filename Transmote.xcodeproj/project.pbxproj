@@ -59,6 +59,8 @@
 		22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3D61DE4572700588FFD /* SettingsViewController.swift */; };
 		22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */; };
 		22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */; };
+		22FED4481E1D83C700ED434D /* TorrentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FED4471E1D83C700ED434D /* TorrentCellViewModel.swift */; };
+		22FED44B1E1E43BE00ED434D /* TorrentStatus+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FED44A1E1E43BE00ED434D /* TorrentStatus+Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +133,8 @@
 		22EBE3D61DE4572700588FFD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionTarget.swift; sourceTree = "<group>"; };
 		22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionSession.swift; sourceTree = "<group>"; };
+		22FED4471E1D83C700ED434D /* TorrentCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCellViewModel.swift; sourceTree = "<group>"; };
+		22FED44A1E1E43BE00ED434D /* TorrentStatus+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TorrentStatus+Color.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				22EBE3D81DE45EB400588FFD /* Core */,
+				22FED4491E1E438900ED434D /* Shared UI */,
 				22EBE3871DE1000A00588FFD /* macOS */,
 				22DB05271E0286F300419CBD /* Supporting Files */,
 				22EBE3861DE1000A00588FFD /* Products */,
@@ -236,6 +241,16 @@
 				22D27D661DFEA9560080B2E8 /* Backoff.swift */,
 			);
 			name = Core;
+			path = Transmote;
+			sourceTree = "<group>";
+		};
+		22FED4491E1E438900ED434D /* Shared UI */ = {
+			isa = PBXGroup;
+			children = (
+				22FED44A1E1E43BE00ED434D /* TorrentStatus+Color.swift */,
+				22FED4471E1D83C700ED434D /* TorrentCellViewModel.swift */,
+			);
+			name = "Shared UI";
 			path = Transmote;
 			sourceTree = "<group>";
 		};
@@ -378,6 +393,8 @@
 				22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */,
 				22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */,
 				22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */,
+				22FED4481E1D83C700ED434D /* TorrentCellViewModel.swift in Sources */,
+				22FED44B1E1E43BE00ED434D /* TorrentStatus+Color.swift in Sources */,
 				22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */,
 				22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */,
 				2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */,
