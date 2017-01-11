@@ -37,26 +37,38 @@ class TorrentViewModel: Equatable {
         title = torrentMetadata.map { $0.name }
         subtitle = torrentMetadata.map { metadata in
             switch metadata.type {
-            case .tv(let season, let episode, let episodeName):
-                return "Season \(season) • Episode \(episode)\n\(episodeName)"
+            case .tvEpisode(let season, let episode, let episodeName):
+                var description = "Season \(season) • Episode \(episode)"
+                if let episodeName = episodeName {
+                    description += "\n\(episodeName)"
+                }
+                return description
+            case .tvSeason(let season):
+                return "Season \(season)"
+            case .tvSeries:
+                return "Complete series"
             case .movie(let year):
                 return "\(year)"
+            case .video:
+                return "Video"
             case .other:
                 return "Not a video"
             }
         }
-        image = Observable.just(NSImage(named:"Magnet")).asDriver(onErrorJustReturn: NSImage(named:"Magnet"))
+        image = Observable.just(NSImage(named:"Magnet")!).asDriver(onErrorJustReturn: NSImage(named:"Magnet")!)
         progress = torrent.percentDone
-        /*asDriver(onErrorJustReturn: NSImage(named:"Magnet"))*/
+
+        statusMessage = torrent.status.map { $0.description }
+        statusColor = torrent.status.map { $0.color }
     }
 
     var title: Observable<String>
     var subtitle: Observable<String>
 
-    var image: Driver<Image?>
+    var image: Driver<Image>
     var progress: Observable<Float>
-//    var statusMessage: Observable<String>
-//    var statusColor: Observable<Color>
+    var statusMessage: Observable<String>
+    var statusColor: Observable<Color>
 }
 
 func == (lhs: TorrentViewModel, rhs: TorrentViewModel) -> Bool {

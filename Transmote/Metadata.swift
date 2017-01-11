@@ -9,7 +9,10 @@ import Foundation
 import ObjectMapper
 
 enum TorrentMetadataType {
-    case tv(season: Int?, episode: Int?, episodeName: String?)
+    case video
+    case tvSeries
+    case tvSeason(season: Int)
+    case tvEpisode(season: Int, episode: Int, episodeName: String?)
     case movie(year: Int)
     case other
 }
@@ -92,9 +95,10 @@ struct DerivedMetadata: Metadata {
         if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
             episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
         }
-
-        if season != nil || episode != nil {
-            self.type = .tv(season: season, episode: episode, episodeName: nil)
+        if let season = season, let episode = episode {
+            self.type = .tvEpisode(season: season, episode: episode, episodeName: nil)
+        } else if let season = season {
+            self.type = .tvSeason(season: season)
         } else if let year = year {
             self.type = .movie(year: year)
         }
@@ -150,6 +154,6 @@ struct EpisodeMetadata: Metadata, ImmutableMappable {
         imagePath >>> map["still_path"]
     }
     var type: TorrentMetadataType {
-        return .tv(season: season, episode: episode, episodeName: name)
+        return .tvEpisode(season: season, episode: episode, episodeName: name)
     }
 }
