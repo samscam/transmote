@@ -84,21 +84,29 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             }).addDisposableTo(disposeBag)
 
         session.torrents.asDriver().drive(onNext: { _ in
+
             self.collectionView.reloadData()
         }).addDisposableTo(disposeBag)
 
+        viewModels = session.torrents.asObservable().map { $0.map { TorrentViewModel(torrent: $0, metadataManager: self.metadataManager) } }
+        viewModels.bindTo(varViewModels).addDisposableTo(disposeBag)
     }
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.session?.torrents.value.count ?? 0
     }
 
+    let metadataManager = MetadataManager()
+
+    var viewModels: Observable<[TorrentViewModel]> = Observable.just([])
+    var varViewModels: Variable<[TorrentViewModel]> = Variable([])
+
     func collectionView(_ collectionView: NSCollectionView,
                         itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
 
         let item = self.collectionView.makeItem(withIdentifier: "TorrentCell",
                                                 for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
-        item.torrent = self.session?.torrents.value[indexPath.item]
+        item.torrentViewModel = varViewModels.value[indexPath.item]
         return item
     }
 
