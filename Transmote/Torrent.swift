@@ -87,8 +87,8 @@ class Torrent: Mappable, Equatable, Hashable {
     private let _rateUpload = Variable<Int>(0)
     var rateUpload: Observable<Int> { return _rateUpload.asObservable() }
 
-    private let _percentDone = Variable<Double>(0)
-    var percentDone: Observable<Double> { return _percentDone.asObservable() }
+    private let _percentDone = Variable<Float>(0)
+    var percentDone: Observable<Float> { return _percentDone.asObservable() }
 
     private let _totalSize = Variable<Int>(0)
     var totalSize: Observable<Int> { return _totalSize.asObservable() }
