@@ -51,19 +51,19 @@ class MungedMetadata {
         derived = Observable<Metadata>.just(DerivedMetadata(from:rawName)).shareReplay(1)
 
         external = derived.flatMapLatest { derived -> Observable<Metadata?> in
-                var request: Observable<Response>
-                switch derived.type {
-                case .tvEpisode, .tvSeries, .tvSeason:
-                    request = tmdbProvider.request(.tvShowMetadata(showName: derived.name))
-                case .movie(let year):
-                    request = tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
-                default:
-                    throw(MetadataError.notWorthLookingUp)
-                }
-                return request.mapMetadata(preservingType:derived.type)
+            var request: Observable<Response>
+            switch derived.type {
+            case .tvEpisode, .tvSeries, .tvSeason:
+                request = tmdbProvider.request(.tvShowMetadata(showName: derived.name))
+            case .movie(let year):
+                request = tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
+            default:
+                throw(MetadataError.notWorthLookingUp)
             }
-            .catchErrorJustReturn(nil)
-            .shareReplay(1)
+            return request.mapMetadata(preservingType:derived.type)
+        }
+        .catchErrorJustReturn(nil)
+        .shareReplay(1)
 
         let episodeRequest = external.flatMapLatest { metadata -> Observable<Response>  in
             guard let metadata = metadata else {
@@ -83,13 +83,13 @@ class MungedMetadata {
         }
 
         episode = episodeRequest.mapJSON().map { latestJSON -> EpisodeMetadata in
-                if let jsonDict = latestJSON as? [String: Any] {
-                    return try EpisodeMetadata(JSON: jsonDict)
-                }
-                throw(MetadataError.couldNotRequest)
+            if let jsonDict = latestJSON as? [String: Any] {
+                return try EpisodeMetadata(JSON: jsonDict)
             }
-            .catchErrorJustReturn(nil)
-            .shareReplay(1)
+            throw(MetadataError.couldNotRequest)
+        }
+        .catchErrorJustReturn(nil)
+        .shareReplay(1)
 
     }
 
