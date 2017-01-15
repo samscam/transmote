@@ -117,4 +117,10 @@ extension Reactive where Base: ProperImageView {
             control.image = value
         }
     }
+
+    public var contentMode: UIBindingObserver<Base, ContentMode> {
+        return UIBindingObserver(UIElement: self.base) { control, value in
+            control.contentMode = value
+        }
+    }
 }

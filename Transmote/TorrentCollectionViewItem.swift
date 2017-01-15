@@ -83,29 +83,31 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
 
     var disposeBag = DisposeBag()
 
-    var torrent: Torrent? {
+    var torrentViewModel: TorrentViewModel? {
         didSet {
 
-            guard torrent != oldValue else {
+            guard torrentViewModel != oldValue else {
                 // It was the same torrent we are already bound to. Ignore
                 return
             }
 
             disposeBag = DisposeBag()
 
-            guard let torrent = torrent else {
+            guard let torrentViewModel = torrentViewModel else {
                 // we got a nil. clean up and return
                 return
             }
 
-            print("Cell set torrent \(torrent.id)")
+            print("Cell set torrent \(torrentViewModel.torrent.id)")
 
-            torrent.bestName.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.title.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
 
-            torrent.episodeDescription.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.subtitle.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
 
-            torrent.image.asDriver(onErrorJustReturn: NSImage(named:"Magnet")).drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
-            torrent.image
+            torrentViewModel.image.drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
+            torrentViewModel.imageContentMode.bindTo(torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
+
+            /*torrent.image
                 .map {
                     if $0 == nil {
                         return ContentMode.center
@@ -118,17 +120,13 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 .subscribe(onNext: { contentMode in
                     self.torrentImageView.contentMode = contentMode
                 }).addDisposableTo(disposeBag)
-
-            torrent.percentDone.subscribe(onNext: { newValue in
+            */
+            torrentViewModel.progress.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
 
             }).addDisposableTo(disposeBag)
 
-            torrent.status.subscribe(onNext: { status in
-                self.progressStatusLabel.stringValue = status.description
-                self.progressView.foreground = status.color
-
-            }).addDisposableTo(disposeBag)
+            torrentViewModel.statusMessage.bindTo(progressStatusLabel.rx.text).addDisposableTo(disposeBag)
 
         }
     }

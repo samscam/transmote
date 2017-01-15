@@ -9,22 +9,27 @@ import Foundation
 import ObjectMapper
 
 enum TorrentMetadataType {
-    case tv(season: Int?, episode: Int?)
+    case video
+    case tvSeries
+    case tvSeason(season: Int)
+    case tvEpisode(season: Int, episode: Int, episodeName: String?)
     case movie(year: Int)
     case other
 }
 
-enum MetadataError: Swift.Error {
-    case couldNotRequest
-    case noImagePath
+protocol Metadata {
+    var id: Int? { get }  // swiftlint:disable:this variable_name
+    var name: String { get }
+    var type: TorrentMetadataType { get set }
+    var imagePath: String? { get }
 }
 
-struct Metadata: Mappable {
+struct DerivedMetadata: Metadata {
 
     var id: Int? // swiftlint:disable:this variable_name
     var name: String = ""
     var type: TorrentMetadataType = .other
-    var posterPath: String?
+    var imagePath: String?
 
     init(from rawName: String) {
 
@@ -85,9 +90,10 @@ struct Metadata: Mappable {
         if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
             episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
         }
-
-        if season != nil || episode != nil {
-            self.type = .tv(season: season, episode: episode)
+        if let season = season, let episode = episode {
+            self.type = .tvEpisode(season: season, episode: episode, episodeName: nil)
+        } else if let season = season {
+            self.type = .tvSeason(season: season)
         } else if let year = year {
             self.type = .movie(year: year)
         }
@@ -97,33 +103,49 @@ struct Metadata: Mappable {
 
     }
 
-    init?(map: Map) {
-
-    }
-
-    mutating func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        name <- map["title"]
-        posterPath <- map["poster_path"]
-
-    }
-
 }
 
-struct Episode: ImmutableMappable {
-    let id: Int // swiftlint:disable:this variable_name
-    let stillPath: String?
-    let season: Int
-    let episode: Int
-    let name: String
+struct ExternalMetadata: Metadata, ImmutableMappable {
+
+    var id: Int? // swiftlint:disable:this variable_name
+    var name: String = ""
+    var imagePath: String?
 
     init(map: Map) throws {
         id = try map.value("id")
-        name = try map.value("name")
+        do {
+           name = try map.value("title")
+        } catch {
+           name = try map.value("name")
+        }
+
+        imagePath = try? map.value("poster_path")
+    }
+
+    mutating func mapping(map: Map) {
+        id >>> map["id"]
+        name >>> map["name"]
+        name >>> map["title"]
+        imagePath >>> map["poster_path"]
+    }
+
+    var type: TorrentMetadataType = .other
+}
+
+struct EpisodeMetadata: Metadata, ImmutableMappable {
+    let id: Int? // swiftlint:disable:this variable_name
+    let imagePath: String?
+    let season: Int
+    let episode: Int
+    var name: String = ""
+    let episodeName: String
+
+    init(map: Map) throws {
+        id = try map.value("id")
+        episodeName = try map.value("name")
         season = try map.value("season_number")
         episode = try map.value("episode_number")
-        stillPath = try? map.value("still_path")
+        imagePath = try? map.value("still_path")
     }
 
     mutating func mapping(map: Map) {
@@ -131,6 +153,13 @@ struct Episode: ImmutableMappable {
         name >>> map["name"]
         season >>> map["season_number"]
         episode >>> map["episode_number"]
-        stillPath >>> map["still_path"]
+        imagePath >>> map["still_path"]
+    }
+    var type: TorrentMetadataType { get {
+        return .tvEpisode(season: season, episode: episode, episodeName: name)
+        }
+        set {
+
+        }
     }
 }
