@@ -8,117 +8,149 @@
 import Foundation
 
 import RxSwift
+import AppKit
 
 import Moya
 import RxMoya
 
+enum MetadataError: Swift.Error {
+    case notWorthLookingUp
+    case couldNotRequest
+    case itemNotFound
+    case noImagePath
+}
+
 class MetadataManager {
 
-    let tmdbProvider = RxMoyaProvider<TMDBTarget>( plugins:[ NetworkLoggerPlugin() ])
+    let tmdbProvider = RxMoyaProvider<TMDBTarget>() // plugins:[ NetworkLoggerPlugin() ]
+    var metadataStore: [String:MungedMetadata] = [:]
 
-    func metadata(for rawName: String) -> Observable<Metadata> {
-        return Observable.just(DerivedMetadata(from: rawName))
+    func metadata(for rawName: String) -> MungedMetadata {
+        if let retrieved = metadataStore[rawName] {
+            return retrieved
+        } else {
+            let munged = MungedMetadata(rawName: rawName, tmdbProvider: tmdbProvider)
+            metadataStore[rawName] = munged
+            return munged
+        }
+
+    }
+}
+
+class MungedMetadata {
+
+    let derived: Observable<Metadata>
+    let external: Observable<Metadata?>
+    let episode: Observable<Metadata?>
+    let tmdbProvider: RxMoyaProvider<TMDBTarget>
+
+    init(rawName: String, tmdbProvider: RxMoyaProvider<TMDBTarget>) {
+
+        self.tmdbProvider = tmdbProvider
+
+        derived = Observable<Metadata>.just(DerivedMetadata(from:rawName)).shareReplay(1)
+
+        external = derived.flatMapLatest { derived -> Observable<Metadata?> in
+                var request: Observable<Response>
+                switch derived.type {
+                case .tvEpisode, .tvSeries, .tvSeason:
+                    request = tmdbProvider.request(.tvShowMetadata(showName: derived.name))
+                case .movie(let year):
+                    request = tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
+                default:
+                    throw(MetadataError.notWorthLookingUp)
+                }
+                return request.mapMetadata(preservingType:derived.type)
+            }
+            .catchErrorJustReturn(nil)
+            .shareReplay(1)
+
+        let episodeRequest = external.flatMapLatest { metadata -> Observable<Response>  in
+            guard let metadata = metadata else {
+                throw(MetadataError.couldNotRequest)
+            }
+            if let id = metadata.id {
+                switch metadata.type {
+                case .tvEpisode(let season, let episode, _):
+
+                        return tmdbProvider.request(.tvShowDetails(showID: id, season: season, episode: episode))
+
+                default:
+                    break
+                }
+            }
+            throw(MetadataError.couldNotRequest)
+        }
+
+        episode = episodeRequest.mapJSON().map { latestJSON -> EpisodeMetadata in
+                if let jsonDict = latestJSON as? [String: Any] {
+                    return try EpisodeMetadata(JSON: jsonDict)
+                }
+                throw(MetadataError.couldNotRequest)
+            }
+            .catchErrorJustReturn(nil)
+            .shareReplay(1)
+
     }
 
-    // External metadata
-    /*
-    
-     lazy var derivedMetadata: Observable<Metadata> = self.name.map {
-     print("Deriving metadata for \($0)")
-     return Metadata(from: $0)
-     }.shareReplay(1).debug("derived metadata")
-     
-     lazy var bestName: Observable<String> = self.metadata.map { $0.name }
-     
-    lazy var externalMetadata: Observable<Metadata?> = {
-        
-        let response = self.derivedMetadata.flatMap({ derived -> Observable<Response> in
-            
-            switch derived.type {
-            case .tv:
-                return self.tmdbProvider.request(.tvShowMetadata(showName: derived.name))
-            case .movie(let year):
-                return self.tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
-            default:
-                throw MetadataError.couldNotRequest
-            }
-        }).filterSuccessfulStatusCodes()
-        
-        let json = response.mapJSON()
-        
-        let metadata: Observable<Metadata?> = json.map { latestJSON in
-            if let jsonDict = latestJSON as? [String:Any],
-                let resultsArray = jsonDict["results"] as? [Any],
-                let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
-                return Metadata(JSON: firstResult)
-            }
-            return nil
-        }
-        
-        return metadata.catchError { _ in
-            return Observable<Metadata?>.just(nil)
-            }.shareReplay(1)
-        
-    }()
-    
-    lazy var metadata: Observable<Metadata> = Observable.combineLatest(self.derivedMetadata, self.externalMetadata) { derived, external in
-        if var external = external {
-            external.type = derived.type
+    lazy var combo: Observable<Metadata> = Observable.combineLatest(self.derived, self.external) { derived, external in
+        if let external = external {
             return external
+        } else {
+            return derived
         }
-        return derived
-        }.shareReplay(1)
-    
-    lazy var episodeMetadata: Observable<Episode?> = {
-        let response: Observable<Response> = self.metadata
-            .flatMap { metadata -> Observable<Response> in
-                if let id = metadata.id {
-                    switch metadata.type {
-                    case .tv(let season, let episode):
-                        if let season = season, let episode = episode {
-                            return self.tmdbProvider.request(.tvShowDetails(showID: id, season: season, episode: episode))
-                        }
-                    default:
-                        break
-                    }
-                }
-                throw MetadataError.couldNotRequest
-        }
-        
-        let episode = response.mapJSON().map { latestJSON -> Episode? in
-            if let jsonDict = latestJSON as? [String: Any] {
-                let ep = try? Episode(JSON: jsonDict)
-                return ep
+    }
+
+    lazy var name: Observable<String> = self.combo.map { $0.name }
+
+    lazy var bigCombo: Observable<Metadata> = Observable
+        .combineLatest(self.combo, self.episode) { combo, episode in
+            if let episode = episode {
+                return episode
+            } else {
+                return combo
             }
-            return nil
         }
-        
-        return episode.catchError { _ in
-            return Observable<Episode?>.just(nil)
-            }.shareReplay(1)
+        .debug()
+        .shareReplay(1)
+
+    lazy var type: Observable<TorrentMetadataType> = self.combo.map { $0.type }
+
+    lazy var image: Observable<NSImage?> = {
+        let path: Observable<String?> = self.bigCombo.map { $0.imagePath }
+
+        let imageResponse = path.flatMapLatest { path -> Observable<Response> in
+            if let path = path {
+                return self.tmdbProvider.request(.image(path:path))
+            } else {
+                throw MetadataError.noImagePath
+            }
+        }
+
+        return imageResponse.mapImage().shareReplay(1)
     }()
-     
-     
-     lazy var image: Observable<NSImage?> = {
-     let path: Observable<String?> = Observable.combineLatest(self.metadata, self.episodeMetadata) { overall, episode in
-     if let episodeImage = episode?.stillPath {
-     return episodeImage
-     } else {
-     return overall.posterPath
-     }
-     }
-     
-     let imageResponse = path.flatMapLatest { path -> Observable<Response> in
-     if let path = path {
-     return self.tmdbProvider.request(.image(path:path))
-     } else {
-     throw MetadataError.noImagePath
-     }
-     }
-     
-     return imageResponse.mapImage().shareReplay(1)
-     }()
 
-*/
+}
 
+extension ObservableType where E == Response {
+    func mapMetadata(preservingType: TorrentMetadataType) -> Observable<Metadata?> {
+        return flatMap { response -> Observable<Metadata?> in
+            return Observable.just(try response.mapMetadata(preservingType: preservingType))
+        }
+    }
+}
+extension Response {
+    func mapMetadata(preservingType: TorrentMetadataType) throws -> Metadata? {
+
+        let json = try self.mapJSON()
+        if let jsonDict = json as? [String:Any],
+            let resultsArray = jsonDict["results"] as? [Any],
+            let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
+            var external = try ExternalMetadata(JSON: firstResult)
+            external.type = preservingType
+            return external
+        } else {
+            throw(MetadataError.couldNotRequest)
+        }
+    }
 }

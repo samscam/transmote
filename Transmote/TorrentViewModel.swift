@@ -26,17 +26,17 @@ class TorrentViewModel: Equatable {
     let torrent: Torrent
 
     private let metadataManager: MetadataManager
-    private let torrentMetadata: Observable<Metadata>
+    private let torrentMetadata: Observable<MungedMetadata>
 
     init(torrent: Torrent, metadataManager: MetadataManager) {
         self.torrent = torrent
         self.metadataManager = metadataManager
 
-        torrentMetadata = torrent.name.flatMap { metadataManager.metadata(for: $0) }
+        torrentMetadata = torrent.name.map { metadataManager.metadata(for: $0) }
 
-        title = torrentMetadata.map { $0.name }
-        subtitle = torrentMetadata.map { metadata in
-            switch metadata.type {
+        title = torrentMetadata.flatMapLatest { $0.name }
+        subtitle = torrentMetadata.flatMapLatest { $0.type }.map { type -> String in
+            switch type {
             case .tvEpisode(let season, let episode, let episodeName):
                 var description = "Season \(season) • Episode \(episode)"
                 if let episodeName = episodeName {
@@ -55,7 +55,17 @@ class TorrentViewModel: Equatable {
                 return "Not a video"
             }
         }
-        image = Observable.just(NSImage(named:"Magnet")!).asDriver(onErrorJustReturn: NSImage(named:"Magnet")!)
+
+        let imageObs = torrentMetadata.flatMapLatest { $0.image }
+        imageContentMode = imageObs.catchErrorJustReturn(nil).map { image in
+            if let _ = image {
+                return ContentMode.scaleAspectFill
+            } else {
+                return ContentMode.center
+            }
+        }
+        image = imageObs.asDriver(onErrorJustReturn: #imageLiteral(resourceName: "Magnet"))
+
         progress = torrent.percentDone
 
         statusMessage = torrent.status.map { $0.description }
@@ -65,10 +75,11 @@ class TorrentViewModel: Equatable {
     var title: Observable<String>
     var subtitle: Observable<String>
 
-    var image: Driver<Image>
+    var image: Driver<Image?>
     var progress: Observable<Float>
     var statusMessage: Observable<String>
     var statusColor: Observable<Color>
+    var imageContentMode: Observable<ContentMode>
 }
 
 func == (lhs: TorrentViewModel, rhs: TorrentViewModel) -> Bool {

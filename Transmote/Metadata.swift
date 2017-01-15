@@ -17,15 +17,10 @@ enum TorrentMetadataType {
     case other
 }
 
-enum MetadataError: Swift.Error {
-    case couldNotRequest
-    case noImagePath
-}
-
 protocol Metadata {
     var id: Int? { get }  // swiftlint:disable:this variable_name
     var name: String { get }
-    var type: TorrentMetadataType { get }
+    var type: TorrentMetadataType { get set }
     var imagePath: String? { get }
 }
 
@@ -114,12 +109,16 @@ struct ExternalMetadata: Metadata, ImmutableMappable {
 
     var id: Int? // swiftlint:disable:this variable_name
     var name: String = ""
-    var type: TorrentMetadataType = .other
     var imagePath: String?
 
     init(map: Map) throws {
         id = try map.value("id")
-        name = try map.value("title")
+        do {
+           name = try map.value("title")
+        } catch {
+           name = try map.value("name")
+        }
+
         imagePath = try? map.value("poster_path")
     }
 
@@ -129,6 +128,8 @@ struct ExternalMetadata: Metadata, ImmutableMappable {
         name >>> map["title"]
         imagePath >>> map["poster_path"]
     }
+
+    var type: TorrentMetadataType = .other
 }
 
 struct EpisodeMetadata: Metadata, ImmutableMappable {
@@ -136,11 +137,12 @@ struct EpisodeMetadata: Metadata, ImmutableMappable {
     let imagePath: String?
     let season: Int
     let episode: Int
-    let name: String
+    var name: String = ""
+    let episodeName: String
 
     init(map: Map) throws {
         id = try map.value("id")
-        name = try map.value("name")
+        episodeName = try map.value("name")
         season = try map.value("season_number")
         episode = try map.value("episode_number")
         imagePath = try? map.value("still_path")
@@ -153,7 +155,11 @@ struct EpisodeMetadata: Metadata, ImmutableMappable {
         episode >>> map["episode_number"]
         imagePath >>> map["still_path"]
     }
-    var type: TorrentMetadataType {
+    var type: TorrentMetadataType { get {
         return .tvEpisode(season: season, episode: episode, episodeName: name)
+        }
+        set {
+
+        }
     }
 }

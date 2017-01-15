@@ -105,6 +105,8 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             torrentViewModel.subtitle.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
 
             torrentViewModel.image.drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
+            torrentViewModel.imageContentMode.bindTo(torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
+
             /*torrent.image
                 .map {
                     if $0 == nil {
@@ -123,13 +125,9 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 self.progressView.progress = CGFloat(newValue)
 
             }).addDisposableTo(disposeBag)
-            /*
-            torrent.status.subscribe(onNext: { status in
-                self.progressStatusLabel.stringValue = status.description
-                self.progressView.foreground = status.color
 
-            }).addDisposableTo(disposeBag)
-            */
+            torrentViewModel.statusMessage.bindTo(progressStatusLabel.rx.text).addDisposableTo(disposeBag)
+
         }
     }
 }
