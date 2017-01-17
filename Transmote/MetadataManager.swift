@@ -62,6 +62,7 @@ class MungedMetadata {
             }
             return request.mapMetadata(preservingType:derived.type)
         }
+        //.startWith(nil)
         .catchErrorJustReturn(nil)
         .shareReplay(1)
 
@@ -88,6 +89,7 @@ class MungedMetadata {
             }
             throw(MetadataError.couldNotRequest)
         }
+        //.startWith(nil)
         .catchErrorJustReturn(nil)
         .shareReplay(1)
 
@@ -114,20 +116,20 @@ class MungedMetadata {
         .debug()
         .shareReplay(1)
 
-    lazy var type: Observable<TorrentMetadataType> = self.combo.map { $0.type }
+    lazy var type: Observable<TorrentMetadataType> = self.bigCombo.map { $0.type }
 
     lazy var image: Observable<NSImage?> = {
         let path: Observable<String?> = self.bigCombo.map { $0.imagePath }
 
-        let imageResponse = path.flatMapLatest { path -> Observable<Response> in
+        let imageResponse = path.flatMapLatest { path -> Observable<NSImage?> in
             if let path = path {
-                return self.tmdbProvider.request(.image(path:path))
+                return self.tmdbProvider.request(.image(path:path)).mapImage()
             } else {
-                throw MetadataError.noImagePath
+                return Observable<NSImage?>.just(nil)
             }
         }
 
-        return imageResponse.mapImage().shareReplay(1)
+        return imageResponse.shareReplay(1)
     }()
 
 }

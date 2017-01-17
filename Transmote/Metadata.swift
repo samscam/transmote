@@ -54,6 +54,10 @@ struct DerivedMetadata: Metadata {
         cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
 
+        // Trim leading and trailing
+        cleaner = try! NSRegularExpression(pattern: "(^\\s*)|(\\s*$)", options: .caseInsensitive)
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: "")
+
         self.name = semiCleaned
 
         // Figure out if we have an episode code or season or year or whatnot
