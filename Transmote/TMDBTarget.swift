@@ -19,7 +19,6 @@ enum TMDBTarget {
 
 extension TMDBTarget: TargetType {
 
-    // These will always be ignored
     public var baseURL: URL {
         switch self {
         case .image:

@@ -24,12 +24,18 @@
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
+		224610FD1E2E6CD600CAFA41 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224610FC1E2E6CD600CAFA41 /* Quick.framework */; };
+		224610FF1E2E6CE300CAFA41 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224610FE1E2E6CE300CAFA41 /* Nimble.framework */; };
+		224611011E2E6D0800CAFA41 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224610FE1E2E6CE300CAFA41 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		224611021E2E6D0B00CAFA41 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224610FC1E2E6CD600CAFA41 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		224611091E2EA63200CAFA41 /* DerivedMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224610EB1E2E6C4000CAFA41 /* DerivedMetadataTests.swift */; };
 		2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; };
 		2247B7C61DF83259001B4C95 /* ProgressKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2247B7C41DF83259001B4C95 /* ProgressKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */; };
 		2247B7CA1DF84BAA001B4C95 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247B7C91DF84BAA001B4C95 /* Metadata.swift */; };
 		22701A6D1E082E54004D3B50 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22701A6C1E082E54004D3B50 /* ConfirmationViewController.swift */; };
 		22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27D661DFEA9560080B2E8 /* Backoff.swift */; };
+		22E8A5941E2F7889002D9BB5 /* sample-top100.txt in Resources */ = {isa = PBXBuildFile; fileRef = 22E8A5931E2F7889002D9BB5 /* sample-top100.txt */; };
 		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
@@ -65,6 +71,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		224610F61E2E6C7000CAFA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22EBE37D1DE1000900588FFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22EBE3841DE1000900588FFD;
+			remoteInfo = Transmote;
+		};
 		22DB05301E02AB6E00419CBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22EBE37D1DE1000900588FFD /* Project object */;
@@ -75,6 +88,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		224611001E2E6CFC00CAFA41 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				224611011E2E6D0800CAFA41 /* Nimble.framework in CopyFiles */,
+				224611021E2E6D0B00CAFA41 /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22EBE3B01DE1017900588FFD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,6 +124,12 @@
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
+		224610EB1E2E6C4000CAFA41 /* DerivedMetadataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DerivedMetadataTests.swift; path = TransmoteTests/DerivedMetadataTests.swift; sourceTree = "<group>"; };
+		224610F11E2E6C7000CAFA41 /* TransmoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransmoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		224610F51E2E6C7000CAFA41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = TransmoteTests/Info.plist; sourceTree = "<group>"; };
+		224610FC1E2E6CD600CAFA41 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		224610FE1E2E6CE300CAFA41 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
+		224611041E2EA48000CAFA41 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
 		2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBTarget.swift; sourceTree = "<group>"; };
 		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
@@ -109,6 +139,7 @@
 		22A6B9061E0976BC00F508DA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		22D27D661DFEA9560080B2E8 /* Backoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backoff.swift; sourceTree = "<group>"; };
 		22DB05261E0286E600419CBD /* autoversioning.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
+		22E8A5931E2F7889002D9BB5 /* sample-top100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sample-top100.txt"; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +171,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		224610EE1E2E6C7000CAFA41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				224610FD1E2E6CD600CAFA41 /* Quick.framework in Frameworks */,
+				224610FF1E2E6CE300CAFA41 /* Nimble.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22EBE3821DE1000900588FFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,6 +199,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		224610EA1E2E6C0700CAFA41 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				224610EB1E2E6C4000CAFA41 /* DerivedMetadataTests.swift */,
+				22E8A5931E2F7889002D9BB5 /* sample-top100.txt */,
+				224610F51E2E6C7000CAFA41 /* Info.plist */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		224610FB1E2E6CD600CAFA41 /* Test Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				224610FE1E2E6CE300CAFA41 /* Nimble.framework */,
+				224610FC1E2E6CD600CAFA41 /* Quick.framework */,
+			);
+			name = "Test Frameworks";
+			sourceTree = "<group>";
+		};
+		224611031E2EA48000CAFA41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				224611041E2EA48000CAFA41 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		22DB05271E0286F300419CBD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,9 +246,11 @@
 				22EBE3D81DE45EB400588FFD /* Core */,
 				22FED4491E1E438900ED434D /* Shared UI */,
 				22EBE3871DE1000A00588FFD /* macOS */,
+				224610EA1E2E6C0700CAFA41 /* Tests */,
 				22DB05271E0286F300419CBD /* Supporting Files */,
 				22EBE3861DE1000A00588FFD /* Products */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
+				224611031E2EA48000CAFA41 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				22EBE3851DE1000A00588FFD /* Transmote.app */,
+				224610F11E2E6C7000CAFA41 /* TransmoteTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,6 +295,7 @@
 				22EBE3BD1DE44FB100588FFD /* RxCocoa.framework */,
 				22EBE3BE1DE44FB100588FFD /* RxMoya.framework */,
 				22EBE3BF1DE44FB100588FFD /* RxSwift.framework */,
+				224610FB1E2E6CD600CAFA41 /* Test Frameworks */,
 			);
 			name = "Carthage Frameworks";
 			sourceTree = "<group>";
@@ -260,6 +331,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		224610F01E2E6C7000CAFA41 /* TransmoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 224610F81E2E6C7000CAFA41 /* Build configuration list for PBXNativeTarget "TransmoteTests" */;
+			buildPhases = (
+				224610ED1E2E6C7000CAFA41 /* Sources */,
+				224610EE1E2E6C7000CAFA41 /* Frameworks */,
+				224610EF1E2E6C7000CAFA41 /* Resources */,
+				224611001E2E6CFC00CAFA41 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				224610F71E2E6C7000CAFA41 /* PBXTargetDependency */,
+			);
+			name = TransmoteTests;
+			productName = TransmoteTests;
+			productReference = 224610F11E2E6C7000CAFA41 /* TransmoteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		22EBE3841DE1000900588FFD /* Transmote */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */;
@@ -287,17 +377,23 @@
 		22EBE37D1DE1000900588FFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Sam Easterby-Smith";
 				TargetAttributes = {
+					224610F01E2E6C7000CAFA41 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3Y2D8C5PMT;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 22EBE3841DE1000900588FFD;
+					};
 					22DB052B1E02AB4800419CBD = {
 						CreatedOnToolsVersion = 8.2;
 						ProvisioningStyle = Automatic;
 					};
 					22EBE3841DE1000900588FFD = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 9M28MQ9SZC;
+						DevelopmentTeam = 3Y2D8C5PMT;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -317,11 +413,20 @@
 			targets = (
 				22EBE3841DE1000900588FFD /* Transmote */,
 				22DB052B1E02AB4800419CBD /* Autoversioning */,
+				224610F01E2E6C7000CAFA41 /* TransmoteTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		224610EF1E2E6C7000CAFA41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E8A5941E2F7889002D9BB5 /* sample-top100.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22EBE3831DE1000900588FFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,6 +484,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		224610ED1E2E6C7000CAFA41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				224611091E2EA63200CAFA41 /* DerivedMetadataTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22EBE3811DE1000900588FFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -408,6 +521,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		224610F71E2E6C7000CAFA41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22EBE3841DE1000900588FFD /* Transmote */;
+			targetProxy = 224610F61E2E6C7000CAFA41 /* PBXContainerItemProxy */;
+		};
 		22DB05311E02AB6E00419CBD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22DB052B1E02AB4800419CBD /* Autoversioning */;
@@ -427,6 +545,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		224610F91E2E6C7000CAFA41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3Y2D8C5PMT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = TransmoteTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.samscam.TransmoteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
+			};
+			name = Debug;
+		};
+		224610FA1E2E6C7000CAFA41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3Y2D8C5PMT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = TransmoteTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.samscam.TransmoteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
+			};
+			name = Release;
+		};
 		22DB052D1E02AB4800419CBD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -537,8 +695,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 9M28MQ9SZC;
+				DEVELOPMENT_TEAM = 3Y2D8C5PMT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -559,8 +718,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 9M28MQ9SZC;
+				DEVELOPMENT_TEAM = 3Y2D8C5PMT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -580,6 +740,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		224610F81E2E6C7000CAFA41 /* Build configuration list for PBXNativeTarget "TransmoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				224610F91E2E6C7000CAFA41 /* Debug */,
+				224610FA1E2E6C7000CAFA41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22DB052C1E02AB4800419CBD /* Build configuration list for PBXAggregateTarget "Autoversioning" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
