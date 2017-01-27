@@ -30,9 +30,13 @@ struct DerivedMetadata: Metadata {
     var name: String = ""
     var type: TorrentMetadataType = .other
     var imagePath: String?
+    var season: Int?
+    var year: Int?
+    var episode: Int?
+    var rawName: String
 
     init(from rawName: String) {
-
+        self.rawName = rawName
         self.name = rawName
 
         // Clean up dots, underscores
@@ -47,7 +51,7 @@ struct DerivedMetadata: Metadata {
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
 
         // Clean references to DVD BDRIP and boxset and things
-        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|complete|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|(from \\w* \\w* \\w*))\\b", options: .caseInsensitive)
+        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|(from \\w* \\w* \\w*))\\b", options: .caseInsensitive)
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
 
         // Clean runs of whitespace
@@ -78,19 +82,16 @@ struct DerivedMetadata: Metadata {
 
         self.name = title
 
-        var year: Int?
         if !NSEqualRanges(result.rangeAt(2), NSRange(location: NSNotFound, length: 0)) {
             year = Int((semiCleaned as NSString).substring(with: result.rangeAt(2)))
         }
 
-        var season: Int?
         if !NSEqualRanges(result.rangeAt(3), NSRange(location: NSNotFound, length: 0)) {
             season = Int((semiCleaned as NSString).substring(with: result.rangeAt(3)))
         } else if !NSEqualRanges(result.rangeAt(5), NSRange(location: NSNotFound, length: 0)) {
             season = Int((semiCleaned as NSString).substring(with: result.rangeAt(5)))
         }
 
-        var episode: Int?
         if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
             episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
         }
