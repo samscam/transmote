@@ -12,11 +12,36 @@ import Nimble
 
 class DerivedMetadataSpec: QuickSpec {
 
-    // swiftlint:disable force_try conditional_returns_on_newline force_unwrapping
+    // swiftlint:disable force_try conditional_returns_on_newline function_body_length force_unwrapping
 
     override func spec() {
         describe("Identifying types") {
+            context("TV Season") {
 
+            }
+            context("TV Episode") {
+                let samples = ["Lucifer.S02E11.HDTV.x264-LOL[ettv]",
+                               "Marvels.Agents.of.S.H.I.E.L.D.S04E10.HDTV.x264-LOL[ettv]",
+                               "Gotham.S03E12.HDTV.x264-LOL[ettv]",
+                               "Sherlock.S04E02.WEBRip.x264-FUM[ettv]",
+                               "Sherlock.S04E01.The.Six.Thatchers.PROPER.HDTV.x264-DEADPOOL[e..."]
+                let allDerived: [DerivedMetadata] = samples.map { DerivedMetadata(from: $0) }
+                for item in allDerived {
+                    it("should identify them as TV Episodes") {
+                        expect(item.type) == TorrentMetadataType.tvEpisode
+                    }
+                }
+
+            }
+            context("TV Series") {
+
+            }
+            context("Movie") {
+
+            }
+            context("Other") {
+
+            }
         }
         describe("Deriving metadata") {
 
@@ -91,3 +116,4 @@ class DerivedMetadataSpec: QuickSpec {
     }
 
 }
+
