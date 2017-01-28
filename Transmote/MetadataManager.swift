@@ -18,16 +18,64 @@ class MetadataManager {
     let tmdbProvider = RxMoyaProvider<TMDBTarget>() // plugins:[ NetworkLoggerPlugin() ]
     var metadataStore: [String:Observable<Metadata>] = [:]
 
+    let disposeBag = DisposeBag()
+
     func metadata(for rawName: String) -> Observable<Metadata> {
         if let retrieved = metadataStore[rawName] {
             return retrieved
         } else {
-            let derived = Observable<Metadata>.just(DerivedMetadata(from: rawName))
-            //let munged = MungedMetadata(rawName: rawName, tmdbProvider: tmdbProvider)
-            metadataStore[rawName] = derived
-            return derived
+            let stream = metadataStream(for: rawName)
+            metadataStore[rawName] = stream
+            return stream
         }
 
+    }
+
+    func metadataStream(for rawName: String) -> Observable<Metadata> {
+        let publishSubject = ReplaySubject<Metadata>.create(bufferSize: 1)
+
+        let derived = DerivedMetadata(from: rawName)
+        publishSubject.onNext(derived)
+
+        if derived.year != nil {
+            // movie
+            tmdbProvider.request(.movieMetadata(movieName: derived.cleanedName, year: derived.year))
+                .mapTMDB(.movie)
+                .subscribe(onNext: { movie in
+                    publishSubject.onNext(movie)
+                }, onError: { error in
+                    print(error)
+                    // do nothing
+                }).addDisposableTo(disposeBag)
+        } else {
+            // tv show
+            tmdbProvider.request(.tvShowMetadata(showName: derived.cleanedName))
+                .mapTMDB(.show)
+                .flatMapLatest { show -> Observable<Metadata> in
+                    if let show = show as? TVShow, let season = derived.season {
+                        if let episode = derived.episode {
+                            return self.tmdbProvider.request(.tvShowDetails(showID: show.id, season: season, episode: episode)).mapTMDB(.episode, show: show)
+                        } else {
+                            return self.tmdbProvider.request(.tvSeasonDetails(showID: show.id, season: season)).mapTMDB(.season, show: show)
+                        }
+                    } else {
+                        return Observable.just(show)
+                    }
+                }
+                .subscribe(onNext: { show in
+                    publishSubject.onNext(show)
+                }, onError: { error in
+                    // do nothing
+                    print(error)
+                })
+
+                .addDisposableTo(disposeBag)
+        }
+        // season
+
+        // episode
+
+        return publishSubject
     }
 }
 
