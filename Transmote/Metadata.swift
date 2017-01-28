@@ -6,165 +6,86 @@
 //
 
 import Foundation
-import ObjectMapper
+import RxSwift
+import Moya
+import AppKit
 
 enum TorrentMetadataType {
     case video
-    case tvSeries
-    case tvSeason(season: Int)
-    case tvEpisode(season: Int, episode: Int, episodeName: String?)
-    case movie(year: Int)
+    case book
+    case software
     case other
 }
 
 protocol Metadata {
-    var id: Int? { get }  // swiftlint:disable:this variable_name
-    var name: String { get }
-    var type: TorrentMetadataType { get set }
+    var title: String { get }
+    var description: String { get }
+    var type: TorrentMetadataType { get }
     var imagePath: String? { get }
 }
 
-struct DerivedMetadata: Metadata {
+enum MetadataError: Swift.Error {
+    case notWorthLookingUp
+    case couldNotRequest
+    case itemNotFound
+    case noImagePath
+}
 
-    var id: Int? // swiftlint:disable:this variable_name
-    var name: String = ""
-    var type: TorrentMetadataType = .other
-    var imagePath: String?
-    var season: Int?
-    var year: Int?
-    var episode: Int?
-    var rawName: String
+extension Metadata {
 
-    init(from rawName: String) {
-        self.rawName = rawName
-        self.name = rawName
-
-        // Clean up dots, underscores
-
-        // swiftlint:disable force_try
-
-        var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
-        var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.characters.count), withTemplate: " ")
-
-        // Clean runs of whitespace
-        cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
-
-        // Clean references to DVD BDRIP and boxset and things
-        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|(from \\w* \\w* \\w*))\\b", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
-
-        // Clean runs of whitespace
-        cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
-
-        // Trim leading and trailing
-        cleaner = try! NSRegularExpression(pattern: "(^\\s*)|(\\s*$)", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: "")
-
-        self.name = semiCleaned
-
-        // Figure out if we have an episode code or season or year or whatnot
-        let pattern = "^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?)?(\\d+)\\W*(?:(?:ep|episode|[ex])\\s?(\\d+\\b))?)|(?:season\\s?(\\d+)))){1,2}"
-        let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-
-        // swiftlint:enable force_try
-
-        guard let result = regex.firstMatch(in: semiCleaned,
-                                            options: [],
-                                            range: NSRange(location: 0, length: semiCleaned.characters.count))
-            else {
-            // If we can't match the regex then give up, returning the name as cleaned up as we have it
-            return
-        }
-
-        let title = (semiCleaned as NSString).substring(with: result.rangeAt(1))
-
-        self.name = title
-
-        if !NSEqualRanges(result.rangeAt(2), NSRange(location: NSNotFound, length: 0)) {
-            year = Int((semiCleaned as NSString).substring(with: result.rangeAt(2)))
-        }
-
-        if !NSEqualRanges(result.rangeAt(3), NSRange(location: NSNotFound, length: 0)) {
-            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(3)))
-        } else if !NSEqualRanges(result.rangeAt(5), NSRange(location: NSNotFound, length: 0)) {
-            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(5)))
-        }
-
-        if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
-            episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
-        }
-        if let season = season, let episode = episode {
-            self.type = .tvEpisode(season: season, episode: episode, episodeName: nil)
-        } else if let season = season {
-            self.type = .tvSeason(season: season)
-        } else if let year = year {
-            self.type = .movie(year: year)
-        }
-
-        print("Raw name: \(rawName)")
-        print("... converted to: \(self.name)")
-
-    }
+//    var image: Observable<NSImage?> {
+//        return self.tmdbProvider.request(.image(path:imagePath)).mapImage()
+//    }
 
 }
 
-struct ExternalMetadata: Metadata, ImmutableMappable {
-
-    var id: Int? // swiftlint:disable:this variable_name
-    var name: String = ""
-    var imagePath: String?
-
-    init(map: Map) throws {
-        id = try map.value("id")
-        do {
-           name = try map.value("title")
-        } catch {
-           name = try map.value("name")
-        }
-
-        imagePath = try? map.value("poster_path")
-    }
-
-    mutating func mapping(map: Map) {
-        id >>> map["id"]
-        name >>> map["name"]
-        name >>> map["title"]
-        imagePath >>> map["poster_path"]
-    }
-
-    var type: TorrentMetadataType = .other
+enum TMDBType {
+    case show
+    case season
+    case episode
+    case movie
 }
 
-struct EpisodeMetadata: Metadata, ImmutableMappable {
-    let id: Int? // swiftlint:disable:this variable_name
-    let imagePath: String?
-    let season: Int
-    let episode: Int
-    var name: String = ""
-    let episodeName: String
-
-    init(map: Map) throws {
-        id = try map.value("id")
-        episodeName = try map.value("name")
-        season = try map.value("season_number")
-        episode = try map.value("episode_number")
-        imagePath = try? map.value("still_path")
-    }
-
-    mutating func mapping(map: Map) {
-        id >>> map["id"]
-        name >>> map["name"]
-        season >>> map["season_number"]
-        episode >>> map["episode_number"]
-        imagePath >>> map["still_path"]
-    }
-    var type: TorrentMetadataType { get {
-        return .tvEpisode(season: season, episode: episode, episodeName: name)
+extension ObservableType where E == Response {
+    func mapTMDB(_ type: TMDBType, show: TVShow? = nil) -> Observable<Metadata> {
+        return flatMap { response -> Observable<Metadata> in
+            return Observable.just(try response.mapTMDB(type, show: show))
         }
-        set {
+    }
+}
+
+extension Response {
+    func mapTMDB(_ type: TMDBType, show: TVShow? = nil) throws -> Metadata {
+
+        let json = try self.mapJSON()
+
+        if let jsonDict = json as? [String:Any] {
+            switch type {
+            case .movie, .show:
+                if let resultsArray = jsonDict["results"] as? [Any],
+                let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
+
+                    switch type {
+                    case .show:
+                        return try TVShow(JSON: firstResult)
+                    case .movie:
+                        return try Movie(JSON: firstResult)
+                    default:
+                        break
+                    }
+                }
+            case .season:
+                var season = try TVSeason(JSON: jsonDict)
+                season.show = show!
+                return season
+            case .episode:
+                var episode = try TVEpisode(JSON: jsonDict)
+                episode.show = show!
+                return episode
+            }
 
         }
+
+        throw(MetadataError.couldNotRequest)
     }
 }

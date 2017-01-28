@@ -172,7 +172,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     @IBAction func updateWidgetClicked(_ sender: Any) {
         self.updater?.checkForUpdates(self)
     }
-    func updater(_ updater: SUUpdater!, didFindValidUpdate item: SUAppcastItem!) {
+    func updater(_ updater: SUUpdater, didFindValidUpdate item: SUAppcastItem) {
         pendingUpdateItem = item
         sortOutVersionWidget()
     }
