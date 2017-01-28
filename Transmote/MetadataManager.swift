@@ -13,32 +13,28 @@ import AppKit
 import Moya
 import RxMoya
 
-enum MetadataError: Swift.Error {
-    case notWorthLookingUp
-    case couldNotRequest
-    case itemNotFound
-    case noImagePath
-}
-
 class MetadataManager {
 
     let tmdbProvider = RxMoyaProvider<TMDBTarget>() // plugins:[ NetworkLoggerPlugin() ]
-    var metadataStore: [String:MungedMetadata] = [:]
+    var metadataStore: [String:Observable<Metadata>] = [:]
 
-    func metadata(for rawName: String) -> MungedMetadata {
+    func metadata(for rawName: String) -> Observable<Metadata> {
         if let retrieved = metadataStore[rawName] {
             return retrieved
         } else {
-            let munged = MungedMetadata(rawName: rawName, tmdbProvider: tmdbProvider)
-            metadataStore[rawName] = munged
-            return munged
+            let derived = Observable<Metadata>.just(DerivedMetadata(from: rawName))
+            //let munged = MungedMetadata(rawName: rawName, tmdbProvider: tmdbProvider)
+            metadataStore[rawName] = derived
+            return derived
         }
 
     }
 }
 
-class MungedMetadata {
+/*
 
+class MungedMetadata {
+    
     let derived: Observable<Metadata>
     let external: Observable<Metadata?>
     let episode: Observable<Metadata?>
@@ -50,21 +46,21 @@ class MungedMetadata {
 
         derived = Observable<Metadata>.just(DerivedMetadata(from:rawName)).shareReplay(1)
 
-        external = derived.flatMapLatest { derived -> Observable<Metadata?> in
-            var request: Observable<Response>
-            switch derived.type {
-            case .tvEpisode, .tvSeries, .tvSeason:
-                request = tmdbProvider.request(.tvShowMetadata(showName: derived.name))
-            case .movie(let year):
-                request = tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
-            default:
-                throw(MetadataError.notWorthLookingUp)
-            }
-            return request.mapMetadata(preservingType:derived.type)
-        }
-        //.startWith(nil)
-        .catchErrorJustReturn(nil)
-        .shareReplay(1)
+//        external = derived.flatMapLatest { derived -> Observable<Metadata?> in
+//            var request: Observable<Response>
+//            switch derived.type {
+//            case .tvEpisode, .tvSeries, .tvSeason:
+//                request = tmdbProvider.request(.tvShowMetadata(showName: derived.name))
+//            case .movie(let year):
+//                request = tmdbProvider.request(.movieMetadata(movieName: derived.name, year: year))
+//            default:
+//                throw(MetadataError.notWorthLookingUp)
+//            }
+//            return request.mapMetadata(preservingType:derived.type)
+//        }
+//        //.startWith(nil)
+//        .catchErrorJustReturn(nil)
+//        .shareReplay(1)
 
         let episodeRequest = external.flatMapLatest { metadata -> Observable<Response>  in
             guard let metadata = metadata else {
@@ -72,10 +68,10 @@ class MungedMetadata {
             }
             if let id = metadata.id {
                 switch metadata.type {
-                case .tvEpisode(let season, let episode, _):
-
+                case .tvEpisode:
+                    if let season = metadata.season, let episode = metadata.episode {
                         return tmdbProvider.request(.tvShowDetails(showID: id, season: season, episode: episode))
-
+                    }
                 default:
                     break
                 }
@@ -133,26 +129,4 @@ class MungedMetadata {
     }()
 
 }
-
-extension ObservableType where E == Response {
-    func mapMetadata(preservingType: TorrentMetadataType) -> Observable<Metadata?> {
-        return flatMap { response -> Observable<Metadata?> in
-            return Observable.just(try response.mapMetadata(preservingType: preservingType))
-        }
-    }
-}
-extension Response {
-    func mapMetadata(preservingType: TorrentMetadataType) throws -> Metadata? {
-
-        let json = try self.mapJSON()
-        if let jsonDict = json as? [String:Any],
-            let resultsArray = jsonDict["results"] as? [Any],
-            let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
-            var external = try ExternalMetadata(JSON: firstResult)
-            external.type = preservingType
-            return external
-        } else {
-            throw(MetadataError.couldNotRequest)
-        }
-    }
-}
+*/

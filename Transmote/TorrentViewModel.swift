@@ -26,19 +26,24 @@ class TorrentViewModel: Equatable {
     let torrent: Torrent
 
     private let metadataManager: MetadataManager
-    private let torrentMetadata: Observable<MungedMetadata>
+    private let torrentMetadata: Observable<Metadata>
 
     init(torrent: Torrent, metadataManager: MetadataManager) {
         self.torrent = torrent
         self.metadataManager = metadataManager
 
-        torrentMetadata = torrent.name.map { metadataManager.metadata(for: $0) }
+        torrentMetadata = torrent.name.flatMapLatest { metadataManager.metadata(for: $0) }
 
-        title = torrentMetadata.flatMapLatest { $0.name }
-        subtitle = torrentMetadata.flatMapLatest { $0.type }.map { type -> String in
-            switch type {
-            case .tvEpisode(let season, let episode, let episodeName):
-                var description = "Season \(season) • Episode \(episode)"
+        title = torrentMetadata.map { $0.title }
+        subtitle = torrentMetadata.map { $0.description }
+
+/*metadata -> String in
+            switch metadata.type {
+            case .tvEpisode:
+                var description = ""
+                if let season = metadata.season, let episode = metadata.episode {
+                   description += "Season \(season) • Episode \(episode)"
+                }
                 if let episodeName = episodeName {
                     description += "\n\(episodeName)"
                 }
@@ -54,9 +59,17 @@ class TorrentViewModel: Equatable {
             case .other:
                 return "Not a video"
             }
+        }*/
+
+        let imageObs = torrentMetadata.map { $0.imagePath }.flatMapLatest { imagePath -> Observable<Image?> in
+            if let imagePath = imagePath {
+                return metadataManager.tmdbProvider.request(.image(path: imagePath)).mapImage()
+            } else {
+                return Observable<Image?>.just(nil)
+            }
+
         }
 
-        let imageObs = torrentMetadata.flatMapLatest { $0.image }
         imageContentMode = imageObs.catchErrorJustReturn(nil).map { image in
             if let _ = image {
                 return ContentMode.scaleAspectFill
