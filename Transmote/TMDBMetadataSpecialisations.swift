@@ -3,7 +3,6 @@
 //  Transmote
 //
 //  Created by Sam Easterby-Smith on 27/01/2017.
-//  Copyright © 2017 Sam Easterby-Smith. All rights reserved.
 //
 
 import Foundation

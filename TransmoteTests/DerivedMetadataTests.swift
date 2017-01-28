@@ -116,4 +116,3 @@ class DerivedMetadataSpec: QuickSpec {
     }
 
 }
-
