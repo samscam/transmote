@@ -31,14 +31,6 @@ enum MetadataError: Swift.Error {
     case noImagePath
 }
 
-extension Metadata {
-
-//    var image: Observable<NSImage?> {
-//        return self.tmdbProvider.request(.image(path:imagePath)).mapImage()
-//    }
-
-}
-
 enum TMDBType {
     case show
     case season

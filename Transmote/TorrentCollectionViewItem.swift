@@ -107,20 +107,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             torrentViewModel.image.drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
             torrentViewModel.imageContentMode.bindTo(torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
 
-            /*torrent.image
-                .map {
-                    if $0 == nil {
-                        return ContentMode.center
-                    } else {
-                        return ContentMode.scaleAspectFill
-                    }
-                }
-                .asDriver(onErrorJustReturn: ContentMode.center)
-                .asObservable()
-                .subscribe(onNext: { contentMode in
-                    self.torrentImageView.contentMode = contentMode
-                }).addDisposableTo(disposeBag)
-            */
             torrentViewModel.progress.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
 

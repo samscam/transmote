@@ -37,30 +37,6 @@ class TorrentViewModel: Equatable {
         title = torrentMetadata.map { $0.title }
         subtitle = torrentMetadata.map { $0.description }
 
-/*metadata -> String in
-            switch metadata.type {
-            case .tvEpisode:
-                var description = ""
-                if let season = metadata.season, let episode = metadata.episode {
-                   description += "Season \(season) • Episode \(episode)"
-                }
-                if let episodeName = episodeName {
-                    description += "\n\(episodeName)"
-                }
-                return description
-            case .tvSeason(let season):
-                return "Season \(season)"
-            case .tvSeries:
-                return "Complete series"
-            case .movie(let year):
-                return "\(year)"
-            case .video:
-                return "Video"
-            case .other:
-                return "Not a video"
-            }
-        }*/
-
         let imageObs = torrentMetadata.map { $0.imagePath }.flatMapLatest { imagePath -> Observable<Image?> in
             if let imagePath = imagePath {
                 return metadataManager.tmdbProvider.request(.image(path: imagePath)).mapImage()

@@ -236,8 +236,8 @@
 				2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */,
 				22FED44C1E1E47F800ED434D /* MetadataManager.swift */,
 				2247B7C91DF84BAA001B4C95 /* Metadata.swift */,
-				22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */,
 				22ADE06B1E3C094100401E85 /* DerivedMetadata.swift */,
+				22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */,
 			);
 			name = Metadata;
 			sourceTree = "<group>";
