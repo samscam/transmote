@@ -24,6 +24,7 @@
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
+		223D821B1E3F529A00925F7E /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 223D821A1E3F529A00925F7E /* dsa_pub.pem */; };
 		224610FD1E2E6CD600CAFA41 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224610FC1E2E6CD600CAFA41 /* Quick.framework */; };
 		224610FF1E2E6CE300CAFA41 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224610FE1E2E6CE300CAFA41 /* Nimble.framework */; };
 		224611011E2E6D0800CAFA41 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224610FE1E2E6CE300CAFA41 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -126,6 +127,7 @@
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
+		223D821A1E3F529A00925F7E /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../Distribution/dsa_pub.pem; sourceTree = "<group>"; };
 		224610EB1E2E6C4000CAFA41 /* DerivedMetadataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DerivedMetadataTests.swift; path = TransmoteTests/DerivedMetadataTests.swift; sourceTree = "<group>"; };
 		224610F11E2E6C7000CAFA41 /* TransmoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransmoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		224610F51E2E6C7000CAFA41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = TransmoteTests/Info.plist; sourceTree = "<group>"; };
@@ -137,7 +139,7 @@
 		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		22701A6C1E082E54004D3B50 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		227925B51E12197400371CE9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
-		2279390D1E01B13F0063B3E1 /* appcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = SOURCE_ROOT; };
+		2279390D1E01B13F0063B3E1 /* Distribution */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Distribution; sourceTree = SOURCE_ROOT; };
 		22A6B9061E0976BC00F508DA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		22ADE06B1E3C094100401E85 /* DerivedMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedMetadata.swift; sourceTree = "<group>"; };
 		22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataSpecialisations.swift; sourceTree = "<group>"; };
@@ -246,11 +248,12 @@
 			isa = PBXGroup;
 			children = (
 				227925B51E12197400371CE9 /* .swiftlint.yml */,
+				223D821A1E3F529A00925F7E /* dsa_pub.pem */,
 				22A6B9061E0976BC00F508DA /* README.md */,
 				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
 				22EBE3911DE1000A00588FFD /* Info.plist */,
 				22DB05261E0286E600419CBD /* autoversioning.sh */,
-				2279390D1E01B13F0063B3E1 /* appcast.xml */,
+				2279390D1E01B13F0063B3E1 /* Distribution */,
 			);
 			name = "Supporting Files";
 			path = Transmote;
@@ -445,6 +448,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				223D821B1E3F529A00925F7E /* dsa_pub.pem in Resources */,
 				22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */,
 				22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */,
 				2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */,
