@@ -77,7 +77,16 @@ class TorrentViewModel: Equatable {
                 return ContentMode.center
             }
         }
-        image = imageObs.asDriver(onErrorJustReturn: #imageLiteral(resourceName: "Magnet"))
+
+        image = imageObs
+            .map {
+                if $0 == nil {
+                    return #imageLiteral(resourceName: "Magnet")
+                } else {
+                    return $0
+                }
+            }
+            .asDriver(onErrorJustReturn: #imageLiteral(resourceName: "Magnet"))
 
         progress = torrent.percentDone
 
