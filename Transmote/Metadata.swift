@@ -76,11 +76,11 @@ extension Response {
                 }
             case .season:
                 var season = try TVSeason(JSON: jsonDict)
-                season.show = show!
+                season.show = show
                 return season
             case .episode:
                 var episode = try TVEpisode(JSON: jsonDict)
-                episode.show = show!
+                episode.show = show
                 return episode
             }
 

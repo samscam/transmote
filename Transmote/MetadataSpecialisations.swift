@@ -74,7 +74,7 @@ struct TVShow: Metadata, ImmutableMappable {
 
 struct TVSeason: Metadata, ImmutableMappable {
 
-    var title: String { return show.title }
+    var title: String { return show?.title ?? "" }
     var description: String { return "Season \(season)" }
 
     var id: Int // swiftlint:disable:this variable_name
@@ -84,12 +84,12 @@ struct TVSeason: Metadata, ImmutableMappable {
         if let _imagePath = _imagePath {
             return _imagePath
         } else {
-            return show.imagePath
+            return show?.imagePath
         }
     }
     private var _imagePath: String?
 
-    var show: TVShow!
+    var show: TVShow?
 
     init(map: Map) throws {
         id = try map.value("id")
