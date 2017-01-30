@@ -128,6 +128,9 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
 
             torrentViewModel.statusMessage.bindTo(progressStatusLabel.rx.text).addDisposableTo(disposeBag)
 
+            torrentViewModel.statusColor.subscribe(onNext: { color in
+                self.progressView.foreground = color
+            }).addDisposableTo(disposeBag)
         }
     }
 }
