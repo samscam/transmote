@@ -1,0 +1,7 @@
+github "sparkle-project/Sparkle" ~> 1.14
+github "Hearst-DD/ObjectMapper" ~> 2.2
+github "Moya/Moya" ~> 8.0
+github "ReactiveX/RxSwift" ~> 3.1
+github "samscam/ProgressKit" "master"
+github "Quick/Quick"
+github "Quick/Nimble"
