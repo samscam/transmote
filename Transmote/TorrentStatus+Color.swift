@@ -25,16 +25,16 @@ extension TorrentStatus {
         case .stopped:
             return Color(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         case .checkWait:
-            return Color(red: 1, green: 0.2, blue: 0, alpha: 1)
+            return Color(red: 1, green: 0.5, blue: 0, alpha: 0.7)
         case .check:
             return Color(red: 1, green: 0.5, blue: 0, alpha: 1)
         case .downloadWait:
-            return Color(red: 0, green: 0.5, blue: 0, alpha: 1)
+            return Color(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.7)
         case .download:
             return Color(red: 0.3, green: 0.7, blue: 1.0, alpha: 1)
 
         case .seedWait:
-            return Color(red: 0, green: 0.5, blue: 0.5, alpha: 1)
+            return Color(red: 0, green: 0.8, blue: 0, alpha: 0.7)
         case .seed:
             return Color(red: 0, green: 0.8, blue: 0, alpha: 1)
         }
