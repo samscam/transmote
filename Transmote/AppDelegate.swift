@@ -6,6 +6,8 @@
 //
 
 import Cocoa
+import Fabric
+import Crashlytics
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -13,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var deferredMagnetURL: URL!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        Fabric.with([Crashlytics.self])
 
     }
 

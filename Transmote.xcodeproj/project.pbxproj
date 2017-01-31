@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2211A4B71E409E5700F5005B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4B31E409B1D00F5005B /* Fabric.framework */; };
+		2211A4B81E409E5700F5005B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4B41E409B1D00F5005B /* Crashlytics.framework */; };
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
@@ -124,6 +126,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2211A4B31E409B1D00F5005B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Fabric/Fabric.framework; sourceTree = "<group>"; };
+		2211A4B41E409B1D00F5005B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Fabric/Crashlytics.framework; sourceTree = "<group>"; };
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
@@ -199,6 +203,8 @@
 				22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */,
 				22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */,
 				2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */,
+				2211A4B71E409E5700F5005B /* Fabric.framework in Frameworks */,
+				2211A4B81E409E5700F5005B /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,12 +230,14 @@
 			name = "Test Frameworks";
 			sourceTree = "<group>";
 		};
-		224611031E2EA48000CAFA41 /* Frameworks */ = {
+		224611031E2EA48000CAFA41 /* Fabric Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2211A4B31E409B1D00F5005B /* Fabric.framework */,
+				2211A4B41E409B1D00F5005B /* Crashlytics.framework */,
 				224611041E2EA48000CAFA41 /* XCTest.framework */,
 			);
-			name = Frameworks;
+			name = "Fabric Frameworks";
 			sourceTree = "<group>";
 		};
 		22ADE06A1E3C091900401E85 /* Metadata */ = {
@@ -269,7 +277,7 @@
 				22DB05271E0286F300419CBD /* Supporting Files */,
 				22EBE3861DE1000A00588FFD /* Products */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
-				224611031E2EA48000CAFA41 /* Frameworks */,
+				224611031E2EA48000CAFA41 /* Fabric Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -377,6 +385,7 @@
 				22EBE3831DE1000900588FFD /* Resources */,
 				22EBE3B01DE1017900588FFD /* Embed Frameworks */,
 				227925B41E11E0A200371CE9 /* ShellScript */,
+				2211A4B21E409AF100F5005B /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -459,6 +468,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2211A4B21E409AF100F5005B /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric/Fabric.framework/run b4da687d2c3f623cf4ea7f4a9f941615101fac7f 81cbca001ef2f9c594cd4b2b1db38afd3b91da1022d2306bb6e99c96b554c09b";
+		};
 		227925B41E11E0A200371CE9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -721,6 +744,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -744,6 +769,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
