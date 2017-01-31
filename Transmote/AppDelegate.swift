@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var deferredMagnetURL: URL!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+
+        UserDefaults.standard.register(defaults: ["NSApplicationCrashOnExceptions": true])
         Fabric.with([Crashlytics.self])
 
     }
