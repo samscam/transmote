@@ -11,6 +11,7 @@ import Moya
 
 enum TMDBTarget {
     case serviceConfiguration
+    case multiSearch(query: String)
     case tvShowMetadata(showName: String)
     case tvSeasonDetails(showID:Int, season:Int)
     case tvShowDetails(showID:Int, season:Int, episode:Int)
@@ -36,6 +37,8 @@ extension TMDBTarget: TargetType {
             return "configuration"
         case .image(let path):
             return "w500/" + path
+        case .multiSearch:
+            return "search/multi"
         case .movieMetadata:
             return "search/movie"
         case .tvSeasonDetails(let showID, let season):
@@ -63,6 +66,8 @@ extension TMDBTarget: TargetType {
 
         case .tvShowMetadata(let showName):
             params["query"] = showName
+        case .multiSearch(let query):
+            params["query"] = query
         }
         return params
     }
