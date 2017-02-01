@@ -65,7 +65,7 @@ fi
 # Do not allow build to continue if we are in release configuration.
 if [[ -n "$dirty" ]]; then
     echo "DIRTY BUILD!"
-    if [[ "$CONFIGURATION" == "Release" ]]; then
+    if [[ "$CONFIGURATION" != "Debug" ]]; then
         exit 1
     fi
 fi

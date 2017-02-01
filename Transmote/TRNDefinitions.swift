@@ -10,7 +10,7 @@
 // The Movie Database
 
 // swiftlint:disable variable_name
-let TMDB_API_KEY = "XXX"
+let TMDB_API_KEY = "***REMOVED***"
 let TMDB_BASE_URL = "https://api.themoviedb.org/3/"
 let TMDB_IMAGES_URL = "https://image.tmdb.org/t/p/"
 

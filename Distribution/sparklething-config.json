@@ -1,0 +1,12 @@
+{
+  "APP_NAME"                                    : "Transmote",
+  "PRIVATE_KEY_PATH"                            : "dsa_priv.pem",
+  "SPARKLE_BIN_PATH"                            : "/Applications/Sparkle/bin/",
+  "APPCAST_FILE_NAME"                           : "appcast.xml",
+  "APPCAST_BASE_URL"                            : "https://samscam.co.uk/transmote/",
+  "RELEASES_DIR"                                : "release/",
+  "APPCAST_TITLE"                               : "Transmote changelog",
+  "APPCAST_DESCRIPTION"                         : "Changes to Transmote",
+  "APPCAST_LANGUAGE"                            : "en",
+  "APPCAST_LATEST_VERSION_UPDATE_DESCRIPTION"   : "Foo"
+}

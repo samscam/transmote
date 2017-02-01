@@ -33,6 +33,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>LONG_VERSION</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>901d118350c7346b2c0e014fc4b50874001e05ac</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSAppTransportSecurity</key>
