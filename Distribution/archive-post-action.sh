@@ -21,10 +21,12 @@ xcodebuild -exportArchive -archivePath "${ARCHIVE_PATH}" -exportPath "${OUTPUT_D
 cd "${ARCHIVE_DSYMS_PATH}/"
 /usr/bin/zip -r "$OUTPUT_DIR/${TARGET_NAME}.dSYM.zip" "${TARGET_NAME}.app.dSYM"
 
+cd "${SOURCE_ROOT}/Distribution"
+
 # Create dmg
-DMG_PATH = "${OUTPUT_DIR}/${TARGET_NAME}-${VERSION}.dmg"
+DMG_PATH="${OUTPUT_DIR}/${TARGET_NAME}-${VERSION}.dmg"
 dmgcanvas "${SOURCE_ROOT}/Distribution/dmg_template.dmgCanvas" "${DMG_PATH}" -setFilePath "Transmote.app" "${OUTPUT_DIR}/${TARGET_NAME}.app"
 
-./sparklething.py "${SOURCE_ROOT}/Distribution/sparklething-config.json" "${DMG_PATH}" -v "${VERSION}" "${OUTPUT_DIR}/appcast.xml" -vv
+./sparklething.py sparklething-config.json "${DMG_PATH}" -v "${VERSION}" "${OUTPUT_DIR}/appcast.xml" -vv
 
 osascript -e 'display notification "Exporting DMG complete" with title "Archiving"'
