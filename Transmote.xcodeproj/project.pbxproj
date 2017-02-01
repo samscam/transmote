@@ -129,6 +129,7 @@
 		2211A4BE1E40B65E00F5005B /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = exportOptions.plist; path = Distribution/exportOptions.plist; sourceTree = SOURCE_ROOT; };
 		2211A4BF1E4167C100F5005B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		2211A4C01E4167C100F5005B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		2211A4CA1E41D8A900F5005B /* archive-post-action.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "archive-post-action.sh"; path = "Distribution/archive-post-action.sh"; sourceTree = SOURCE_ROOT; };
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
@@ -256,6 +257,7 @@
 			children = (
 				227925B51E12197400371CE9 /* .swiftlint.yml */,
 				223D821A1E3F529A00925F7E /* dsa_pub.pem */,
+				2211A4CA1E41D8A900F5005B /* archive-post-action.sh */,
 				2211A4BE1E40B65E00F5005B /* exportOptions.plist */,
 				22A6B9061E0976BC00F508DA /* README.md */,
 				22EBE3D41DE4502C00588FFD /* Defaults.plist */,

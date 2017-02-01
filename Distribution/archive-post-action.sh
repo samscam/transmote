@@ -26,3 +26,5 @@ dmgcanvas "${SOURCE_ROOT}/Distribution/dmg_template.dmgCanvas" "${OUTPUT_DIR}/${
 # Zip and copy .app
 #cd "${ARCHIVE_PRODUCTS_PATH}/Applications/"
 #/usr/bin/zip -r -y "$OUTPUT_DIR/${TARGET_NAME}.app.zip" "${TARGET_NAME}.app"
+
+osascript -e 'Exporting DMG complete" with title "Archiving"'
