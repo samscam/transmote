@@ -1,0 +1,4 @@
+bitly-api
+boto
+Jinja2
+MarkupSafe

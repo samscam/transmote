@@ -1,5 +1,7 @@
 #!/bin/sh
 
+## This is a post-action when archiving
+
 PRODUCT_INFO_PLIST_PATH="${ARCHIVE_PRODUCTS_PATH}/Applications/${TARGET_NAME}.app/Contents/Info.plist"
 VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "${PRODUCT_INFO_PLIST_PATH}")
 BUILD=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${PRODUCT_INFO_PLIST_PATH}")
@@ -20,11 +22,9 @@ cd "${ARCHIVE_DSYMS_PATH}/"
 /usr/bin/zip -r "$OUTPUT_DIR/${TARGET_NAME}.dSYM.zip" "${TARGET_NAME}.app.dSYM"
 
 # Create dmg
-dmgcanvas "${SOURCE_ROOT}/Distribution/dmg_template.dmgCanvas" "${OUTPUT_DIR}/${TARGET_NAME}-${VERSION}.dmg" -setFilePath "Transmote.app" "${OUTPUT_DIR}/${TARGET_NAME}.app" 
+DMG_PATH = "${OUTPUT_DIR}/${TARGET_NAME}-${VERSION}.dmg"
+dmgcanvas "${SOURCE_ROOT}/Distribution/dmg_template.dmgCanvas" "${DMG_PATH}" -setFilePath "Transmote.app" "${OUTPUT_DIR}/${TARGET_NAME}.app"
 
-#/usr/local/bin/dropdmg "${ARCHIVE_PRODUCTS_PATH}/Applications/${TARGET_NAME}.app" --layout-folder "${SOURCE_ROOT}/DropDMG/Layout" --destination  "$OUTPUT_DIR"
-# Zip and copy .app
-#cd "${ARCHIVE_PRODUCTS_PATH}/Applications/"
-#/usr/bin/zip -r -y "$OUTPUT_DIR/${TARGET_NAME}.app.zip" "${TARGET_NAME}.app"
+./sparklething.py "${SOURCE_ROOT}/Distribution/sparklething-config.json" "${DMG_PATH}" -v "${VERSION}" "${OUTPUT_DIR}/appcast.xml" -vv
 
-osascript -e 'Exporting DMG complete" with title "Archiving"'
+osascript -e 'display notification "Exporting DMG complete" with title "Archiving"'

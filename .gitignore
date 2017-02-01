@@ -64,3 +64,4 @@ Carthage/Build
 fastlane/report.xml
 fastlane/screenshots
 /Distribution/Archives
+*.pyc
