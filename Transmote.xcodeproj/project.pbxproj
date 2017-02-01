@@ -21,8 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2211A4C11E4167C100F5005B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4BF1E4167C100F5005B /* Fabric.framework */; };
-		2211A4C21E4167C100F5005B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4C01E4167C100F5005B /* Crashlytics.framework */; };
+		2211A4C81E4169DE00F5005B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4BF1E4167C100F5005B /* Fabric.framework */; };
+		2211A4C91E4169E200F5005B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4C01E4167C100F5005B /* Crashlytics.framework */; };
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
@@ -195,7 +195,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22EBE3C91DE44FB100588FFD /* RxCocoa.framework in Frameworks */,
-				2211A4C11E4167C100F5005B /* Fabric.framework in Frameworks */,
 				22EBE3C31DE44FB100588FFD /* Moya.framework in Frameworks */,
 				22EBE3C71DE44FB100588FFD /* Result.framework in Frameworks */,
 				22EBE3CD1DE44FB100588FFD /* RxSwift.framework in Frameworks */,
@@ -204,13 +203,23 @@
 				22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */,
 				22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */,
 				2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */,
-				2211A4C21E4167C100F5005B /* Crashlytics.framework in Frameworks */,
+				2211A4C81E4169DE00F5005B /* Fabric.framework in Frameworks */,
+				2211A4C91E4169E200F5005B /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2211A4C71E4169D600F5005B /* Fabric */ = {
+			isa = PBXGroup;
+			children = (
+				2211A4BF1E4167C100F5005B /* Fabric.framework */,
+				2211A4C01E4167C100F5005B /* Crashlytics.framework */,
+			);
+			name = Fabric;
+			sourceTree = "<group>";
+		};
 		224610EA1E2E6C0700CAFA41 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,8 +233,6 @@
 		224610FB1E2E6CD600CAFA41 /* Test Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2211A4BF1E4167C100F5005B /* Fabric.framework */,
-				2211A4C01E4167C100F5005B /* Crashlytics.framework */,
 				224610FE1E2E6CE300CAFA41 /* Nimble.framework */,
 				224610FC1E2E6CD600CAFA41 /* Quick.framework */,
 			);
@@ -269,6 +276,7 @@
 				224610EA1E2E6C0700CAFA41 /* Tests */,
 				22DB05271E0286F300419CBD /* Supporting Files */,
 				22EBE3861DE1000A00588FFD /* Products */,
+				2211A4C71E4169D600F5005B /* Fabric */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -634,7 +642,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -832,7 +839,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -857,7 +863,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
