@@ -479,8 +479,9 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 901d118350c7346b2c0e014fc4b50874001e05ac ed4f996167300b345fff20ace5c8d177a2711af113fec28567843fe098396769";
+			shellPath = /bin/bash;
+			shellScript = "PRODUCT_INFO_PLIST_PATH=\"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/Contents/Info.plist\"\nVERSION=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PRODUCT_INFO_PLIST_PATH}\")\nBUILD=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PRODUCT_INFO_PLIST_PATH}\")\n\nif [[ $BUILD != *\"dirty\" ]]; then\n./Fabric.framework/run 901d118350c7346b2c0e014fc4b50874001e05ac ed4f996167300b345fff20ace5c8d177a2711af113fec28567843fe098396769\nelse\necho \"Dirty build - not running Fabric\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		227925B41E11E0A200371CE9 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -760,7 +761,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
