@@ -18,7 +18,7 @@ public enum ContentMode: Int {
     case scaleAspectFill
     case center
 /* 
-     TODO: There are other modes in UIImageView which could be implemented:
+    // There are other modes in UIImageView which could be implemented:
     case redraw
     case top
     case bottom
