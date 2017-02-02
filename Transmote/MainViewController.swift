@@ -173,8 +173,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     }
 
     func sortOutVersionWidget() {
-        if let pendingUpdateItem = pendingUpdateItem {
-            self.versionWidget.title="Update available: v\(pendingUpdateItem.versionString)"
+        if let pendingUpdateItem = pendingUpdateItem,
+            let newVersion = pendingUpdateItem.versionString {
+            self.versionWidget.title="Update available: v\(newVersion)"
         } else {
             self.versionWidget.title = "Transmote v\(shortVersion)"
         }
