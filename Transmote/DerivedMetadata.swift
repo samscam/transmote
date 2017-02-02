@@ -50,7 +50,7 @@ struct DerivedMetadata: Metadata {
         self.cleanedName = semiCleaned
 
         // Figure out if we have an episode code or season or year or whatnot
-        let pattern = "^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?)?(\\d+)\\W*(?:(?:ep|episode|[ex])\\s?(\\d+\\b))?)|(?:season\\s?(\\d+)))){1,2}"
+        let pattern = "^(.+?)\\s*(?:\\W*(?:(\\b\\d{4}\\b)|(?:\\b(?:s\\s?)+(\\d+)\\W*(?:(?:ep|episode|[ex])\\s?(\\d+\\b))?)|(?:season\\s?(\\d+)))){1,2}"
         let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
 
         // swiftlint:enable force_try
@@ -83,14 +83,12 @@ struct DerivedMetadata: Metadata {
 
         // Figure out what type it probably is
 
-        self.type = .video
-
         if season != nil && episode != nil {
-
+            self.type = .tv
         } else if season != nil {
-
+            self.type = .tv
         } else if year != nil {
-
+            self.type = .movie
         }
 
         print("Raw name: \(rawName)")
