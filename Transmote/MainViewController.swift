@@ -63,15 +63,24 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
         // Observe the session status
 
-        session.status.asObservable()
+        Observable
+            .combineLatest(session.status.asObservable(), session.torrents.asObservable()) {
+                return ($0, $1)
+            }
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { status in
+            .subscribe(onNext: { (status, torrents) in
 
                 switch status {
                 case .connected:
-                    self.passiveAlertContainer.isHidden = true
-                    self.passiveAlertImageView.image = #imageLiteral(resourceName: "magnet")
-                    self.collectionViewContainer.isHidden = false
+                    if torrents.isEmpty {
+                        self.passiveAlertContainer.isHidden = false
+                        self.passiveAlertImageView.image = #imageLiteral(resourceName: "magnet")
+                        self.collectionViewContainer.isHidden = true
+                        self.passiveAlertLabel.stringValue = "Open a magnet link from a browser to add a torrent"
+                    } else {
+                        self.passiveAlertContainer.isHidden = true
+                        self.collectionViewContainer.isHidden = false
+                    }
                 case .connecting, .indeterminate:
                     self.passiveAlertContainer.isHidden = false
                     self.collectionViewContainer.isHidden = true
