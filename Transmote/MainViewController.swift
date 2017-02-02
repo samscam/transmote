@@ -70,21 +70,23 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                 switch status {
                 case .connected:
                     self.passiveAlertContainer.isHidden = true
+                    self.passiveAlertImageView.image = #imageLiteral(resourceName: "magnet")
                     self.collectionViewContainer.isHidden = false
                 case .connecting, .indeterminate:
                     self.passiveAlertContainer.isHidden = false
                     self.collectionViewContainer.isHidden = true
+                    self.passiveAlertImageView.image = #imageLiteral(resourceName: "connecting")
+                    self.passiveAlertLabel.stringValue = "Connecting"
                 case .failed(let error):
                     self.collectionViewContainer.isHidden = true
                     self.passiveAlertContainer.isHidden = false
+                    self.passiveAlertImageView.image = #imageLiteral(resourceName: "disconnect")
                     self.passiveAlertLabel.stringValue = error.description
-
                 }
 
             }).addDisposableTo(disposeBag)
 
         session.torrents.asDriver().drive(onNext: { _ in
-
             self.collectionView.reloadData()
         }).addDisposableTo(disposeBag)
 
