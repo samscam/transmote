@@ -37,19 +37,9 @@ class MetadataManager {
         let derived = DerivedMetadata(from: rawName)
         publishSubject.onNext(derived)
 
-        if derived.year != nil {
-            // movie
-            tmdbProvider.request(.movieMetadata(movieName: derived.cleanedName, year: derived.year))
-                .mapTMDB(.movie)
-                .subscribe(onNext: { movie in
-                    publishSubject.onNext(movie)
-                }, onError: { error in
-                    print(error)
-                    // do nothing
-                }).addDisposableTo(disposeBag)
-        } else {
-            // tv show
-            tmdbProvider.request(.tvShowMetadata(showName: derived.cleanedName))
+        switch derived.type {
+        case .tv:
+            tmdbProvider.request(.tvShowSearch(showName: derived.cleanedName))
                 .mapTMDB(.show)
                 .flatMapLatest { show -> Observable<Metadata> in
                     if let show = show as? TVShow, let season = derived.season {
@@ -72,6 +62,18 @@ class MetadataManager {
                 })
 
                 .addDisposableTo(disposeBag)
+        case .movie:
+            tmdbProvider.request(.movieSearch(movieName: derived.cleanedName, year: derived.year))
+                .mapTMDB(.movie)
+                .subscribe(onNext: { movie in
+                    publishSubject.onNext(movie)
+                }, onError: { error in
+                    print(error)
+                    // do nothing
+                }).addDisposableTo(disposeBag)
+
+        default:
+            break
         }
 
         return publishSubject
