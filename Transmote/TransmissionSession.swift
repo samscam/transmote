@@ -154,7 +154,7 @@ class TransmissionSession {
             let rpcPath = defaults.string(forKey: "rpcPath") {
             return TransmissionServer(address:address, port: port, rpcPath: rpcPath)
         }
-        return nil
+        return TransmissionServer(address:"localhost")
     }
 
     func storeDefaultsServer(server: TransmissionServer) {
