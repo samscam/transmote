@@ -11,7 +11,7 @@ import ObjectMapper
 
 struct TransmissionServer {
 
-    var address: String?
+    var address: String
     var port: Int
     var rpcPath: String
     var useTLS: Bool
@@ -29,11 +29,8 @@ struct TransmissionServer {
     }
 
     var serverURL: URL? {
-        guard let address = self.address else {
-            return nil
-        }
         let scheme: String = useTLS ? "https" : "http"
-        let theURL = URL(string: "\(scheme)://\(address):\(self.port)/\(self.rpcPath)")
+        let theURL = URL(string: "\(scheme)://\(self.address):\(self.port)/\(self.rpcPath)")
         return theURL
     }
 

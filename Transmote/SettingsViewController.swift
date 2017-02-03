@@ -37,10 +37,6 @@ class SettingsViewController: NSViewController {
             return
         }
 
-        guard let server = session.server else {
-            return
-        }
-
         disposeBag = DisposeBag()
 
         usernameStack.isHidden = true
@@ -67,9 +63,19 @@ class SettingsViewController: NSViewController {
 
         // Initial server values
 
-        serverAddressField.stringValue = server.address ?? ""
-        portField.stringValue = String(server.port)
-        rpcPathField.stringValue = server.rpcPath
+        if let server = session.server {
+            serverAddressField.stringValue = server.address
+            if server.port != 9_091 {
+                portField.stringValue = String(server.port)
+            } else {
+                portField.stringValue = ""
+            }
+            if server.rpcPath != "transmission/rpc" {
+                rpcPathField.stringValue = server.rpcPath
+            } else {
+                rpcPathField.stringValue = ""
+            }
+        }
 
         // Bind the fields back to the session
 
@@ -78,6 +84,13 @@ class SettingsViewController: NSViewController {
             .debug("SERVER CHANGE")
             .skip(1)
             .subscribe(onNext: { [weak self] (address, port, path) in
+
+                var port = port
+                var path = path
+
+                if port == "" { port = nil }
+                if path == "" { path = nil }
+
                 if let address = address {
                     var portInt: Int? = nil
                     if let port = port {
