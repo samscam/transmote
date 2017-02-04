@@ -23,12 +23,23 @@ class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        //poke the session
+        // Remember window positions
 
-        // swiftlint:disable:next force_cast force_unwrapping
-        mainViewController = self.contentViewController! as! MainViewController
+        self.shouldCascadeWindows = false
+
+        if let window = self.window {
+            if !window.setFrameUsingName("MainTransmoteWindow") {
+                window.center()
+            }
+            window.setFrameAutosaveName("MainTransmoteWindow")
+        }
+
+        mainViewController = self.contentViewController! as! MainViewController // swiftlint:disable:this force_cast force_unwrapping
+
+        // Inject the session into the main viewcontroller
         mainViewController.session = session
 
+        // State for the toolbar buttons
         mainViewController.hasSelectedTorrents.subscribe(onNext: { hasSelectedTorrents in
             self.deleteTorrentToolbarItem.isEnabled = hasSelectedTorrents
             self.removeTorrentToolbarItem.isEnabled = hasSelectedTorrents
