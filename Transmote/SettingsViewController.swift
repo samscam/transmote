@@ -35,6 +35,13 @@ class SettingsViewController: NSViewController {
 
     var disposeBag: DisposeBag = DisposeBag()
 
+    var showAuthThings: Bool = false {
+        didSet {
+            usernameStack.isHidden = !showAuthThings
+            passwordStack.isHidden = !showAuthThings
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,8 +67,17 @@ class SettingsViewController: NSViewController {
                 self?.statusBlobImageView.image = NSImage(named: "status-orange")
             case .indeterminate:
                 self?.statusBlobImageView.image = NSImage(named: "status-gray")
-            case .failed:
+            case .failed(let sessionError):
                 self?.statusBlobImageView.image = NSImage(named: "status-red")
+
+                switch sessionError {
+
+                case .needsAuthentication:
+                    self?.showAuthThings = true
+                default:
+                    self?.showAuthThings = false
+//                    break
+                }
             }
 
         }).addDisposableTo(disposeBag)
