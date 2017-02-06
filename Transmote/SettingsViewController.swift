@@ -11,9 +11,14 @@ import Cocoa
 import RxSwift
 import RxCocoa
 
+protocol SettingsPopoverDelegate: class {
+    func settingsDismissed(sender: SettingsViewController)
+}
+
 class SettingsViewController: NSViewController {
 
     var session: TransmissionSession?
+    weak var delegate: SettingsPopoverDelegate?
 
     @IBOutlet weak private var statusBlobImageView: NSImageView!
 
@@ -105,6 +110,11 @@ class SettingsViewController: NSViewController {
                 }
         }).addDisposableTo(disposeBag)
 
+    }
+
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        self.delegate?.settingsDismissed(sender: self)
     }
 
 }
