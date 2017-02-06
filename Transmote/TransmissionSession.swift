@@ -14,6 +14,7 @@ import RxSwift
 // A session - which coordinates access to a server and its torrents
 
 public enum SessionError: Swift.Error, CustomStringConvertible {
+    case noServerSet
     case networkError(Moya.Error)
     case badRpcPath
     case unexpectedStatusCode(Int)
@@ -22,6 +23,8 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
 
     public var description: String {
         switch self {
+        case .noServerSet:
+            return "Configure your server"
         case .networkError(let moyaError):
             switch moyaError {
             case .underlying(let underlying):
@@ -55,10 +58,24 @@ class TransmissionSession {
 
     var server: TransmissionServer? {
         didSet {
+
+            self.storeDefaultsServer(server: server)
+
+            guard let server = self.server else {
+                self.provider = nil
+                if let connectCancellable = self.connectCancellable {
+                    print("cancelling")
+                    connectCancellable.cancel()
+                }
+                self.status.value = .failed(.noServerSet)
+
+                return
+            }
+
             let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
 
                 // If we have no url then the provider ain't going to be no use...
-                guard let serverURL = self.server?.serverURL?.absoluteString else {
+                guard let serverURL = server.serverURL?.absoluteString else {
                     return MoyaProvider.defaultEndpointMapping(for: target)
                 }
 
@@ -73,10 +90,6 @@ class TransmissionSession {
             }
 
             self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
-
-            if let server = self.server {
-                self.storeDefaultsServer(server: server)
-            }
 
             connect()
         }
@@ -108,10 +121,16 @@ class TransmissionSession {
                 case .connected:
                     self.startTimers()
                     self.addDeferredTorrents()
-                case .failed:
+                case .failed(let sessionError):
                     self.torrents.value = []
                     self.stopTimers()
-                    self.startRetryTimer()
+                    switch sessionError {
+                    case .networkError:
+                        self.startRetryTimer()
+                    default:
+                        break
+                    }
+
                 default:
                     self.torrents.value = []
                     break
@@ -154,14 +173,20 @@ class TransmissionSession {
             let rpcPath = defaults.string(forKey: "rpcPath") {
             return TransmissionServer(address:address, port: port, rpcPath: rpcPath)
         }
-        return TransmissionServer(address:"localhost")
+        return nil
     }
 
-    func storeDefaultsServer(server: TransmissionServer) {
+    func storeDefaultsServer(server: TransmissionServer?) {
         let defaults = UserDefaults.standard
-        defaults.set(server.address, forKey: "address")
-        defaults.set(server.port, forKey: "port")
-        defaults.set(server.rpcPath, forKey: "rpcPath")
+        if let server = server {
+            defaults.set(server.address, forKey: "address")
+            defaults.set(server.port, forKey: "port")
+            defaults.set(server.rpcPath, forKey: "rpcPath")
+        } else {
+            defaults.removeObject(forKey: "address")
+            defaults.removeObject(forKey: "port")
+            defaults.removeObject(forKey: "rpcPath")
+        }
     }
 
     // Timers
@@ -182,6 +207,9 @@ class TransmissionSession {
     func stopTimers() {
         timer?.invalidate()
         timer = nil
+
+        retryTimer?.invalidate()
+        retryTimer = nil
     }
 
     func startRetryTimer() {
@@ -204,6 +232,13 @@ class TransmissionSession {
             print("cancelling")
             connectCancellable.cancel()
         }
+
+        guard let _ = self.server else {
+            print("No server")
+            self.status.value = .failed(.noServerSet)
+            return
+        }
+
         print("connecting")
         self.status.value = .connecting
         connectCancellable = self.provider?.request(.connect) { result in
