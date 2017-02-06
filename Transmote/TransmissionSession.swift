@@ -258,7 +258,6 @@ class TransmissionSession {
                         self.status.value = .connected
 
                     } catch let error as Moya.Error {
-                        print("There was an error \(error)")
                         self.status.value = .failed(.networkError(error))
                     } catch let error as SessionError {
                         self.status.value = .failed(error)
@@ -268,11 +267,12 @@ class TransmissionSession {
 
                 case 404:
                     // The path was wrong probably
-                    print("404 - wrong path")
                     self.status.value = .failed(SessionError.badRpcPath)
+                case 401:
+                    // The path was wrong probably
+                    self.status.value = .failed(SessionError.needsAuthentication)
                 default:
                     // Something else happened - I wonder what it was
-                    print("Oh dear - status code \(moyaResponse.statusCode)")
                     self.status.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
                 }
             case let .failure(error):
