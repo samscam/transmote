@@ -93,9 +93,9 @@ class TransmissionSession {
             }
 
             var plugins: [PluginType] = []
-            if let username = server.username, let password = server.password {
+            if let credential = server.credential {
                 plugins.append( CredentialsPlugin { _ -> URLCredential? in
-                    return URLCredential(user: username, password: password, persistence: .none)
+                    return credential
                 })
             }
 
@@ -129,6 +129,7 @@ class TransmissionSession {
             print("Status is \(status)")
             switch status {
                 case .connected:
+                    self.server?.storeCredentialIfNeeded()
                     self.startTimers()
                     self.addDeferredTorrents()
                 case .failed(let sessionError):
@@ -181,7 +182,11 @@ class TransmissionSession {
         if let address = defaults.string(forKey: "address"),
             let port = defaults.value(forKey: "port") as? Int,
             let rpcPath = defaults.string(forKey: "rpcPath") {
-            return TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+            let server = TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+            if let username = defaults.string(forKey: "username") {
+                server.username = username
+            }
+            return server
         }
         return nil
     }
@@ -192,6 +197,7 @@ class TransmissionSession {
             defaults.set(server.address, forKey: "address")
             defaults.set(server.port, forKey: "port")
             defaults.set(server.rpcPath, forKey: "rpcPath")
+            defaults.set(server.username, forKey: "username")
         } else {
             defaults.removeObject(forKey: "address")
             defaults.removeObject(forKey: "port")

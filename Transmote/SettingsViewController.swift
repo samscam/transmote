@@ -130,7 +130,7 @@ class SettingsViewController: NSViewController {
                     if let port = port {
                         portInt = Int(port)
                     }
-                    var server = TransmissionServer(address: address, port: portInt, rpcPath: path)
+                    let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
 
                     server.username = username
                     server.password = password
