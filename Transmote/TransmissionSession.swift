@@ -15,6 +15,7 @@ import RxSwift
 
 public enum SessionError: Swift.Error, CustomStringConvertible {
     case noServerSet
+    case needsAuthentication
     case networkError(Moya.Error)
     case badRpcPath
     case unexpectedStatusCode(Int)
@@ -25,6 +26,8 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
         switch self {
         case .noServerSet:
             return "Configure your server"
+        case .needsAuthentication:
+            return "Server requires authentication"
         case .networkError(let moyaError):
             switch moyaError {
             case .underlying(let underlying):
