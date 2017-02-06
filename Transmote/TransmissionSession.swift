@@ -92,7 +92,14 @@ class TransmissionSession {
                 return endpoint
             }
 
-            self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
+            var plugins: [PluginType] = []
+            if let username = server.username, let password = server.password {
+                plugins.append( CredentialsPlugin { _ -> URLCredential? in
+                    return URLCredential(user: username, password: password, persistence: .none)
+                })
+            }
+
+            self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure, plugins: plugins)
 
             connect()
         }

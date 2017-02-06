@@ -51,9 +51,6 @@ class SettingsViewController: NSViewController {
 
         disposeBag = DisposeBag()
 
-        usernameStack.isHidden = true
-        passwordStack.isHidden = true
-
         // Observe the session status
 
         session.status.asObservable()
@@ -68,15 +65,18 @@ class SettingsViewController: NSViewController {
             case .indeterminate:
                 self?.statusBlobImageView.image = NSImage(named: "status-gray")
             case .failed(let sessionError):
-                self?.statusBlobImageView.image = NSImage(named: "status-red")
 
                 switch sessionError {
 
                 case .needsAuthentication:
+                    self?.statusBlobImageView.image = NSImage(named: "status-orange")
                     self?.showAuthThings = true
                 default:
-                    self?.showAuthThings = false
-//                    break
+                    self?.statusBlobImageView.image = NSImage(named: "status-red")
+                    if self?.session?.server?.username == nil {
+                        self?.showAuthThings = false
+                    }
+
                 }
             }
 
@@ -96,30 +96,45 @@ class SettingsViewController: NSViewController {
             } else {
                 rpcPathField.stringValue = ""
             }
+
+            if server.username != nil {
+                usernameField.stringValue = server.username ?? ""
+                passwordField.stringValue = server.password ?? ""
+                self.showAuthThings = true
+            }
+
             skip = 1
         }
 
         // Bind the fields back to the session
 
-        Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text) { ($0, $1, $2) }
+        Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text, usernameField.rx.text, passwordField.rx.text) { ($0, $1, $2, $3, $4) }
             .throttle(0.5, scheduler: MainScheduler.instance )
             .debug("SERVER CHANGE")
             .skip(skip)
-            .subscribe(onNext: { [weak self] (address, port, path) in
+            .subscribe(onNext: { [weak self] (address, port, path, username, password) in
                 var address = address
                 var port = port
                 var path = path
+                var username = username
+                var password = password
 
                 if address == "" { address = nil }
                 if port == "" { port = nil }
                 if path == "" { path = nil }
+                if username == "" { username = nil }
+                if password == "" { password = nil }
 
                 if let address = address {
                     var portInt: Int? = nil
                     if let port = port {
                         portInt = Int(port)
                     }
-                    let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
+                    var server = TransmissionServer(address: address, port: portInt, rpcPath: path)
+
+                    server.username = username
+                    server.password = password
+
                     self?.session?.server = server
                 } else {
                     self?.session?.server = nil
