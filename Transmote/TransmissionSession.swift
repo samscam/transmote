@@ -58,6 +58,9 @@ class TransmissionSession {
 
     var server: TransmissionServer? {
         didSet {
+
+            self.storeDefaultsServer(server: server)
+
             guard let server = self.server else {
                 self.provider = nil
                 if let connectCancellable = self.connectCancellable {
@@ -87,8 +90,6 @@ class TransmissionSession {
             }
 
             self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
-
-            self.storeDefaultsServer(server: server)
 
             connect()
         }
