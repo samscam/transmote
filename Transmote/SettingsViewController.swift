@@ -15,7 +15,9 @@ protocol SettingsPopoverDelegate: class {
     func settingsDismissed(sender: SettingsViewController)
 }
 
-class SettingsViewController: NSViewController {
+// swiftlint:disable cyclomatic_complexity
+
+class SettingsViewController: NSViewController, ProperTextFieldDelegate {
 
     var session: TransmissionSession?
     weak var delegate: SettingsPopoverDelegate?
@@ -27,15 +29,16 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak private var portField: NSTextField!
     @IBOutlet weak private var rpcPathField: NSTextField!
     @IBOutlet weak private var usernameField: NSTextField!
-    @IBOutlet weak private var passwordField: NSSecureTextField!
+    @IBOutlet weak private var passwordField: ProperSecureTextField!
 
     @IBOutlet weak private var rpcPathStack: NSStackView!
     @IBOutlet weak private var usernameStack: NSStackView!
     @IBOutlet weak private var passwordStack: NSStackView!
 
     var disposeBag: DisposeBag = DisposeBag()
+    var showingFakePassword: Bool = false
 
-    var showAuthThings: Bool = false {
+    var showAuthThings: Bool = true {
         didSet {
             usernameStack.isHidden = !showAuthThings
             passwordStack.isHidden = !showAuthThings
@@ -50,6 +53,8 @@ class SettingsViewController: NSViewController {
         }
 
         disposeBag = DisposeBag()
+
+        passwordField.pdelegate = self
 
         // Observe the session status
 
@@ -73,10 +78,6 @@ class SettingsViewController: NSViewController {
                     self?.showAuthThings = true
                 default:
                     self?.statusBlobImageView.image = NSImage(named: "status-red")
-                    if self?.session?.server?.username == nil {
-                        self?.showAuthThings = false
-                    }
-
                 }
             }
 
@@ -99,8 +100,18 @@ class SettingsViewController: NSViewController {
 
             if server.username != nil {
                 usernameField.stringValue = server.username ?? ""
-                passwordField.stringValue = server.password ?? ""
-                self.showAuthThings = true
+
+                if let password = server.password {
+                    passwordField.stringValue = password
+                    showingFakePassword = false
+                } else if server.credential != nil {
+                    passwordField.stringValue = "fakefake"
+                    showingFakePassword = true
+                } else {
+                    passwordField.stringValue = ""
+                    showingFakePassword = false
+                }
+
             }
 
             skip = 1
@@ -130,10 +141,16 @@ class SettingsViewController: NSViewController {
                     if let port = port {
                         portInt = Int(port)
                     }
+
                     let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
 
                     server.username = username
-                    server.password = password
+                    if let sself = self {
+                        if !sself.showingFakePassword {
+                            server.password = password
+                        }
+                    }
+
                     server.removeCredential() // this is an attempt to clear out the protection space
 
                     self?.session?.server = server
@@ -147,6 +164,17 @@ class SettingsViewController: NSViewController {
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.delegate?.settingsDismissed(sender: self)
+    }
+
+    internal func textFieldDidBecomeFirstResponder(_ sender: NSTextField) {
+        if showingFakePassword {
+            sender.stringValue = ""
+            showingFakePassword = false
+        }
+    }
+
+    internal func textFieldDidResignFirstResponder(_ sender: NSTextField) {
+        // do nothing
     }
 
 }

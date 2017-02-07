@@ -430,7 +430,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xui-JC-rBQ">
-                                                <rect key="frame" x="-2" y="6" width="49" height="11"/>
+                                                <rect key="frame" x="-2" y="5.5" width="49" height="11"/>
                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="RPC Path" id="rk4-oV-XNN">
                                                     <font key="font" metaFont="miniSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -504,7 +504,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zNI-Mt-CNU" userLabel="Password Field">
+                                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zNI-Mt-CNU" userLabel="Password Field" customClass="ProperSecureTextField" customModule="Transmote" customModuleProvider="target">
                                                 <rect key="frame" x="53" y="0.0" width="207" height="22"/>
                                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password" usesSingleLineMode="YES" bezelStyle="round" id="w2l-Sn-w8g">
                                                     <font key="font" metaFont="system"/>
