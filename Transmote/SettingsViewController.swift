@@ -134,6 +134,7 @@ class SettingsViewController: NSViewController {
 
                     server.username = username
                     server.password = password
+                    server.removeCredential() // this is an attempt to clear out the protection space
 
                     self?.session?.server = server
                 } else {

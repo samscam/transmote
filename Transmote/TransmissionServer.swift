@@ -76,7 +76,12 @@ extension TransmissionServer {
                 password = nil
             }
         }
+    }
 
+    func removeCredential() {
+        if let credential = credential {
+            URLCredentialStorage.shared.remove(credential, for: protectionSpace)
+        }
     }
 
 }
