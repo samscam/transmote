@@ -70,7 +70,7 @@ class TransmissionSession {
                     print("cancelling")
                     connectCancellable.cancel()
                 }
-                self.status.value = .failed(.noServerSet)
+                self.statusVar.value = .failed(.noServerSet)
 
                 return
             }
@@ -105,7 +105,11 @@ class TransmissionSession {
         }
     }
 
-    var status: Variable<Status> = Variable<Status>(.indeterminate)
+    let statusVar: Variable<Status> = Variable<Status>(.indeterminate)
+    lazy var status: Observable<Status> = self.statusVar
+        .asObservable()
+        .debounce(0.2, scheduler: MainScheduler.instance)
+        .shareReplay(1)
 
     var provider: JSONRPCProvider<TransmissionTarget>?
 
@@ -123,8 +127,7 @@ class TransmissionSession {
     init() {
 
         // Observe our own status to start/stop update timer
-        status.asObservable()
-            .debounce(0.2, scheduler: MainScheduler.instance)
+        status
             .subscribe(onNext: { status in
             print("Status is \(status)")
             switch status {
@@ -167,7 +170,7 @@ class TransmissionSession {
 
         if let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
             let url = URL(string: urlString) {
-            if case .connected = self.status.value {
+            if case .connected = self.statusVar.value {
                 self.addTorrent(url: url)
             } else {
                 self.deferredMagnetURLs.append(url)
@@ -251,12 +254,12 @@ class TransmissionSession {
 
         guard let _ = self.server else {
             print("No server")
-            self.status.value = .failed(.noServerSet)
+            self.statusVar.value = .failed(.noServerSet)
             return
         }
 
         print("connecting")
-        self.status.value = .connecting
+        self.statusVar.value = .connecting
         connectCancellable = self.provider?.request(.connect) { result in
             switch result {
             case let .success(moyaResponse):
@@ -268,35 +271,35 @@ class TransmissionSession {
                     do {
                         // We should expect to have valid RPC response saying "success"
                         let _ = try moyaResponse.mapJsonRpc()
-                        self.status.value = .connected
+                        self.statusVar.value = .connected
 
                     } catch let error as Moya.Error {
-                        self.status.value = .failed(.networkError(error))
+                        self.statusVar.value = .failed(.networkError(error))
                     } catch let error as SessionError {
-                        self.status.value = .failed(error)
+                        self.statusVar.value = .failed(error)
                     } catch {
-                        self.status.value = .failed(.unknownError(error))
+                        self.statusVar.value = .failed(.unknownError(error))
                     }
 
                 case 404:
                     // The path was wrong probably
-                    self.status.value = .failed(SessionError.badRpcPath)
+                    self.statusVar.value = .failed(SessionError.badRpcPath)
                 case 401:
                     // The path was wrong probably
-                    self.status.value = .failed(SessionError.needsAuthentication)
+                    self.statusVar.value = .failed(SessionError.needsAuthentication)
                 default:
                     // Something else happened - I wonder what it was
-                    self.status.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
+                    self.statusVar.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
                 }
             case let .failure(error):
                 // Ignore cancellations - otherwise, pass the error along...
                 switch error {
                 case .underlying(let err):
                     if (err as NSError).code != -999 {
-                        self.status.value = .failed(.networkError(error))
+                        self.statusVar.value = .failed(.networkError(error))
                     }
                 default:
-                    self.status.value = .failed(.networkError(error))
+                    self.statusVar.value = .failed(.networkError(error))
                 }
 
             }
@@ -317,7 +320,7 @@ class TransmissionSession {
             case .failure(let error):
                 // Network error
                 print(error)
-                self.status.value = .failed(.networkError(error))
+                self.statusVar.value = .failed(.networkError(error))
             }
         }
     }
@@ -363,12 +366,15 @@ class TransmissionSession {
                             self.torrents.value.remove(at: index)
                         }
                     }
+                } catch let error as JSONRPCError {
+                    self.statusVar.value = .failed(.rpcError(error))
                 } catch {
-                    print(error)
+                    self.statusVar.value = .failed(.unknownError(error))
                 }
+
             case .failure(let error):
                 print(error)
-                self.status.value = .failed(.networkError(error))
+                self.statusVar.value = .failed(.networkError(error))
             }
         }
     }
