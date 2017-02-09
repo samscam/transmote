@@ -132,7 +132,6 @@ class TransmissionSession {
             print("Status is \(status)")
             switch status {
                 case .connected:
-                    self.server?.storeCredentialIfNeeded()
                     self.startTimers()
                     self.addDeferredTorrents()
                 case .failed(let sessionError):
@@ -186,9 +185,7 @@ class TransmissionSession {
             let port = defaults.value(forKey: "port") as? Int,
             let rpcPath = defaults.string(forKey: "rpcPath") {
             let server = TransmissionServer(address:address, port: port, rpcPath: rpcPath)
-            if let username = defaults.string(forKey: "username") {
-                server.username = username
-            }
+
             return server
         }
         return nil
@@ -200,7 +197,6 @@ class TransmissionSession {
             defaults.set(server.address, forKey: "address")
             defaults.set(server.port, forKey: "port")
             defaults.set(server.rpcPath, forKey: "rpcPath")
-            defaults.set(server.username, forKey: "username")
         } else {
             defaults.removeObject(forKey: "address")
             defaults.removeObject(forKey: "port")

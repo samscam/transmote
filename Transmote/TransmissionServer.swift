@@ -16,17 +16,6 @@ class TransmissionServer {
     var rpcPath: String
     var useTLS: Bool
 
-    var username: String?
-    var password: String? {
-        didSet {
-            if password != nil {
-                needsCredentialStorage = true
-            }
-        }
-    }
-
-    var needsCredentialStorage: Bool = false
-
     init(address: String, port: Int? = nil, rpcPath: String? = nil, useTLS: Bool = false) {
 
         self.address = address
@@ -47,39 +36,32 @@ class TransmissionServer {
 /// Extension adding keychain stuff
 extension TransmissionServer {
 
+    var username: String? {
+        return credential?.user
+    }
+    var password: String? {
+        return credential?.password
+    }
+
+    func setUsername(_ username: String, password: String) {
+        removeCredential()
+        print("Setting credential")
+        let cred = URLCredential(user: username, password: password, persistence: .permanent)
+        URLCredentialStorage.shared.setDefaultCredential(cred, for: protectionSpace)
+    }
+
     var protectionSpace: URLProtectionSpace {
         let proto: String = useTLS ? "https" : "http"
         return URLProtectionSpace(host: address, port: port, protocol: proto, realm: nil, authenticationMethod: nil)
     }
 
     var credential: URLCredential? {
-        if let username = self.username, let password = self.password {
-            return URLCredential(user: username, password: password, persistence: .permanent)
-        } else {
-            return self.storedCredential
-        }
-    }
-
-    var storedCredential: URLCredential? {
-        guard let username = self.username else {
-            return nil
-        }
-        let credentials = URLCredentialStorage.shared.credentials(for: protectionSpace)
-        return credentials?[username]
-    }
-
-    func storeCredentialIfNeeded() {
-        if needsCredentialStorage {
-            if let credential = credential {
-                URLCredentialStorage.shared.set(credential, for: protectionSpace)
-                needsCredentialStorage = false
-                password = nil
-            }
-        }
+        return URLCredentialStorage.shared.defaultCredential(for: protectionSpace)
     }
 
     func removeCredential() {
         if let credential = credential {
+            print("Removing credential")
             URLCredentialStorage.shared.remove(credential, for: protectionSpace)
         }
     }

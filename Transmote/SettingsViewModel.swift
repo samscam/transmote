@@ -78,21 +78,8 @@ class SettingsViewModel {
                 serverPath.value = ""
             }
 
-            if server.username != nil {
-                serverUsername.value = server.username ?? ""
-
-                if let password = server.password {
-                    serverPassword.value = password
-//                    showingFakePassword = false
-                } else if server.credential != nil {
-                    serverPassword.value = "fakefake"
-//                    showingFakePassword = true
-                } else {
-                    serverPassword.value = ""
-//                    showingFakePassword = false
-                }
-
-            }
+            serverUsername.value = server.username ?? ""
+            serverPassword.value = server.password ?? ""
         }
     }
     func bindToSession() {
@@ -139,14 +126,11 @@ class SettingsViewModel {
 
                 let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
 
-                server.username = username
-                if let sself = self {
-                    if !sself.showingFakePassword {
-                        server.password = password
-                    }
+                if let username = username, let password = password {
+                    server.setUsername(username, password: password)
+                } else {
+                    server.removeCredential()
                 }
-
-                server.removeCredential() // this is an attempt to clear out the protection space
 
                 self?.session.server = server
             } else {
