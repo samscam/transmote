@@ -246,6 +246,7 @@ class TransmissionSession {
         if let connectCancellable = self.connectCancellable {
             print("cancelling")
             connectCancellable.cancel()
+            self.connectCancellable = nil
         }
 
         guard let _ = self.server else {
