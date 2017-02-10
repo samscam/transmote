@@ -14,11 +14,11 @@ class SettingsViewModel {
     public var statusBlobImage: Driver<Image>
 //    public let showAuthThings: Driver<Bool>
 
-    public let serverHost: Variable<String?> = Variable("")
-    public let serverPort: Variable<String?> = Variable("")
-    public let serverPath: Variable<String?> = Variable("")
-    public let serverUsername: Variable<String?> = Variable("")
-    public let serverPassword: Variable<String?> = Variable("")
+    public let settingsHost: Variable<String?> = Variable("")
+    public let settingsPort: Variable<String?> = Variable("")
+    public let settingsPath: Variable<String?> = Variable("")
+    public let settingsUsername: Variable<String?> = Variable("")
+    public let settingsPassword: Variable<String?> = Variable("")
 
     let session: TransmissionSession
     let disposeBag = DisposeBag()
@@ -66,30 +66,30 @@ class SettingsViewModel {
     func populateInitialValues() {
         // Initial server values
         if let server = session.server {
-            serverHost.value = server.address
+            settingsHost.value = server.address
             if server.port != 9_091 {
-                serverPort.value = String(server.port)
+                settingsPort.value = String(server.port)
             } else {
-                serverPort.value = ""
+                settingsPort.value = ""
             }
             if server.rpcPath != "transmission/rpc" {
-                serverPath.value = server.rpcPath
+                settingsPath.value = server.rpcPath
             } else {
-                serverPath.value = ""
+                settingsPath.value = ""
             }
 
-            serverUsername.value = server.username ?? ""
-            serverPassword.value = server.password ?? ""
+            settingsUsername.value = server.username ?? ""
+            settingsPassword.value = server.password ?? ""
         }
     }
     func bindToSession() {
         // Bind the fields back to the session
 
-        Observable.combineLatest(serverHost.asObservable(),
-                                 serverPort.asObservable(),
-                                 serverPath.asObservable(),
-                                 serverUsername.asObservable(),
-                                 serverPassword.asObservable() ) {
+        Observable.combineLatest(settingsHost.asObservable(),
+                                 settingsPort.asObservable(),
+                                 settingsPath.asObservable(),
+                                 settingsUsername.asObservable(),
+                                 settingsPassword.asObservable() ) {
                                     ($0, $1, $2, $3, $4)
         }
         .throttle(1.0, scheduler: MainScheduler.instance )

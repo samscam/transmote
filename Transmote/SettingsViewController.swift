@@ -62,11 +62,11 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
     func bindViewModel() {
         // Observe the session status
         viewModel.statusBlobImage.drive(statusBlobImageView.rx.image).addDisposableTo(disposeBag)
-        serverAddressField.rx.text <-> viewModel.serverHost
-        portField.rx.text <-> viewModel.serverPort
-        rpcPathField.rx.text <-> viewModel.serverPath
-        usernameField.rx.text <-> viewModel.serverUsername
-        passwordField.rx.text <-> viewModel.serverPassword
+        serverAddressField.rx.text <-> viewModel.settingsHost
+        portField.rx.text <-> viewModel.settingsPort
+        rpcPathField.rx.text <-> viewModel.settingsPath
+        usernameField.rx.text <-> viewModel.settingsUsername
+        passwordField.rx.text <-> viewModel.settingsPassword
     }
 
     override func viewDidDisappear() {
