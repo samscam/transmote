@@ -52,7 +52,7 @@ extension TransmissionServer {
 
     var protectionSpace: URLProtectionSpace {
         let proto: String = useTLS ? "https" : "http"
-        return URLProtectionSpace(host: address, port: port, protocol: proto, realm: nil, authenticationMethod: nil)
+        return URLProtectionSpace(host: address, port: port, protocol: proto, realm: rpcPath, authenticationMethod: nil)
     }
 
     var credential: URLCredential? {
