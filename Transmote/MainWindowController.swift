@@ -10,7 +10,7 @@ import Sparkle
 import RxSwift
 import RxCocoa
 
-class MainWindowController: NSWindowController {
+class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopoverDelegate {
 
     var session: TransmissionSession = TransmissionSession()
     weak var mainViewController: MainViewController!
@@ -20,21 +20,60 @@ class MainWindowController: NSWindowController {
     @IBOutlet weak private var removeTorrentToolbarItem: NSToolbarItem!
     @IBOutlet weak private var deleteTorrentToolbarItem: NSToolbarItem!
 
+    var isShowingSettings = false
+
     override func windowDidLoad() {
+
         super.windowDidLoad()
 
-        //poke the session
+        self.window?.delegate = self
 
-        // swiftlint:disable:next force_cast force_unwrapping
-        mainViewController = self.contentViewController! as! MainViewController
+        // Remember window positions
+
+        self.shouldCascadeWindows = false
+
+        if let window = self.window {
+            if !window.setFrameUsingName("MainTransmoteWindow") {
+                window.center()
+            }
+            window.setFrameAutosaveName("MainTransmoteWindow")
+        }
+
+        mainViewController = self.contentViewController! as! MainViewController // swiftlint:disable:this force_cast force_unwrapping
+
+        // Inject the session into the main viewcontroller
         mainViewController.session = session
 
+        // State for the toolbar buttons
         mainViewController.hasSelectedTorrents.subscribe(onNext: { hasSelectedTorrents in
             self.deleteTorrentToolbarItem.isEnabled = hasSelectedTorrents
             self.removeTorrentToolbarItem.isEnabled = hasSelectedTorrents
         }).addDisposableTo(disposeBag)
 
     }
+
+    /*
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
+
+        // Automatically pop open settings if there is no server or similar session error
+        session.status
+            .asObservable()
+            .subscribe(onNext: { status in
+                switch status {
+                case .failed(let sessionError):
+                    switch sessionError {
+                    case .noServerSet:
+                            self.performSegue(withIdentifier: "SettingsSegue", sender: self)
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+            }).addDisposableTo(disposeBag)
+    }
+ */
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
@@ -45,6 +84,8 @@ class MainWindowController: NSWindowController {
         case "SettingsSegue":
             if let settingsViewController = segue.destinationController as? SettingsViewController {
                 settingsViewController.session = self.session
+                settingsViewController.delegate = self
+                self.isShowingSettings = true
             }
         case "DeleteSegue":
 
@@ -69,4 +110,28 @@ class MainWindowController: NSWindowController {
             break
         }
     }
+
+    // Prevent double-display of settings popover
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+            case "SettingsSegue":
+                return !isShowingSettings
+        default:
+            return true
+        }
+    }
+
+    func settingsDismissed(sender: SettingsViewController) {
+        isShowingSettings = false
+    }
+
+    // Show settings on window foregrounding if there is no server
+
+    func windowDidBecomeKey(_ notification: Notification) {
+        if session.server == nil {
+            self.performSegue(withIdentifier: "SettingsSegue", sender: self)
+        }
+    }
+
 }

@@ -14,6 +14,8 @@ import RxSwift
 // A session - which coordinates access to a server and its torrents
 
 public enum SessionError: Swift.Error, CustomStringConvertible {
+    case noServerSet
+    case needsAuthentication
     case networkError(Moya.Error)
     case badRpcPath
     case unexpectedStatusCode(Int)
@@ -22,6 +24,10 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
 
     public var description: String {
         switch self {
+        case .noServerSet:
+            return "Configure your server"
+        case .needsAuthentication:
+            return "Server requires authentication"
         case .networkError(let moyaError):
             switch moyaError {
             case .underlying(let underlying):
@@ -55,10 +61,24 @@ class TransmissionSession {
 
     var server: TransmissionServer? {
         didSet {
+
+            self.storeDefaultsServer(server: server)
+
+            guard let server = self.server else {
+                self.provider = nil
+                if let connectCancellable = self.connectCancellable {
+                    print("cancelling")
+                    connectCancellable.cancel()
+                }
+                self.statusVar.value = .failed(.noServerSet)
+
+                return
+            }
+
             let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
 
                 // If we have no url then the provider ain't going to be no use...
-                guard let serverURL = self.server?.serverURL?.absoluteString else {
+                guard let serverURL = server.serverURL?.absoluteString else {
                     return MoyaProvider.defaultEndpointMapping(for: target)
                 }
 
@@ -72,17 +92,24 @@ class TransmissionSession {
                 return endpoint
             }
 
-            self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure)
-
-            if let server = self.server {
-                self.storeDefaultsServer(server: server)
+            var plugins: [PluginType] = []
+            if let credential = server.credential {
+                plugins.append( CredentialsPlugin { _ -> URLCredential? in
+                    return credential
+                })
             }
+
+            self.provider = JSONRPCProvider<TransmissionTarget>(endpointClosure: endpointClosure, plugins: plugins)
 
             connect()
         }
     }
 
-    var status: Variable<Status> = Variable<Status>(.indeterminate)
+    let statusVar: Variable<Status> = Variable<Status>(.indeterminate)
+    lazy var status: Observable<Status> = self.statusVar
+        .asObservable()
+        .debounce(0.2, scheduler: MainScheduler.instance)
+        .shareReplay(1)
 
     var provider: JSONRPCProvider<TransmissionTarget>?
 
@@ -100,18 +127,23 @@ class TransmissionSession {
     init() {
 
         // Observe our own status to start/stop update timer
-        status.asObservable()
-            .debounce(0.2, scheduler: MainScheduler.instance)
+        status
             .subscribe(onNext: { status in
             print("Status is \(status)")
             switch status {
                 case .connected:
                     self.startTimers()
                     self.addDeferredTorrents()
-                case .failed:
+                case .failed(let sessionError):
                     self.torrents.value = []
                     self.stopTimers()
-                    self.startRetryTimer()
+                    switch sessionError {
+                    case .networkError:
+                        self.startRetryTimer()
+                    default:
+                        break
+                    }
+
                 default:
                     self.torrents.value = []
                     break
@@ -137,7 +169,7 @@ class TransmissionSession {
 
         if let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
             let url = URL(string: urlString) {
-            if case .connected = self.status.value {
+            if case .connected = self.statusVar.value {
                 self.addTorrent(url: url)
             } else {
                 self.deferredMagnetURLs.append(url)
@@ -152,16 +184,24 @@ class TransmissionSession {
         if let address = defaults.string(forKey: "address"),
             let port = defaults.value(forKey: "port") as? Int,
             let rpcPath = defaults.string(forKey: "rpcPath") {
-            return TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+            let server = TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+
+            return server
         }
-        return TransmissionServer(address:"localhost")
+        return nil
     }
 
-    func storeDefaultsServer(server: TransmissionServer) {
+    func storeDefaultsServer(server: TransmissionServer?) {
         let defaults = UserDefaults.standard
-        defaults.set(server.address, forKey: "address")
-        defaults.set(server.port, forKey: "port")
-        defaults.set(server.rpcPath, forKey: "rpcPath")
+        if let server = server {
+            defaults.set(server.address, forKey: "address")
+            defaults.set(server.port, forKey: "port")
+            defaults.set(server.rpcPath, forKey: "rpcPath")
+        } else {
+            defaults.removeObject(forKey: "address")
+            defaults.removeObject(forKey: "port")
+            defaults.removeObject(forKey: "rpcPath")
+        }
     }
 
     // Timers
@@ -182,6 +222,9 @@ class TransmissionSession {
     func stopTimers() {
         timer?.invalidate()
         timer = nil
+
+        retryTimer?.invalidate()
+        retryTimer = nil
     }
 
     func startRetryTimer() {
@@ -203,9 +246,17 @@ class TransmissionSession {
         if let connectCancellable = self.connectCancellable {
             print("cancelling")
             connectCancellable.cancel()
+            self.connectCancellable = nil
         }
+
+        guard let _ = self.server else {
+            print("No server")
+            self.statusVar.value = .failed(.noServerSet)
+            return
+        }
+
         print("connecting")
-        self.status.value = .connecting
+        self.statusVar.value = .connecting
         connectCancellable = self.provider?.request(.connect) { result in
             switch result {
             case let .success(moyaResponse):
@@ -217,35 +268,35 @@ class TransmissionSession {
                     do {
                         // We should expect to have valid RPC response saying "success"
                         let _ = try moyaResponse.mapJsonRpc()
-                        self.status.value = .connected
+                        self.statusVar.value = .connected
 
                     } catch let error as Moya.Error {
-                        print("There was an error \(error)")
-                        self.status.value = .failed(.networkError(error))
+                        self.statusVar.value = .failed(.networkError(error))
                     } catch let error as SessionError {
-                        self.status.value = .failed(error)
+                        self.statusVar.value = .failed(error)
                     } catch {
-                        self.status.value = .failed(.unknownError(error))
+                        self.statusVar.value = .failed(.unknownError(error))
                     }
 
                 case 404:
                     // The path was wrong probably
-                    print("404 - wrong path")
-                    self.status.value = .failed(SessionError.badRpcPath)
+                    self.statusVar.value = .failed(SessionError.badRpcPath)
+                case 401:
+                    // The path was wrong probably
+                    self.statusVar.value = .failed(SessionError.needsAuthentication)
                 default:
                     // Something else happened - I wonder what it was
-                    print("Oh dear - status code \(moyaResponse.statusCode)")
-                    self.status.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
+                    self.statusVar.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
                 }
             case let .failure(error):
                 // Ignore cancellations - otherwise, pass the error along...
                 switch error {
                 case .underlying(let err):
                     if (err as NSError).code != -999 {
-                        self.status.value = .failed(.networkError(error))
+                        self.statusVar.value = .failed(.networkError(error))
                     }
                 default:
-                    self.status.value = .failed(.networkError(error))
+                    self.statusVar.value = .failed(.networkError(error))
                 }
 
             }
@@ -266,7 +317,7 @@ class TransmissionSession {
             case .failure(let error):
                 // Network error
                 print(error)
-                self.status.value = .failed(.networkError(error))
+                self.statusVar.value = .failed(.networkError(error))
             }
         }
     }
@@ -312,12 +363,15 @@ class TransmissionSession {
                             self.torrents.value.remove(at: index)
                         }
                     }
+                } catch let error as JSONRPCError {
+                    self.statusVar.value = .failed(.rpcError(error))
                 } catch {
-                    print(error)
+                    self.statusVar.value = .failed(.unknownError(error))
                 }
+
             case .failure(let error):
                 print(error)
-                self.status.value = .failed(.networkError(error))
+                self.statusVar.value = .failed(.networkError(error))
             }
         }
     }
@@ -341,11 +395,11 @@ class TransmissionSession {
 
     func removeTorrents(torrents: [Torrent], delete: Bool) {
         if delete {
-            provider?.request(.removeTorrents(torrents)) { (result) in
+            provider?.request(.deleteTorrents(torrents)) { (result) in
                 print(result)
             }
         } else {
-            provider?.request(.deleteTorrents(torrents)) { (result) in
+            provider?.request(.removeTorrents(torrents)) { (result) in
                 print(result)
             }
         }

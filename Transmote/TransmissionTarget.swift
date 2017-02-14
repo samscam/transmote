@@ -40,10 +40,10 @@ extension TransmissionTarget: TargetType {
             arguments = ["filename": url.absoluteString]
         case .deleteTorrents(let torrents):
             method = "torrent-remove"
-            arguments = ["ids": torrents.map { $0.id }, "delete-local-data": false ]
+            arguments = ["ids": torrents.map { $0.id }, "delete-local-data": true ]
         case .removeTorrents(let torrents):
             method = "torrent-remove"
-            arguments = ["ids": torrents.map { $0.id }, "delete-local-data": true ]
+            arguments = ["ids": torrents.map { $0.id }, "delete-local-data": false ]
         case .torrents:
             method = "torrent-get"
             arguments = ["fields": ["id",
