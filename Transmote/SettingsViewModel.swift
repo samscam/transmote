@@ -12,7 +12,7 @@ import RxCocoa
 class SettingsViewModel {
 
     public var statusBlobImage: Driver<Image>
-//    public let showAuthThings: Driver<Bool>
+    public var showUsernameAndPassword: Driver<Bool>
 
     public let settingsHost: Variable<String?> = Variable("")
     public let settingsPort: Variable<String?> = Variable("")
@@ -20,21 +20,24 @@ class SettingsViewModel {
     public let settingsUsername: Variable<String?> = Variable("")
     public let settingsPassword: Variable<String?> = Variable("")
 
+    let server: Variable<TransmissionServer?>
+
     let session: TransmissionSession
     let disposeBag = DisposeBag()
-
-    var showingFakePassword: Bool = false
 
     init(session: TransmissionSession) {
 
         self.session = session
+        self.server = Variable(session.server)
 
         // make sure we have initialised everything before actually configuring it all
         self.statusBlobImage = Driver.never()
+        self.showUsernameAndPassword = Driver.never()
 
         self.statusBlobImage = configureStatusBlob().asDriver(onErrorJustReturn: #imageLiteral(resourceName: "warning"))
+        self.showUsernameAndPassword = configureShowPassword().asDriver(onErrorJustReturn:false)
 
-        self.populateInitialValues()
+        self.populate()
         self.bindToSession()
     }
 
@@ -63,7 +66,36 @@ class SettingsViewModel {
             }
     }
 
-    func populateInitialValues() {
+    /// It should show the password fields if...
+    /// - the server has a credential
+    /// - or the session has reported that authentication is needed
+    func configureShowPassword() -> Observable<Bool> {
+        return Observable.combineLatest(server.asObservable(), session.status) { ($0, $1) }
+            .map { server, status -> Bool in
+                var show: Bool = false
+
+                switch status {
+                case .failed(let sessionError):
+
+                    switch sessionError {
+                    case .needsAuthentication:
+                        show = true
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+
+                if let _ = server?.credential {
+                    show = true
+                }
+
+                return show
+            }
+    }
+
+    func populate() {
         // Initial server values
         if let server = session.server {
             settingsHost.value = server.address
@@ -87,36 +119,20 @@ class SettingsViewModel {
 
         Observable.combineLatest(settingsHost.asObservable(),
                                  settingsPort.asObservable(),
-                                 settingsPath.asObservable(),
-                                 settingsUsername.asObservable(),
-                                 settingsPassword.asObservable() ) {
-                                    ($0, $1, $2, $3, $4)
+                                 settingsPath.asObservable()) {
+                                    ($0, $1, $2)
         }
-        .throttle(1.0, scheduler: MainScheduler.instance )
+        .throttle(0.3, scheduler: MainScheduler.instance )
         .skip(2) // skip both the initial (nil) value and the value set during populateInitialValues()
         .debug("SERVER CHANGE")
-        .subscribe(onNext: { [weak self] (address, port, path, username, password) in
+        .subscribe(onNext: { [weak self] (address, port, path) in
             var address = address
             var port = port
             var path = path
-            var username = username
-            var password = password
 
             if address == "" { address = nil }
             if port == "" { port = nil }
             if path == "" { path = nil }
-            if username == "" { username = nil }
-            if password == "" { password = nil }
-
-            if let address = address {
-                var portInt: Int? = nil
-                if let port = port {
-                    portInt = Int(port)
-                }
-
-                let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
-                self?.session.server = server
-            }
 
             if let address = address {
                 var portInt: Int? = nil
@@ -126,17 +142,35 @@ class SettingsViewModel {
 
                 let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
 
-                if let username = username, let password = password {
-                    server.setUsername(username, password: password)
-                } else {
-                    server.removeCredential()
-                }
-
-                self?.session.server = server
+                self?.server.value = server
             } else {
-                self?.session.server = nil
+                self?.server.value = nil
             }
 
         }).addDisposableTo(disposeBag)
+
+        Observable.combineLatest(settingsUsername.asObservable(), settingsPassword.asObservable()) { ($0, $1) }
+            .subscribe(onNext: { username, password in
+                print("U/P setting changed")
+                var username = username
+                var password = password
+                if username == "" { username = nil }
+                if password == "" { password = nil }
+
+                if let username = username, let password = password {
+                    self.server.value?.setUsername(username, password: password)
+                } else {
+                    self.server.value?.removeCredential()
+                }
+
+                // force the session to try connecting again
+                self.session.server = self.server.value
+            }).addDisposableTo(disposeBag)
+
+        self.server.asObservable().skip(1).subscribe(onNext: { (server) in
+            print("Pushing server to session")
+            self.session.server = server
+        }).addDisposableTo(disposeBag)
+
     }
 }

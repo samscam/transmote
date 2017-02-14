@@ -62,11 +62,18 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
     func bindViewModel() {
         // Observe the session status
         viewModel.statusBlobImage.drive(statusBlobImageView.rx.image).addDisposableTo(disposeBag)
+
+        // Two-way bindings for the fields
         serverAddressField.rx.text <-> viewModel.settingsHost
         portField.rx.text <-> viewModel.settingsPort
         rpcPathField.rx.text <-> viewModel.settingsPath
         usernameField.rx.text <-> viewModel.settingsUsername
         passwordField.rx.text <-> viewModel.settingsPassword
+
+        // Show username/password
+        viewModel.showUsernameAndPassword.drive(onNext: { (show) in
+            self.showAuthThings = show
+        }).addDisposableTo(disposeBag)
     }
 
     override func viewDidDisappear() {
@@ -75,10 +82,7 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
     }
 
     internal func textFieldDidBecomeFirstResponder(_ sender: NSTextField) {
-        if showingFakePassword {
-            sender.stringValue = ""
-            showingFakePassword = false
-        }
+
     }
 
     internal func textFieldDidResignFirstResponder(_ sender: NSTextField) {
