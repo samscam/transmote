@@ -376,11 +376,11 @@ class TransmissionSession {
 
     func removeTorrents(torrents: [Torrent], delete: Bool) {
         if delete {
-            provider?.request(.removeTorrents(torrents)) { (result) in
+            provider?.request(.deleteTorrents(torrents)) { (result) in
                 print(result)
             }
         } else {
-            provider?.request(.deleteTorrents(torrents)) { (result) in
+            provider?.request(.removeTorrents(torrents)) { (result) in
                 print(result)
             }
         }
