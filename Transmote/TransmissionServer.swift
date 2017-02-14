@@ -9,15 +9,12 @@ import Foundation
 import Cocoa
 import ObjectMapper
 
-struct TransmissionServer {
+class TransmissionServer {
 
     var address: String
     var port: Int
     var rpcPath: String
     var useTLS: Bool
-
-    var username: String?
-    var password: String?
 
     init(address: String, port: Int? = nil, rpcPath: String? = nil, useTLS: Bool = false) {
 
@@ -34,6 +31,39 @@ struct TransmissionServer {
         return theURL
     }
 
+    var username: String? {
+        return credential?.user
+    }
+
+    var password: String? {
+        return credential?.password
+    }
+
+    func setUsername(_ username: String, password: String) {
+        removeCredential()
+        print("Setting credential")
+        _credential = URLCredential(user: username, password: password, persistence: .permanent)
+    }
+
+    var protectionSpace: URLProtectionSpace {
+        let proto: String = useTLS ? "https" : "http"
+        return URLProtectionSpace(host: address, port: port, protocol: proto, realm: "Transmission", authenticationMethod: NSURLAuthenticationMethodHTTPBasic)
+    }
+
+    private var _credential: URLCredential?
+    var credential: URLCredential? {
+        if _credential == nil {
+            _credential = URLCredentialStorage.shared.defaultCredential(for: protectionSpace)
+        }
+        return _credential
+    }
+
+    func removeCredential() {
+        if let cred = URLCredentialStorage.shared.defaultCredential(for: protectionSpace) {
+            URLCredentialStorage.shared.remove(cred, for: protectionSpace)
+        }
+        _credential = nil
+    }
 }
 
 struct SessionStats: Mappable {

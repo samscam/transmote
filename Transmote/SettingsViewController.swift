@@ -15,9 +15,11 @@ protocol SettingsPopoverDelegate: class {
     func settingsDismissed(sender: SettingsViewController)
 }
 
-class SettingsViewController: NSViewController {
+class SettingsViewController: NSViewController, ProperTextFieldDelegate {
 
     var session: TransmissionSession?
+    var viewModel: SettingsViewModel!
+
     weak var delegate: SettingsPopoverDelegate?
 
     @IBOutlet weak private var statusBlobImageView: NSImageView!
@@ -27,13 +29,21 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak private var portField: NSTextField!
     @IBOutlet weak private var rpcPathField: NSTextField!
     @IBOutlet weak private var usernameField: NSTextField!
-    @IBOutlet weak private var passwordField: NSSecureTextField!
+    @IBOutlet weak private var passwordField: ProperSecureTextField!
 
     @IBOutlet weak private var rpcPathStack: NSStackView!
     @IBOutlet weak private var usernameStack: NSStackView!
     @IBOutlet weak private var passwordStack: NSStackView!
 
     var disposeBag: DisposeBag = DisposeBag()
+    var showingFakePassword: Bool = false
+
+    var showAuthThings: Bool = true {
+        didSet {
+            usernameStack.isHidden = !showAuthThings
+            passwordStack.isHidden = !showAuthThings
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,74 +52,28 @@ class SettingsViewController: NSViewController {
             return
         }
 
-        disposeBag = DisposeBag()
+        viewModel = SettingsViewModel(session: session)
+        bindViewModel(viewModel)
 
-        usernameStack.isHidden = true
-        passwordStack.isHidden = true
+        passwordField.pdelegate = self
 
+    }
+
+    func bindViewModel(_ viewModel: SettingsViewModel) {
         // Observe the session status
+        viewModel.statusBlobImage.drive(statusBlobImageView.rx.image).addDisposableTo(disposeBag)
 
-        session.status.asObservable()
-            .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] status in
+        // Two-way bindings for the fields
+        serverAddressField.rx.text <-> viewModel.settingsHost
+        portField.rx.text <-> viewModel.settingsPort
+        rpcPathField.rx.text <-> viewModel.settingsPath
+        usernameField.rx.text <-> viewModel.settingsUsername
+        passwordField.rx.text <-> viewModel.settingsPassword
 
-            switch status {
-            case .connected:
-                self?.statusBlobImageView.image = NSImage(named: "status-green")
-            case .connecting:
-                self?.statusBlobImageView.image = NSImage(named: "status-orange")
-            case .indeterminate:
-                self?.statusBlobImageView.image = NSImage(named: "status-gray")
-            case .failed:
-                self?.statusBlobImageView.image = NSImage(named: "status-red")
-            }
-
+        // Show username/password
+        viewModel.showUsernameAndPassword.drive(onNext: { [weak self] (show) in
+            self?.showAuthThings = show
         }).addDisposableTo(disposeBag)
-
-        // Initial server values
-        var skip = 0
-        if let server = session.server {
-            serverAddressField.stringValue = server.address
-            if server.port != 9_091 {
-                portField.stringValue = String(server.port)
-            } else {
-                portField.stringValue = ""
-            }
-            if server.rpcPath != "transmission/rpc" {
-                rpcPathField.stringValue = server.rpcPath
-            } else {
-                rpcPathField.stringValue = ""
-            }
-            skip = 1
-        }
-
-        // Bind the fields back to the session
-
-        Observable.combineLatest(serverAddressField.rx.text, portField.rx.text, rpcPathField.rx.text) { ($0, $1, $2) }
-            .throttle(0.5, scheduler: MainScheduler.instance )
-            .debug("SERVER CHANGE")
-            .skip(skip)
-            .subscribe(onNext: { [weak self] (address, port, path) in
-                var address = address
-                var port = port
-                var path = path
-
-                if address == "" { address = nil }
-                if port == "" { port = nil }
-                if path == "" { path = nil }
-
-                if let address = address {
-                    var portInt: Int? = nil
-                    if let port = port {
-                        portInt = Int(port)
-                    }
-                    let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
-                    self?.session?.server = server
-                } else {
-                    self?.session?.server = nil
-                }
-        }).addDisposableTo(disposeBag)
-
     }
 
     override func viewDidDisappear() {
@@ -117,4 +81,28 @@ class SettingsViewController: NSViewController {
         self.delegate?.settingsDismissed(sender: self)
     }
 
+    internal func textFieldDidBecomeFirstResponder(_ sender: NSTextField) {
+
+    }
+
+    internal func textFieldDidResignFirstResponder(_ sender: NSTextField) {
+        // do nothing
+    }
+
+}
+
+infix operator <->
+
+@discardableResult
+func <-> <T>(property: ControlProperty<T>, variable: Variable<T>) -> Disposable {
+    let variableToProperty = variable.asObservable()
+        .bindTo(property)
+
+    let propertyToVariable = property
+        .subscribe(
+            onNext: { variable.value = $0 },
+            onCompleted: { variableToProperty.dispose() }
+    )
+
+    return Disposables.create(variableToProperty, propertyToVariable)
 }

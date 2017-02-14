@@ -64,7 +64,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         // Observe the session status
 
         Observable
-            .combineLatest(session.status.asObservable(), session.torrents.asObservable()) {
+            .combineLatest(session.status, session.torrents.asObservable()) {
                 return ($0, $1)
             }
             .debounce(0.2, scheduler: MainScheduler.instance)

@@ -59,7 +59,7 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
                         let sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as? String {
                         self.sessionId = sessionId
                         print("Got new session id: \(sessionId)")
-                        // We are discarding the inner cancellable - this is kinda bad...
+                        // WARNING: We are discarding the inner cancellable - this is kinda bad...
                         _ = self.request(target, completion: completion)
                         return
                     }
