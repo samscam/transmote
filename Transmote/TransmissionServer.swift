@@ -31,14 +31,10 @@ class TransmissionServer {
         return theURL
     }
 
-}
-
-/// Extension adding keychain stuff
-extension TransmissionServer {
-
     var username: String? {
         return credential?.user
     }
+
     var password: String? {
         return credential?.password
     }
@@ -46,26 +42,28 @@ extension TransmissionServer {
     func setUsername(_ username: String, password: String) {
         removeCredential()
         print("Setting credential")
-        let cred = URLCredential(user: username, password: password, persistence: .permanent)
-        URLCredentialStorage.shared.setDefaultCredential(cred, for: protectionSpace)
+        _credential = URLCredential(user: username, password: password, persistence: .permanent)
     }
 
     var protectionSpace: URLProtectionSpace {
         let proto: String = useTLS ? "https" : "http"
-        return URLProtectionSpace(host: address, port: port, protocol: proto, realm: rpcPath, authenticationMethod: nil)
+        return URLProtectionSpace(host: address, port: port, protocol: proto, realm: "Transmission", authenticationMethod: NSURLAuthenticationMethodHTTPBasic)
     }
 
+    private var _credential: URLCredential?
     var credential: URLCredential? {
-        return URLCredentialStorage.shared.defaultCredential(for: protectionSpace)
+        if _credential == nil {
+            _credential = URLCredentialStorage.shared.defaultCredential(for: protectionSpace)
+        }
+        return _credential
     }
 
     func removeCredential() {
-        if let credential = credential {
-            print("Removing credential")
-            URLCredentialStorage.shared.remove(credential, for: protectionSpace)
+        if let cred = URLCredentialStorage.shared.defaultCredential(for: protectionSpace) {
+            URLCredentialStorage.shared.remove(cred, for: protectionSpace)
         }
+        _credential = nil
     }
-
 }
 
 struct SessionStats: Mappable {
