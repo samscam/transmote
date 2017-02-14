@@ -38,7 +38,12 @@ class SettingsViewModel {
         self.showUsernameAndPassword = configureShowPassword().asDriver(onErrorJustReturn:false)
 
         self.populate()
-        self.bindToSession()
+        self.bindServerFields()
+        self.bindAuthFields()
+
+        self.server.asObservable().skip(1).subscribe(onNext: {[weak self] (server) in
+            self?.session.server = server
+        }).addDisposableTo(disposeBag)
     }
 
     func configureStatusBlob() -> Observable<Image> {
@@ -114,7 +119,7 @@ class SettingsViewModel {
             settingsPassword.value = server.password ?? ""
         }
     }
-    func bindToSession() {
+    func bindServerFields() {
         // Bind the fields back to the session
 
         Observable.combineLatest(settingsHost.asObservable(),
@@ -124,7 +129,6 @@ class SettingsViewModel {
         }
         .throttle(0.3, scheduler: MainScheduler.instance )
         .skip(2) // skip both the initial (nil) value and the value set during populateInitialValues()
-        .debug("SERVER CHANGE")
         .subscribe(onNext: { [weak self] (address, port, path) in
             var address = address
             var port = port
@@ -148,29 +152,27 @@ class SettingsViewModel {
             }
 
         }).addDisposableTo(disposeBag)
+    }
+
+    func bindAuthFields() {
 
         Observable.combineLatest(settingsUsername.asObservable(), settingsPassword.asObservable()) { ($0, $1) }
-            .subscribe(onNext: { username, password in
-                print("U/P setting changed")
+            .skip(3)
+            .subscribe(onNext: { [weak self] username, password in
                 var username = username
                 var password = password
                 if username == "" { username = nil }
                 if password == "" { password = nil }
 
                 if let username = username, let password = password {
-                    self.server.value?.setUsername(username, password: password)
+                    self?.server.value?.setUsername(username, password: password)
                 } else {
-                    self.server.value?.removeCredential()
+                    self?.server.value?.removeCredential()
                 }
 
                 // force the session to try connecting again
-                self.session.server = self.server.value
+                self?.session.server = self?.server.value
             }).addDisposableTo(disposeBag)
-
-        self.server.asObservable().skip(1).subscribe(onNext: { (server) in
-            print("Pushing server to session")
-            self.session.server = server
-        }).addDisposableTo(disposeBag)
 
     }
 }

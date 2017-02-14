@@ -53,13 +53,13 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
         }
 
         viewModel = SettingsViewModel(session: session)
-        bindViewModel()
+        bindViewModel(viewModel)
 
         passwordField.pdelegate = self
 
     }
 
-    func bindViewModel() {
+    func bindViewModel(_ viewModel: SettingsViewModel) {
         // Observe the session status
         viewModel.statusBlobImage.drive(statusBlobImageView.rx.image).addDisposableTo(disposeBag)
 
@@ -71,8 +71,8 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
         passwordField.rx.text <-> viewModel.settingsPassword
 
         // Show username/password
-        viewModel.showUsernameAndPassword.drive(onNext: { (show) in
-            self.showAuthThings = show
+        viewModel.showUsernameAndPassword.drive(onNext: { [weak self] (show) in
+            self?.showAuthThings = show
         }).addDisposableTo(disposeBag)
     }
 
