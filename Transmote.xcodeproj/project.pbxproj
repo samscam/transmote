@@ -155,7 +155,7 @@
 		22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataSpecialisations.swift; sourceTree = "<group>"; };
 		22D27D661DFEA9560080B2E8 /* Backoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backoff.swift; sourceTree = "<group>"; };
 		22DB05261E0286E600419CBD /* autoversioning.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
-		22E8A5931E2F7889002D9BB5 /* sample-top100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sample-top100.txt"; sourceTree = "<group>"; };
+		22E8A5931E2F7889002D9BB5 /* sample-top100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "sample-top100.txt"; path = "TestData/sample-top100.txt"; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22EBE38A1DE1000A00588FFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };

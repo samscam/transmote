@@ -16,31 +16,47 @@ class DerivedMetadataSpec: QuickSpec {
 
     override func spec() {
         describe("Identifying types") {
-            context("TV Season") {
-
-            }
-            context("TV Episode") {
-                let samples = ["Lucifer.S02E11.HDTV.x264-LOL[ettv]",
-                               "Marvels.Agents.of.S.H.I.E.L.D.S04E10.HDTV.x264-LOL[ettv]",
+            context("TV") {
+                let samples = ["Lucifer.S02.HDTV.x264-LOL[ettv]",
+                               "Some.Thing.Season.2.HDTV.x264-LOL[ettv]",
                                "Gotham.S03E12.HDTV.x264-LOL[ettv]",
                                "Sherlock.S04E02.WEBRip.x264-FUM[ettv]",
                                "Sherlock.S04E01.The.Six.Thatchers.PROPER.HDTV.x264-DEADPOOL[e..."]
                 let allDerived: [DerivedMetadata] = samples.map { DerivedMetadata(from: $0) }
                 for item in allDerived {
-                    it("should identify them as TV Episodes") {
-                        expect(item.type) == TorrentMetadataType.tvEpisode
+                    it("should identify them as TV") {
+                        expect(item.type) == TorrentMetadataType.tv
                     }
                 }
 
             }
-            context("TV Series") {
+            context("Movies") {
+                let samples = ["Arrival.2016.DVDScr.XVID.AC3.HQ.Hive-CM8",
+                               "La.La.Land.2016.DVDScr.XVID.AC3.HQ.Hive-CM8",
+                    "Fantastic.Beasts.and.Where.to.Find.Them.2016.720p.HC.HDRip.x264.",
+                    "Arrival.2016.DVDScr.x264-4RRIVED",
+                    "Fantastic.Beasts.and.Where.to.Find.Them.2016.HC.HDRip ETRG"]
+                let allDerived: [DerivedMetadata] = samples.map { DerivedMetadata(from: $0) }
+                for item in allDerived {
+                    it("should identify them as Movies") {
+                        expect(item.type) == TorrentMetadataType.movie
+                    }
+                }
 
             }
-            context("Movie") {
 
-            }
-            context("Other") {
-
+            xcontext("Software") {
+                let samples = ["Adobe Photoshop CS6 13.0.1 Final  Multilanguage (cracked dll) [C",
+                               "Windows 10 Pro v.1511 En-us x64 July2016 Pre-Activated-=TEAM OS=",
+                               "Far Cry Primal-CPY",
+                               "The Sims 4-RELOADED",
+                               "MICROSOFT Office PRO Plus 2016 v16.0.4266.1003 RTM + ActivatorG"]
+                let allDerived: [DerivedMetadata] = samples.map { DerivedMetadata(from: $0) }
+                for item in allDerived {
+                    it("should identify them as Software") {
+                        expect(item.type) == TorrentMetadataType.software
+                    }
+                }
             }
         }
         describe("Deriving metadata") {
@@ -53,60 +69,7 @@ class DerivedMetadataSpec: QuickSpec {
             context("Everything") {
                 for item in allDerived {
                     it("should clean up dots and underscores and whitespace and so forth") {
-                        expect(item.name).toNot(contain([".", "-", "_"]))
-                    }
-                }
-            }
-
-            context("Torrents which are TV Episodes") {
-                let tv = allDerived.filter {
-                    if case .tvEpisode = $0.type { return true } else { return false }
-                }
-
-                for item in tv {
-                    context("Torrent named \(item.rawName)") {
-
-                        it("Should extract the season number") {
-                            expect(item.season).toNot(beNil())
-                        }
-                        it("Should extract the episode number") {
-                            expect(item.episode).toNot(beNil())
-                        }
-                    }
-                }
-            }
-
-            context("Torrents which are TV Series") {
-                let tv = allDerived.filter {
-                    if case .tvSeason = $0.type { return true } else { return false }
-                }
-
-                for item in tv {
-                    context("Torrent named \(item.rawName)") {
-
-                        it("Should have a season number") {
-                            expect(item.season).toNot(beNil())
-                        }
-                        it("Should NOT have an episode number") {
-                            expect(item.episode).to(beNil())
-                        }
-                    }
-                }
-            }
-
-            context("Items which are NOT tv episodes") {
-                let notTv = allDerived.filter {
-                    if case .tvEpisode = $0.type { return false } else { return true }
-                }
-                for item in notTv {
-                    context("Torrent named \(item.rawName)") {
-
-                        it("Should not have a season number") {
-                            expect(item.season).to(beNil())
-                        }
-                        it("Should not have an episode number") {
-                            expect(item.episode).to(beNil())
-                        }
+                        expect(item.title).toNot(contain([".", "-", "_"]))
                     }
                 }
             }
