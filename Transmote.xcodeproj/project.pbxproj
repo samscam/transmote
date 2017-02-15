@@ -21,8 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2211A4C81E4169DE00F5005B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4BF1E4167C100F5005B /* Fabric.framework */; };
-		2211A4C91E4169E200F5005B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4C01E4167C100F5005B /* Crashlytics.framework */; };
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
@@ -42,6 +40,8 @@
 		22ADE06C1E3C094100401E85 /* DerivedMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADE06B1E3C094100401E85 /* DerivedMetadata.swift */; };
 		22ADE06E1E3C09E400401E85 /* MetadataSpecialisations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */; };
 		22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27D661DFEA9560080B2E8 /* Backoff.swift */; };
+		22E257471E550E83009CDD36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4BF1E4167C100F5005B /* Fabric.framework */; };
+		22E257481E550E87009CDD36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4C01E4167C100F5005B /* Crashlytics.framework */; };
 		22E8A5941E2F7889002D9BB5 /* sample-top100.txt in Resources */ = {isa = PBXBuildFile; fileRef = 22E8A5931E2F7889002D9BB5 /* sample-top100.txt */; };
 		22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3881DE1000A00588FFD /* AppDelegate.swift */; };
 		22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE38A1DE1000A00588FFD /* MainViewController.swift */; };
@@ -129,8 +129,8 @@
 
 /* Begin PBXFileReference section */
 		2211A4BE1E40B65E00F5005B /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = exportOptions.plist; path = Distribution/exportOptions.plist; sourceTree = SOURCE_ROOT; };
-		2211A4BF1E4167C100F5005B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		2211A4C01E4167C100F5005B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		2211A4BF1E4167C100F5005B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Fabric/Fabric.framework; sourceTree = "<group>"; };
+		2211A4C01E4167C100F5005B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Fabric/Crashlytics.framework; sourceTree = "<group>"; };
 		2211A4CA1E41D8A900F5005B /* archive-post-action.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "archive-post-action.sh"; path = "Distribution/archive-post-action.sh"; sourceTree = SOURCE_ROOT; };
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -209,8 +209,8 @@
 				22EBE3C11DE44FB100588FFD /* Alamofire.framework in Frameworks */,
 				22EBE3D21DE44FD600588FFD /* Sparkle.framework in Frameworks */,
 				2247B7C51DF83259001B4C95 /* ProgressKit.framework in Frameworks */,
-				2211A4C81E4169DE00F5005B /* Fabric.framework in Frameworks */,
-				2211A4C91E4169E200F5005B /* Crashlytics.framework in Frameworks */,
+				22E257471E550E83009CDD36 /* Fabric.framework in Frameworks */,
+				22E257481E550E87009CDD36 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,7 +490,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Distribute\" ]; then\necho \"Running Crashlytics\"\n./Fabric.framework/run 901d118350c7346b2c0e014fc4b50874001e05ac ed4f996167300b345fff20ace5c8d177a2711af113fec28567843fe098396769\nfi";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Distribute\" ]; then\necho \"Running Crashlytics\"\n./Fabric/Fabric.framework/run 901d118350c7346b2c0e014fc4b50874001e05ac ed4f996167300b345fff20ace5c8d177a2711af113fec28567843fe098396769\nfi";
 			showEnvVarsInLog = 0;
 		};
 		227925B41E11E0A200371CE9 /* Swiftlint */ = {
@@ -655,6 +655,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -853,6 +854,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -878,6 +880,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Fabric",
 				);
 				INFOPLIST_FILE = Transmote/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
