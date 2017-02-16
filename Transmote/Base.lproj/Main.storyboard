@@ -242,10 +242,9 @@
                                         <collectionView selectable="YES" allowsMultipleSelection="YES" id="LSW-tT-MvJ">
                                             <rect key="frame" x="0.0" y="0.0" width="750" height="481"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lbx-AU-g3M">
-                                                <size key="itemSize" width="350" height="200"/>
-                                                <edgeInsets key="sectionInset" left="10" right="10" top="10" bottom="10"/>
-                                            </collectionViewFlowLayout>
+                                            <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfColumns="1" id="ObK-83-2FT">
+                                                <size key="minimumItemSize" width="400" height="60"/>
+                                            </collectionViewGridLayout>
                                             <color key="primaryBackgroundColor" red="0.92812067270278931" green="0.92882484197616577" blue="0.92822974920272827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </collectionView>
                                     </subviews>

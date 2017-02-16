@@ -42,6 +42,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         let nib = NSNib(nibNamed: "TorrentCollectionViewItem", bundle: nil)
         self.collectionView.register(nib, forItemWithIdentifier: "TorrentCell")
 
+        let listNib = NSNib(nibNamed: "TorrentCollectionViewListItem", bundle: nil)
+        self.collectionView.register(listNib, forItemWithIdentifier: "TorrentListCell")
+
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
 
@@ -115,7 +118,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     func collectionView(_ collectionView: NSCollectionView,
                         itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
 
-        let item = self.collectionView.makeItem(withIdentifier: "TorrentCell",
+        let item = self.collectionView.makeItem(withIdentifier: "TorrentListCell",
                                                 for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
         item.torrentViewModel = varViewModels.value[indexPath.item]
         return item
