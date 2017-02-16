@@ -45,6 +45,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         let listNib = NSNib(nibNamed: "TorrentCollectionViewListItem", bundle: nil)
         self.collectionView.register(listNib, forItemWithIdentifier: "TorrentListCell")
 
+        self.collectionView.collectionViewLayout = ListLayout()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
 
