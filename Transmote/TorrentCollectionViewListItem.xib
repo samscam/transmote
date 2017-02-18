@@ -56,7 +56,7 @@
                     </customView>
                     <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="aWU-ot-GHR">
                         <rect key="frame" x="161" y="116" width="386" height="17"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="zJv-q0-xej">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="zJv-q0-xej">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -79,7 +79,7 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="Re3-Pr-8Gj">
                         <rect key="frame" x="161" y="100" width="386" height="11"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="EPI-hX-zp6">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="EPI-hX-zp6">
                             <font key="font" metaFont="systemLight" size="9"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

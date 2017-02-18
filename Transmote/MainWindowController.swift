@@ -19,6 +19,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     @IBOutlet weak private var removeTorrentToolbarItem: NSToolbarItem!
     @IBOutlet weak private var deleteTorrentToolbarItem: NSToolbarItem!
+    @IBOutlet weak private var viewControl: NSSegmentedControl!
 
     @IBAction func viewChange(_ sender: NSSegmentedControl) {
         switch sender.selectedSegment {
@@ -60,6 +61,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
             self.deleteTorrentToolbarItem.isEnabled = hasSelectedTorrents
             self.removeTorrentToolbarItem.isEnabled = hasSelectedTorrents
         }).addDisposableTo(disposeBag)
+
+        self.viewControl.selectedSegment = mainViewController.viewStyle.rawValue
 
     }
 

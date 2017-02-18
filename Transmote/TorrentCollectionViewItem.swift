@@ -26,7 +26,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
 
     var persistentDisposeBag = DisposeBag()
 
-    var light: Bool = true
+    var light: Bool = true {
+        didSet {
+            sortSelection()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

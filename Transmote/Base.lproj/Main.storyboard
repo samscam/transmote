@@ -213,6 +213,7 @@
                     <connections>
                         <outlet property="deleteTorrentToolbarItem" destination="F1X-C5-LpX" id="Q1Y-rh-FAZ"/>
                         <outlet property="removeTorrentToolbarItem" destination="6I3-AJ-fGM" id="67b-th-b1U"/>
+                        <outlet property="viewControl" destination="U6k-v6-whZ" id="oqf-e1-T3X"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>

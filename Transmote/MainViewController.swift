@@ -35,6 +35,12 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     let longVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     // swiftlint:enable force_cast
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        let savedStyle = UserDefaults.standard.integer(forKey: "viewStyle")
+        self.viewStyle = ViewStyle(rawValue: savedStyle)!
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,14 +53,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
         // We should persist the view style
 
-        self.viewStyle = .grid
-
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.collectionViewLayout = self.viewStyle.layout
 
         sortOutVersionWidget()
         startUpdater()
         bindToSession()
+
     }
 
     func bindToSession() {
@@ -199,9 +205,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
     // View style
 
-    enum ViewStyle {
-        case grid
-        case list
+    enum ViewStyle: Int {
+        case grid = 0
+        case list = 1
 
         var reuseIdentifier: String {
             switch self {
@@ -237,8 +243,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
     var viewStyle: ViewStyle = .grid {
         didSet {
-            self.collectionView.collectionViewLayout = viewStyle.layout
-            self.collectionView.reloadData()
+            if let collectionView = self.collectionView {
+                collectionView.collectionViewLayout = viewStyle.layout
+                collectionView.reloadData()
+            }
+            UserDefaults.standard.set(viewStyle.rawValue, forKey: "viewStyle")
         }
     }
 

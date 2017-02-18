@@ -11,7 +11,7 @@ import AppKit
 /// This has one column of cells
 class ListLayout: NSCollectionViewLayout {
 
-    let itemHeight: Double = 80.0
+    let itemHeight: Double = 70.0
     var width: Double = 0.0
 
     var numberOfItems = 0
