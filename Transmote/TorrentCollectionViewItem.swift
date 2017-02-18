@@ -24,13 +24,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     @IBOutlet weak private var progressStatusLabel: NSTextField!
     @IBOutlet weak private var progressView: CircularProgressView!
 
-    var persistentDisposeBag = DisposeBag()
-
-    var light: Bool = true {
-        didSet {
-            sortSelection()
-        }
-    }
+    var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +44,8 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             return _isSelected
         }
     }
-    private var _highlightState: NSCollectionViewItemHighlightState = .none
 
+    private var _highlightState: NSCollectionViewItemHighlightState = .none
     override var highlightState: NSCollectionViewItemHighlightState {
         set {
             _highlightState = newValue
@@ -59,6 +53,12 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
         get {
             return _highlightState
+        }
+    }
+
+    var light: Bool = true {
+        didSet {
+            sortSelection()
         }
     }
 
@@ -99,8 +99,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
 
     }
-
-    var disposeBag = DisposeBag()
 
     var torrentViewModel: TorrentViewModel? {
         didSet {
