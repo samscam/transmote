@@ -177,18 +177,43 @@
                                         <segue destination="M6y-C0-WB3" kind="popover" identifier="DeleteSegue" popoverAnchorView="F1X-C5-LpX" popoverBehavior="t" preferredEdge="maxY" id="up7-jv-ogf"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="3AEF8698-C820-4A18-AE5A-B94C551F7C44" label="View" paletteLabel="View" id="pM2-ly-eNq">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="23" height="20"/>
+                                    <size key="maxSize" width="73" height="22"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="U6k-v6-whZ">
+                                        <rect key="frame" x="0.0" y="14" width="73" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="GaV-Kr-xL4">
+                                            <font key="font" metaFont="cellTitle"/>
+                                            <segments>
+                                                <segment image="grid" imageScaling="none" width="32">
+                                                    <nil key="label"/>
+                                                </segment>
+                                                <segment image="list" imageScaling="none" width="32" selected="YES" tag="1">
+                                                    <nil key="label"/>
+                                                </segment>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="viewChange:" target="B8D-0N-5wS" id="99w-K7-QH1"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="yUR-CH-7bX"/>
                                 <toolbarItem reference="k1X-tw-37e"/>
                                 <toolbarItem reference="6I3-AJ-fGM"/>
                                 <toolbarItem reference="F1X-C5-LpX"/>
+                                <toolbarItem reference="pM2-ly-eNq"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
                     <connections>
                         <outlet property="deleteTorrentToolbarItem" destination="F1X-C5-LpX" id="Q1Y-rh-FAZ"/>
                         <outlet property="removeTorrentToolbarItem" destination="6I3-AJ-fGM" id="67b-th-b1U"/>
+                        <outlet property="viewControl" destination="U6k-v6-whZ" id="oqf-e1-T3X"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
@@ -221,10 +246,9 @@
                                         <collectionView selectable="YES" allowsMultipleSelection="YES" id="LSW-tT-MvJ">
                                             <rect key="frame" x="0.0" y="0.0" width="750" height="481"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lbx-AU-g3M">
-                                                <size key="itemSize" width="350" height="200"/>
-                                                <edgeInsets key="sectionInset" left="10" right="10" top="10" bottom="10"/>
-                                            </collectionViewFlowLayout>
+                                            <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfColumns="1" id="ObK-83-2FT">
+                                                <size key="minimumItemSize" width="400" height="60"/>
+                                            </collectionViewGridLayout>
                                             <color key="primaryBackgroundColor" red="0.92812067270278931" green="0.92882484197616577" blue="0.92822974920272827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </collectionView>
                                     </subviews>
@@ -430,7 +454,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xui-JC-rBQ">
-                                                <rect key="frame" x="-2" y="5.5" width="49" height="11"/>
+                                                <rect key="frame" x="-2" y="6" width="49" height="11"/>
                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="RPC Path" id="rk4-oV-XNN">
                                                     <font key="font" metaFont="miniSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -697,6 +721,8 @@ DQ
         <image name="NSStatusNone" width="16" height="16"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="NSTrashEmpty" width="32" height="32"/>
+        <image name="grid" width="32" height="20"/>
+        <image name="list" width="32" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="up7-jv-ogf"/>

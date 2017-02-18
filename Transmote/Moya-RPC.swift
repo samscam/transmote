@@ -35,7 +35,7 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
                             plugins: [PluginType] = [],
                             trackInflights: Bool = false) {
         // swiftlint:enable vertical_parameter_alignment
-        
+
         super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
 

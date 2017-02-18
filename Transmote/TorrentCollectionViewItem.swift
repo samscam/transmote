@@ -24,7 +24,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     @IBOutlet weak private var progressStatusLabel: NSTextField!
     @IBOutlet weak private var progressView: CircularProgressView!
 
-    var persistentDisposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,8 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             return _isSelected
         }
     }
-    private var _highlightState: NSCollectionViewItemHighlightState = .none
 
+    private var _highlightState: NSCollectionViewItemHighlightState = .none
     override var highlightState: NSCollectionViewItemHighlightState {
         set {
             _highlightState = newValue
@@ -53,6 +53,12 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
         get {
             return _highlightState
+        }
+    }
+
+    var light: Bool = true {
+        didSet {
+            sortSelection()
         }
     }
 
@@ -64,15 +70,28 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
                 self.box.borderWidth = 3
             } else {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                if light {
+                    self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.05)
+                } else {
+                    self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                }
                 self.box.borderWidth = 0
             }
         case .forSelection:
-            self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+            if light {
+                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+            } else {
+                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            }
+
             self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
             self.box.borderWidth = 3
         case .forDeselection:
-            self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
+            if light {
+                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.2)
+            } else {
+                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
+            }
             self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
             self.box.borderWidth = 3
         case .asDropTarget:
@@ -80,8 +99,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
 
     }
-
-    var disposeBag = DisposeBag()
 
     var torrentViewModel: TorrentViewModel? {
         didSet {
