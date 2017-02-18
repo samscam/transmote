@@ -20,6 +20,17 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
     @IBOutlet weak private var removeTorrentToolbarItem: NSToolbarItem!
     @IBOutlet weak private var deleteTorrentToolbarItem: NSToolbarItem!
 
+    @IBAction func viewChange(_ sender: NSSegmentedControl) {
+        switch sender.selectedSegment {
+        case 0:
+            self.mainViewController.viewStyle = .grid
+        case 1:
+            self.mainViewController.viewStyle = .list
+        default:
+            break
+        }
+    }
+
     var isShowingSettings = false
 
     override func windowDidLoad() {

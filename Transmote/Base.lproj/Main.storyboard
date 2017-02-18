@@ -195,6 +195,9 @@
                                                 </segment>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="viewChange:" target="B8D-0N-5wS" id="99w-K7-QH1"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                             </allowedToolbarItems>

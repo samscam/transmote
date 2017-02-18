@@ -45,7 +45,10 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         let listNib = NSNib(nibNamed: "TorrentCollectionViewListItem", bundle: nil)
         self.collectionView.register(listNib, forItemWithIdentifier: "TorrentListCell")
 
-        self.collectionView.collectionViewLayout = ListLayout()
+        // We should persist the view style
+
+        self.viewStyle = .grid
+
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
 
@@ -119,8 +122,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     func collectionView(_ collectionView: NSCollectionView,
                         itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
 
-        let item = self.collectionView.makeItem(withIdentifier: "TorrentListCell",
+        let item = self.collectionView.makeItem(withIdentifier: self.viewStyle.reuseIdentifier,
                                                 for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
+        item.light = self.viewStyle.light
         item.torrentViewModel = varViewModels.value[indexPath.item]
         return item
     }
@@ -191,6 +195,51 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     func updater(_ updater: SUUpdater, didFindValidUpdate item: SUAppcastItem) {
         pendingUpdateItem = item
         sortOutVersionWidget()
+    }
+
+    // View style
+
+    enum ViewStyle {
+        case grid
+        case list
+
+        var reuseIdentifier: String {
+            switch self {
+            case .grid:
+                return "TorrentCell"
+            case .list:
+                return "TorrentListCell"
+            }
+        }
+
+        var light: Bool {
+            switch self {
+            case .grid:
+                return false
+            case .list:
+                return true
+            }
+        }
+
+        var layout: NSCollectionViewLayout {
+            switch self {
+            case .grid:
+                let layout = NSCollectionViewFlowLayout()
+                layout.itemSize = NSSize(width: 400, height: 225)
+                layout.minimumInteritemSpacing = 10
+                layout.sectionInset = EdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+                return layout
+            case .list:
+                return ListLayout()
+            }
+        }
+    }
+
+    var viewStyle: ViewStyle = .grid {
+        didSet {
+            self.collectionView.collectionViewLayout = viewStyle.layout
+            self.collectionView.reloadData()
+        }
     }
 
 }
