@@ -27,12 +27,14 @@ class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
 
     var sessionId: String?
 
+    // swiftlint:disable vertical_parameter_alignment
     override public init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,
                             requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,
                             stubClosure: @escaping StubClosure = MoyaProvider.neverStub,
                             manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
                             plugins: [PluginType] = [],
                             trackInflights: Bool = false) {
+        // swiftlint:enable vertical_parameter_alignment
 
         super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
