@@ -96,13 +96,13 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Distribute"
-      revealArchiveInOrganizer = "YES">
+      revealArchiveInOrganizer = "NO">
       <PostActions>
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "./Distribution/archive-post-action.sh">
+               scriptText = "/Users/sam/Development/transmote/Distribution/archive-post-action.sh">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

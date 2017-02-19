@@ -1,6 +1,8 @@
 #!/bin/sh
+osascript -e 'display notification "Starting DMG archive" with title "Archiving"'
 
 ## This is a post-action when archiving
+exec > "/Users/sam/Desktop/archive.log" 2>&1
 
 PRODUCT_INFO_PLIST_PATH="${ARCHIVE_PRODUCTS_PATH}/Applications/${TARGET_NAME}.app/Contents/Info.plist"
 VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "${PRODUCT_INFO_PLIST_PATH}")
@@ -8,7 +10,6 @@ BUILD=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${PRODUCT_INFO_PLIST
 
 unset XCODE_DEVELOPER_DIR_PATH
 
-DATE=$(/bin/date +%Y%m%d%H%M%S)
 OUTPUT_DIR="${SOURCE_ROOT}/Distribution/Archives/${TARGET_NAME}_${VERSION}"
 mkdir -p "$OUTPUT_DIR"
 
