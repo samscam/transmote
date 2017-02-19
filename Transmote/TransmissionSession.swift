@@ -13,43 +13,6 @@ import RxSwift
 
 // A session - which coordinates access to a server and its torrents
 
-public enum SessionError: Swift.Error, CustomStringConvertible {
-    case noServerSet
-    case needsAuthentication
-    case networkError(Moya.Error)
-    case badRpcPath
-    case unexpectedStatusCode(Int)
-    case unknownError(Swift.Error)
-    case rpcError(JSONRPCError)
-
-    public var description: String {
-        switch self {
-        case .noServerSet:
-            return "Configure your server"
-        case .needsAuthentication:
-            return "Server requires authentication"
-        case .networkError(let moyaError):
-            switch moyaError {
-            case .underlying(let underlying):
-                return underlying.localizedDescription
-            case .jsonMapping:
-                return "The server returned something other than JSON\n\nProbably a bad RPC path or not a Transmission Server"
-            default:
-                return "Network error:\n\n\(moyaError.localizedDescription)"
-            }
-
-        case .badRpcPath:
-            return "Bad RPC path or not a Transmission Server"
-        case .unknownError:
-            return "Unknown error"
-        case .unexpectedStatusCode(let statusCode):
-            return "Unexpected status code: \(statusCode)"
-        case .rpcError(let rpcError):
-            return rpcError.description
-        }
-    }
-}
-
 class TransmissionSession {
 
     enum Status {
@@ -114,7 +77,6 @@ class TransmissionSession {
     var provider: JSONRPCProvider<TransmissionTarget>?
 
     var torrents: Variable<[Torrent]> = Variable([])
-    var stats: SessionStats?
 
     var timer: Timer?
 
@@ -303,25 +265,6 @@ class TransmissionSession {
         }
     }
 
-    func updateSessionStats() {
-        self.provider?.request(.stats) { result in
-            switch result {
-            case .success(let moyaResponse):
-                do {
-                    let json = try moyaResponse.mapJsonRpc()
-                    self.stats = SessionStats(JSON: json)
-                } catch {
-                    // RPC or server error
-                    print(error)
-                }
-            case .failure(let error):
-                // Network error
-                print(error)
-                self.statusVar.value = .failed(.networkError(error))
-            }
-        }
-    }
-
     func updateTorrents() {
         self.provider?.request(.torrents) { result in
             switch result {
@@ -405,10 +348,4 @@ class TransmissionSession {
         }
     }
 
-}
-
-extension Collection where Iterator.Element: Hashable {
-    func element(matching hash: Int) -> Iterator.Element? {
-        return self.first(where: { $0.hashValue == hash })
-    }
 }

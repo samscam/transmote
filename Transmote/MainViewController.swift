@@ -38,7 +38,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         let savedStyle = UserDefaults.standard.integer(forKey: "viewStyle")
-        self.viewStyle = ViewStyle(rawValue: savedStyle)!
+        if let viewStyle = ViewStyle(rawValue: savedStyle) {
+            self.viewStyle = viewStyle
+        }
     }
 
     override func viewDidLoad() {

@@ -26,6 +26,7 @@
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
 		221EAD071E55D82800021A89 /* TorrentCollectionViewListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EAD061E55D82800021A89 /* TorrentCollectionViewListItem.xib */; };
 		221EAD091E5626B600021A89 /* ListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EAD081E5626B600021A89 /* ListLayout.swift */; };
+		221EAD0B1E59893700021A89 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EAD0A1E59893700021A89 /* SessionError.swift */; };
 		223D821B1E3F529A00925F7E /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 223D821A1E3F529A00925F7E /* dsa_pub.pem */; };
 		224610FD1E2E6CD600CAFA41 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224610FC1E2E6CD600CAFA41 /* Quick.framework */; };
 		224610FF1E2E6CE300CAFA41 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224610FE1E2E6CE300CAFA41 /* Nimble.framework */; };
@@ -41,7 +42,7 @@
 		22701A6D1E082E54004D3B50 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22701A6C1E082E54004D3B50 /* ConfirmationViewController.swift */; };
 		22ADE06C1E3C094100401E85 /* DerivedMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADE06B1E3C094100401E85 /* DerivedMetadata.swift */; };
 		22ADE06E1E3C09E400401E85 /* MetadataSpecialisations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */; };
-		22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27D661DFEA9560080B2E8 /* Backoff.swift */; };
+		22D27D671DFEA9560080B2E8 /* SmallThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27D661DFEA9560080B2E8 /* SmallThings.swift */; };
 		22E257471E550E83009CDD36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4BF1E4167C100F5005B /* Fabric.framework */; };
 		22E257481E550E87009CDD36 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2211A4C01E4167C100F5005B /* Crashlytics.framework */; };
 		22E8A5941E2F7889002D9BB5 /* sample-top100.txt in Resources */ = {isa = PBXBuildFile; fileRef = 22E8A5931E2F7889002D9BB5 /* sample-top100.txt */; };
@@ -139,6 +140,7 @@
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
 		221EAD061E55D82800021A89 /* TorrentCollectionViewListItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewListItem.xib; sourceTree = "<group>"; };
 		221EAD081E5626B600021A89 /* ListLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLayout.swift; sourceTree = "<group>"; };
+		221EAD0A1E59893700021A89 /* SessionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionError.swift; sourceTree = "<group>"; };
 		222DD92C1E4DD9720015A2BC /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
 		223D821A1E3F529A00925F7E /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../Distribution/dsa_pub.pem; sourceTree = "<group>"; };
 		224610EB1E2E6C4000CAFA41 /* DerivedMetadataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DerivedMetadataTests.swift; path = TransmoteTests/DerivedMetadataTests.swift; sourceTree = "<group>"; };
@@ -156,7 +158,7 @@
 		22A6B9061E0976BC00F508DA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		22ADE06B1E3C094100401E85 /* DerivedMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedMetadata.swift; sourceTree = "<group>"; };
 		22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataSpecialisations.swift; sourceTree = "<group>"; };
-		22D27D661DFEA9560080B2E8 /* Backoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backoff.swift; sourceTree = "<group>"; };
+		22D27D661DFEA9560080B2E8 /* SmallThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallThings.swift; sourceTree = "<group>"; };
 		22DB05261E0286E600419CBD /* autoversioning.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
 		22E8A5931E2F7889002D9BB5 /* sample-top100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "sample-top100.txt"; path = "TestData/sample-top100.txt"; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,12 +347,13 @@
 			children = (
 				22EBE3981DE1010800588FFD /* TRNDefinitions.swift */,
 				22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */,
+				221EAD0A1E59893700021A89 /* SessionError.swift */,
 				22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */,
 				22EBE39A1DE1010800588FFD /* TransmissionServer.swift */,
 				22EBE39C1DE1010800588FFD /* Torrent.swift */,
 				22ADE06A1E3C091900401E85 /* Metadata */,
 				2211B4981DEE530900DDA453 /* Moya-RPC.swift */,
-				22D27D661DFEA9560080B2E8 /* Backoff.swift */,
+				22D27D661DFEA9560080B2E8 /* SmallThings.swift */,
 			);
 			name = Core;
 			path = Transmote;
@@ -562,7 +565,7 @@
 				22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */,
 				22EBE39E1DE1010800588FFD /* ProperImageView.swift in Sources */,
 				22ADE06C1E3C094100401E85 /* DerivedMetadata.swift in Sources */,
-				22D27D671DFEA9560080B2E8 /* Backoff.swift in Sources */,
+				22D27D671DFEA9560080B2E8 /* SmallThings.swift in Sources */,
 				2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */,
 				22701A6D1E082E54004D3B50 /* ConfirmationViewController.swift in Sources */,
 				2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */,
@@ -571,6 +574,7 @@
 				22FED44D1E1E47F800ED434D /* MetadataManager.swift in Sources */,
 				22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */,
 				22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */,
+				221EAD0B1E59893700021A89 /* SessionError.swift in Sources */,
 				22EBE39F1DE1010800588FFD /* TRNDefinitions.swift in Sources */,
 				22FED4481E1D83C700ED434D /* TorrentViewModel.swift in Sources */,
 				22FED44B1E1E43BE00ED434D /* TorrentStatus+Color.swift in Sources */,

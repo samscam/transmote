@@ -24,7 +24,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0kG-Eo-1eF" userLabel="Torrent cell template">
             <rect key="frame" x="0.0" y="0.0" width="595" height="143"/>
-            <view key="contentView" autoresizesSubviews="NO" id="kXy-KE-Kxb">
+            <view key="contentView" id="kXy-KE-Kxb">
                 <rect key="frame" x="0.0" y="0.0" width="595" height="143"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
@@ -55,7 +55,7 @@
                         </constraints>
                     </customView>
                     <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="aWU-ot-GHR">
-                        <rect key="frame" x="161" y="116" width="386" height="17"/>
+                        <rect key="frame" x="161" y="116" width="376" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="zJv-q0-xej">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -78,8 +78,8 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="Re3-Pr-8Gj">
-                        <rect key="frame" x="161" y="100" width="386" height="11"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="EPI-hX-zp6">
+                        <rect key="frame" x="161" y="100" width="376" height="11"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="EPI-hX-zp6">
                             <font key="font" metaFont="systemLight" size="9"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -98,7 +98,7 @@
                     <constraint firstAttribute="bottom" secondItem="TBD-I6-f25" secondAttribute="bottom" constant="10" id="ZuZ-GX-UTy"/>
                     <constraint firstItem="TBD-I6-f25" firstAttribute="top" secondItem="42D-J4-332" secondAttribute="bottom" constant="5" id="kZC-Ze-Boa"/>
                     <constraint firstAttribute="trailing" secondItem="42D-J4-332" secondAttribute="trailing" constant="10" id="w85-ZD-hta"/>
-                    <constraint firstItem="42D-J4-332" firstAttribute="leading" secondItem="aWU-ot-GHR" secondAttribute="trailing" constant="10" id="yQb-Yp-Gzj"/>
+                    <constraint firstItem="42D-J4-332" firstAttribute="leading" secondItem="aWU-ot-GHR" secondAttribute="trailing" constant="20" id="yQb-Yp-Gzj"/>
                     <constraint firstItem="YB2-C0-ijo" firstAttribute="leading" secondItem="kXy-KE-Kxb" secondAttribute="leading" constant="3" id="ymd-Eh-Ply"/>
                 </constraints>
             </view>

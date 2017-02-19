@@ -1,5 +1,5 @@
 //
-//  Backoff.swift
+//  SmallThings.swift
 //  Transmote
 //
 //  Created by Sam Easterby-Smith on 12/12/2016.
@@ -41,5 +41,11 @@ class BackoffTimer {
 
     deinit {
         invalidate()
+    }
+}
+
+extension Collection where Iterator.Element: Hashable {
+    func element(matching hash: Int) -> Iterator.Element? {
+        return self.first(where: { $0.hashValue == hash })
     }
 }

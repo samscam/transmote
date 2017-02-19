@@ -32,7 +32,9 @@ class ListLayout: NSCollectionViewLayout {
     override func layoutAttributesForElements(in rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
         var attribs: [NSCollectionViewLayoutAttributes] = []
         for i in 0 ..< numberOfItems {
-            attribs.append(layoutAttributesForItem(at: IndexPath(item: i, section: 0))!)
+            if let attribute = layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
+                attribs.append(attribute)
+            }
         }
         return attribs
     }

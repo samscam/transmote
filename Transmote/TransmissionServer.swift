@@ -65,16 +65,3 @@ class TransmissionServer {
         _credential = nil
     }
 }
-
-struct SessionStats: Mappable {
-    var activeTorrentCount: Int!
-
-    init?(map: Map) {
-
-    }
-
-    mutating func mapping(map: Map) {
-        activeTorrentCount <- map["activeTorrentCount"]
-    }
-
-}
