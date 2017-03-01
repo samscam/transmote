@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Moya
 import Sparkle
+import QuartzCore
 
 class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, SUUpdaterDelegate {
 
@@ -50,13 +51,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         let nib = NSNib(nibNamed: "TorrentCollectionViewItem", bundle: nil)
         self.collectionView.register(nib, forItemWithIdentifier: "TorrentCell")
 
-        let listNib = NSNib(nibNamed: "TorrentCollectionViewListItem", bundle: nil)
-        self.collectionView.register(listNib, forItemWithIdentifier: "TorrentListCell")
-
         // We should persist the view style
 
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+
         self.collectionView.collectionViewLayout = self.viewStyle.layout
 
         sortOutVersionWidget()
@@ -132,7 +131,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
         let item = self.collectionView.makeItem(withIdentifier: self.viewStyle.reuseIdentifier,
                                                 for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
-        item.light = self.viewStyle.light
+
         item.torrentViewModel = varViewModels.value[indexPath.item]
         return item
     }
@@ -212,21 +211,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         case list = 1
 
         var reuseIdentifier: String {
-            switch self {
-            case .grid:
                 return "TorrentCell"
-            case .list:
-                return "TorrentListCell"
-            }
-        }
-
-        var light: Bool {
-            switch self {
-            case .grid:
-                return false
-            case .list:
-                return true
-            }
         }
 
         var layout: NSCollectionViewLayout {
@@ -246,8 +231,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     var viewStyle: ViewStyle = .grid {
         didSet {
             if let collectionView = self.collectionView {
-                collectionView.collectionViewLayout = viewStyle.layout
-                collectionView.reloadData()
+                collectionView.animator().collectionViewLayout = viewStyle.layout
             }
             UserDefaults.standard.set(viewStyle.rawValue, forKey: "viewStyle")
         }

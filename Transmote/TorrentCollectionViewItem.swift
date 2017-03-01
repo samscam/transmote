@@ -31,7 +31,13 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         progressView.strokeWidth = 3
         progressView.background = NSColor.clear
         progressView.foreground = NSColor.white
+
         sortSelection()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.torrentViewModel = nil
     }
 
     private var _isSelected: Bool = false
@@ -56,44 +62,33 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
     }
 
-    var light: Bool = true {
-        didSet {
-            sortSelection()
-        }
-    }
-
     func sortSelection() {
+
+        let transition = CATransition()
+        transition.duration = 0.15
+        box.wantsLayer = true
+        box.layer?.add(transition, forKey: "transition")
+
+        let subject: NSBox = self.box
+
         switch _highlightState {
         case .none:
             if _isSelected {
-                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.7)
-                self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
-                self.box.borderWidth = 3
+                subject.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.7)
+                subject.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
+                subject.borderWidth = 3
             } else {
-                if light {
-                    self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.05)
-                } else {
-                    self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-                }
-                self.box.borderWidth = 0
+                subject.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                subject.borderWidth = 0
             }
         case .forSelection:
-            if light {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-            } else {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-            }
-
-            self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
-            self.box.borderWidth = 3
+            subject.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            subject.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
+            subject.borderWidth = 3
         case .forDeselection:
-            if light {
-                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.2)
-            } else {
-                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
-            }
-            self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
-            self.box.borderWidth = 3
+            subject.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
+            subject.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
+            subject.borderWidth = 3
         case .asDropTarget:
             break
         }
@@ -136,4 +131,19 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             }).addDisposableTo(disposeBag)
         }
     }
+
+    var firstPass: Bool = true
+
+    override func apply(_ layoutAttributes: NSCollectionViewLayoutAttributes) {
+
+        super.apply(layoutAttributes)
+
+        // This is so that it animates the subviews when changing bounds but doesn't bork the initial positioning
+        if !firstPass {
+            self.view.layoutSubtreeIfNeeded()
+        } else {
+            firstPass = false
+        }
+    }
+
 }

@@ -23,25 +23,25 @@
             <point key="canvasLocation" x="584" y="750"/>
         </collectionViewItem>
         <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afG-HD-eFG" userLabel="Torrent cell template">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
-            <view key="contentView" id="fse-0A-fHe">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="266"/>
+            <view key="contentView" wantsLayer="YES" id="fse-0A-fHe">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="266"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="3b3-D2-Yqf" customClass="ProperImageView" customModule="Transmote" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="266"/>
                     </customView>
-                    <box autoresizesSubviews="NO" boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
+                    <box autoresizesSubviews="NO" wantsLayer="YES" boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="266"/>
                         <view key="contentView" id="TkE-v7-kSP">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="266"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </view>
                         <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="fillColor" red="0.0035435267857142857" green="0.0035435267857142857" blue="0.0035435267857142857" alpha="0.0" colorSpace="calibratedRGB"/>
                     </box>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-Qk-Z9k">
-                        <rect key="frame" x="8" y="383" width="384" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o5B-Qk-Z9k">
+                        <rect key="frame" x="8" y="239" width="344" height="17"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="AS0-KO-qaH">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,19 +55,16 @@
                             <constraint firstAttribute="width" constant="30" id="X40-qK-vYW"/>
                         </constraints>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZS-1p-7Ih">
-                        <rect key="frame" x="18" y="10" width="374" height="11"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VZS-1p-7Ih">
+                        <rect key="frame" x="364" y="10" width="28" height="11"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="bZO-DP-WVJ">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6N-yI-x06">
-                        <rect key="frame" x="8" y="330" width="384" height="48"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="48" id="bxa-LK-Ddf"/>
-                        </constraints>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s6N-yI-x06">
+                        <rect key="frame" x="8" y="223" width="344" height="11"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="EIP-b8-MbQ">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,7 +73,7 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="VZS-1p-7Ih" firstAttribute="leading" secondItem="fse-0A-fHe" secondAttribute="leading" constant="20" id="1dF-SX-SNJ"/>
+                    <constraint firstItem="gxl-JK-iJZ" firstAttribute="leading" secondItem="o5B-Qk-Z9k" secondAttribute="trailing" constant="10" id="2Ux-V3-Rmp"/>
                     <constraint firstAttribute="bottom" secondItem="3b3-D2-Yqf" secondAttribute="bottom" id="4PB-Ih-GZa"/>
                     <constraint firstAttribute="bottom" secondItem="VZS-1p-7Ih" secondAttribute="bottom" constant="10" id="QfW-uM-wZg"/>
                     <constraint firstAttribute="trailing" secondItem="VZS-1p-7Ih" secondAttribute="trailing" constant="10" id="UQI-qD-FFg"/>
@@ -96,11 +93,10 @@
                 <constraint firstItem="s6N-yI-x06" firstAttribute="trailing" secondItem="o5B-Qk-Z9k" secondAttribute="trailing" id="Slj-7M-Dan"/>
                 <constraint firstItem="WM3-nd-Dig" firstAttribute="top" secondItem="afG-HD-eFG" secondAttribute="top" id="bBb-el-QvC"/>
                 <constraint firstItem="o5B-Qk-Z9k" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" constant="10" id="fTo-EU-E5A"/>
-                <constraint firstItem="s6N-yI-x06" firstAttribute="centerX" secondItem="afG-HD-eFG" secondAttribute="centerX" id="hOL-hi-ivo"/>
                 <constraint firstItem="WM3-nd-Dig" firstAttribute="leading" secondItem="afG-HD-eFG" secondAttribute="leading" id="wB4-XD-r4h"/>
             </constraints>
             <color key="fillColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
-            <point key="canvasLocation" x="132" y="214"/>
+            <point key="canvasLocation" x="132" y="142"/>
         </box>
     </objects>
 </document>
