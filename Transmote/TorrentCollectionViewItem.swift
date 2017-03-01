@@ -60,8 +60,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     func sortSelection() {
 
         let transition = CATransition()
-        transition.duration = 0.1
-
+        transition.duration = 0.15
         box.wantsLayer = true
         box.layer?.add(transition, forKey: "transition")
 
