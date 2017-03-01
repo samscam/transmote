@@ -35,6 +35,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         sortSelection()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.torrentViewModel = nil
+    }
+
     private var _isSelected: Bool = false
     override var isSelected: Bool {
         set {
