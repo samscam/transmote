@@ -117,4 +117,19 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
             }).addDisposableTo(disposeBag)
         }
     }
+
+    var firstPass: Bool = true
+
+    override func apply(_ layoutAttributes: NSCollectionViewLayoutAttributes) {
+
+        super.apply(layoutAttributes)
+
+        // This is so that it animates the subviews when changing bounds but doesn't bork the initial positioning
+        if !firstPass {
+            self.view.layoutSubtreeIfNeeded()
+        } else {
+            firstPass = false
+        }
+    }
+
 }

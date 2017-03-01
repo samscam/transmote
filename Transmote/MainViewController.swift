@@ -231,8 +231,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     var viewStyle: ViewStyle = .grid {
         didSet {
             if let collectionView = self.collectionView {
-                collectionView.collectionViewLayout = viewStyle.layout
-                collectionView.reloadData()
+                collectionView.animator().collectionViewLayout = viewStyle.layout
             }
             UserDefaults.standard.set(viewStyle.rawValue, forKey: "viewStyle")
         }
