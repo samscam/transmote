@@ -24,14 +24,14 @@
         </collectionViewItem>
         <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afG-HD-eFG" userLabel="Torrent cell template">
             <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
-            <view key="contentView" id="fse-0A-fHe">
+            <view key="contentView" wantsLayer="YES" id="fse-0A-fHe">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="3b3-D2-Yqf" customClass="ProperImageView" customModule="Transmote" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
                     </customView>
-                    <box autoresizesSubviews="NO" boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
+                    <box autoresizesSubviews="NO" wantsLayer="YES" boxType="custom" borderType="line" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-nd-Dig">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>
                         <view key="contentView" id="TkE-v7-kSP">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="410"/>

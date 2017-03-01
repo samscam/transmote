@@ -31,6 +31,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         progressView.strokeWidth = 3
         progressView.background = NSColor.clear
         progressView.foreground = NSColor.white
+
         sortSelection()
     }
 
@@ -57,24 +58,33 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     }
 
     func sortSelection() {
+
+        let transition = CATransition()
+        transition.duration = 0.1
+
+        box.wantsLayer = true
+        box.layer?.add(transition, forKey: "transition")
+
+        let subject: NSBox = self.box
+
         switch _highlightState {
         case .none:
             if _isSelected {
-                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.7)
-                self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
-                self.box.borderWidth = 3
+                subject.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.7)
+                subject.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
+                subject.borderWidth = 3
             } else {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-                self.box.borderWidth = 0
+                subject.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                subject.borderWidth = 0
             }
         case .forSelection:
-            self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-            self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
-            self.box.borderWidth = 3
+            subject.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            subject.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
+            subject.borderWidth = 3
         case .forDeselection:
-            self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
-            self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
-            self.box.borderWidth = 3
+            subject.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
+            subject.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
+            subject.borderWidth = 3
         case .asDropTarget:
             break
         }
