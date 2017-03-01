@@ -56,12 +56,6 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
     }
 
-    var light: Bool = true {
-        didSet {
-            sortSelection()
-        }
-    }
-
     func sortSelection() {
         switch _highlightState {
         case .none:
@@ -70,28 +64,15 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.8)
                 self.box.borderWidth = 3
             } else {
-                if light {
-                    self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.05)
-                } else {
-                    self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-                }
+                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.5)
                 self.box.borderWidth = 0
             }
         case .forSelection:
-            if light {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-            } else {
-                self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-            }
-
+            self.box.fillColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.6)
             self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
             self.box.borderWidth = 3
         case .forDeselection:
-            if light {
-                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.2)
-            } else {
-                self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
-            }
+            self.box.fillColor = NSColor(red: 0, green: 0.5, blue: 0.75, alpha: 0.6)
             self.box.borderColor = NSColor(red: 0.3, green: 0.7, blue: 1.0, alpha: 0.5)
             self.box.borderWidth = 3
         case .asDropTarget:

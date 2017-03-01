@@ -24,7 +24,6 @@
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
-		221EAD071E55D82800021A89 /* TorrentCollectionViewListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EAD061E55D82800021A89 /* TorrentCollectionViewListItem.xib */; };
 		221EAD091E5626B600021A89 /* ListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EAD081E5626B600021A89 /* ListLayout.swift */; };
 		221EAD0B1E59893700021A89 /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EAD0A1E59893700021A89 /* SessionError.swift */; };
 		223D821B1E3F529A00925F7E /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 223D821A1E3F529A00925F7E /* dsa_pub.pem */; };
@@ -138,7 +137,6 @@
 		2211B4981DEE530900DDA453 /* Moya-RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya-RPC.swift"; sourceTree = "<group>"; };
 		2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentCollectionViewItem.swift; sourceTree = "<group>"; };
 		2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewItem.xib; sourceTree = "<group>"; };
-		221EAD061E55D82800021A89 /* TorrentCollectionViewListItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TorrentCollectionViewListItem.xib; sourceTree = "<group>"; };
 		221EAD081E5626B600021A89 /* ListLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLayout.swift; sourceTree = "<group>"; };
 		221EAD0A1E59893700021A89 /* SessionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionError.swift; sourceTree = "<group>"; };
 		222DD92C1E4DD9720015A2BC /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
@@ -309,7 +307,6 @@
 				22EBE39D1DE1010800588FFD /* MainWindowController.swift */,
 				22EBE38A1DE1000A00588FFD /* MainViewController.swift */,
 				2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */,
-				221EAD061E55D82800021A89 /* TorrentCollectionViewListItem.xib */,
 				2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */,
 				221EAD081E5626B600021A89 /* ListLayout.swift */,
 				22EBE3D61DE4572700588FFD /* SettingsViewController.swift */,
@@ -478,7 +475,6 @@
 				22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */,
 				22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */,
 				2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */,
-				221EAD071E55D82800021A89 /* TorrentCollectionViewListItem.xib in Resources */,
 				22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
