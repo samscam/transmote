@@ -149,6 +149,7 @@
 		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
 		2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBTarget.swift; sourceTree = "<group>"; };
 		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
+		22495C011E68A5180016569F /* bitrise.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = bitrise.yml; sourceTree = SOURCE_ROOT; };
 		225547A61E49E96700E091C1 /* ProperTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperTextField.swift; sourceTree = "<group>"; };
 		225547A81E4A17DC00E091C1 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		22701A6C1E082E54004D3B50 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				227925B51E12197400371CE9 /* .swiftlint.yml */,
+				22495C011E68A5180016569F /* bitrise.yml */,
 				223D821A1E3F529A00925F7E /* dsa_pub.pem */,
 				2211A4CA1E41D8A900F5005B /* archive-post-action.sh */,
 				2211A4BE1E40B65E00F5005B /* exportOptions.plist */,
