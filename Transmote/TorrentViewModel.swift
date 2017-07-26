@@ -62,7 +62,6 @@ class TorrentViewModel: Equatable {
                     return $0
                 }
             }
-            .asDriver(onErrorJustReturn: #imageLiteral(resourceName: "magnet"))
 
         progress = torrent.percentDone
 
@@ -73,7 +72,7 @@ class TorrentViewModel: Equatable {
     var title: Observable<String>
     var subtitle: Observable<String>
 
-    var image: Driver<Image?>
+    var image: Observable<Image?>
     var progress: Observable<Float>
     var statusMessage: Observable<String>
     var statusColor: Observable<Color>

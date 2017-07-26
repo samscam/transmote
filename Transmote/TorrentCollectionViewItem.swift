@@ -116,7 +116,11 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
 
             torrentViewModel.subtitle.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
 
-            torrentViewModel.image.drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
+            torrentViewModel.image
+                .asDriver(onErrorJustReturn: #imageLiteral(resourceName: "magnet") )
+                .drive(torrentImageView.rx.image)
+                .addDisposableTo(disposeBag)
+            
             torrentViewModel.imageContentMode.bindTo(torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
 
             torrentViewModel.progress.subscribe(onNext: { newValue in

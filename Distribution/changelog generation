@@ -1,0 +1,22 @@
+0.4.0
+0.4.0.1234
+0.4.1
+0.5.0
+
+git tag -l 'r*' --sort=-committerdate
+r0.3.248
+r0.3.242
+r0.3.241
+r0.3.223
+r0.3.194
+r0.3.189
+r0.3.179
+r0.3.166
+
+git log r0.3.242...r0.3.248 --pretty=format:"%h %s" | grep -v Merge
+
+5c5298a Clear out view model on prepareForReuse
+d58a7f6 Small cleanup of cell constraints
+c1a8bb7 Little fades when selecting cells
+1d049f9 Gratuitous animation when switching layouts
+7d00261 Removed seperate list style cell and notion of lightness

@@ -42,7 +42,19 @@ public class ProperImageView: NSView {
         get {
             return self.innerImageView.image
         }
+    }
 
+    public func setImage(_ image: NSImage?, animated: Bool = false) {
+        let transition = CATransition()
+        transition.duration = 0.2
+        self.setImage(image, transition: transition)
+    }
+
+    public func setImage(_ image: NSImage?, transition: CATransition? = nil ) {
+        if let transition = transition {
+            innerImageView.layer?.add(transition, forKey: "transition")
+        }
+        self.image = image
     }
 
     public var contentMode: ContentMode = .center {
@@ -113,8 +125,25 @@ extension Reactive where Base: ProperImageView {
 
     /// Bindable sink for `image` property.
     public var image: UIBindingObserver<Base, NSImage?> {
-        return UIBindingObserver(UIElement: self.base) { control, value in
-            control.image = value
+        return image(transitionType: nil)
+    }
+
+    /// Bindable sink for `image` property.
+    /// - parameter transitionType: Optional transition type while setting the image (kCATransitionFade, kCATransitionMoveIn, ...)
+    public func image(transitionType: String? = nil) -> UIBindingObserver<Base, NSImage?> {
+        return UIBindingObserver(UIElement: base) { imageView, image in
+            if let transitionType = transitionType {
+                if image != nil {
+                    let transition = CATransition()
+                    transition.duration = 0.25
+                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    transition.type = transitionType
+                    imageView.layer?.add(transition, forKey: kCATransition)
+                }
+            } else {
+                imageView.layer?.removeAllAnimations()
+            }
+            imageView.image = image
         }
     }
 
