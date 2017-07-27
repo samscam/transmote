@@ -92,7 +92,7 @@ class SettingsViewModel {
                     break
                 }
 
-                if let _ = server?.credential {
+                if server?.credential != nil {
                     show = true
                 }
 

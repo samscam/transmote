@@ -47,7 +47,7 @@ class TorrentViewModel: Equatable {
         }
 
         imageContentMode = imageObs.catchErrorJustReturn(nil).map { image in
-            if let _ = image {
+            if image != nil {
                 return ContentMode.scaleAspectFill
             } else {
                 return ContentMode.center

@@ -112,23 +112,23 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
 
             print("Cell set torrent \(torrentViewModel.torrent.id)")
 
-            torrentViewModel.title.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.title.bind(to: titleLabel.rx.text).addDisposableTo(disposeBag)
 
-            torrentViewModel.subtitle.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.subtitle.bind(to: episodeLabel.rx.text).addDisposableTo(disposeBag)
 
             torrentViewModel.image
                 .asDriver(onErrorJustReturn: #imageLiteral(resourceName: "magnet") )
                 .drive(torrentImageView.rx.image)
                 .addDisposableTo(disposeBag)
-            
-            torrentViewModel.imageContentMode.bindTo(torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
+
+            torrentViewModel.imageContentMode.bind(to: torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
 
             torrentViewModel.progress.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
 
             }).addDisposableTo(disposeBag)
 
-            torrentViewModel.statusMessage.bindTo(progressStatusLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.statusMessage.bind(to: progressStatusLabel.rx.text).addDisposableTo(disposeBag)
 
             torrentViewModel.statusColor.subscribe(onNext: { color in
                 self.progressView.foreground = color

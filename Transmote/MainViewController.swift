@@ -114,7 +114,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         }).addDisposableTo(disposeBag)
 
         viewModels = session.torrents.asObservable().map { $0.map { TorrentViewModel(torrent: $0, metadataManager: self.metadataManager) } }
-        viewModels.bindTo(varViewModels).addDisposableTo(disposeBag)
+        viewModels.bind(to: varViewModels).addDisposableTo(disposeBag)
     }
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -12,7 +12,7 @@ import Moya
 public enum SessionError: Swift.Error, CustomStringConvertible {
     case noServerSet
     case needsAuthentication
-    case networkError(Moya.Error)
+    case networkError(MoyaError)
     case badRpcPath
     case unexpectedStatusCode(Int)
     case unknownError(Swift.Error)

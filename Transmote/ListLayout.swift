@@ -51,7 +51,7 @@ class ListLayout: NSCollectionViewLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: NSRect) -> Bool {
         return true
     }
-    
+
 // Some work in progress here...
 //    override func initialLayoutAttributesForAppearingItem(at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes? {
 //        let attribs = NSCollectionViewLayoutAttributes(forItemWith: indexPath)

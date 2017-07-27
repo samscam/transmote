@@ -96,7 +96,7 @@ infix operator <->
 @discardableResult
 func <-> <T>(property: ControlProperty<T>, variable: Variable<T>) -> Disposable {
     let variableToProperty = variable.asObservable()
-        .bindTo(property)
+        .bind(to: property)
 
     let propertyToVariable = property
         .subscribe(

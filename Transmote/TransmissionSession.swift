@@ -211,7 +211,7 @@ class TransmissionSession {
             self.connectCancellable = nil
         }
 
-        guard let _ = self.server else {
+        guard self.server != nil else {
             print("No server")
             self.statusVar.value = .failed(.noServerSet)
             return
@@ -229,10 +229,10 @@ class TransmissionSession {
 
                     do {
                         // We should expect to have valid RPC response saying "success"
-                        let _ = try moyaResponse.mapJsonRpc()
+                        _ = try moyaResponse.mapJsonRpc()
                         self.statusVar.value = .connected
 
-                    } catch let error as Moya.Error {
+                    } catch let error as MoyaError {
                         self.statusVar.value = .failed(.networkError(error))
                     } catch let error as SessionError {
                         self.statusVar.value = .failed(error)

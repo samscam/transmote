@@ -23,7 +23,7 @@ public enum JSONRPCError: Swift.Error, CustomStringConvertible {
     }
 }
 
-class JSONRPCProvider<Target:TargetType>: MoyaProvider<Target> {
+class JSONRPCProvider<Target: TargetType>: MoyaProvider<Target> {
 
     var sessionId: String?
 
