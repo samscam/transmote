@@ -63,22 +63,22 @@ struct DerivedMetadata: Metadata {
                 return
         }
 
-        let title = (semiCleaned as NSString).substring(with: result.rangeAt(1))
+        let title = (semiCleaned as NSString).substring(with: result.range(at: 1))
 
         self.cleanedName = title
 
-        if !NSEqualRanges(result.rangeAt(2), NSRange(location: NSNotFound, length: 0)) {
-            year = Int((semiCleaned as NSString).substring(with: result.rangeAt(2)))
+        if !NSEqualRanges(result.range(at: 2), NSRange(location: NSNotFound, length: 0)) {
+            year = Int((semiCleaned as NSString).substring(with: result.range(at: 2)))
         }
 
-        if !NSEqualRanges(result.rangeAt(3), NSRange(location: NSNotFound, length: 0)) {
-            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(3)))
-        } else if !NSEqualRanges(result.rangeAt(5), NSRange(location: NSNotFound, length: 0)) {
-            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(5)))
+        if !NSEqualRanges(result.range(at: 3), NSRange(location: NSNotFound, length: 0)) {
+            season = Int((semiCleaned as NSString).substring(with: result.range(at: 3)))
+        } else if !NSEqualRanges(result.range(at: 5), NSRange(location: NSNotFound, length: 0)) {
+            season = Int((semiCleaned as NSString).substring(with: result.range(at: 5)))
         }
 
-        if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
-            episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
+        if !NSEqualRanges(result.range(at: 4), NSRange(location: NSNotFound, length: 0)) {
+            episode = Int((semiCleaned as NSString).substring(with: result.range(at: 4)))
         }
 
         // Figure out what type it probably is

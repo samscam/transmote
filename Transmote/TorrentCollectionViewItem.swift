@@ -51,8 +51,8 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
     }
 
-    private var _highlightState: NSCollectionViewItemHighlightState = .none
-    override var highlightState: NSCollectionViewItemHighlightState {
+    private var _highlightState: NSCollectionViewItem.HighlightState = .none
+    override var highlightState: NSCollectionViewItem.HighlightState {
         set {
             _highlightState = newValue
             sortSelection()

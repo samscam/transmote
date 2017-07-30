@@ -87,7 +87,7 @@
 			remoteGlobalIDString = 22EBE3841DE1000900588FFD;
 			remoteInfo = Transmote;
 		};
-		22DB05301E02AB6E00419CBD /* PBXContainerItemProxy */ = {
+		22B0D37C1F2A9C1800BB1D16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22EBE37D1DE1000900588FFD /* Project object */;
 			proxyType = 1;
@@ -406,7 +406,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				22DB05311E02AB6E00419CBD /* PBXTargetDependency */,
+				22B0D37D1F2A9C1800BB1D16 /* PBXTargetDependency */,
 			);
 			name = Transmote;
 			productName = Transmote;
@@ -426,6 +426,7 @@
 					224610F01E2E6C7000CAFA41 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3Y2D8C5PMT;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 22EBE3841DE1000900588FFD;
 					};
@@ -436,6 +437,7 @@
 					22EBE3841DE1000900588FFD = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 9M28MQ9SZC;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -591,10 +593,10 @@
 			target = 22EBE3841DE1000900588FFD /* Transmote */;
 			targetProxy = 224610F61E2E6C7000CAFA41 /* PBXContainerItemProxy */;
 		};
-		22DB05311E02AB6E00419CBD /* PBXTargetDependency */ = {
+		22B0D37D1F2A9C1800BB1D16 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22DB052B1E02AB4800419CBD /* Autoversioning */;
-			targetProxy = 22DB05301E02AB6E00419CBD /* PBXContainerItemProxy */;
+			targetProxy = 22B0D37C1F2A9C1800BB1D16 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -680,7 +682,8 @@
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Distribute;
 		};
@@ -706,7 +709,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.samscam.TransmoteTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
 			};
 			name = Distribute;
@@ -726,7 +730,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.samscam.TransmoteTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
 			};
 			name = Debug;
@@ -746,7 +751,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.samscam.TransmoteTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmote.app/Contents/MacOS/Transmote";
 			};
 			name = Release;
@@ -891,7 +897,8 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -917,7 +924,8 @@
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.Transmote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

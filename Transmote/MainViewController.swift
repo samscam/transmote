@@ -48,8 +48,10 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         super.viewDidLoad()
 
         // Register cell
-        let nib = NSNib(nibNamed: "TorrentCollectionViewItem", bundle: nil)
-        self.collectionView.register(nib, forItemWithIdentifier: "TorrentCell")
+        let nib = NSNib(nibNamed: NSNib.Name("TorrentCollectionViewItem"), bundle: nil)
+
+            //(rawValue: "TorrentCollectionViewItem"), bundle: nil)
+        self.collectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TorrentCell"))
 
         // We should persist the view style
 
@@ -82,8 +84,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                 return ($0, $1)
             }
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { (status, torrents) in
-
+            .subscribe({ event in
+                switch event {
+                case .next(let status, let torrents):
                 switch status {
                 case .connected:
                     if torrents.isEmpty {
@@ -107,6 +110,9 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                     self.passiveAlertLabel.stringValue = error.description
                 }
 
+                default:
+                break
+                }
             }).addDisposableTo(disposeBag)
 
         session.torrents.asDriver().drive(onNext: { _ in
@@ -129,7 +135,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     func collectionView(_ collectionView: NSCollectionView,
                         itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
 
-        let item = self.collectionView.makeItem(withIdentifier: self.viewStyle.reuseIdentifier,
+        let item = self.collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: self.viewStyle.reuseIdentifier),
                                                 for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
 
         item.torrentViewModel = varViewModels.value[indexPath.item]
@@ -220,7 +226,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                 let layout = NSCollectionViewFlowLayout()
                 layout.itemSize = NSSize(width: 400, height: 225)
                 layout.minimumInteritemSpacing = 10
-                layout.sectionInset = EdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+                layout.sectionInset = NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 return layout
             case .list:
                 return ListLayout()

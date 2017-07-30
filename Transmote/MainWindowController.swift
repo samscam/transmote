@@ -43,12 +43,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
         // Remember window positions
 
         self.shouldCascadeWindows = false
-
+        let windowName = NSWindow.FrameAutosaveName("MainTransmoteWindow")
         if let window = self.window {
-            if !window.setFrameUsingName("MainTransmoteWindow") {
+            if !window.setFrameUsingName(windowName) {
                 window.center()
             }
-            window.setFrameAutosaveName("MainTransmoteWindow")
+            window.setFrameAutosaveName(windowName)
         }
 
         mainViewController = self.contentViewController! as! MainViewController // swiftlint:disable:this force_cast force_unwrapping
@@ -90,7 +90,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
  */
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier else {
+        guard let identifier = segue.identifier?.rawValue else {
             return
         }
 
@@ -127,8 +127,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     // Prevent double-display of settings popover
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        switch identifier {
+    override func shouldPerformSegue(withIdentifier identifier: NSStoryboardSegue.Identifier, sender: Any?) -> Bool {
+        switch identifier.rawValue {
             case "SettingsSegue":
                 return !isShowingSettings
         default:
@@ -144,7 +144,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     func windowDidBecomeKey(_ notification: Notification) {
         if session.server == nil {
-            self.performSegue(withIdentifier: "SettingsSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "SettingsSegue"), sender: self)
         }
     }
 
