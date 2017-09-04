@@ -50,8 +50,9 @@ class TransmissionSession {
                                                                 .networkResponse(200, target.sampleData)
                                                             },
                                                             method: target.method,
-                                                            parameters: target.parameters,
-                                                            parameterEncoding: target.parameterEncoding)
+                                                            task: target.task,
+                                                            httpHeaderFields: target.headers)
+
                 return endpoint
             }
 
@@ -254,7 +255,7 @@ class TransmissionSession {
                 // Ignore cancellations - otherwise, pass the error along...
                 switch error {
                 case .underlying(let err):
-                    if (err as NSError).code != -999 {
+                    if (err.0 as NSError).code != -999 {
                         self.statusVar.value = .failed(.networkError(error))
                     }
                 default:

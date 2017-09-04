@@ -18,6 +18,9 @@ enum TransmissionTarget {
 }
 
 extension TransmissionTarget: TargetType {
+    var headers: [String : String]? {
+        return nil
+    }
 
     // These will always be ignored
     public var baseURL: URL { return URL(string: "http://localhost/")! } // swiftlint:disable:this force_unwrapping
@@ -27,7 +30,7 @@ extension TransmissionTarget: TargetType {
     public var method: Moya.Method { return .post }
 
     // And here's the fun part
-    public var parameters: [String: Any]? {
+    public var task: Task {
         let method: String
         var arguments: [String:Any]?
         switch self {
@@ -65,19 +68,11 @@ extension TransmissionTarget: TargetType {
         if let arguments = arguments {
             payload["arguments"] = arguments
         }
-        return payload
+        return .requestParameters(parameters: payload, encoding: JSONEncoding.default)
     }
 
     public var sampleData: Data {
         return "Just can't be bothered".data(using: String.Encoding.utf8)! // swiftlint:disable:this force_unwrapping
     }
 
-    public var task: Task {
-        return .request
-    }
-
-    /// The method used for parameter encoding.
-    public var parameterEncoding: ParameterEncoding {
-        return JSONEncoding()
-    }
 }

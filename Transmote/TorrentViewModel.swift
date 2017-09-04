@@ -39,7 +39,7 @@ class TorrentViewModel: Equatable {
 
         let imageObs = torrentMetadata.map { $0.imagePath }.flatMapLatest { imagePath -> Observable<Image?> in
             if let imagePath = imagePath {
-                return metadataManager.tmdbProvider.request(.image(path: imagePath)).mapImage()
+                return metadataManager.tmdbProvider.request(.image(path: imagePath)).mapImage().asObservable()
             } else {
                 return Observable<Image?>.just(nil)
             }
