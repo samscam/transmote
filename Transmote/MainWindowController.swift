@@ -66,7 +66,6 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     }
 
-    /*
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
 
@@ -78,7 +77,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
                 case .failed(let sessionError):
                     switch sessionError {
                     case .noServerSet:
-                            self.performSegue(withIdentifier: "SettingsSegue", sender: self)
+                            self.performSegue(withIdentifier: .settingsSegue, sender: self)
                     default:
                         break
                     }
@@ -87,21 +86,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
                 }
             }).addDisposableTo(disposeBag)
     }
- */
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier?.rawValue else {
+        guard let identifier = segue.identifier else {
             return
         }
 
         switch identifier {
-        case "SettingsSegue":
+        case .settingsSegue:
             if let settingsViewController = segue.destinationController as? SettingsViewController {
                 settingsViewController.session = self.session
                 settingsViewController.delegate = self
                 self.isShowingSettings = true
             }
-        case "DeleteSegue":
+        case .deleteSegue:
 
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "Do you really want to DELETE this torrent and any downloaded files?"
@@ -111,7 +109,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
                     }
                 }
             }
-        case "RemoveSegue":
+        case .removeSegue:
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "This will remove the torrent from the list, leaving files intact."
                 confirmationViewController.action = { [weak self] in
@@ -128,8 +126,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
     // Prevent double-display of settings popover
 
     override func shouldPerformSegue(withIdentifier identifier: NSStoryboardSegue.Identifier, sender: Any?) -> Bool {
-        switch identifier.rawValue {
-            case "SettingsSegue":
+        switch identifier {
+            case .settingsSegue:
                 return !isShowingSettings
         default:
             return true
@@ -144,8 +142,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     func windowDidBecomeKey(_ notification: Notification) {
         if session.server == nil {
-            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "SettingsSegue"), sender: self)
+            self.performSegue(withIdentifier: .settingsSegue, sender: self)
         }
     }
 
+    enum Segues: String {
+        case settingsSegue
+        case deleteSegue
+        case removeSegue
+    }
+
+}
+
+fileprivate extension NSStoryboardSegue.Identifier {
+    static let settingsSegue: NSStoryboardSegue.Identifier = NSStoryboardSegue.Identifier("SettingsSegue")
+    static let deleteSegue: NSStoryboardSegue.Identifier = NSStoryboardSegue.Identifier("DeleteSegue")
+    static let removeSegue: NSStoryboardSegue.Identifier = NSStoryboardSegue.Identifier("RemoveSegue")
 }

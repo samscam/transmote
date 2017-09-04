@@ -36,7 +36,7 @@ struct DerivedMetadata: Metadata {
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
 
         // Clean references to DVD BDRIP and boxset and things
-        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|((from )?www torrenting \\w*))\\b", options: .caseInsensitive)
+        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|((from )?www .* com\\w*))\\b", options: .caseInsensitive)
         semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
 
         // Clean runs of whitespace
