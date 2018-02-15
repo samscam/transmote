@@ -60,7 +60,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
         mainViewController.hasSelectedTorrents.subscribe(onNext: { hasSelectedTorrents in
             self.deleteTorrentToolbarItem.isEnabled = hasSelectedTorrents
             self.removeTorrentToolbarItem.isEnabled = hasSelectedTorrents
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         self.viewControl.selectedSegment = mainViewController.viewStyle.rawValue
 
@@ -84,7 +84,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
                 default:
                     break
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -127,8 +127,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     override func shouldPerformSegue(withIdentifier identifier: NSStoryboardSegue.Identifier, sender: Any?) -> Bool {
         switch identifier {
-            case .settingsSegue:
-                return !isShowingSettings
+        case .settingsSegue:
+            return !isShowingSettings
         default:
             return true
         }

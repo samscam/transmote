@@ -61,7 +61,7 @@ class MetadataManager {
                     print(error)
                 })
 
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
         case .movie:
             tmdbProvider.rx.request(.movieSearch(movieName: derived.cleanedName, year: derived.year))
                 .mapTMDB(.movie)
@@ -71,7 +71,7 @@ class MetadataManager {
                 }, onError: { error in
                     print(error)
                     // do nothing
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
 
         default:
             break

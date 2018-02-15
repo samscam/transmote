@@ -73,7 +73,7 @@ class TransmissionSession {
     lazy var status: Observable<Status> = self.statusVar
         .asObservable()
         .debounce(0.2, scheduler: MainScheduler.instance)
-        .shareReplay(1)
+        .share(replay: 1)
 
     var provider: JSONRPCProvider<TransmissionTarget>?
 
@@ -94,24 +94,23 @@ class TransmissionSession {
             .subscribe(onNext: { status in
             print("Status is \(status)")
             switch status {
-                case .connected:
-                    self.startTimers()
-                    self.addDeferredTorrents()
-                case .failed(let sessionError):
-                    self.torrents.value = []
-                    self.stopTimers()
-                    switch sessionError {
-                    case .networkError:
-                        self.startRetryTimer()
-                    default:
-                        break
-                    }
-
+            case .connected:
+                self.startTimers()
+                self.addDeferredTorrents()
+            case .failed(let sessionError):
+                self.torrents.value = []
+                self.stopTimers()
+                switch sessionError {
+                case .networkError:
+                    self.startRetryTimer()
                 default:
-                    self.torrents.value = []
                     break
+                }
+
+            default:
+                self.torrents.value = []
             }
-        }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
         defer {
             self.server = self.fetchDefaultsServer()

@@ -43,7 +43,7 @@ class SettingsViewModel {
 
         self.server.asObservable().skip(1).subscribe(onNext: {[weak self] (server) in
             self?.session.server = server
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     func configureStatusBlob() -> Observable<Image> {
@@ -152,7 +152,7 @@ class SettingsViewModel {
                     break
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func bindAuthFields() {
@@ -176,7 +176,7 @@ class SettingsViewModel {
                 default:
                 break
                 } })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
     }
 }

@@ -39,10 +39,7 @@ class JSONRPCProvider<Target: TargetType>: MoyaProvider<Target> {
 
     /// Catches 409 status codes, stores the sessionID, and retries the request
     @discardableResult
-    override func request(_ target: Target,
-                      callbackQueue: DispatchQueue? = .none,
-                      progress: ProgressBlock? = .none,
-                      completion: @escaping Completion) -> Cancellable {
+    override func request(_ target: Target, callbackQueue: DispatchQueue? = .none, progress: ProgressBlock? = .none, completion: @escaping Completion) -> Cancellable {
         return super.request(target,
                              callbackQueue: callbackQueue,
                              progress: progress,

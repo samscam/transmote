@@ -124,14 +124,14 @@ public class ProperImageView: NSView {
 extension Reactive where Base: ProperImageView {
 
     /// Bindable sink for `image` property.
-    public var image: UIBindingObserver<Base, NSImage?> {
+    public var image: Binder<NSImage?> {
         return image(transitionType: nil)
     }
 
     /// Bindable sink for `image` property.
     /// - parameter transitionType: Optional transition type while setting the image (kCATransitionFade, kCATransitionMoveIn, ...)
-    public func image(transitionType: String? = nil) -> UIBindingObserver<Base, NSImage?> {
-        return UIBindingObserver(UIElement: base) { imageView, image in
+    public func image(transitionType: String? = nil) -> Binder<NSImage?> {
+        return Binder(base) { (imageView, image) in
             if let transitionType = transitionType {
                 if image != nil {
                     let transition = CATransition()
@@ -145,10 +145,11 @@ extension Reactive where Base: ProperImageView {
             }
             imageView.image = image
         }
+
     }
 
-    public var contentMode: UIBindingObserver<Base, ContentMode> {
-        return UIBindingObserver(UIElement: self.base) { control, value in
+    public var contentMode: Binder<ContentMode> {
+        return Binder(self.base) { control, value in
             control.contentMode = value
         }
     }

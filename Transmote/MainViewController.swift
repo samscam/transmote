@@ -113,14 +113,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                 default:
                 break
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
         session.torrents.asDriver().drive(onNext: { _ in
             self.collectionView.reloadData()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         viewModels = session.torrents.asObservable().map { $0.map { TorrentViewModel(torrent: $0, metadataManager: self.metadataManager) } }
-        viewModels.bind(to: varViewModels).addDisposableTo(disposeBag)
+        viewModels.bind(to: varViewModels).disposed(by: disposeBag)
     }
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {

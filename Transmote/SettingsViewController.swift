@@ -61,7 +61,7 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
 
     func bindViewModel(_ viewModel: SettingsViewModel) {
         // Observe the session status
-        viewModel.statusBlobImage.drive(statusBlobImageView.rx.image).addDisposableTo(disposeBag)
+        viewModel.statusBlobImage.drive(statusBlobImageView.rx.image).disposed(by: disposeBag)
 
         // Two-way bindings for the fields
         serverAddressField.rx.text <-> viewModel.settingsHost
@@ -73,7 +73,7 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
         // Show username/password
         viewModel.showUsernameAndPassword.drive(onNext: { [weak self] (show) in
             self?.showAuthThings = show
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     override func viewDidDisappear() {
