@@ -15,7 +15,7 @@ class ListLayout: NSCollectionViewLayout {
     var width: Double = 0.0
 
     var numberOfItems = 0
-    var itemHeights: [IndexPath:CGFloat] = [:]
+    var itemHeights: [IndexPath: CGFloat] = [:]
 
     override func prepare() {
         guard let collectionView = self.collectionView, let superview = collectionView.superview else {

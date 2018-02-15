@@ -35,7 +35,7 @@ class SettingsViewModel {
         self.showUsernameAndPassword = Driver.never()
 
         self.statusBlobImage = configureStatusBlob().asDriver(onErrorJustReturn: #imageLiteral(resourceName: "warning"))
-        self.showUsernameAndPassword = configureShowPassword().asDriver(onErrorJustReturn:false)
+        self.showUsernameAndPassword = configureShowPassword().asDriver(onErrorJustReturn: false)
 
         self.populate()
         self.bindServerFields()

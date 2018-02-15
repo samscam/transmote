@@ -53,11 +53,11 @@ extension Response {
 
         let json = try self.mapJSON()
 
-        if let jsonDict = json as? [String:Any] {
+        if let jsonDict = json as? [String: Any] {
             switch type {
             case .movie, .show:
                 if let resultsArray = jsonDict["results"] as? [Any],
-                let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
+                let firstResult: [String: Any] = resultsArray.first as? [String: Any] {
 
                     switch type {
                     case .show:

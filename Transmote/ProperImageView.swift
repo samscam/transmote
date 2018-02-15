@@ -99,7 +99,7 @@ public class ProperImageView: NSView {
             if imageAspect > boundsAspect {
                 result = CGRect(x: ( -((imageAspect * bounds.height) - bounds.width) / 2 ), y: 0, width: imageAspect * bounds.height, height: bounds.height)
             } else {
-                result = CGRect(x: 0, y:  -( ( bounds.width / imageAspect) - bounds.height) / 2, width: bounds.width, height:  bounds.width / imageAspect)
+                result = CGRect(x: 0, y: -( ( bounds.width / imageAspect) - bounds.height) / 2, width: bounds.width, height: bounds.width / imageAspect)
             }
         case .scaleAspectFit:
             // erm yeah...

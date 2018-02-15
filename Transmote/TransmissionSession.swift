@@ -38,14 +38,14 @@ class TransmissionSession {
                 return
             }
 
-            let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
+            let endpointClosure = { (target: TransmissionTarget) -> Endpoint in
 
                 // If we have no url then the provider ain't going to be no use...
                 guard let serverURL = server.serverURL?.absoluteString else {
                     return MoyaProvider.defaultEndpointMapping(for: target)
                 }
 
-                let endpoint = Endpoint<TransmissionTarget>(url: serverURL,
+                let endpoint = Endpoint(url: serverURL,
                                                             sampleResponseClosure: {
                                                                 .networkResponse(200, target.sampleData)
                                                             },
@@ -147,7 +147,7 @@ class TransmissionSession {
         if let address = defaults.string(forKey: "address"),
             let port = defaults.value(forKey: "port") as? Int,
             let rpcPath = defaults.string(forKey: "rpcPath") {
-            let server = TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+            let server = TransmissionServer(address: address, port: port, rpcPath: rpcPath)
 
             return server
         }
@@ -276,7 +276,7 @@ class TransmissionSession {
                     var torrentsCpy = self.torrents.value
 
                     // We are mutating the existing array rather than simply replacing it with a fresh one - this could be genericised
-                    guard let torrentsArray = json["torrents"] as? [[String:Any]] else {
+                    guard let torrentsArray = json["torrents"] as? [[String: Any]] else {
                         throw JSONRPCError.jsonParsingError("Missing Torrents array")
                     }
 
@@ -286,10 +286,10 @@ class TransmissionSession {
                         }
                         if let existing = torrentsCpy.element(matching: id) {
                             // Update existing torrent
-                            return existing.update(JSON:$0)
+                            return existing.update(JSON: $0)
                         } else {
                             // Create a new one
-                            return Torrent(JSON:$0)
+                            return Torrent(JSON: $0)
                         }
                     }
 

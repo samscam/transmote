@@ -18,7 +18,7 @@ enum TransmissionTarget {
 }
 
 extension TransmissionTarget: TargetType {
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return nil
     }
 
@@ -32,7 +32,7 @@ extension TransmissionTarget: TargetType {
     // And here's the fun part
     public var task: Task {
         let method: String
-        var arguments: [String:Any]?
+        var arguments: [String: Any]?
         switch self {
         case .connect:
             method = "session-get"

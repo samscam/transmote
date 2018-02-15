@@ -28,7 +28,7 @@ class JSONRPCProvider<Target: TargetType>: MoyaProvider<Target> {
     var sessionId: String?
 
     /// Injects the session id into the endpoint
-    override func endpoint(_ token: Target) -> Endpoint<Target> {
+    override func endpoint(_ token: Target) -> Endpoint {
         let endpoint = endpointClosure(token)
         if let sessionId = sessionId {
             return endpoint.adding(newHTTPHeaderFields: ["X-Transmission-Session-Id": sessionId])

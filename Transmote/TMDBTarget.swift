@@ -20,7 +20,7 @@ enum TMDBTarget {
 }
 
 extension TMDBTarget: TargetType {
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return nil
     }
 
