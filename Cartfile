@@ -5,3 +5,6 @@ github "ReactiveX/RxSwift" ~> 4.1
 github "samscam/ProgressKit" "master"
 github "Quick/Quick"
 github "Quick/Nimble"
+
+binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/macOS/Fabric.json"
+binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/macOS/Crashlytics.json"
