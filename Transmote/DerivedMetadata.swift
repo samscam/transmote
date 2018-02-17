@@ -29,23 +29,23 @@ struct DerivedMetadata: Metadata {
         // swiftlint:disable force_try
 
         var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
-        var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.characters.count), withTemplate: " ")
+        var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.count), withTemplate: " ")
 
         // Clean runs of whitespace
         cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: " ")
 
         // Clean references to DVD BDRIP and boxset and things
-        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|((from )?www torrenting \\w*))\\b", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|((from )?www .* com\\w*))\\b", options: .caseInsensitive)
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: " ")
 
         // Clean runs of whitespace
         cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: " ")
 
         // Trim leading and trailing
         cleaner = try! NSRegularExpression(pattern: "(^\\s*)|(\\s*$)", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: "")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: "")
 
         self.cleanedName = semiCleaned
 
@@ -57,28 +57,28 @@ struct DerivedMetadata: Metadata {
 
         guard let result = regex.firstMatch(in: semiCleaned,
                                             options: [],
-                                            range: NSRange(location: 0, length: semiCleaned.characters.count))
+                                            range: NSRange(location: 0, length: semiCleaned.count))
             else {
                 // If we can't match the regex then give up, returning the name as cleaned up as we have it
                 return
         }
 
-        let title = (semiCleaned as NSString).substring(with: result.rangeAt(1))
+        let title = (semiCleaned as NSString).substring(with: result.range(at: 1))
 
         self.cleanedName = title
 
-        if !NSEqualRanges(result.rangeAt(2), NSRange(location: NSNotFound, length: 0)) {
-            year = Int((semiCleaned as NSString).substring(with: result.rangeAt(2)))
+        if !NSEqualRanges(result.range(at: 2), NSRange(location: NSNotFound, length: 0)) {
+            year = Int((semiCleaned as NSString).substring(with: result.range(at: 2)))
         }
 
-        if !NSEqualRanges(result.rangeAt(3), NSRange(location: NSNotFound, length: 0)) {
-            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(3)))
-        } else if !NSEqualRanges(result.rangeAt(5), NSRange(location: NSNotFound, length: 0)) {
-            season = Int((semiCleaned as NSString).substring(with: result.rangeAt(5)))
+        if !NSEqualRanges(result.range(at: 3), NSRange(location: NSNotFound, length: 0)) {
+            season = Int((semiCleaned as NSString).substring(with: result.range(at: 3)))
+        } else if !NSEqualRanges(result.range(at: 5), NSRange(location: NSNotFound, length: 0)) {
+            season = Int((semiCleaned as NSString).substring(with: result.range(at: 5)))
         }
 
-        if !NSEqualRanges(result.rangeAt(4), NSRange(location: NSNotFound, length: 0)) {
-            episode = Int((semiCleaned as NSString).substring(with: result.rangeAt(4)))
+        if !NSEqualRanges(result.range(at: 4), NSRange(location: NSNotFound, length: 0)) {
+            episode = Int((semiCleaned as NSString).substring(with: result.range(at: 4)))
         }
 
         // Figure out what type it probably is

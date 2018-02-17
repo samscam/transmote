@@ -15,8 +15,8 @@ import RxMoya
 
 class MetadataManager {
 
-    let tmdbProvider = RxMoyaProvider<TMDBTarget>() // plugins:[ NetworkLoggerPlugin() ]
-    var metadataStore: [String:Observable<Metadata>] = [:]
+    let tmdbProvider = MoyaProvider<TMDBTarget>() // plugins:[ NetworkLoggerPlugin() ]
+    var metadataStore: [String: Observable<Metadata>] = [:]
 
     let disposeBag = DisposeBag()
 
@@ -39,16 +39,16 @@ class MetadataManager {
 
         switch derived.type {
         case .tv:
-            tmdbProvider.request(.tvShowSearch(showName: derived.cleanedName))
-                .mapTMDB(.show)
+            tmdbProvider.rx.request(.tvShowSearch(showName: derived.cleanedName))
+                .mapTMDB(.show).asObservable()
                 .flatMapLatest { show -> Observable<Metadata> in
                     if let show = show as? TVShow, let season = derived.season {
                         if let episode = derived.episode {
                             // episode
-                            return self.tmdbProvider.request(.tvShowDetails(showID: show.id, season: season, episode: episode)).mapTMDB(.episode, show: show)
+                            return self.tmdbProvider.rx.request(.tvShowDetails(showID: show.id, season: season, episode: episode)).mapTMDB(.episode, show: show).asObservable()
                         } else {
                             // season
-                            return self.tmdbProvider.request(.tvSeasonDetails(showID: show.id, season: season)).mapTMDB(.season, show: show)
+                            return self.tmdbProvider.rx.request(.tvSeasonDetails(showID: show.id, season: season)).mapTMDB(.season, show: show).asObservable()
                         }
                     } else {
                         return Observable.just(show)
@@ -61,16 +61,17 @@ class MetadataManager {
                     print(error)
                 })
 
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
         case .movie:
-            tmdbProvider.request(.movieSearch(movieName: derived.cleanedName, year: derived.year))
+            tmdbProvider.rx.request(.movieSearch(movieName: derived.cleanedName, year: derived.year))
                 .mapTMDB(.movie)
+                .asObservable()
                 .subscribe(onNext: { movie in
                     publishSubject.onNext(movie)
                 }, onError: { error in
                     print(error)
                     // do nothing
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
 
         default:
             break

@@ -40,10 +40,10 @@ enum TMDBType {
     case movie
 }
 
-extension ObservableType where E == Response {
-    func mapTMDB(_ type: TMDBType, show: TVShow? = nil) -> Observable<Metadata> {
-        return flatMap { response -> Observable<Metadata> in
-            return Observable.just(try response.mapTMDB(type, show: show))
+extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
+    func mapTMDB(_ type: TMDBType, show: TVShow? = nil) -> Single<Metadata> {
+        return flatMap { response -> Single<Metadata> in
+            return Single.just(try response.mapTMDB(type, show: show))
         }
     }
 }
@@ -53,11 +53,11 @@ extension Response {
 
         let json = try self.mapJSON()
 
-        if let jsonDict = json as? [String:Any] {
+        if let jsonDict = json as? [String: Any] {
             switch type {
             case .movie, .show:
                 if let resultsArray = jsonDict["results"] as? [Any],
-                let firstResult: [String: Any] = resultsArray.first as? [String : Any] {
+                let firstResult: [String: Any] = resultsArray.first as? [String: Any] {
 
                     switch type {
                     case .show:

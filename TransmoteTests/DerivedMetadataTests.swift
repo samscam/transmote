@@ -12,7 +12,7 @@ import Nimble
 
 class DerivedMetadataSpec: QuickSpec {
 
-    // swiftlint:disable force_try conditional_returns_on_newline function_body_length force_unwrapping
+    // swiftlint:disable force_try force_unwrapping
 
     override func spec() {
         describe("Identifying types") {

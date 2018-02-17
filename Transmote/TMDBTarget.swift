@@ -20,6 +20,9 @@ enum TMDBTarget {
 }
 
 extension TMDBTarget: TargetType {
+    var headers: [String: String]? {
+        return nil
+    }
 
     public var baseURL: URL {
         switch self {
@@ -53,7 +56,7 @@ extension TMDBTarget: TargetType {
     public var method: Moya.Method { return .get }
 
     // And here's the fun part
-    public var parameters: [String: Any]? {
+    public var task: Task {
         var params: [String: Any] = ["api_key": TMDB_API_KEY]
         switch self {
         case .serviceConfiguration, .image, .tvShowDetails, .tvSeasonDetails:
@@ -69,19 +72,11 @@ extension TMDBTarget: TargetType {
         case .multiSearch(let query):
             params["query"] = query
         }
-        return params
+        return .requestParameters(parameters: params, encoding: URLEncoding.default)
     }
 
     public var sampleData: Data {
         return "Just can't be bothered".data(using: String.Encoding.utf8)! // swiftlint:disable:this force_unwrapping
     }
 
-    public var task: Task {
-        return .request
-    }
-
-    /// The method used for parameter encoding.
-    public var parameterEncoding: ParameterEncoding {
-        return URLEncoding()
-    }
 }

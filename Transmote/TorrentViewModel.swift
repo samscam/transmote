@@ -39,7 +39,7 @@ class TorrentViewModel: Equatable {
 
         let imageObs = torrentMetadata.map { $0.imagePath }.flatMapLatest { imagePath -> Observable<Image?> in
             if let imagePath = imagePath {
-                return metadataManager.tmdbProvider.request(.image(path: imagePath)).mapImage()
+                return metadataManager.tmdbProvider.rx.request(.image(path: imagePath)).mapImage().asObservable()
             } else {
                 return Observable<Image?>.just(nil)
             }
@@ -47,7 +47,7 @@ class TorrentViewModel: Equatable {
         }
 
         imageContentMode = imageObs.catchErrorJustReturn(nil).map { image in
-            if let _ = image {
+            if image != nil {
                 return ContentMode.scaleAspectFill
             } else {
                 return ContentMode.center
@@ -62,7 +62,6 @@ class TorrentViewModel: Equatable {
                     return $0
                 }
             }
-            .asDriver(onErrorJustReturn: #imageLiteral(resourceName: "magnet"))
 
         progress = torrent.percentDone
 
@@ -73,7 +72,7 @@ class TorrentViewModel: Equatable {
     var title: Observable<String>
     var subtitle: Observable<String>
 
-    var image: Driver<Image?>
+    var image: Observable<Image?>
     var progress: Observable<Float>
     var statusMessage: Observable<String>
     var statusColor: Observable<Color>

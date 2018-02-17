@@ -38,20 +38,21 @@ class TransmissionSession {
                 return
             }
 
-            let endpointClosure = { (target: TransmissionTarget) -> Endpoint<TransmissionTarget> in
+            let endpointClosure = { (target: TransmissionTarget) -> Endpoint in
 
                 // If we have no url then the provider ain't going to be no use...
                 guard let serverURL = server.serverURL?.absoluteString else {
                     return MoyaProvider.defaultEndpointMapping(for: target)
                 }
 
-                let endpoint = Endpoint<TransmissionTarget>(url: serverURL,
+                let endpoint = Endpoint(url: serverURL,
                                                             sampleResponseClosure: {
                                                                 .networkResponse(200, target.sampleData)
                                                             },
                                                             method: target.method,
-                                                            parameters: target.parameters,
-                                                            parameterEncoding: target.parameterEncoding)
+                                                            task: target.task,
+                                                            httpHeaderFields: target.headers)
+
                 return endpoint
             }
 
@@ -72,7 +73,7 @@ class TransmissionSession {
     lazy var status: Observable<Status> = self.statusVar
         .asObservable()
         .debounce(0.2, scheduler: MainScheduler.instance)
-        .shareReplay(1)
+        .share(replay: 1)
 
     var provider: JSONRPCProvider<TransmissionTarget>?
 
@@ -93,24 +94,23 @@ class TransmissionSession {
             .subscribe(onNext: { status in
             print("Status is \(status)")
             switch status {
-                case .connected:
-                    self.startTimers()
-                    self.addDeferredTorrents()
-                case .failed(let sessionError):
-                    self.torrents.value = []
-                    self.stopTimers()
-                    switch sessionError {
-                    case .networkError:
-                        self.startRetryTimer()
-                    default:
-                        break
-                    }
-
+            case .connected:
+                self.startTimers()
+                self.addDeferredTorrents()
+            case .failed(let sessionError):
+                self.torrents.value = []
+                self.stopTimers()
+                switch sessionError {
+                case .networkError:
+                    self.startRetryTimer()
                 default:
-                    self.torrents.value = []
                     break
+                }
+
+            default:
+                self.torrents.value = []
             }
-        }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
         defer {
             self.server = self.fetchDefaultsServer()
@@ -146,7 +146,7 @@ class TransmissionSession {
         if let address = defaults.string(forKey: "address"),
             let port = defaults.value(forKey: "port") as? Int,
             let rpcPath = defaults.string(forKey: "rpcPath") {
-            let server = TransmissionServer(address:address, port: port, rpcPath: rpcPath)
+            let server = TransmissionServer(address: address, port: port, rpcPath: rpcPath)
 
             return server
         }
@@ -211,7 +211,7 @@ class TransmissionSession {
             self.connectCancellable = nil
         }
 
-        guard let _ = self.server else {
+        guard self.server != nil else {
             print("No server")
             self.statusVar.value = .failed(.noServerSet)
             return
@@ -229,10 +229,10 @@ class TransmissionSession {
 
                     do {
                         // We should expect to have valid RPC response saying "success"
-                        let _ = try moyaResponse.mapJsonRpc()
+                        _ = try moyaResponse.mapJsonRpc()
                         self.statusVar.value = .connected
 
-                    } catch let error as Moya.Error {
+                    } catch let error as MoyaError {
                         self.statusVar.value = .failed(.networkError(error))
                     } catch let error as SessionError {
                         self.statusVar.value = .failed(error)
@@ -254,7 +254,7 @@ class TransmissionSession {
                 // Ignore cancellations - otherwise, pass the error along...
                 switch error {
                 case .underlying(let err):
-                    if (err as NSError).code != -999 {
+                    if (err.0 as NSError).code != -999 {
                         self.statusVar.value = .failed(.networkError(error))
                     }
                 default:
@@ -275,7 +275,7 @@ class TransmissionSession {
                     var torrentsCpy = self.torrents.value
 
                     // We are mutating the existing array rather than simply replacing it with a fresh one - this could be genericised
-                    guard let torrentsArray = json["torrents"] as? [[String:Any]] else {
+                    guard let torrentsArray = json["torrents"] as? [[String: Any]] else {
                         throw JSONRPCError.jsonParsingError("Missing Torrents array")
                     }
 
@@ -285,10 +285,10 @@ class TransmissionSession {
                         }
                         if let existing = torrentsCpy.element(matching: id) {
                             // Update existing torrent
-                            return existing.update(JSON:$0)
+                            return existing.update(JSON: $0)
                         } else {
                             // Create a new one
-                            return Torrent(JSON:$0)
+                            return Torrent(JSON: $0)
                         }
                     }
 

@@ -43,12 +43,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
         // Remember window positions
 
         self.shouldCascadeWindows = false
-
+        let windowName = NSWindow.FrameAutosaveName("MainTransmoteWindow")
         if let window = self.window {
-            if !window.setFrameUsingName("MainTransmoteWindow") {
+            if !window.setFrameUsingName(windowName) {
                 window.center()
             }
-            window.setFrameAutosaveName("MainTransmoteWindow")
+            window.setFrameAutosaveName(windowName)
         }
 
         mainViewController = self.contentViewController! as! MainViewController // swiftlint:disable:this force_cast force_unwrapping
@@ -60,13 +60,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
         mainViewController.hasSelectedTorrents.subscribe(onNext: { hasSelectedTorrents in
             self.deleteTorrentToolbarItem.isEnabled = hasSelectedTorrents
             self.removeTorrentToolbarItem.isEnabled = hasSelectedTorrents
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
 
         self.viewControl.selectedSegment = mainViewController.viewStyle.rawValue
 
     }
 
-    /*
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
 
@@ -78,16 +77,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
                 case .failed(let sessionError):
                     switch sessionError {
                     case .noServerSet:
-                            self.performSegue(withIdentifier: "SettingsSegue", sender: self)
+                            self.performSegue(withIdentifier: .settingsSegue, sender: self)
                     default:
                         break
                     }
                 default:
                     break
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
- */
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
@@ -95,13 +93,13 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
         }
 
         switch identifier {
-        case "SettingsSegue":
+        case .settingsSegue:
             if let settingsViewController = segue.destinationController as? SettingsViewController {
                 settingsViewController.session = self.session
                 settingsViewController.delegate = self
                 self.isShowingSettings = true
             }
-        case "DeleteSegue":
+        case .deleteSegue:
 
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "Do you really want to DELETE this torrent and any downloaded files?"
@@ -111,7 +109,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
                     }
                 }
             }
-        case "RemoveSegue":
+        case .removeSegue:
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "This will remove the torrent from the list, leaving files intact."
                 confirmationViewController.action = { [weak self] in
@@ -127,10 +125,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     // Prevent double-display of settings popover
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: NSStoryboardSegue.Identifier, sender: Any?) -> Bool {
         switch identifier {
-            case "SettingsSegue":
-                return !isShowingSettings
+        case .settingsSegue:
+            return !isShowingSettings
         default:
             return true
         }
@@ -144,8 +142,20 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
 
     func windowDidBecomeKey(_ notification: Notification) {
         if session.server == nil {
-            self.performSegue(withIdentifier: "SettingsSegue", sender: self)
+            self.performSegue(withIdentifier: .settingsSegue, sender: self)
         }
     }
 
+    enum Segues: String {
+        case settingsSegue
+        case deleteSegue
+        case removeSegue
+    }
+
+}
+
+fileprivate extension NSStoryboardSegue.Identifier {
+    static let settingsSegue: NSStoryboardSegue.Identifier = NSStoryboardSegue.Identifier("SettingsSegue")
+    static let deleteSegue: NSStoryboardSegue.Identifier = NSStoryboardSegue.Identifier("DeleteSegue")
+    static let removeSegue: NSStoryboardSegue.Identifier = NSStoryboardSegue.Identifier("RemoveSegue")
 }

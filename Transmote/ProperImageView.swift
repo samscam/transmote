@@ -42,7 +42,19 @@ public class ProperImageView: NSView {
         get {
             return self.innerImageView.image
         }
+    }
 
+    public func setImage(_ image: NSImage?, animated: Bool = false) {
+        let transition = CATransition()
+        transition.duration = 0.2
+        self.setImage(image, transition: transition)
+    }
+
+    public func setImage(_ image: NSImage?, transition: CATransition? = nil ) {
+        if let transition = transition {
+            innerImageView.layer?.add(transition, forKey: "transition")
+        }
+        self.image = image
     }
 
     public var contentMode: ContentMode = .center {
@@ -87,7 +99,7 @@ public class ProperImageView: NSView {
             if imageAspect > boundsAspect {
                 result = CGRect(x: ( -((imageAspect * bounds.height) - bounds.width) / 2 ), y: 0, width: imageAspect * bounds.height, height: bounds.height)
             } else {
-                result = CGRect(x: 0, y:  -( ( bounds.width / imageAspect) - bounds.height) / 2, width: bounds.width, height:  bounds.width / imageAspect)
+                result = CGRect(x: 0, y: -( ( bounds.width / imageAspect) - bounds.height) / 2, width: bounds.width, height: bounds.width / imageAspect)
             }
         case .scaleAspectFit:
             // erm yeah...
@@ -112,14 +124,32 @@ public class ProperImageView: NSView {
 extension Reactive where Base: ProperImageView {
 
     /// Bindable sink for `image` property.
-    public var image: UIBindingObserver<Base, NSImage?> {
-        return UIBindingObserver(UIElement: self.base) { control, value in
-            control.image = value
-        }
+    public var image: Binder<NSImage?> {
+        return image(transitionType: nil)
     }
 
-    public var contentMode: UIBindingObserver<Base, ContentMode> {
-        return UIBindingObserver(UIElement: self.base) { control, value in
+    /// Bindable sink for `image` property.
+    /// - parameter transitionType: Optional transition type while setting the image (kCATransitionFade, kCATransitionMoveIn, ...)
+    public func image(transitionType: String? = nil) -> Binder<NSImage?> {
+        return Binder(base) { (imageView, image) in
+            if let transitionType = transitionType {
+                if image != nil {
+                    let transition = CATransition()
+                    transition.duration = 0.25
+                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    transition.type = transitionType
+                    imageView.layer?.add(transition, forKey: kCATransition)
+                }
+            } else {
+                imageView.layer?.removeAllAnimations()
+            }
+            imageView.image = image
+        }
+
+    }
+
+    public var contentMode: Binder<ContentMode> {
+        return Binder(self.base) { control, value in
             control.contentMode = value
         }
     }

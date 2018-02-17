@@ -35,7 +35,7 @@ class SettingsViewModel {
         self.showUsernameAndPassword = Driver.never()
 
         self.statusBlobImage = configureStatusBlob().asDriver(onErrorJustReturn: #imageLiteral(resourceName: "warning"))
-        self.showUsernameAndPassword = configureShowPassword().asDriver(onErrorJustReturn:false)
+        self.showUsernameAndPassword = configureShowPassword().asDriver(onErrorJustReturn: false)
 
         self.populate()
         self.bindServerFields()
@@ -43,7 +43,7 @@ class SettingsViewModel {
 
         self.server.asObservable().skip(1).subscribe(onNext: {[weak self] (server) in
             self?.session.server = server
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     func configureStatusBlob() -> Observable<Image> {
@@ -92,7 +92,7 @@ class SettingsViewModel {
                     break
                 }
 
-                if let _ = server?.credential {
+                if server?.credential != nil {
                     show = true
                 }
 
@@ -129,38 +129,39 @@ class SettingsViewModel {
         }
         .throttle(0.3, scheduler: MainScheduler.instance )
         .skip(2) // skip both the initial (nil) value and the value set during populateInitialValues()
-        .subscribe(onNext: { [weak self] (address, port, path) in
-            var address = address
-            var port = port
-            var path = path
+            .subscribe({ [weak self] event in
+                switch event {
+                case .next(var address, var port, var path):
+                    if address == "" { address = nil }
+                    if port == "" { port = nil }
+                    if path == "" { path = nil }
 
-            if address == "" { address = nil }
-            if port == "" { port = nil }
-            if path == "" { path = nil }
+                    if let address = address {
+                        var portInt: Int? = nil
+                        if let port = port {
+                            portInt = Int(port)
+                        }
 
-            if let address = address {
-                var portInt: Int? = nil
-                if let port = port {
-                    portInt = Int(port)
+                        let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
+
+                        self?.server.value = server
+                    } else {
+                        self?.server.value = nil
+                    }
+                default:
+                    break
                 }
-
-                let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
-
-                self?.server.value = server
-            } else {
-                self?.server.value = nil
-            }
-
-        }).addDisposableTo(disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     func bindAuthFields() {
 
         Observable.combineLatest(settingsUsername.asObservable(), settingsPassword.asObservable()) { ($0, $1) }
             .skip(3)
-            .subscribe(onNext: { [weak self] username, password in
-                var username = username
-                var password = password
+            .subscribe({ [weak self] event in
+                switch event {
+                case .next(var username, var password):
                 if username == "" { username = nil }
                 if password == "" { password = nil }
 
@@ -172,7 +173,10 @@ class SettingsViewModel {
 
                 // force the session to try connecting again
                 self?.session.server = self?.server.value
-            }).addDisposableTo(disposeBag)
+                default:
+                break
+                } })
+            .disposed(by: disposeBag)
 
     }
 }

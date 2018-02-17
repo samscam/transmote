@@ -51,8 +51,8 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
         }
     }
 
-    private var _highlightState: NSCollectionViewItemHighlightState = .none
-    override var highlightState: NSCollectionViewItemHighlightState {
+    private var _highlightState: NSCollectionViewItem.HighlightState = .none
+    override var highlightState: NSCollectionViewItem.HighlightState {
         set {
             _highlightState = newValue
             sortSelection()
@@ -112,23 +112,27 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
 
             print("Cell set torrent \(torrentViewModel.torrent.id)")
 
-            torrentViewModel.title.bindTo(titleLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
 
-            torrentViewModel.subtitle.bindTo(episodeLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.subtitle.bind(to: episodeLabel.rx.text).disposed(by: disposeBag)
 
-            torrentViewModel.image.drive(torrentImageView.rx.image).addDisposableTo(disposeBag)
-            torrentViewModel.imageContentMode.bindTo(torrentImageView.rx.contentMode).addDisposableTo(disposeBag)
+            torrentViewModel.image
+                .asDriver(onErrorJustReturn: #imageLiteral(resourceName: "magnet") )
+                .drive(torrentImageView.rx.image)
+                .disposed(by: disposeBag)
+
+            torrentViewModel.imageContentMode.bind(to: torrentImageView.rx.contentMode).disposed(by: disposeBag)
 
             torrentViewModel.progress.subscribe(onNext: { newValue in
                 self.progressView.progress = CGFloat(newValue)
 
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
-            torrentViewModel.statusMessage.bindTo(progressStatusLabel.rx.text).addDisposableTo(disposeBag)
+            torrentViewModel.statusMessage.bind(to: progressStatusLabel.rx.text).disposed(by: disposeBag)
 
             torrentViewModel.statusColor.subscribe(onNext: { color in
                 self.progressView.foreground = color
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
         }
     }
 

@@ -12,7 +12,7 @@ import Moya
 public enum SessionError: Swift.Error, CustomStringConvertible {
     case noServerSet
     case needsAuthentication
-    case networkError(Moya.Error)
+    case networkError(MoyaError)
     case badRpcPath
     case unexpectedStatusCode(Int)
     case unknownError(Swift.Error)
@@ -27,7 +27,7 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
         case .networkError(let moyaError):
             switch moyaError {
             case .underlying(let underlying):
-                return underlying.localizedDescription
+                return underlying.0.localizedDescription
             case .jsonMapping:
                 return "The server returned something other than JSON\n\nProbably a bad RPC path or not a Transmission Server"
             default:
@@ -36,8 +36,8 @@ public enum SessionError: Swift.Error, CustomStringConvertible {
 
         case .badRpcPath:
             return "Bad RPC path or not a Transmission Server"
-        case .unknownError:
-            return "Unknown error"
+        case .unknownError(let underlying):
+            return "Unknown error \(underlying.localizedDescription)"
         case .unexpectedStatusCode(let statusCode):
             return "Unexpected status code: \(statusCode)"
         case .rpcError(let rpcError):

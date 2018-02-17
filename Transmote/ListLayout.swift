@@ -15,7 +15,7 @@ class ListLayout: NSCollectionViewLayout {
     var width: Double = 0.0
 
     var numberOfItems = 0
-    var itemHeights: [IndexPath:CGFloat] = [:]
+    var itemHeights: [IndexPath: CGFloat] = [:]
 
     override func prepare() {
         guard let collectionView = self.collectionView, let superview = collectionView.superview else {
@@ -51,4 +51,17 @@ class ListLayout: NSCollectionViewLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: NSRect) -> Bool {
         return true
     }
+
+// Some work in progress here...
+//    override func initialLayoutAttributesForAppearingItem(at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes? {
+//        let attribs = NSCollectionViewLayoutAttributes(forItemWith: indexPath)
+//
+//        let rect = NSRect(x: 0.0, y: (5.0 + ((itemHeight + 5.0) * Double(indexPath.item))), width: width, height: 0)
+//        attribs.frame = rect.insetBy(dx: 5, dy: 0)
+//        return attribs
+//    }
+
+//    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> NSCollectionViewLayoutAttributes? {
+//        
+//    }
 }
