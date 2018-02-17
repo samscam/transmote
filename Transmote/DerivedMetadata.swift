@@ -29,23 +29,23 @@ struct DerivedMetadata: Metadata {
         // swiftlint:disable force_try
 
         var cleaner = try! NSRegularExpression(pattern: "[\\[\\]\\(\\)\\.+_-]", options: [])
-        var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.characters.count), withTemplate: " ")
+        var semiCleaned = cleaner.stringByReplacingMatches(in: rawName, options: [], range: NSRange(location: 0, length: rawName.count), withTemplate: " ")
 
         // Clean runs of whitespace
         cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: " ")
 
         // Clean references to DVD BDRIP and boxset and things
         cleaner = try! NSRegularExpression(pattern: "\\b(1080p|720p|x264|dts|aac|boxset|extras|dvd\\w*?|br|bluray|bd\\w*?|((from )?www .* com\\w*))\\b", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: " ")
 
         // Clean runs of whitespace
         cleaner = try! NSRegularExpression(pattern: "\\s+", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: " ")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: " ")
 
         // Trim leading and trailing
         cleaner = try! NSRegularExpression(pattern: "(^\\s*)|(\\s*$)", options: .caseInsensitive)
-        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.characters.count), withTemplate: "")
+        semiCleaned = cleaner.stringByReplacingMatches(in: semiCleaned, options: [], range: NSRange(location: 0, length: semiCleaned.count), withTemplate: "")
 
         self.cleanedName = semiCleaned
 
@@ -57,7 +57,7 @@ struct DerivedMetadata: Metadata {
 
         guard let result = regex.firstMatch(in: semiCleaned,
                                             options: [],
-                                            range: NSRange(location: 0, length: semiCleaned.characters.count))
+                                            range: NSRange(location: 0, length: semiCleaned.count))
             else {
                 // If we can't match the regex then give up, returning the name as cleaned up as we have it
                 return
