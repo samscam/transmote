@@ -50,7 +50,6 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         // Register cell
         let nib = NSNib(nibNamed: NSNib.Name("TorrentCollectionViewItem"), bundle: nil)
 
-            //(rawValue: "TorrentCollectionViewItem"), bundle: nil)
         self.collectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TorrentCell"))
 
         // We should persist the view style
@@ -237,8 +236,26 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     var viewStyle: ViewStyle = .grid {
         didSet {
             if let collectionView = self.collectionView {
+
+                NSAnimationContext.beginGrouping()
                 collectionView.animator().collectionViewLayout = viewStyle.layout
+
+                NSAnimationContext.current.completionHandler = {
+                    // This is a nasty hack to make it get the scrollers right...
+                    if let window = self.view.window {
+                        NSDisableScreenUpdates()
+                        let origRect = window.frame
+                        let insetRect = origRect.insetBy(dx: 1, dy: 1)
+                        window.setFrame(insetRect, display: true)
+                        window.setFrame(origRect, display: true)
+                        NSEnableScreenUpdates()
+                    }
+
+                }
+                NSAnimationContext.endGrouping()
+
             }
+
             UserDefaults.standard.set(viewStyle.rawValue, forKey: "viewStyle")
         }
     }
