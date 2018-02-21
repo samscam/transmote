@@ -27,9 +27,9 @@ extension TMDBTarget: TargetType {
     public var baseURL: URL {
         switch self {
         case .image:
-            return URL(string: TMDB_IMAGES_URL)! // swiftlint:disable:this force_unwrapping
+            return Configuration.TMDB.imagesURL
         default:
-            return URL(string: TMDB_BASE_URL)! // swiftlint:disable:this force_unwrapping
+            return Configuration.TMDB.baseURL
         }
 
     }
@@ -57,7 +57,7 @@ extension TMDBTarget: TargetType {
 
     // And here's the fun part
     public var task: Task {
-        var params: [String: Any] = ["api_key": TMDB_API_KEY]
+        var params: [String: Any] = ["api_key": Configuration.TMDB.apiKey]
         switch self {
         case .serviceConfiguration, .image, .tvShowDetails, .tvSeasonDetails:
             break
