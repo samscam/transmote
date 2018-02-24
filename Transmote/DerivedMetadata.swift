@@ -84,9 +84,9 @@ struct DerivedMetadata: Metadata {
         // Figure out what type it probably is
 
         if season != nil && episode != nil {
-            self.type = .tv
+            self.type = .television
         } else if season != nil {
-            self.type = .tv
+            self.type = .television
         } else if year != nil {
             self.type = .movie
         }

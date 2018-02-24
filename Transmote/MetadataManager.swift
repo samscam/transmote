@@ -38,7 +38,7 @@ class MetadataManager {
         publishSubject.onNext(derived)
 
         switch derived.type {
-        case .tv:
+        case .television:
             tmdbProvider.rx.request(.tvShowSearch(showName: derived.cleanedName))
                 .mapTMDB(.show).asObservable()
                 .flatMapLatest { show -> Observable<Metadata> in

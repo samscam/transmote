@@ -12,7 +12,7 @@ import AppKit
 
 enum TorrentMetadataType {
     case video
-    case tv
+    case television
     case movie
     case book
     case software
