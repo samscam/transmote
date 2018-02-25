@@ -48,7 +48,6 @@
 		22EBE38D1DE1000A00588FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38C1DE1000A00588FFD /* Assets.xcassets */; };
 		22EBE3901DE1000A00588FFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE38E1DE1000A00588FFD /* Main.storyboard */; };
 		22EBE39E1DE1010800588FFD /* ProperImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3971DE1010800588FFD /* ProperImageView.swift */; };
-		22EBE39F1DE1010800588FFD /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3981DE1010800588FFD /* Configuration.swift */; };
 		22EBE3A11DE1010800588FFD /* TransmissionServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39A1DE1010800588FFD /* TransmissionServer.swift */; };
 		22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39C1DE1010800588FFD /* Torrent.swift */; };
 		22EBE3A41DE1010800588FFD /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE39D1DE1010800588FFD /* MainWindowController.swift */; };
@@ -70,6 +69,7 @@
 		22EBE3D31DE44FD600588FFD /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EBE3D11DE44FD600588FFD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22EBE3D51DE4502C00588FFD /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22EBE3D41DE4502C00588FFD /* Defaults.plist */; };
 		22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EBE3D61DE4572700588FFD /* SettingsViewController.swift */; };
+		22F6EA6B20422C5300DE01B5 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F6EA6A20422C5300DE01B5 /* Configuration.swift */; };
 		22FBE2BE1DEB74CE00636FCC /* TransmissionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */; };
 		22FBE2C01DEC48C400636FCC /* TransmissionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */; };
 		22FE0B842038F09D00361182 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FE0B822038F04A00361182 /* Crashlytics.framework */; };
@@ -151,7 +151,6 @@
 		2247B7C41DF83259001B4C95 /* ProgressKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProgressKit.framework; path = Carthage/Build/Mac/ProgressKit.framework; sourceTree = "<group>"; };
 		2247B7C71DF8422B001B4C95 /* TMDBTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBTarget.swift; sourceTree = "<group>"; };
 		2247B7C91DF84BAA001B4C95 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
-		22495C011E68A5180016569F /* bitrise.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = bitrise.yml; sourceTree = SOURCE_ROOT; };
 		225547A61E49E96700E091C1 /* ProperTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperTextField.swift; sourceTree = "<group>"; };
 		225547A81E4A17DC00E091C1 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		22701A6C1E082E54004D3B50 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 		22ADE06B1E3C094100401E85 /* DerivedMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedMetadata.swift; sourceTree = "<group>"; };
 		22ADE06D1E3C09E400401E85 /* MetadataSpecialisations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataSpecialisations.swift; sourceTree = "<group>"; };
 		22D27D661DFEA9560080B2E8 /* SmallThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallThings.swift; sourceTree = "<group>"; };
-		22DB05261E0286E600419CBD /* autoversioning.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
 		22E8A5931E2F7889002D9BB5 /* sample-top100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "sample-top100.txt"; path = "TestData/sample-top100.txt"; sourceTree = "<group>"; };
 		22EBE3851DE1000A00588FFD /* Transmote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EBE3881DE1000A00588FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,7 +167,7 @@
 		22EBE38F1DE1000A00588FFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22EBE3911DE1000A00588FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22EBE3971DE1010800588FFD /* ProperImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProperImageView.swift; sourceTree = "<group>"; };
-		22EBE3981DE1010800588FFD /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		22EBE3981DE1010800588FFD /* Configuration.template.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.template.swift; sourceTree = "<group>"; };
 		22EBE39A1DE1010800588FFD /* TransmissionServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionServer.swift; sourceTree = "<group>"; };
 		22EBE39C1DE1010800588FFD /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
 		22EBE39D1DE1010800588FFD /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -185,6 +183,9 @@
 		22EBE3D11DE44FD600588FFD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		22EBE3D41DE4502C00588FFD /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		22EBE3D61DE4572700588FFD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		22F6EA6820421C1C00DE01B5 /* autoversioning.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autoversioning.sh; sourceTree = "<group>"; };
+		22F6EA6920422BFD00DE01B5 /* patch_configuration.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = patch_configuration.sh; sourceTree = "<group>"; };
+		22F6EA6A20422C5300DE01B5 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionTarget.swift; sourceTree = "<group>"; };
 		22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionSession.swift; sourceTree = "<group>"; };
 		22FE0B822038F04A00361182 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/Mac/Crashlytics.framework; sourceTree = "<group>"; };
@@ -260,13 +261,11 @@
 			isa = PBXGroup;
 			children = (
 				227925B51E12197400371CE9 /* .swiftlint.yml */,
-				22495C011E68A5180016569F /* bitrise.yml */,
 				223D821A1E3F529A00925F7E /* dsa_pub.pem */,
 				2211A4CA1E41D8A900F5005B /* archive-post-action.sh */,
 				2211A4BE1E40B65E00F5005B /* exportOptions.plist */,
 				22EBE3D41DE4502C00588FFD /* Defaults.plist */,
 				22EBE3911DE1000A00588FFD /* Info.plist */,
-				22DB05261E0286E600419CBD /* autoversioning.sh */,
 			);
 			name = "Supporting Files";
 			path = Transmote;
@@ -282,6 +281,7 @@
 				22EBE3871DE1000A00588FFD /* macOS */,
 				224610EA1E2E6C0700CAFA41 /* Tests */,
 				22DB05271E0286F300419CBD /* Supporting Files */,
+				22F6EA6720421C1C00DE01B5 /* Scripts */,
 				22EBE3861DE1000A00588FFD /* Products */,
 				22EBE3B11DE1018900588FFD /* Carthage Frameworks */,
 			);
@@ -340,7 +340,8 @@
 		22EBE3D81DE45EB400588FFD /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				22EBE3981DE1010800588FFD /* Configuration.swift */,
+				22EBE3981DE1010800588FFD /* Configuration.template.swift */,
+				22F6EA6A20422C5300DE01B5 /* Configuration.swift */,
 				22FBE2BF1DEC48C400636FCC /* TransmissionSession.swift */,
 				221EAD0A1E59893700021A89 /* SessionError.swift */,
 				22FBE2BD1DEB74CE00636FCC /* TransmissionTarget.swift */,
@@ -352,6 +353,15 @@
 			);
 			name = Core;
 			path = Transmote;
+			sourceTree = "<group>";
+		};
+		22F6EA6720421C1C00DE01B5 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				22F6EA6820421C1C00DE01B5 /* autoversioning.sh */,
+				22F6EA6920422BFD00DE01B5 /* patch_configuration.sh */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		22FED4491E1E438900ED434D /* Shared UI */ = {
@@ -393,6 +403,7 @@
 			buildPhases = (
 				227925B41E11E0A200371CE9 /* Swiftlint */,
 				22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */,
+				22F6EA6620421AE900DE01B5 /* Resolve Configuration */,
 				22EBE3811DE1000900588FFD /* Sources */,
 				22EBE3821DE1000900588FFD /* Frameworks */,
 				22EBE3831DE1000900588FFD /* Resources */,
@@ -536,7 +547,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$PROJECT_DIR/$PROJECT_NAME\"\n./autoversioning.sh";
+			shellScript = "cd \"$PROJECT_DIR/Scripts\"\n./autoversioning.sh";
+		};
+		22F6EA6620421AE900DE01B5 /* Resolve Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Resolve Configuration";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$PROJECT_DIR/Scripts\"\n./patch_configuration.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -564,6 +589,7 @@
 				22D27D671DFEA9560080B2E8 /* SmallThings.swift in Sources */,
 				2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */,
 				22701A6D1E082E54004D3B50 /* ConfirmationViewController.swift in Sources */,
+				22F6EA6B20422C5300DE01B5 /* Configuration.swift in Sources */,
 				2247B7C81DF8422B001B4C95 /* TMDBTarget.swift in Sources */,
 				2247B7CA1DF84BAA001B4C95 /* Metadata.swift in Sources */,
 				22EBE3D71DE4572700588FFD /* SettingsViewController.swift in Sources */,
@@ -571,7 +597,6 @@
 				22EBE38B1DE1000A00588FFD /* MainViewController.swift in Sources */,
 				22EBE3891DE1000A00588FFD /* AppDelegate.swift in Sources */,
 				221EAD0B1E59893700021A89 /* SessionError.swift in Sources */,
-				22EBE39F1DE1010800588FFD /* Configuration.swift in Sources */,
 				22FED4481E1D83C700ED434D /* TorrentViewModel.swift in Sources */,
 				22FED44B1E1E43BE00ED434D /* TorrentStatus+Color.swift in Sources */,
 				22EBE3A31DE1010800588FFD /* Torrent.swift in Sources */,

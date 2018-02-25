@@ -9,10 +9,6 @@ import Foundation
 
 // swiftlint:disable force_unwrapping
 
-#if SUBSTITUTED
-    // This should not be compiled if substitution has been run
-#else
-
 ///  For general configuration of things, URLs and API keys
 enum Configuration {
 
@@ -24,5 +20,3 @@ enum Configuration {
         static let imagesURL = URL(string: "https://image.tmdb.org/t/p/")!
     }
 }
-
-#endif
