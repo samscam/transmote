@@ -13,7 +13,7 @@ cp Configuration.template.swift Configuration.swift
 
 for i in "${confs[@]}"
 do
-    key={i%%=*}
+    key=${i%%=*}
     searchkey="{\*\*$key\*\*}"
     value=${i#*=}
     echo $key $value
