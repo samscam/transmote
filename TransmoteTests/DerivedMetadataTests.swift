@@ -25,7 +25,7 @@ class DerivedMetadataSpec: QuickSpec {
                 let allDerived: [DerivedMetadata] = samples.map { DerivedMetadata(from: $0) }
                 for item in allDerived {
                     it("should identify them as TV") {
-                        expect(item.type) == TorrentMetadataType.tv
+                        expect(item.type) == TorrentMetadataType.television
                     }
                 }
 
