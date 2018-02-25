@@ -16,6 +16,20 @@ You can download the latest binary [from here](https://samscam.co.uk/transmote/)
 
 ## Building it yourself
 
+You've got Homebrew and Xcode already yes?
+
+Then you will need to install (or update) Carthage and Swiftlint:
+`brew install carthage swiftlint`
+
 Dependencies are managed using Carthage. Prior to building you will want to run `carthage bootstrap --platform macOS` from the project root.
 
-If you are building it yourself and want the metadata lookups to work you'll have to add your own TMDB API key in the TRNDefinitions.h file.
+If you are building it yourself and want the metadata lookups to work you'll have to add your own TMDB API key:
+
+Create a file called `secrets.sh` in the Scripts directory.
+
+```
+#!/bin/bash
+export TMDB_API_KEY='your-api-key-goes-here'
+```
+
+and make it executable.
