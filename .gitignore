@@ -65,3 +65,5 @@ fastlane/screenshots
 /Distribution/Archives
 *.pyc
 /.bitrise.secrets.yml
+/Transmote/Configuration.swift
+/Scripts/secrets.sh
