@@ -401,14 +401,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
-				227925B41E11E0A200371CE9 /* Swiftlint */,
-				22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */,
 				22F6EA6620421AE900DE01B5 /* Resolve Configuration */,
 				22EBE3811DE1000900588FFD /* Sources */,
 				22EBE3821DE1000900588FFD /* Frameworks */,
 				22EBE3831DE1000900588FFD /* Resources */,
 				22EBE3B01DE1017900588FFD /* Embed Frameworks */,
-				2211A4B21E409AF100F5005B /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -493,49 +490,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2211A4B21E409AF100F5005B /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "if [ \"${CONFIGURATION}\" != \"Debug\" ]; then\necho \"Running Crashlytics\"\n./Carthage/Build/Mac/Fabric.framework/run 901d118350c7346b2c0e014fc4b50874001e05ac ed4f996167300b345fff20ace5c8d177a2711af113fec28567843fe098396769\nfi";
-			showEnvVarsInLog = 0;
-		};
-		227925B41E11E0A200371CE9 /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint autocorrect\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint -- but it is optional\"\nfi";
-		};
-		22DB052A1E02A54200419CBD /* TODO and FIXME and WARNING */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "TODO and FIXME and WARNING";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "TAGS=\"(TODO|FIXME|WARNING):\"\necho \"searching ${SRCROOT}/${PROJECT_NAME} for ${TAGS}\"\nfind \"${SRCROOT}/${PROJECT_NAME}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --ignore-case --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/i\"";
-		};
 		22DB052F1E02AB6000419CBD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
