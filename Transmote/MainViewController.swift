@@ -145,7 +145,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
 
     var selectedTorrents: [Torrent] {
         let indexes = self.collectionView.selectionIndexPaths
-        return indexes.flatMap { self.session?.torrents.value[$0.item] }
+        return indexes.compactMap { self.session?.torrents.value[$0.item] }
     }
 
     lazy var øSelectedTorrents: Observable<[Torrent]> = {
@@ -160,7 +160,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                     return Set<IndexPath>()
                 }
             }
-            .map { $0.flatMap { self.session?.torrents.value[$0.item] } }
+            .map { $0.compactMap { self.session?.torrents.value[$0.item] } }
         return tor
     }()
 

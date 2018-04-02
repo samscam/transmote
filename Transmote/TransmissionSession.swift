@@ -279,11 +279,11 @@ class TransmissionSession {
                         throw JSONRPCError.jsonParsingError("Missing Torrents array")
                     }
 
-                    let updatedTorrents: [Torrent] = torrentsArray.flatMap {
-                        guard let id = $0["id"] as? Int else {
+                    let updatedTorrents: [Torrent] = torrentsArray.compactMap {
+                        guard let identifier = $0["id"] as? Int else {
                             return nil
                         }
-                        if let existing = torrentsCpy.element(matching: id) {
+                        if let existing = torrentsCpy.element(matching: identifier) {
                             // Update existing torrent
                             return existing.update(JSON: $0)
                         } else {
