@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#source "secrets.sh"
+source "secrets.sh"
 
 cd "$PROJECT_DIR/$PROJECT_NAME"
 
