@@ -81,8 +81,8 @@ struct TVSeason: Metadata, ImmutableMappable {
     var name: String
     let season: Int
     var imagePath: String? {
-        if let _imagePath = _imagePath {
-            return _imagePath
+        if let imagePath = _imagePath {
+            return imagePath
         } else {
             return show?.imagePath
         }
@@ -114,8 +114,8 @@ struct TVEpisode: Metadata, ImmutableMappable {
 
     let id: Int // swiftlint:disable:this variable_name
     var imagePath: String? {
-        if let _imagePath = _imagePath {
-            return _imagePath
+        if let imagePath = _imagePath {
+            return imagePath
         } else {
             return show.imagePath
         }

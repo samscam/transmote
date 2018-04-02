@@ -292,17 +292,17 @@ class TransmissionSession {
                         }
                     }
 
-                    for t in updatedTorrents {
+                    for torrent in updatedTorrents {
                         // add new ones
-                        if self.torrents.value.index(of: t) == nil {
-                            self.torrents.value.append(t)
+                        if self.torrents.value.index(of: torrent) == nil {
+                            self.torrents.value.append(torrent)
                         }
                     }
 
                     torrentsCpy = self.torrents.value
-                    for t in self.torrents.value {
-                        if updatedTorrents.index(of: t) == nil ,
-                            let index = self.torrents.value.index(of: t) {
+                    for torrent in self.torrents.value {
+                        if updatedTorrents.index(of: torrent) == nil ,
+                            let index = self.torrents.value.index(of: torrent) {
                             self.torrents.value.remove(at: index)
                         }
                     }
@@ -328,8 +328,8 @@ class TransmissionSession {
     }
 
     func addDeferredTorrents() {
-        for t in self.deferredMagnetURLs {
-            self.addTorrent(url: t)
+        self.deferredMagnetURLs.forEach {
+            self.addTorrent(url: $0)
         }
         deferredMagnetURLs = []
     }
