@@ -104,8 +104,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "Do you really want to DELETE this torrent and any downloaded files?"
                 confirmationViewController.action = { [weak self] in
-                    if let strongSelf = self {
-                        strongSelf.session.removeTorrents(torrents: strongSelf.mainViewController.selectedTorrents, delete: true)
+                    if let `self` = self {
+                        self.session.removeTorrents(torrents: self.mainViewController.selectedTorrents, delete: true)
                     }
                 }
             }
@@ -113,8 +113,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, SettingsPopove
             if let confirmationViewController = segue.destinationController as? ConfirmationViewController {
                 confirmationViewController.message = "This will remove the torrent from the list, leaving files intact."
                 confirmationViewController.action = { [weak self] in
-                    if let strongSelf = self {
-                        strongSelf.session.removeTorrents(torrents: strongSelf.mainViewController.selectedTorrents, delete: false)
+                    if let `self` = self {
+                        self.session.removeTorrents(torrents: self.mainViewController.selectedTorrents, delete: false)
                     }
                 }
             }

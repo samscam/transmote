@@ -98,10 +98,10 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
     var torrentViewModel: TorrentViewModel? {
         didSet {
 
-            guard torrentViewModel != oldValue else {
-                // It was the same torrent we are already bound to. Ignore
-                return
-            }
+//            guard torrentViewModel != oldValue else {
+//                // It was the same torrent we are already bound to. Ignore
+//                return
+//            }
 
             disposeBag = DisposeBag()
 
@@ -110,7 +110,7 @@ class TorrentCollectionViewItem: NSCollectionViewItem {
                 return
             }
 
-            print("Cell set torrent \(torrentViewModel.torrent.id)")
+//            print("Cell set torrent \(torrentViewModel.torrent.id)")
 
             torrentViewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
 

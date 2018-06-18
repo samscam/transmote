@@ -21,64 +21,48 @@ import RxCocoa
     typealias Image = NSImage
 #endif
 
-class TorrentViewModel: Equatable {
+class TorrentViewModel {
 
-    let torrent: Torrent
-
+    private let torrent: Observable<Torrent>
     private let metadataManager: MetadataManager
-    private let torrentMetadata: Observable<Metadata>
 
-    init(torrent: Torrent, metadataManager: MetadataManager) {
+    init(torrent: Observable<Torrent>, metadataManager: MetadataManager) {
         self.torrent = torrent
         self.metadataManager = metadataManager
-
-        torrentMetadata = torrent.name.flatMapLatest { metadataManager.metadata(for: $0) }
-
-        title = torrentMetadata.map { $0.title }
-        subtitle = torrentMetadata.map { $0.description }
-
-        let imageObs = torrentMetadata.map { $0.imagePath }.flatMapLatest { imagePath -> Observable<Image?> in
-            if let imagePath = imagePath {
-                return metadataManager.tmdbProvider.rx.request(.image(path: imagePath)).mapImage().asObservable()
-            } else {
-                return Observable<Image?>.just(nil)
-            }
-
-        }
-
-        imageContentMode = imageObs.catchErrorJustReturn(nil).map { image in
-            if image != nil {
-                return ContentMode.scaleAspectFill
-            } else {
-                return ContentMode.center
-            }
-        }
-
-        image = imageObs
-            .map {
-                if $0 == nil {
-                    return #imageLiteral(resourceName: "magnet")
-                } else {
-                    return $0
-                }
-            }
-
-        progress = torrent.percentDone
-
-        statusMessage = torrent.status.map { $0.description }
-        statusColor = torrent.status.map { $0.color }
     }
 
-    var title: Observable<String>
-    var subtitle: Observable<String>
+    private lazy var metadata: Observable<Metadata> = { self.torrent.flatMap { self.metadataManager.metadata(for: $0.name) } }()
 
-    var image: Observable<Image?>
-    var progress: Observable<Float>
-    var statusMessage: Observable<String>
-    var statusColor: Observable<Color>
-    var imageContentMode: Observable<ContentMode>
-}
+    lazy var title: Observable<String> = { self.metadata.map { $0.title } }()
+    lazy var subtitle: Observable<String> = { self.metadata.map { $0.description } }()
 
-func == (lhs: TorrentViewModel, rhs: TorrentViewModel) -> Bool {
-    return (lhs.torrent == rhs.torrent)
+    private lazy var remoteImage: Observable<Image?> = {
+        self.metadata
+            .map { $0.imagePath }
+            .flatMap { imagePath -> Observable<Image?> in
+                if let imagePath = imagePath {
+                    return self.metadataManager.tmdbProvider.rx.request(.image(path: imagePath)).mapImage().asObservable()
+                } else {
+                    return Observable<Image?>.just(nil)
+                }
+            }
+    }()
+    lazy var image: Observable<Image> = {
+        self.remoteImage.map { remoteImageValue in
+            if let remoteImageValue = remoteImageValue {
+                return remoteImageValue
+            } else {
+                return #imageLiteral(resourceName: "magnet")
+            }
+        }
+    }()
+
+    lazy var imageContentMode: Observable<ContentMode> = {
+        self.remoteImage.map { $0 == nil ? ContentMode.center : ContentMode.scaleAspectFill }
+    }()
+
+    lazy var progress: Observable<Float> = { self.torrent.map { $0.percentDone } }()
+    lazy var statusMessage: Observable<String> = { self.torrent.map { $0.status.description } }()
+    lazy var statusColor: Observable<Color> = { self.torrent.map { $0.status.color } }()
+
 }

@@ -118,7 +118,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             self.collectionView.reloadData()
         }).disposed(by: disposeBag)
 
-        viewModels = session.torrents.asObservable().map { $0.map { TorrentViewModel(torrent: $0, metadataManager: self.metadataManager) } }
+        viewModels = session.torrents.asObservable().map { dict in
+            return dict.values.map { oTorrent in
+                return TorrentViewModel(torrent: oTorrent, metadataManager: self.metadataManager)
+            }
+        }
         viewModels.bind(to: varViewModels).disposed(by: disposeBag)
     }
 
@@ -144,11 +148,23 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     // MARK: Selected Torrents
 
     var selectedTorrents: [Torrent] {
+        guard let session = session else {
+            return []
+        }
+        let torrentArr = Array(session.torrents.value.values)
+
         let indexes = self.collectionView.selectionIndexPaths
-        return indexes.compactMap { self.session?.torrents.value[$0.item] }
+        let selected = indexes
+            .map { $0.item } // Strip out the sections
+            .compactMap { index -> BehaviorSubject<Torrent>? in
+                torrentArr[index] // Filter the behaviour subjects to the ones at the indexes
+            }
+            .compactMap { try? $0.value() } // Reduce to just Torrents
+
+        return selected
     }
 
-    lazy var øSelectedTorrents: Observable<[Torrent]> = {
+    lazy var øSelectedTorrents: Observable<[BehaviorSubject<Torrent>]> = {
         let obs = self.collectionView.rx
             .observe(Set<IndexPath>.self, "selectionIndexPaths")
 

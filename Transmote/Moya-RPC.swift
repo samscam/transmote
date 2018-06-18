@@ -70,8 +70,8 @@ class JSONRPCProvider<Target: TargetType>: MoyaProvider<Target> {
 }
 
 extension Response {
-
-    func mapJsonRpc() throws -> [String: Any] {
+    @discardableResult
+    func filterJsonRpcFailures() throws -> Response {
         guard let json = try self.mapJSON() as? [String: Any] else {
             throw JSONRPCError.jsonParsingError("Top level container not a dictionary")
         }
@@ -84,10 +84,10 @@ extension Response {
             throw JSONRPCError.errorResponse(result)
         }
 
-        guard let arguments = json["arguments"] as? [String: Any] else {
+        guard json["arguments"] as? [String: Any] != nil else {
             throw JSONRPCError.jsonParsingError("Arguments missing or mis-typed in response")
         }
 
-        return arguments
+        return self
     }
 }

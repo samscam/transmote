@@ -25,9 +25,10 @@ class TransmissionSession {
     var server: TransmissionServer? {
         didSet {
 
-            self.storeDefaultsServer(server: server)
+            self.storeDefaultsServer(server: server) /// Storage should be elsewhere!!!
 
-            guard let server = self.server else {
+            guard let server = self.server else { // If the server is niled out...
+
                 self.provider = nil
                 if let connectCancellable = self.connectCancellable {
                     print("cancelling")
@@ -77,7 +78,7 @@ class TransmissionSession {
 
     var provider: JSONRPCProvider<TransmissionTarget>?
 
-    var torrents: Variable<[Torrent]> = Variable([])
+    var torrents: Variable<[Int: BehaviorSubject<Torrent>]> = Variable([:])
 
     var timer: Timer?
 
@@ -98,7 +99,7 @@ class TransmissionSession {
                 self.startTimers()
                 self.addDeferredTorrents()
             case .failed(let sessionError):
-                self.torrents.value = []
+                self.torrents.value = [:]
                 self.stopTimers()
                 switch sessionError {
                 case .networkError:
@@ -108,7 +109,7 @@ class TransmissionSession {
                 }
 
             default:
-                self.torrents.value = []
+                self.torrents.value = [:]
             }
             }).disposed(by: disposeBag)
 
@@ -116,6 +117,7 @@ class TransmissionSession {
             self.server = self.fetchDefaultsServer()
         }
 
+        // This really shouldn't be here - it's desktop client stuff, not core
         let appleEventManager = NSAppleEventManager.shared()
         appleEventManager.setEventHandler(self,
                                           andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)),
@@ -222,6 +224,7 @@ class TransmissionSession {
         connectCancellable = self.provider?.request(.connect) { result in
             switch result {
             case let .success(moyaResponse):
+
                 switch moyaResponse.statusCode {
 
                 case 200:
@@ -229,7 +232,7 @@ class TransmissionSession {
 
                     do {
                         // We should expect to have valid RPC response saying "success"
-                        _ = try moyaResponse.mapJsonRpc()
+                        _ = try moyaResponse.filterJsonRpcFailures()
                         self.statusVar.value = .connected
 
                     } catch let error as MoyaError {
@@ -270,42 +273,30 @@ class TransmissionSession {
             switch result {
             case .success(let moyaResponse):
                 do {
-                    let json = try moyaResponse.mapJsonRpc()
 
-                    var torrentsCpy = self.torrents.value
+                    try moyaResponse.filterJsonRpcFailures()
 
-                    // We are mutating the existing array rather than simply replacing it with a fresh one - this could be genericised
-                    guard let torrentsArray = json["torrents"] as? [[String: Any]] else {
-                        throw JSONRPCError.jsonParsingError("Missing Torrents array")
-                    }
+                    let incomingTorrents = try moyaResponse.map([Torrent].self, atKeyPath: "arguments.torrents")
 
-                    let updatedTorrents: [Torrent] = torrentsArray.compactMap {
-                        guard let identifier = $0["id"] as? Int else {
-                            return nil
-                        }
-                        if let existing = torrentsCpy.element(matching: identifier) {
-                            // Update existing torrent
-                            return existing.update(JSON: $0)
+                    incomingTorrents.forEach { torrent in
+                        if let innerObservable = self.torrents.value[torrent.id] {
+                            // Update an existing torrent
+                            innerObservable.on(.next(torrent))
                         } else {
-                            // Create a new one
-                            return Torrent(JSON: $0)
+                            // Add a new one
+                            self.torrents.value[torrent.id] = BehaviorSubject(value: torrent)
                         }
                     }
 
-                    for torrent in updatedTorrents {
-                        // add new ones
-                        if self.torrents.value.index(of: torrent) == nil {
-                            self.torrents.value.append(torrent)
-                        }
+                    // cleanup any removed ones
+                    let allKeys = Set(self.torrents.value.keys)
+                    let incomingIds = Set(incomingTorrents.map { $0.id })
+                    let toRemove = allKeys.subtracting(incomingIds)
+
+                    toRemove.forEach {
+                        self.torrents.value[$0] = nil
                     }
 
-                    torrentsCpy = self.torrents.value
-                    for torrent in self.torrents.value {
-                        if updatedTorrents.index(of: torrent) == nil ,
-                            let index = self.torrents.value.index(of: torrent) {
-                            self.torrents.value.remove(at: index)
-                        }
-                    }
                 } catch let error as JSONRPCError {
                     self.statusVar.value = .failed(.rpcError(error))
                 } catch {
