@@ -15,16 +15,13 @@ You can download the latest binary [from here](https://samscam.co.uk/transmote/)
 * It supports basic authentication
 
 ## Building it yourself
+You will need Xcode >27
 
-You've got Homebrew and Xcode already yes?
+Dependencies are managed using SPM.
 
-Then you will need to install (or update) Carthage and Swiftlint:
-`brew install carthage swiftlint`
-
-Dependencies are managed using Carthage. Prior to building you will want to run `carthage bootstrap --platform macOS` from the project root.
+## API Keys for TMBD metadata lookups(this doesn't work - looking into it)
 
 If you are building it yourself and want the metadata lookups to work you'll have to add your own TMDB API key:
-
 Create a file called `secrets.sh` in the Scripts directory.
 
 ```
