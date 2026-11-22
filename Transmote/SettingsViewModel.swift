@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import RxCocoa
 
 class SettingsViewModel {
@@ -14,13 +15,13 @@ class SettingsViewModel {
     public var statusBlobImage: Driver<Image>
     public var showUsernameAndPassword: Driver<Bool>
 
-    public let settingsHost: Variable<String?> = Variable("")
-    public let settingsPort: Variable<String?> = Variable("")
-    public let settingsPath: Variable<String?> = Variable("")
-    public let settingsUsername: Variable<String?> = Variable("")
-    public let settingsPassword: Variable<String?> = Variable("")
+    public let settingsHost: BehaviorRelay<String?> = BehaviorRelay(value: "")
+    public let settingsPort: BehaviorRelay<String?> = BehaviorRelay(value: "")
+    public let settingsPath: BehaviorRelay<String?> = BehaviorRelay(value: "")
+    public let settingsUsername: BehaviorRelay<String?> = BehaviorRelay(value: "")
+    public let settingsPassword: BehaviorRelay<String?> = BehaviorRelay(value: "")
 
-    let server: Variable<TransmissionServer?>
+    let server: BehaviorRelay<TransmissionServer?>
 
     let session: TransmissionSession
     let disposeBag = DisposeBag()
@@ -28,7 +29,7 @@ class SettingsViewModel {
     init(session: TransmissionSession) {
 
         self.session = session
-        self.server = Variable(session.server)
+        self.server = BehaviorRelay(value: session.server)
 
         // make sure we have initialised everything before actually configuring it all
         self.statusBlobImage = Driver.never()
@@ -49,7 +50,7 @@ class SettingsViewModel {
     func configureStatusBlob() -> Observable<Image> {
         return session.status
             .asObservable()
-            .debounce(0.2, scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .map { status -> Image in
 
                 switch status {
@@ -103,20 +104,20 @@ class SettingsViewModel {
     func populate() {
         // Initial server values
         if let server = session.server {
-            settingsHost.value = server.address
+            settingsHost.accept( server.address )
             if server.port != 9_091 {
-                settingsPort.value = String(server.port)
+                settingsPort.accept( String(server.port) )
             } else {
-                settingsPort.value = ""
+                settingsPort.accept( "" )
             }
             if server.rpcPath != "transmission/rpc" {
-                settingsPath.value = server.rpcPath
+                settingsPath.accept( server.rpcPath )
             } else {
-                settingsPath.value = ""
+                settingsPath.accept( "" )
             }
 
-            settingsUsername.value = server.username ?? ""
-            settingsPassword.value = server.password ?? ""
+            settingsUsername.accept( server.username ?? "" )
+            settingsPassword.accept( server.password ?? "" )
         }
     }
     func bindServerFields() {
@@ -127,7 +128,7 @@ class SettingsViewModel {
                                  settingsPath.asObservable()) {
                                     ($0, $1, $2)
         }
-        .throttle(0.3, scheduler: MainScheduler.instance )
+                                 .throttle(.milliseconds(300), scheduler: MainScheduler.instance )
         .skip(2) // skip both the initial (nil) value and the value set during populateInitialValues()
             .subscribe({ [weak self] event in
                 switch event {
@@ -144,9 +145,9 @@ class SettingsViewModel {
 
                         let server = TransmissionServer(address: address, port: portInt, rpcPath: path)
 
-                        self?.server.value = server
+                        self?.server.accept( server )
                     } else {
-                        self?.server.value = nil
+                        self?.server.accept( nil )
                     }
                 default:
                     break

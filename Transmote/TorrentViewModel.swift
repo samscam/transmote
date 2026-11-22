@@ -36,33 +36,47 @@ class TorrentViewModel {
     lazy var title: Observable<String> = { self.metadata.map { $0.title } }()
     lazy var subtitle: Observable<String> = { self.metadata.map { $0.description } }()
 
-    private lazy var remoteImage: Observable<Image?> = {
+    private lazy var remoteImage: Observable<Image> = {
         self.metadata
             .map { $0.imagePath }
-            .flatMap { imagePath -> Observable<Image?> in
-                if let imagePath = imagePath {
-                    return self.metadataManager.tmdbProvider.rx.request(.image(path: imagePath)).mapImage().asObservable()
-                } else {
-                    return Observable<Image?>.just(nil)
+            .flatMap { imagePath -> Observable<Image> in
+                
+                guard let imagePath else {
+                    return Observable<Image>.error(BadImageError.imageFailed)
                 }
+                return self.metadataManager.tmdbProvider.rx
+                    .request(.image(path: imagePath))
+                    .mapImage()
+                    .asObservable()
+                    
             }
     }()
+    
     lazy var image: Observable<Image> = {
-        self.remoteImage.map { remoteImageValue in
-            if let remoteImageValue = remoteImageValue {
-                return remoteImageValue
-            } else {
-                return #imageLiteral(resourceName: "magnet")
+        self.remoteImage
+            .catch{ error in
+                Observable<Image>.just(#imageLiteral(resourceName: "magnet"))
             }
-        }
+        
     }()
 
     lazy var imageContentMode: Observable<ContentMode> = {
-        self.remoteImage.map { $0 == nil ? ContentMode.center : ContentMode.scaleAspectFill }
+        self.remoteImage
+            .flatMap{
+                Observable<Image?>.just($0)
+            }
+            .catch{ _ in
+                Observable<Image?>.just(nil)
+            }
+            .map { $0 == nil ? ContentMode.center : ContentMode.scaleAspectFill }
     }()
 
     lazy var progress: Observable<Float> = { self.torrent.map { $0.percentDone } }()
     lazy var statusMessage: Observable<String> = { self.torrent.map { $0.status.description } }()
     lazy var statusColor: Observable<Color> = { self.torrent.map { $0.status.color } }()
 
+}
+
+enum BadImageError: Error {
+    case imageFailed
 }

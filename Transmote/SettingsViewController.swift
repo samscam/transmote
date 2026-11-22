@@ -7,7 +7,7 @@
 
 import Foundation
 import Cocoa
-
+import RxRelay
 import RxSwift
 import RxCocoa
 
@@ -94,13 +94,13 @@ class SettingsViewController: NSViewController, ProperTextFieldDelegate {
 infix operator <->
 
 @discardableResult
-func <-> <T>(property: ControlProperty<T>, variable: Variable<T>) -> Disposable {
+func <-> <T>(property: ControlProperty<T>, variable: BehaviorRelay<T>) -> Disposable {
     let variableToProperty = variable.asObservable()
         .bind(to: property)
 
     let propertyToVariable = property
         .subscribe(
-            onNext: { variable.value = $0 },
+            onNext: { variable.accept( $0 ) },
             onCompleted: { variableToProperty.dispose() }
     )
 

@@ -40,7 +40,7 @@ enum TMDBType {
     case movie
 }
 
-extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
+extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
     func mapTMDB(_ type: TMDBType, show: TVShow? = nil) -> Single<Metadata> {
         return flatMap { response -> Single<Metadata> in
             return Single.just(try response.mapTMDB(type, show: show))

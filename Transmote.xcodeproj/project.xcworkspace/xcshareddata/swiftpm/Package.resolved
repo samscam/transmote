@@ -1,5 +1,5 @@
 {
-  "originHash" : "e40ca9d764227afccdbf62011893b498a0064fa98afab7104b00187273852331",
+  "originHash" : "93b2dff7bdb799824d57e338b7876ccf04cdc01f845f9ee3f608005f388c6e46",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "6021c6035e83a306047348666f6400dc61445d3b",
         "version" : "4.4.3"
+      }
+    },
+    {
+      "identity" : "progresskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/muyexi/ProgressKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "398668eda8e43ab9163a8ff68780b83ded2b8df4"
       }
     },
     {

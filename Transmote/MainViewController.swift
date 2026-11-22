@@ -8,6 +8,7 @@
 import AppKit
 import RxSwift
 import RxCocoa
+import RxRelay
 import Moya
 import Sparkle
 import QuartzCore
@@ -82,7 +83,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             .combineLatest(session.status, session.torrents.asObservable()) {
                 return ($0, $1)
             }
-            .debounce(0.2, scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .subscribe({ event in
                 switch event {
                 case .next(let status, let torrents):
@@ -133,7 +134,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     let metadataManager = MetadataManager()
 
     var viewModels: Observable<[TorrentViewModel]> = Observable.just([])
-    var varViewModels: Variable<[TorrentViewModel]> = Variable([])
+    var varViewModels: BehaviorRelay<[TorrentViewModel]> = BehaviorRelay(value: [])
 
     func collectionView(_ collectionView: NSCollectionView,
                         itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
@@ -209,8 +210,8 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     }
 
     func sortOutVersionWidget() {
-        if let pendingUpdateItem = pendingUpdateItem,
-            let newVersion = pendingUpdateItem.versionString {
+        if let pendingUpdateItem {
+            let newVersion = pendingUpdateItem.versionString
             self.versionWidget.title="Update available: v\(newVersion)"
         } else {
             self.versionWidget.title = "Transmote v\(shortVersion)"
@@ -220,6 +221,7 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
     @IBAction func updateWidgetClicked(_ sender: Any) {
         self.updater?.checkForUpdates(self)
     }
+    
     func updater(_ updater: SUUpdater, didFindValidUpdate item: SUAppcastItem) {
         pendingUpdateItem = item
         sortOutVersionWidget()

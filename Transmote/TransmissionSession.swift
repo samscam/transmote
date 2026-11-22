@@ -10,6 +10,7 @@ import Foundation
 import Moya
 
 import RxSwift
+import RxRelay
 
 // A session - which coordinates access to a server and its torrents
 
@@ -34,7 +35,7 @@ class TransmissionSession {
                     print("cancelling")
                     connectCancellable.cancel()
                 }
-                self.statusVar.value = .failed(.noServerSet)
+                self.statusVar.accept( .failed(.noServerSet) )
 
                 return
             }
@@ -70,15 +71,15 @@ class TransmissionSession {
         }
     }
 
-    let statusVar: Variable<Status> = Variable<Status>(.indeterminate)
+    let statusVar: BehaviorRelay<Status> = BehaviorRelay<Status>(value:.indeterminate)
     lazy var status: Observable<Status> = self.statusVar
         .asObservable()
-        .debounce(0.2, scheduler: MainScheduler.instance)
+        .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
         .share(replay: 1)
 
     var provider: JSONRPCProvider<TransmissionTarget>?
 
-    var torrents: Variable<[Int: BehaviorSubject<Torrent>]> = Variable([:])
+    var torrents: BehaviorRelay<[Int: BehaviorSubject<Torrent>]> = BehaviorRelay(value:[:])
 
     var timer: Timer?
 
@@ -99,7 +100,7 @@ class TransmissionSession {
                 self.startTimers()
                 self.addDeferredTorrents()
             case .failed(let sessionError):
-                self.torrents.value = [:]
+                self.torrents.accept( [:] )
                 self.stopTimers()
                 switch sessionError {
                 case .networkError:
@@ -109,7 +110,7 @@ class TransmissionSession {
                 }
 
             default:
-                self.torrents.value = [:]
+                self.torrents.accept( [:] )
             }
             }).disposed(by: disposeBag)
 
@@ -119,10 +120,10 @@ class TransmissionSession {
 
         // This really shouldn't be here - it's desktop client stuff, not core
         let appleEventManager = NSAppleEventManager.shared()
-        appleEventManager.setEventHandler(self,
-                                          andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)),
-                                          forEventClass: AEEventClass(kInternetEventClass),
-                                          andEventID: AEEventID(kAEGetURL))
+//        appleEventManager.setEventHandler(self,
+//                                          andSelector: #selector(TransmissionSession.handleGetURLEvent(_:withReplyEvent:)),
+//                                          forEventClass: AEEventClass(kInternetEventClass),
+//                                          andEventID: AEEventID(kAEGetURL))
 
     }
 
@@ -215,12 +216,12 @@ class TransmissionSession {
 
         guard self.server != nil else {
             print("No server")
-            self.statusVar.value = .failed(.noServerSet)
+            self.statusVar.accept( .failed(.noServerSet) )
             return
         }
 
         print("connecting")
-        self.statusVar.value = .connecting
+        self.statusVar.accept( .connecting )
         connectCancellable = self.provider?.request(.connect) { result in
             switch result {
             case let .success(moyaResponse):
@@ -233,35 +234,35 @@ class TransmissionSession {
                     do {
                         // We should expect to have valid RPC response saying "success"
                         _ = try moyaResponse.filterJsonRpcFailures()
-                        self.statusVar.value = .connected
+                        self.statusVar.accept( .connected )
 
                     } catch let error as MoyaError {
-                        self.statusVar.value = .failed(.networkError(error))
+                        self.statusVar.accept( .failed(.networkError(error)) )
                     } catch let error as SessionError {
-                        self.statusVar.value = .failed(error)
+                        self.statusVar.accept( .failed(error) )
                     } catch {
-                        self.statusVar.value = .failed(.unknownError(error))
+                        self.statusVar.accept( .failed(.unknownError(error)) )
                     }
 
                 case 404:
                     // The path was wrong probably
-                    self.statusVar.value = .failed(SessionError.badRpcPath)
+                    self.statusVar.accept(  .failed(SessionError.badRpcPath) )
                 case 401:
                     // The path was wrong probably
-                    self.statusVar.value = .failed(SessionError.needsAuthentication)
+                    self.statusVar.accept( .failed(SessionError.needsAuthentication))
                 default:
                     // Something else happened - I wonder what it was
-                    self.statusVar.value = .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode))
+                    self.statusVar.accept( .failed(SessionError.unexpectedStatusCode(moyaResponse.statusCode)))
                 }
             case let .failure(error):
                 // Ignore cancellations - otherwise, pass the error along...
                 switch error {
                 case .underlying(let err):
                     if (err.0 as NSError).code != -999 {
-                        self.statusVar.value = .failed(.networkError(error))
+                        self.statusVar.accept( .failed(.networkError(error)))
                     }
                 default:
-                    self.statusVar.value = .failed(.networkError(error))
+                    self.statusVar.accept(  .failed(.networkError(error)))
                 }
 
             }
@@ -284,7 +285,9 @@ class TransmissionSession {
                             innerObservable.on(.next(torrent))
                         } else {
                             // Add a new one
-                            self.torrents.value[torrent.id] = BehaviorSubject(value: torrent)
+                            var temp = self.torrents.value
+                            temp[torrent.id] = BehaviorSubject(value: torrent)
+                            self.torrents.accept(temp)
                         }
                     }
 
@@ -294,18 +297,20 @@ class TransmissionSession {
                     let toRemove = allKeys.subtracting(incomingIds)
 
                     toRemove.forEach {
-                        self.torrents.value[$0] = nil
+                        var temp = self.torrents.value
+                        temp[$0] = nil
+                        self.torrents.accept(temp)
                     }
 
                 } catch let error as JSONRPCError {
-                    self.statusVar.value = .failed(.rpcError(error))
+                    self.statusVar.accept( .failed(.rpcError(error)) )
                 } catch {
-                    self.statusVar.value = .failed(.unknownError(error))
+                    self.statusVar.accept( .failed(.unknownError(error)) )
                 }
 
             case .failure(let error):
                 print(error)
-                self.statusVar.value = .failed(.networkError(error))
+                self.statusVar.accept( .failed(.networkError(error)) )
             }
         }
     }

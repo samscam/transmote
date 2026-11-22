@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		220E5FEE30B2540E0024EE52 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 220E5FED30B2540E0024EE52 /* RxMoya */; };
+		220E5FF130B2566D0024EE52 /* ProgressKit in Frameworks */ = {isa = PBXBuildFile; productRef = 220E5FF030B2566D0024EE52 /* ProgressKit */; };
 		2211B4991DEE530900DDA453 /* Moya-RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4981DEE530900DDA453 /* Moya-RPC.swift */; };
 		2211B4AC1DF5970700DDA453 /* TorrentCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2211B4AB1DF5970700DDA453 /* TorrentCollectionViewItem.swift */; };
 		2211B4AE1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2211B4AD1DF59D9C00DDA453 /* TorrentCollectionViewItem.xib */; };
@@ -156,10 +158,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220E5FF130B2566D0024EE52 /* ProgressKit in Frameworks */,
 				22B91D6F308529E20032078C /* RxSwift in Frameworks */,
 				22B91D6A308528AC0032078C /* ObjectMapper in Frameworks */,
 				22B91D67308528570032078C /* Sparkle in Frameworks */,
 				22B91D6D308529E20032078C /* RxCocoa in Frameworks */,
+				220E5FEE30B2540E0024EE52 /* RxMoya in Frameworks */,
 				22B91D64308527620032078C /* Moya in Frameworks */,
 				22B91D63308527620032078C /* CombineMoya in Frameworks */,
 			);
@@ -324,6 +328,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22EBE3941DE1000A00588FFD /* Build configuration list for PBXNativeTarget "Transmote" */;
 			buildPhases = (
+				220E5FF230B2710D0024EE52 /* ShellScript */,
 				22EBE3811DE1000900588FFD /* Sources */,
 				22EBE3821DE1000900588FFD /* Frameworks */,
 				22EBE3831DE1000900588FFD /* Resources */,
@@ -341,6 +346,8 @@
 				22B91D69308528AC0032078C /* ObjectMapper */,
 				22B91D6C308529E20032078C /* RxCocoa */,
 				22B91D6E308529E20032078C /* RxSwift */,
+				220E5FED30B2540E0024EE52 /* RxMoya */,
+				220E5FF030B2566D0024EE52 /* ProgressKit */,
 			);
 			productName = Transmote;
 			productReference = 22EBE3851DE1000A00588FFD /* Transmote.app */;
@@ -393,6 +400,7 @@
 				22B91D65308528570032078C /* XCRemoteSwiftPackageReference "Sparkle" */,
 				22B91D68308528AC0032078C /* XCRemoteSwiftPackageReference "ObjectMapper" */,
 				22B91D6B308529E20032078C /* XCRemoteSwiftPackageReference "RxSwift" */,
+				220E5FEF30B2566D0024EE52 /* XCRemoteSwiftPackageReference "ProgressKit" */,
 			);
 			productRefGroup = 22EBE3861DE1000A00588FFD /* Products */;
 			projectDirPath = "";
@@ -429,6 +437,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		220E5FF230B2710D0024EE52 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# cd \"$PROJECT_DIR/Scripts\"\n# ./patch_configuration.sh\n";
+			showEnvVarsInLog = 0;
+		};
 		22DB052F1E02AB6000419CBD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,7 +466,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$PROJECT_DIR/Scripts\"\n./autoversioning.sh";
+			shellScript = "cd \"$PROJECT_DIR/Scripts\"\n./autoversioning.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -798,6 +824,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		220E5FEF30B2566D0024EE52 /* XCRemoteSwiftPackageReference "ProgressKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/muyexi/ProgressKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		22A397CF2580457400A5E128 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -849,6 +883,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		220E5FED30B2540E0024EE52 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22A397CF2580457400A5E128 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		220E5FF030B2566D0024EE52 /* ProgressKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 220E5FEF30B2566D0024EE52 /* XCRemoteSwiftPackageReference "ProgressKit" */;
+			productName = ProgressKit;
+		};
 		22A397D02580457400A5E128 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 22A397CF2580457400A5E128 /* XCRemoteSwiftPackageReference "Moya" */;
