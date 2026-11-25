@@ -15,11 +15,11 @@ You can download the latest binary [from here](https://samscam.co.uk/transmote/)
 * It supports basic authentication
 
 ## Building it yourself
-You will need Xcode >27
+You will need Xcode >=27.0
 
 Dependencies are managed using SPM.
 
-## API Keys for TMBD metadata lookups(this doesn't work - looking into it)
+## API Keys for TMBD metadata lookups
 
 If you are building it yourself and want the metadata lookups to work you'll have to add your own TMDB API key:
 Create a file called `secrets.sh` in the Scripts directory.
