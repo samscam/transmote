@@ -13,30 +13,30 @@ import Moya
 import Sparkle
 import QuartzCore
 
-class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, SUUpdaterDelegate {
-
+class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate {
+    
     var session: TransmissionSession? {
         didSet {
             bindToSession()
         }
     }
-
+    
     var disposeBag: DisposeBag = DisposeBag()
-
+    
     @IBOutlet weak private var collectionView: NSCollectionView!
     @IBOutlet weak private var collectionViewContainer: NSScrollView!
-
+    
     @IBOutlet weak private var passiveAlertContainer: NSBox!
     @IBOutlet weak private var passiveAlertLabel: NSTextField!
     @IBOutlet weak private var passiveAlertImageView: NSImageView!
-
+    
     @IBOutlet weak private var versionWidget: NSButton!
-
+    
     // swiftlint:disable force_cast
     let shortVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let longVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     // swiftlint:enable force_cast
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         let savedStyle = UserDefaults.standard.integer(forKey: "viewStyle")
@@ -44,41 +44,41 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             self.viewStyle = viewStyle
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Register cell
         let nib = NSNib(nibNamed: NSNib.Name("TorrentCollectionViewItem"), bundle: nil)
-
+        
         self.collectionView.register(nib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TorrentCell"))
-
+        
         // We should persist the view style
-
+        
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-
+        
         self.collectionView.collectionViewLayout = self.viewStyle.layout
-
+        
         sortOutVersionWidget()
         startUpdater()
         bindToSession()
-
+        
     }
-
+    
     func bindToSession() {
-
+        
         guard let session = session else {
             return
         }
-
+        
         guard self.isViewLoaded else {
             return
         }
         disposeBag = DisposeBag()
-
+        
         // Observe the session status
-
+        
         Observable
             .combineLatest(session.status, session.torrents.asObservable()) {
                 return ($0, $1)
@@ -86,39 +86,39 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .subscribe({ event in
                 switch event {
-                case .next(let status, let torrents):
-                switch status {
-                case .connected:
-                    if torrents.isEmpty {
+                case .next(let (status, torrents)):
+                    switch status {
+                    case .connected:
+                        if torrents.isEmpty {
+                            self.passiveAlertContainer.isHidden = false
+                            self.passiveAlertImageView.image = #imageLiteral(resourceName: "magnet")
+                            self.collectionViewContainer.isHidden = true
+                            self.passiveAlertLabel.stringValue = "Open a magnet link from a browser to add a torrent"
+                        } else {
+                            self.passiveAlertContainer.isHidden = true
+                            self.collectionViewContainer.isHidden = false
+                        }
+                    case .connecting, .indeterminate:
                         self.passiveAlertContainer.isHidden = false
-                        self.passiveAlertImageView.image = #imageLiteral(resourceName: "magnet")
                         self.collectionViewContainer.isHidden = true
-                        self.passiveAlertLabel.stringValue = "Open a magnet link from a browser to add a torrent"
-                    } else {
-                        self.passiveAlertContainer.isHidden = true
-                        self.collectionViewContainer.isHidden = false
+                        self.passiveAlertImageView.image = #imageLiteral(resourceName: "connecting")
+                        self.passiveAlertLabel.stringValue = "Connecting"
+                    case .failed(let error):
+                        self.collectionViewContainer.isHidden = true
+                        self.passiveAlertContainer.isHidden = false
+                        self.passiveAlertImageView.image = #imageLiteral(resourceName: "disconnect")
+                        self.passiveAlertLabel.stringValue = error.description
                     }
-                case .connecting, .indeterminate:
-                    self.passiveAlertContainer.isHidden = false
-                    self.collectionViewContainer.isHidden = true
-                    self.passiveAlertImageView.image = #imageLiteral(resourceName: "connecting")
-                    self.passiveAlertLabel.stringValue = "Connecting"
-                case .failed(let error):
-                    self.collectionViewContainer.isHidden = true
-                    self.passiveAlertContainer.isHidden = false
-                    self.passiveAlertImageView.image = #imageLiteral(resourceName: "disconnect")
-                    self.passiveAlertLabel.stringValue = error.description
-                }
-
+                    
                 default:
-                break
+                    break
                 }
             }).disposed(by: disposeBag)
-
+        
         session.torrents.asDriver().drive(onNext: { _ in
             self.collectionView.reloadData()
         }).disposed(by: disposeBag)
-
+        
         viewModels = session.torrents.asObservable().map { dict in
             return dict.values.map { oTorrent in
                 return TorrentViewModel(torrent: oTorrent, metadataManager: self.metadataManager)
@@ -126,34 +126,34 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
         }
         viewModels.bind(to: varViewModels).disposed(by: disposeBag)
     }
-
+    
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.session?.torrents.value.count ?? 0
     }
-
+    
     let metadataManager = MetadataManager()
-
+    
     var viewModels: Observable<[TorrentViewModel]> = Observable.just([])
     var varViewModels: BehaviorRelay<[TorrentViewModel]> = BehaviorRelay(value: [])
-
+    
     func collectionView(_ collectionView: NSCollectionView,
                         itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-
+        
         let item = self.collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: self.viewStyle.reuseIdentifier),
                                                 for: indexPath) as! TorrentCollectionViewItem // swiftlint:disable:this force_cast
-
+        
         item.torrentViewModel = varViewModels.value[indexPath.item]
         return item
     }
-
+    
     // MARK: Selected Torrents
-
+    
     var selectedTorrents: [Torrent] {
         guard let session = session else {
             return []
         }
         let torrentArr = Array(session.torrents.value.values)
-
+        
         let indexes = self.collectionView.selectionIndexPaths
         let selected = indexes
             .map { $0.item } // Strip out the sections
@@ -161,14 +161,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                 torrentArr[index] // Filter the behaviour subjects to the ones at the indexes
             }
             .compactMap { try? $0.value() } // Reduce to just Torrents
-
+        
         return selected
     }
-
+    
     lazy var øSelectedTorrents: Observable<[BehaviorSubject<Torrent>]> = {
         let obs = self.collectionView.rx
             .observe(Set<IndexPath>.self, "selectionIndexPaths")
-
+        
         let tor = obs
             .map { optionalIndexes -> Set<IndexPath> in
                 if let optionalIndexes = optionalIndexes {
@@ -180,11 +180,11 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             .map { $0.compactMap { self.session?.torrents.value[$0.item] } }
         return tor
     }()
-
+    
     lazy var hasSelectedTorrents: Observable<Bool> = {
         let obs = self.collectionView.rx
             .observe(Set<IndexPath>.self, "selectionIndexPaths")
-
+        
         return obs
             .map { optionalIndexes -> Set<IndexPath> in
                 if let optionalIndexes = optionalIndexes {
@@ -196,19 +196,20 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             .map {
                 return !$0.isEmpty
             }
-
+        
     }()
-
+    
     // MARK: Sparkle Updater Stuff
-
-    let updater = SUUpdater.shared()
+    
+    let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil)
+    
     var pendingUpdateItem: SUAppcastItem?
-
+    
     func startUpdater() {
-        updater?.delegate = self
-        updater?.checkForUpdatesInBackground()
+        updaterController.startUpdater()
+        updaterController.updater.checkForUpdatesInBackground()
     }
-
+    
     func sortOutVersionWidget() {
         if let pendingUpdateItem {
             let newVersion = pendingUpdateItem.versionString
@@ -217,26 +218,23 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             self.versionWidget.title = "Transmote v\(shortVersion)"
         }
     }
-
+    
     @IBAction func updateWidgetClicked(_ sender: Any) {
-        self.updater?.checkForUpdates(self)
+        updaterController.checkForUpdates(self)
     }
     
-    func updater(_ updater: SUUpdater, didFindValidUpdate item: SUAppcastItem) {
-        pendingUpdateItem = item
-        sortOutVersionWidget()
-    }
-
+    
+    
     // View style
-
+    
     enum ViewStyle: Int {
         case grid = 0
         case list = 1
-
+        
         var reuseIdentifier: String {
-                return "TorrentCell"
+            return "TorrentCell"
         }
-
+        
         var layout: NSCollectionViewLayout {
             switch self {
             case .grid:
@@ -250,14 +248,14 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
             }
         }
     }
-
+    
     var viewStyle: ViewStyle = .grid {
         didSet {
             if let collectionView = self.collectionView {
-
+                
                 NSAnimationContext.beginGrouping()
                 collectionView.animator().collectionViewLayout = viewStyle.layout
-
+                
                 NSAnimationContext.current.completionHandler = {
                     // This is a nasty hack to make it get the scrollers right...
                     if let window = self.view.window {
@@ -268,14 +266,22 @@ class MainViewController: NSViewController, NSCollectionViewDataSource, NSCollec
                         window.setFrame(origRect, display: true)
                         NSEnableScreenUpdates()
                     }
-
+                    
                 }
                 NSAnimationContext.endGrouping()
-
+                
             }
-
+            
             UserDefaults.standard.set(viewStyle.rawValue, forKey: "viewStyle")
         }
     }
+}
 
+extension MainViewController: SPUUpdaterDelegate {
+    // why does this think it doesn't conform?
+
+    func updater(_ updater: SPUUpdater, didFindValidUpdate item: SUAppcastItem) {
+        pendingUpdateItem = item
+        sortOutVersionWidget()
+    }
 }
